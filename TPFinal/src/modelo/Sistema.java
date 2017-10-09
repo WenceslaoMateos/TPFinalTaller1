@@ -2,7 +2,7 @@ package modelo;
 
 public class Sistema
 {
-    ColeccionGenerica<String, Alumno> alumnos;
-    ColeccionGenerica<String, Profesor> profesores;
-    ColeccionGenerica<String, Asignatura> asignaturas;
+    IndiceDoble<String, String, Alumno> alumnos;
+    IndiceDoble<String, String, Profesor> profesores;
+    IndiceDoble<String, String, Asignatura> asignaturas;
 }
