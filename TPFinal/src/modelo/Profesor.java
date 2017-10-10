@@ -1,7 +1,18 @@
 package modelo;
 
+
 public class Profesor
-    extends Persona
+  extends Persona
 {
-    private String telefono;
+  private String telefono;
+
+  public void setTelefono(String telefono)
+  {
+    this.telefono = telefono;
+  }
+
+  public String getTelefono()
+  {
+    return telefono;
+  }
 }
