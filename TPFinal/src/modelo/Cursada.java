@@ -2,68 +2,74 @@ package modelo;
 
 
 public class Cursada
-    implements I_Indexable
+  implements I_Indexable
 {
-    private Asignatura asignatura;
-    private String identificacion;
-    private String periodo;
-    private Dia dia;
-    private String hora;
+  private Asignatura asignatura;
+  private String identificacion;
+  private String periodo;
+  private Dia dia;
+  private String hora;
 
-    @Override
-    public Object getClavePrimaria()
-    {
-        return this.identificacion;
-    }
 
-    @Override
-    public Object getClaveSecundaria()
-    {
-        return Dia.parseInt(this.dia) * 100 + Integer.parseInt(this.hora);
-    }
+  @Override
+  public Object getClavePrimaria()
+  {
+    return this.identificacion;
+  }
 
-    public void setAsignatura(Asignatura asignatura)
-    {
-        this.asignatura = asignatura;
-    }
+  @Override
+  public Object getClaveSecundaria()
+  {
+    return Dia.parseInt(this.dia) * 100 + Integer.parseInt(this.hora);
+  }
 
-    public Asignatura getAsignatura()
-    {
-        return asignatura;
-    }
+  public String getIdentificacion()
+  {
+    return identificacion;
+  }
 
-    public void setIdentificacion(String identificacion)
-    {
-        this.identificacion = identificacion;
-    }
+  public void setAsignatura(Asignatura asignatura)
+  {
+    this.asignatura = asignatura;
+  }
 
-    public void setPeriodo(String periodo)
-    {
-        this.periodo = periodo;
-    }
+  public Asignatura getAsignatura()
+  {
+    return asignatura;
+  }
 
-    public String getPeriodo()
-    {
-        return periodo;
-    }
+  public void setIdentificacion(String identificacion)
+  {
+    this.identificacion = identificacion;
+  }
 
-    public void setDia(Dia dia)
-    {
-        this.dia = dia;
-    }
+  public void setPeriodo(String periodo)
+  {
+    this.periodo = periodo;
+  }
 
-    public Dia getDia()
-    {
-        return dia;
-    }
+  public String getPeriodo()
+  {
+    return periodo;
+  }
 
-    public void setHora(String hora)
-    {
-        this.hora = hora;
-    }
+  public void setDia(Dia dia)
+  {
+    this.dia = dia;
+  }
 
-    public String getHora()
-    {
-        return hora;
-    }
+  public Dia getDia()
+  {
+    return dia;
+  }
+
+  public void setHora(String hora)
+  {
+    this.hora = hora;
+  }
+
+  public String getHora()
+  {
+    return hora;
+  }
 }
