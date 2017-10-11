@@ -10,6 +10,10 @@ public class Alumno
   {
     this.historia = new IndicePrimario<String, Asignatura>();
   }
+  
+  public boolean isAprobada(Asignatura verif)
+  {
+  }
 
   public void agregarHistoria(Asignatura nuevo)
   {
@@ -20,4 +24,6 @@ public class Alumno
   {
     this.historia.eliminar(elim);
   }
+  
+  
 }
