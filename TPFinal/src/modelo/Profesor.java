@@ -16,7 +16,7 @@ public class Profesor
   {
     this.competencia.agregar(nuevo);
   }
-  
+
   public void eliminarCompetencia(Asignatura elim)
   {
     this.competencia.eliminar(elim);
@@ -26,7 +26,7 @@ public class Profesor
   {
     this.telefono = telefono;
   }
-  
+
   public String getTelefono()
   {
     return telefono;
