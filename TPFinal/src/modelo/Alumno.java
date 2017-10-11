@@ -5,10 +5,16 @@ public class Alumno
   extends Persona
 {
   private IndicePrimario<String, Asignatura> historia;
-
+  
   public Alumno()
   {
-    this.historia = new IndicePrimario<String, Asignatura>();
+        super();
+    }
+
+    public Alumno(String legajo, String apellidoNombre, String domicilio, String mail)
+    {
+        super(legajo, apellidoNombre, domicilio, mail);
+    this.historia=new IndicePrimario<String,Asignatura>();
   }
   
   public boolean isAprobada(Asignatura verif)
@@ -19,11 +25,14 @@ public class Alumno
   {
     this.historia.agregar(nuevo);
   }
-
+  
   public void eliminarHistoria(Asignatura elim)
   {
     this.historia.eliminar(elim);
   }
-  
-  
+    
+    public boolean asignaturaAprobada(Asignatura asignatura)
+    {
+        return this.historia.contieneValor(asignatura);
+}
 }
