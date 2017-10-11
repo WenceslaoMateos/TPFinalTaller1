@@ -20,7 +20,12 @@ public class Cursada
   @Override
   public Object getClaveSecundaria()
   {
-    return Dia.parseInt(this.dia) * 100 + Integer.parseInt(this.hora);
+    return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.hora);
+  }
+
+  private int parseInt(String hora)
+  {
+    return Integer.parseInt(this.hora.substring(0, 2)) * 100 + Integer.parseInt(this.hora.substring(3, 5));
   }
 
   public String getIdentificacion()
