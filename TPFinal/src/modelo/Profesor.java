@@ -9,13 +9,13 @@ public class Profesor
 
   public Profesor()
   {
-        super();
-    }
+    super();
+  }
 
-    public Profesor(String legajo, String apellidoNombre, String domicilio, String mail, String telefono)
-    {
-        super(legajo, apellidoNombre, domicilio, mail);
-        this.telefono = telefono;
+  public Profesor(String legajo, String apellidoNombre, String domicilio, String mail, String telefono)
+  {
+    super(legajo, apellidoNombre, domicilio, mail);
+    this.telefono = telefono;
     this.competencia = new IndicePrimario<String, Asignatura>();
   }
 
@@ -23,7 +23,7 @@ public class Profesor
   {
     this.competencia.agregar(nuevo);
   }
-  
+
   public void eliminarCompetencia(Asignatura elim)
   {
     this.competencia.eliminar(elim);
@@ -33,14 +33,14 @@ public class Profesor
   {
     this.telefono = telefono;
   }
-  
+
   public String getTelefono()
   {
     return telefono;
   }
-    
-    public boolean habilitadoParaAsignatura(Asignatura asignatura)
-    {
-        return this.competencia.contieneValor(asignatura);
-}
+
+  public boolean habilitadoParaAsignatura(Asignatura asignatura)
+  {
+    return this.competencia.contieneValor(asignatura);
+  }
 }

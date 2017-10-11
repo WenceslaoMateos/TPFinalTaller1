@@ -25,7 +25,7 @@ public class Cursada
 
   public boolean correlativasAprobadas(Alumno aux)
   {
-    
+
     return true;
   }
 
