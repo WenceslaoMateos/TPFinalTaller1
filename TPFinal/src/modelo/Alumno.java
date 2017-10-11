@@ -2,6 +2,10 @@ package modelo;
 
 
 public class Alumno
-  extends Persona
+    extends Persona
 {
+    public Alumno()
+    {
+        super();
+    }
 }

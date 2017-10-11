@@ -2,46 +2,46 @@ package modelo;
 
 
 public class Asignatura
-  implements I_Indexable
+    implements I_Indexable
 {
-  private String identificacion;
-  private String nombre;
+    private String identificacion;
+    private String nombre;
 
-  public Asignatura(String identificacion, String nombre)
-  {
-    this.identificacion = identificacion;
-    this.nombre = nombre;
-  }
+    public Asignatura(String identificacion, String nombre)
+    {
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+    }
 
-  @Override
-  public Object getClavePrimaria()
-  {
-    return this.identificacion;
-  }
+    @Override
+    public Object getClavePrimaria()
+    {
+        return this.identificacion;
+    }
 
-  @Override
-  public Object getClaveSecundaria()
-  {
-    return this.nombre;
-  }
+    @Override
+    public Object getClaveSecundaria()
+    {
+        return this.nombre;
+    }
 
-  public String getIdentificacion()
-  {
-    return identificacion;
-  }
+    public String getIdentificacion()
+    {
+        return identificacion;
+    }
 
-  public String getNombre()
-  {
-    return nombre;
-  }
+    public String getNombre()
+    {
+        return nombre;
+    }
 
-  public void setIdentificacion(String identificacion)
-  {
-    this.identificacion = identificacion;
-  }
+    public void setIdentificacion(String identificacion)
+    {
+        this.identificacion = identificacion;
+    }
 
-  public void setNombre(String nombre)
-  {
-    this.nombre = nombre;
-  }
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
 }
