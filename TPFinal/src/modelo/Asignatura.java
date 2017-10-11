@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Iterator;
+
 
 public class Asignatura
   implements I_Indexable
@@ -23,6 +25,20 @@ public class Asignatura
   public void eliminarCorrelativa(Asignatura elim)
   {
     this.correlatividades.eliminar(elim);
+  }
+
+  public boolean compruebaCompetencia(Profesor profesor)
+  {
+    return profesor.habilitadoParaAsignatura(this);
+  }
+
+  public boolean compruebaCorrelativas(Alumno alumno)
+  {
+    Iterator<Asignatura> it = this.correlatividades.iterator();
+    boolean ret = true;
+    while (it.hasNext() && ret)
+      ret = alumno.asignaturaAprobada(it.next());
+    return ret;
   }
 
   @Override

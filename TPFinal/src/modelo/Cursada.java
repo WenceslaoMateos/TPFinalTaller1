@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.Iterator;
-
 
 public class Cursada
   implements I_Indexable
@@ -14,19 +12,14 @@ public class Cursada
   private IndiceDoble<String, String, Profesor> profesores;
   private IndiceDoble<String, String, Alumno> alumnos;
 
-  public void agregarAlumno(Alumno nuevo)
+  public boolean correlativasAprobadas(Alumno alumno)
   {
-    if (this.correlativasAprobadas(nuevo))
-      this.alumnos.agregar(nuevo);
-    else
-      ;
-    //TODO tirar excepcion?
+    return this.asignatura.compruebaCorrelativas(alumno);
   }
 
-  public boolean correlativasAprobadas(Alumno aux)
+  public boolean aceptaCompetencia(Profesor profesor)
   {
-
-    return true;
+    return this.asignatura.compruebaCompetencia(profesor);
   }
 
   @Override
@@ -41,13 +34,8 @@ public class Cursada
     return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.hora);
   }
 
-  /**
-   * Parsea el string de la hora de acuerdo a la mascara para que trabaje con un numero entero directo
-   * @param hora
-   * @return
-   */
   private int parseInt(String hora)
-  {
+  { //Parsea el string de la hora de acuerdo a la mascara para que trabaje con un numero entero directo
     return Integer.parseInt(hora.substring(0, 2)) * 100 + Integer.parseInt(hora.substring(3, 5));
   }
 

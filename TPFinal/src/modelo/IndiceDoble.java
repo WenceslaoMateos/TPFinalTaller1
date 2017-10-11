@@ -71,4 +71,9 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
   {
     return this.indice1.contieneValor(valor);
   }
+
+  public Iterator<V> iterator()
+  {
+    return this.indice1.iterator();
+  }
 }

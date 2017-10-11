@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class IndicePrimario<K, V extends I_Indexable>
 {
@@ -45,5 +46,12 @@ public class IndicePrimario<K, V extends I_Indexable>
   public boolean contieneValor(V valor)
   {
     return this.elementos.containsValue(valor);
+  }
+
+  public Iterator<V> iterator()
+  {
+    return this.elementos
+               .values()
+               .iterator();
   }
 }

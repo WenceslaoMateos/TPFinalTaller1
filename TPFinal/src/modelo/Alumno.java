@@ -17,12 +17,6 @@ public class Alumno
     this.historia = new IndicePrimario<String, Asignatura>();
   }
 
-  public boolean isAprobada(Asignatura verif)
-  {
-    //TODO
-    return true;
-  }
-
   public void agregarHistoria(Asignatura nuevo)
   {
     this.historia.agregar(nuevo);
