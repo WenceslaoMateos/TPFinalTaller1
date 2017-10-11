@@ -13,7 +13,7 @@ public class IndicePrimario<K, V extends I_Indexable>
 
     public void agregar(V nuevo)
     {
-        if (this.elementos.containsKey(nuevo.getClavePrimaria()))
+        if (this.contieneClave((K) nuevo.getClavePrimaria()))
             ;
         // TODO
         else
@@ -22,7 +22,7 @@ public class IndicePrimario<K, V extends I_Indexable>
 
     public void eliminar(V elim)
     {
-        if (!this.elementos.containsValue(elim.getClavePrimaria()))
+        if (!this.contieneValor(elim))
             ;
         // TODO
         else
@@ -35,5 +35,15 @@ public class IndicePrimario<K, V extends I_Indexable>
             ;
         // TODO
         return this.elementos.get(clave);
+    }
+    
+    public boolean contieneClave(K clave)
+    {
+        return this.elementos.containsKey(clave);
+    }
+    
+    public boolean contieneValor(V valor)
+    {
+        return this.elementos.containsValue(valor);
     }
 }

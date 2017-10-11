@@ -18,11 +18,9 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
     public void agregar(V nuevo)
     {
         this.indice1.agregar(nuevo);
-        if (!this.indice2.containsKey(nuevo.getClaveSecundaria()))
+        if (!this.contieneClaveSecundaria((K2) nuevo.getClaveSecundaria()))
             this.indice2.put((K2) nuevo.getClaveSecundaria(), new ArrayList<V>());
-        this.indice2
-            .get(nuevo.getClaveSecundaria())
-            .add(nuevo);
+        this.indice2.get(nuevo.getClaveSecundaria()).add(nuevo);
     }
 
     public void eliminar(V elim)
@@ -40,18 +38,31 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
         return this.indice1.buscarPorClavePrimaria(clave);
     }
 
-    public ArrayList<V> buscarPorClaveSecundaria(K2 clave)
+    public Iterator<V> buscarPorClaveSecundaria(K2 clave)
     {
         if (!this.indice2.containsKey(clave))
             ;
         // TODO
-        return this.indice2.get(clave);
+        return this.indice2.get(clave).iterator();
     }
 
     public Iterator<ArrayList<V>> elementosPorClaveSecundaria()
     {
-        return this.indice2
-                   .values()
-                   .iterator();
+        return this.indice2.values().iterator();
+    }
+    
+    public boolean contieneClavePrimaria(K1 clave)
+    {
+        return this.indice1.contieneClave(clave);
+    }
+    
+    public boolean contieneClaveSecundaria(K2 clave)
+    {
+        return this.indice2.containsKey(clave);
+    }
+    
+    public boolean contieneValor(V valor)
+    {
+        return this.indice1.contieneValor(valor);
     }
 }
