@@ -73,4 +73,9 @@ public abstract class Persona
   {
     return mail;
   }
+
+  public static boolean validaMail(String mail)
+  {
+    return mail.contains("@") && ((mail.charAt(mail.length() - 1)) != '@') && (mail.charAt(0) != '@');
+  }
 }

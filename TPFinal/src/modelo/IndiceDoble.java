@@ -76,4 +76,24 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
   {
     return this.indice1.elementos();
   }
+
+  public void setIndice1(IndicePrimario<K1, V> indice1)
+  {
+    this.indice1 = indice1;
+  }
+
+  public IndicePrimario<K1, V> getIndice1()
+  {
+    return indice1;
+  }
+
+  public void setIndice2(TreeMap<K2, ArrayList<V>> indice2)
+  {
+    this.indice2 = indice2;
+  }
+
+  public TreeMap<K2, ArrayList<V>> getIndice2()
+  {
+    return indice2;
+  }
 }

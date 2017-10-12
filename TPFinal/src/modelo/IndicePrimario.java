@@ -68,4 +68,14 @@ public class IndicePrimario<K, V extends I_Indexable>
                .values()
                .iterator();
   }
+
+  public void setElementos(TreeMap<K, V> elementos)
+  {
+    this.elementos = elementos;
+  }
+
+  public TreeMap<K, V> getElementos()
+  {
+    return elementos;
+  }
 }

@@ -11,6 +11,18 @@ public class Cursada
   private String hora;
   private IndiceDoble<String, String, Profesor> profesores;
   private IndiceDoble<String, String, Alumno> alumnos;
+  private static int CANT_CURSADAS = 0;
+
+  public Cursada(Asignatura asignatura, String periodo, Dia dia, String hora)
+  {
+    this.asignatura = asignatura;
+    this.periodo = periodo;
+    this.dia = dia;
+    this.hora = hora;
+    this.identificacion = Cursada.getNuevaIdentificacion();
+    this.profesores = new IndiceDoble<String, String, Profesor>();
+    this.alumnos = new IndiceDoble<String, String, Alumno>();
+  }
 
   public boolean correlativasAprobadas(Alumno alumno)
   {
@@ -87,5 +99,70 @@ public class Cursada
   public String getHora()
   {
     return hora;
+  }
+
+  public void setProfesores(IndiceDoble<String, String, Profesor> profesores)
+  {
+    this.profesores = profesores;
+  }
+
+  public IndiceDoble<String, String, Profesor> getProfesores()
+  {
+    return profesores;
+  }
+
+  public void setAlumnos(IndiceDoble<String, String, Alumno> alumnos)
+  {
+    this.alumnos = alumnos;
+  }
+
+  public IndiceDoble<String, String, Alumno> getAlumnos()
+  {
+    return alumnos;
+  }
+
+  public static void setCANT_CURSADAS(int CANT_CURSADAS)
+  {
+    Cursada.CANT_CURSADAS = CANT_CURSADAS;
+  }
+
+  public static int getCANT_CURSADAS()
+  {
+    return CANT_CURSADAS;
+  }
+
+  public static boolean validaPeriodo(String periodo)
+  {
+    boolean ret;
+    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+        Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
+        Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
+      ret = true;
+    else
+      ret = false;
+    return ret;
+  }
+
+  public static boolean validaHora(String hora)
+  {
+    boolean ret;
+    if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 3)) <= 99) &&
+        (Integer.parseInt(hora.substring(0, 3)) >= 0) && (Integer.parseInt(hora.substring(4, 6)) <= 99) &&
+        (Integer.parseInt(hora.substring(4, 6)) >= 0) && hora.charAt(2) == '-')
+      ret = true;
+    else
+      ret = false;
+    return ret;
+  }
+
+  public static String getNuevaIdentificacion()
+  {
+    Cursada.CANT_CURSADAS++;
+    String ret = "ASI";
+    String aux = "" + Cursada.CANT_CURSADAS;
+    int i, j = aux.length();
+    for (i = 1; i < 4 - j; i++)
+      ret = ret + "0";
+    return ret + aux;
   }
 }

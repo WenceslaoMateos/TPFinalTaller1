@@ -9,12 +9,14 @@ public class Asignatura
   private String identificacion;
   private String nombre;
   private IndicePrimario<String, Asignatura> correlatividades;
+  private static int CANT_ASIGNATURAS = 0;
 
   public Asignatura(String identificacion, String nombre)
   {
     this.identificacion = identificacion;
     this.nombre = nombre;
     this.correlatividades = new IndicePrimario<String, Asignatura>();
+    this.identificacion = Asignatura.getNuevaIdentificacion();
   }
 
   public void agregarCorrelativa(Asignatura correlativa)
@@ -63,8 +65,40 @@ public class Asignatura
     this.identificacion = identificacion;
   }
 
+  public static void setCANT_ASIGNATURAS(int CANT_ASIGNATURAS)
+  {
+    Asignatura.CANT_ASIGNATURAS = CANT_ASIGNATURAS;
+  }
+
+  public static int getCANT_ASIGNATURAS()
+  {
+    return CANT_ASIGNATURAS;
+  }
+
   public void setNombre(String nombre)
   {
     this.nombre = nombre;
   }
+
+  public void setCorrelatividades(IndicePrimario<String, Asignatura> correlatividades)
+  {
+    this.correlatividades = correlatividades;
+  }
+
+  public IndicePrimario<String, Asignatura> getCorrelatividades()
+  {
+    return correlatividades;
+  }
+
+  public static String getNuevaIdentificacion()
+  {
+    Asignatura.CANT_ASIGNATURAS++;
+    String ret = "ASI";
+    String aux = "" + Asignatura.CANT_ASIGNATURAS;
+    int i, j = aux.length();
+    for (i = 1; i < 4 - j; i++)
+      ret = ret + "0";
+    return ret + aux;
+  }
+
 }
