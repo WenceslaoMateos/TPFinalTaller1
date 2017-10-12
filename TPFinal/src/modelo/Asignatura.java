@@ -8,13 +8,13 @@ public class Asignatura
 {
     private String identificacion;
     private String nombre;
-    private IndicePrimario<String, Asignatura> correlatividades;
+    private IndicePrimario<Asignatura> correlatividades;
 
     public Asignatura(String identificacion, String nombre)
     {
         this.identificacion = identificacion;
         this.nombre = nombre;
-        this.correlatividades = new IndicePrimario<String, Asignatura>();
+        this.correlatividades = new IndicePrimario<Asignatura>();
     }
 
     public void agregarCorrelativa(Asignatura correlativa)

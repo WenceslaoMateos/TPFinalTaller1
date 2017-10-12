@@ -5,7 +5,7 @@ public class Profesor
     extends Persona
 {
     private String telefono;
-    private IndicePrimario<String, Asignatura> competencia;
+    private IndicePrimario<Asignatura> competencia;
 
     public Profesor()
     {
@@ -16,7 +16,7 @@ public class Profesor
     {
         super(legajo, apellidoNombre, domicilio, mail);
         this.telefono = telefono;
-        this.competencia = new IndicePrimario<String, Asignatura>();
+        this.competencia = new IndicePrimario<Asignatura>();
     }
 
     public void agregarCompetencia(Asignatura nuevo)

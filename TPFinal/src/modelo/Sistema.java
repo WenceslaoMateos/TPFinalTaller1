@@ -3,7 +3,7 @@ package modelo;
 
 public class Sistema
 {
-    IndiceDoble<String, String, Alumno> alumnos;
-    IndiceDoble<String, String, Profesor> profesores;
-    IndiceDoble<String, String, Asignatura> asignaturas;
+    IndiceDoble<Alumno> alumnos;
+    IndiceDoble<Profesor> profesores;
+    IndiceDoble<Asignatura> asignaturas;
 }

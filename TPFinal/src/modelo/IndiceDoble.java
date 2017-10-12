@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-public class IndiceDoble<K1, K2, V extends I_Indexable>
+public class IndiceDoble<V extends I_Indexable>
 {
-    private IndicePrimario<K1, V> indice1;
-    private TreeMap<K2, ArrayList<V>> indice2;
+    private IndicePrimario<V> indice1;
+    private TreeMap<Object, ArrayList<V>> indice2;
 
     public IndiceDoble()
     {
-        this.indice1 = new IndicePrimario<K1, V>();
-        this.indice2 = new TreeMap<K2, ArrayList<V>>();
+        this.indice1 = new IndicePrimario<V>();
+        this.indice2 = new TreeMap<Object, ArrayList<V>>();
     }
 
     public void agregar(V nuevo)
     {
         this.indice1.agregar(nuevo);
-        if (!this.contieneClaveSecundaria((K2) nuevo.getClaveSecundaria()))
-            this.indice2.put((K2) nuevo.getClaveSecundaria(), new ArrayList<V>());
+        if (!this.contieneClaveSecundaria(nuevo.getClaveSecundaria()))
+            this.indice2.put(nuevo.getClaveSecundaria(), new ArrayList<V>());
         this.indice2
             .get(nuevo.getClaveSecundaria())
             .add(nuevo);
@@ -35,12 +35,12 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
             this.indice2.remove(elim.getClaveSecundaria());
     }
 
-    public V buscarPorClavePrimaria(K1 clave)
+    public V buscarPorClavePrimaria(Object clave)
     {
         return this.indice1.buscarPorClavePrimaria(clave);
     }
 
-    public Iterator<V> buscarPorClaveSecundaria(K2 clave)
+    public Iterator<V> buscarPorClaveSecundaria(Object clave)
     {
         if (!this.indice2.containsKey(clave))
             ;
@@ -57,12 +57,12 @@ public class IndiceDoble<K1, K2, V extends I_Indexable>
                    .iterator();
     }
 
-    public boolean contieneClavePrimaria(K1 clave)
+    public boolean contieneClavePrimaria(Object clave)
     {
         return this.indice1.contieneClave(clave);
     }
 
-    public boolean contieneClaveSecundaria(K2 clave)
+    public boolean contieneClaveSecundaria(Object clave)
     {
         return this.indice2.containsKey(clave);
     }

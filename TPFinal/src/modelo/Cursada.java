@@ -9,8 +9,8 @@ public class Cursada
     private String periodo;
     private Dia dia;
     private String hora;
-    private IndiceDoble<String, String, Profesor> profesores;
-    private IndiceDoble<String, String, Alumno> alumnos;
+    private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
+    private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
 
     public boolean correlativasAprobadas(Alumno alumno)
     {

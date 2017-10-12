@@ -6,24 +6,23 @@ import java.util.TreeMap;
 /**
  * Clase que mantiene una colección de elementos indexables organizados según su clave primaria.
  * @param <V> tipo de elementos de la colección. Deben implementar I_Indexable.
- * @param <K>
  */
-public class IndicePrimario<K, V extends I_Indexable>
+public class IndicePrimario<V extends I_Indexable>
 {
-    private TreeMap<K, V> elementos;
+    private TreeMap<Object, V> elementos;
 
     public IndicePrimario()
     {
-        this.elementos = new TreeMap<K, V>();
+        this.elementos = new TreeMap<Object, V>();
     }
 
     public void agregar(V nuevo)
     {
-        if (this.contieneClave((K) nuevo.getClavePrimaria()))
+        if (this.contieneClave(nuevo.getClavePrimaria()))
             ;
         // TODO
         else
-            this.elementos.put((K) nuevo.getClavePrimaria(), nuevo);
+            this.elementos.put(nuevo.getClavePrimaria(), nuevo);
     }
 
     public void eliminar(V elim)
@@ -35,7 +34,7 @@ public class IndicePrimario<K, V extends I_Indexable>
             this.elementos.remove(elim);
     }
 
-    public V buscarPorClavePrimaria(K clave)
+    public V buscarPorClavePrimaria(Object clave)
     {
         if (!this.contieneClave(clave))
             ;
@@ -43,7 +42,7 @@ public class IndicePrimario<K, V extends I_Indexable>
         return this.elementos.get(clave);
     }
 
-    public boolean contieneClave(K clave)
+    public boolean contieneClave(Object clave)
     {
         return this.elementos.containsKey(clave);
     }

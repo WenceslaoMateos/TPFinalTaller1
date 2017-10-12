@@ -4,7 +4,7 @@ package modelo;
 public class Alumno
     extends Persona
 {
-    private IndicePrimario<String, Asignatura> historia;
+    private IndicePrimario<Asignatura> historia;
 
     public Alumno()
     {
@@ -14,7 +14,7 @@ public class Alumno
     public Alumno(String legajo, String apellidoNombre, String domicilio, String mail)
     {
         super(legajo, apellidoNombre, domicilio, mail);
-        this.historia = new IndicePrimario<String, Asignatura>();
+        this.historia = new IndicePrimario<Asignatura>();
     }
 
     public void agregarHistoria(Asignatura nuevo)
