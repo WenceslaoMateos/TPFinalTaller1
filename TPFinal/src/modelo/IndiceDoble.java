@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -16,6 +18,7 @@ public class IndiceDoble<V extends I_Indexable>
     }
 
     public void agregar(V nuevo)
+        throws ClaveYaExistenteException
     {
         this.indice1.agregar(nuevo);
         if (!this.contieneClaveSecundaria(nuevo.getClaveSecundaria()))

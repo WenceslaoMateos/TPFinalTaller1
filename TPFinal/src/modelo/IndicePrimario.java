@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -15,12 +17,17 @@ public class IndicePrimario<V extends I_Indexable>
     {
         this.elementos = new TreeMap<Object, V>();
     }
-
+    
+    /**
+     * Añade un elemento al índice si su clave primaria no se encuentra ya.
+     * @param nuevo elemento tipo V a agregar.
+     * @throws ClaveYaExistenteException un elemento de la colección ya contaba con esa clave.
+     */
     public void agregar(V nuevo)
+        throws ClaveYaExistenteException
     {
         if (this.contieneClave(nuevo.getClavePrimaria()))
-            ;
-        // TODO
+            throw new ClaveYaExistenteException(nuevo.getClavePrimaria());
         else
             this.elementos.put(nuevo.getClavePrimaria(), nuevo);
     }

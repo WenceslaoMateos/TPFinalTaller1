@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+
 
 public class Profesor
     extends Persona
@@ -20,6 +22,7 @@ public class Profesor
     }
 
     public void agregarCompetencia(Asignatura nuevo)
+        throws ClaveYaExistenteException
     {
         this.competencia.agregar(nuevo);
     }

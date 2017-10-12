@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+
 
 public class Alumno
     extends Persona
@@ -18,6 +20,7 @@ public class Alumno
     }
 
     public void agregarHistoria(Asignatura nuevo)
+        throws ClaveYaExistenteException
     {
         this.historia.agregar(nuevo);
     }

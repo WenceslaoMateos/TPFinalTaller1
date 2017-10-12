@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+
 import java.util.Iterator;
 
 
@@ -18,6 +20,7 @@ public class Asignatura
     }
 
     public void agregarCorrelativa(Asignatura correlativa)
+        throws ClaveYaExistenteException
     {
         this.correlatividades.agregar(correlativa);
     }
