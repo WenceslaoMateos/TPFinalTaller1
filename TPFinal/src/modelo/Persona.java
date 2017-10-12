@@ -2,62 +2,75 @@ package modelo;
 
 
 public abstract class Persona
-  implements I_Indexable
+    implements I_Indexable
 {
-  private String legajo;
-  private String apellidoNombre;
-  private String domicilio;
-  private String mail;
+    private String legajo;
+    private String apellidoNombre;
+    private String domicilio;
+    private String mail;
 
-  @Override
-  public Object getClavePrimaria()
-  {
-    return this.legajo;
-  }
+    public Persona()
+    {
+        super();
+    }
 
-  @Override
-  public Object getClaveSecundaria()
-  {
-    return this.apellidoNombre;
-  }
+    public Persona(String legajo, String apellidoNombre, String domicilio, String mail)
+    {
+        this.legajo = legajo;
+        this.apellidoNombre = apellidoNombre;
+        this.domicilio = domicilio;
+        this.mail = mail;
+    }
 
-  public String getLegajo()
-  {
-    return legajo;
-  }
+    @Override
+    public Object getClavePrimaria()
+    {
+        return this.legajo;
+    }
 
-  public String getApellidoNombre()
-  {
-    return apellidoNombre;
-  }
+    @Override
+    public Object getClaveSecundaria()
+    {
+        return this.apellidoNombre;
+    }
 
-  public void setLegajo(String legajo)
-  {
-    this.legajo = legajo;
-  }
+    public String getLegajo()
+    {
+        return legajo;
+    }
 
-  public void setApellidoNombre(String apellidoNombre)
-  {
-    this.apellidoNombre = apellidoNombre;
-  }
+    public String getApellidoNombre()
+    {
+        return apellidoNombre;
+    }
 
-  public void setDomicilio(String domicilio)
-  {
-    this.domicilio = domicilio;
-  }
+    public void setLegajo(String legajo)
+    {
+        this.legajo = legajo;
+    }
 
-  public String getDomicilio()
-  {
-    return domicilio;
-  }
+    public void setApellidoNombre(String apellidoNombre)
+    {
+        this.apellidoNombre = apellidoNombre;
+    }
 
-  public void setMail(String mail)
-  {
-    this.mail = mail;
-  }
+    public void setDomicilio(String domicilio)
+    {
+        this.domicilio = domicilio;
+    }
 
-  public String getMail()
-  {
-    return mail;
-  }
+    public String getDomicilio()
+    {
+        return domicilio;
+    }
+
+    public void setMail(String mail)
+    {
+        this.mail = mail;
+    }
+
+    public String getMail()
+    {
+        return mail;
+    }
 }
