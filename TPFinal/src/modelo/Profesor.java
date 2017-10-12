@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.ElementoNoExisteException;
 
 
 public class Profesor
@@ -28,6 +29,7 @@ public class Profesor
     }
 
     public void eliminarCompetencia(Asignatura elim)
+        throws ElementoNoExisteException
     {
         this.competencia.eliminar(elim);
     }

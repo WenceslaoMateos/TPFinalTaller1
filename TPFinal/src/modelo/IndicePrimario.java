@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.ElementoNoExisteException;
 
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -32,11 +33,10 @@ public class IndicePrimario<V extends I_Indexable>
             this.elementos.put(nuevo.getClavePrimaria(), nuevo);
     }
 
-    public void eliminar(V elim)
+    public void eliminar(V elim) throws ElementoNoExisteException
     {
         if (!this.contieneValor(elim))
-            ;
-        // TODO
+            throw new ElementoNoExisteException(elim);
         else
             this.elementos.remove(elim);
     }

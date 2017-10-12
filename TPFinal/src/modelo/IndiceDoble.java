@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.ElementoNoExisteException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ public class IndiceDoble<V extends I_Indexable>
     }
 
     public void eliminar(V elim)
+        throws ElementoNoExisteException
     {
         ArrayList<V> aux;
         this.indice1.eliminar(elim);
