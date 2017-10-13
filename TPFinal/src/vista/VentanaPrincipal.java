@@ -17,6 +17,9 @@ public class VentanaPrincipal
   public VentanaPrincipal()
   {
     initComponents();
+    this.setSize(this.getMaximumSize());
+    this.setResizable(false);
+    this.setTitle("Programa de Gestion de asignaturas");
   }
 
   @Override
@@ -34,21 +37,326 @@ public class VentanaPrincipal
   private void initComponents()//GEN-BEGIN:initComponents
   {
 
+    jPanelAlumno = new javax.swing.JPanel();
+    altaAlumno = new javax.swing.JButton();
+    bajaAlumno = new javax.swing.JButton();
+    modificacionAlumno = new javax.swing.JButton();
+    jPanelProfesor = new javax.swing.JPanel();
+    altaProfesor = new javax.swing.JButton();
+    bajaProfesor = new javax.swing.JButton();
+    modificacionProfesor = new javax.swing.JButton();
+    jPanelCursada = new javax.swing.JPanel();
+    altaCursada = new javax.swing.JButton();
+    bajaCursada = new javax.swing.JButton();
+    modificacionCursada = new javax.swing.JButton();
+    jPanelAsignatura = new javax.swing.JPanel();
+    altaAsignatura = new javax.swing.JButton();
+    bajaAsignatura = new javax.swing.JButton();
+    modificacionAsignatura = new javax.swing.JButton();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+    jPanelAlumno.setBorder(javax.swing.BorderFactory.createTitledBorder("Alumno"));
+
+    altaAlumno.setText("Alta");
+    altaAlumno.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        altaAlumnoActionPerformed(evt);
+      }
+    });
+
+    bajaAlumno.setText("Baja");
+    bajaAlumno.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        bajaAlumnoActionPerformed(evt);
+      }
+    });
+
+    modificacionAlumno.setText("Modificación");
+    modificacionAlumno.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        modificacionAlumnoActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelAlumnoLayout = new javax.swing.GroupLayout(jPanelAlumno);
+    jPanelAlumno.setLayout(jPanelAlumnoLayout);
+    jPanelAlumnoLayout.setHorizontalGroup(
+      jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlumnoLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(modificacionAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(bajaAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(altaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
+    );
+    jPanelAlumnoLayout.setVerticalGroup(
+      jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelAlumnoLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(altaAlumno)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(bajaAlumno)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(modificacionAlumno)
+        .addContainerGap(69, Short.MAX_VALUE))
+    );
+
+    jPanelProfesor.setBorder(javax.swing.BorderFactory.createTitledBorder("Profesor"));
+
+    altaProfesor.setText("Alta");
+    altaProfesor.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        altaProfesorActionPerformed(evt);
+      }
+    });
+
+    bajaProfesor.setText("Baja");
+    bajaProfesor.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        bajaProfesorActionPerformed(evt);
+      }
+    });
+
+    modificacionProfesor.setText("Modificación");
+    modificacionProfesor.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        modificacionProfesorActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelProfesorLayout = new javax.swing.GroupLayout(jPanelProfesor);
+    jPanelProfesor.setLayout(jPanelProfesorLayout);
+    jPanelProfesorLayout.setHorizontalGroup(
+      jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(modificacionProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(bajaProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(altaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
+    );
+    jPanelProfesorLayout.setVerticalGroup(
+      jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelProfesorLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(altaProfesor)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(bajaProfesor)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(modificacionProfesor)
+        .addContainerGap(69, Short.MAX_VALUE))
+    );
+
+    jPanelCursada.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursada"));
+
+    altaCursada.setText("Alta");
+    altaCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        altaCursadaActionPerformed(evt);
+      }
+    });
+
+    bajaCursada.setText("Baja");
+    bajaCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        bajaCursadaActionPerformed(evt);
+      }
+    });
+
+    modificacionCursada.setText("Modificación");
+    modificacionCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        modificacionCursadaActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelCursadaLayout = new javax.swing.GroupLayout(jPanelCursada);
+    jPanelCursada.setLayout(jPanelCursadaLayout);
+    jPanelCursadaLayout.setHorizontalGroup(
+      jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(modificacionCursada, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(bajaCursada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(altaCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
+    );
+    jPanelCursadaLayout.setVerticalGroup(
+      jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(altaCursada)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(bajaCursada)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(modificacionCursada)
+        .addContainerGap(69, Short.MAX_VALUE))
+    );
+
+    jPanelAsignatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignatura"));
+
+    altaAsignatura.setText("Alta");
+    altaAsignatura.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        altaAsignaturaActionPerformed(evt);
+      }
+    });
+
+    bajaAsignatura.setText("Baja");
+    bajaAsignatura.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        bajaAsignaturaActionPerformed(evt);
+      }
+    });
+
+    modificacionAsignatura.setText("Modificación");
+    modificacionAsignatura.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        modificacionAsignaturaActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelAsignaturaLayout = new javax.swing.GroupLayout(jPanelAsignatura);
+    jPanelAsignatura.setLayout(jPanelAsignaturaLayout);
+    jPanelAsignaturaLayout.setHorizontalGroup(
+      jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAsignaturaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(modificacionAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(bajaAsignatura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(altaAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
+    );
+    jPanelAsignaturaLayout.setVerticalGroup(
+      jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelAsignaturaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(altaAsignatura)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(bajaAsignatura)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(modificacionAsignatura)
+        .addContainerGap(69, Short.MAX_VALUE))
+    );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(421, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jPanelCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jPanelAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(388, Short.MAX_VALUE))
     );
 
     pack();
   }//GEN-END:initComponents
+
+  private void altaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaAlumnoActionPerformed
+  {//GEN-HEADEREND:event_altaAlumnoActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_altaAlumnoActionPerformed
+
+  private void bajaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaAlumnoActionPerformed
+  {//GEN-HEADEREND:event_bajaAlumnoActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_bajaAlumnoActionPerformed
+
+  private void modificacionAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionAlumnoActionPerformed
+  {//GEN-HEADEREND:event_modificacionAlumnoActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_modificacionAlumnoActionPerformed
+
+  private void altaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaProfesorActionPerformed
+  {//GEN-HEADEREND:event_altaProfesorActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_altaProfesorActionPerformed
+
+  private void bajaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaProfesorActionPerformed
+  {//GEN-HEADEREND:event_bajaProfesorActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_bajaProfesorActionPerformed
+
+  private void modificacionProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionProfesorActionPerformed
+  {//GEN-HEADEREND:event_modificacionProfesorActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_modificacionProfesorActionPerformed
+
+  private void altaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaCursadaActionPerformed
+  {//GEN-HEADEREND:event_altaCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_altaCursadaActionPerformed
+
+  private void bajaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaCursadaActionPerformed
+  {//GEN-HEADEREND:event_bajaCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_bajaCursadaActionPerformed
+
+  private void modificacionCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionCursadaActionPerformed
+  {//GEN-HEADEREND:event_modificacionCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_modificacionCursadaActionPerformed
+
+  private void altaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_altaAsignaturaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_altaAsignaturaActionPerformed
+
+  private void bajaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_bajaAsignaturaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_bajaAsignaturaActionPerformed
+
+  private void modificacionAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_modificacionAsignaturaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_modificacionAsignaturaActionPerformed
 
   /**
    * @param args the command line arguments
@@ -134,5 +442,22 @@ public class VentanaPrincipal
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton altaAlumno;
+  private javax.swing.JButton altaAsignatura;
+  private javax.swing.JButton altaCursada;
+  private javax.swing.JButton altaProfesor;
+  private javax.swing.JButton bajaAlumno;
+  private javax.swing.JButton bajaAsignatura;
+  private javax.swing.JButton bajaCursada;
+  private javax.swing.JButton bajaProfesor;
+  private javax.swing.JPanel jPanel2;
+  private javax.swing.JPanel jPanelAlumno;
+  private javax.swing.JPanel jPanelAsignatura;
+  private javax.swing.JPanel jPanelCursada;
+  private javax.swing.JPanel jPanelProfesor;
+  private javax.swing.JButton modificacionAlumno;
+  private javax.swing.JButton modificacionAsignatura;
+  private javax.swing.JButton modificacionCursada;
+  private javax.swing.JButton modificacionProfesor;
   // End of variables declaration//GEN-END:variables
 }
