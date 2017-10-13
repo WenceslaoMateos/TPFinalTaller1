@@ -3,48 +3,56 @@ package modelo;
 
 public class Sistema
 {
-    IndiceDoble<Alumno> alumnos;
-    IndiceDoble<Profesor> profesores;
-    IndiceDoble<Asignatura> planDeEstudio;
-    IndiceDoble<Cursada> calendario;
+  private IndiceDoble<Alumno> alumnos;
+  private IndiceDoble<Profesor> profesores;
+  private IndiceDoble<Asignatura> planDeEstudio;
+  private IndiceDoble<Cursada> calendario;
 
-    public void setAlumnos(IndiceDoble<Alumno> alumnos)
-    {
-        this.alumnos = alumnos;
-    }
+  public Sistema()
+  {
+    this.alumnos = new IndiceDoble<Alumno>();
+    this.profesores = new IndiceDoble<Profesor>();
+    this.planDeEstudio = new IndiceDoble<Asignatura>();
+    this.calendario = new IndiceDoble<Cursada>();
+  }
 
-    public IndiceDoble<Alumno> getAlumnos()
-    {
-        return alumnos;
-    }
+  public void setAlumnos(IndiceDoble<Alumno> alumnos)
+  {
+    this.alumnos = alumnos;
+  }
 
-    public void setProfesores(IndiceDoble<Profesor> profesores)
-    {
-        this.profesores = profesores;
-    }
+  public IndiceDoble<Alumno> getAlumnos()
+  {
+    return alumnos;
+  }
 
-    public IndiceDoble<Profesor> getProfesores()
-    {
-        return profesores;
-    }
+  public void setProfesores(IndiceDoble<Profesor> profesores)
+  {
+    this.profesores = profesores;
+  }
 
-    public void setPlanDeEstudio(IndiceDoble<Asignatura> planDeEstudio)
-    {
-        this.planDeEstudio = planDeEstudio;
-    }
+  public IndiceDoble<Profesor> getProfesores()
+  {
+    return profesores;
+  }
 
-    public IndiceDoble<Asignatura> getPlanDeEstudio()
-    {
-        return planDeEstudio;
-    }
+  public void setPlanDeEstudio(IndiceDoble<Asignatura> planDeEstudio)
+  {
+    this.planDeEstudio = planDeEstudio;
+  }
 
-    public void setCalendario(IndiceDoble<Cursada> calendario)
-    {
-        this.calendario = calendario;
-    }
+  public IndiceDoble<Asignatura> getPlanDeEstudio()
+  {
+    return planDeEstudio;
+  }
 
-    public IndiceDoble<Cursada> getCalendario()
-    {
-        return calendario;
-    }
+  public void setCalendario(IndiceDoble<Cursada> calendario)
+  {
+    this.calendario = calendario;
+  }
+
+  public IndiceDoble<Cursada> getCalendario()
+  {
+    return calendario;
+  }
 }
