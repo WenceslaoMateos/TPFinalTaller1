@@ -3,10 +3,10 @@ package modelo;
 
 public class Sistema
 {
-    IndiceDoble<Alumno> alumnos;
-    IndiceDoble<Profesor> profesores;
-    IndiceDoble<Asignatura> planDeEstudio;
-    IndiceDoble<Cursada> calendario;
+    private IndiceDoble<Alumno> alumnos;
+    private IndiceDoble<Profesor> profesores;
+    private IndiceDoble<Asignatura> planDeEstudio;
+    private IndiceDoble<Cursada> calendario;
 
     public void setAlumnos(IndiceDoble<Alumno> alumnos)
     {

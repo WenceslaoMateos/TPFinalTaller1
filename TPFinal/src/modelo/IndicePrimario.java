@@ -1,7 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
-import excepciones.ElementoNoExisteException;
+import excepciones.NoEncontradoException;
 
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -20,7 +20,9 @@ public class IndicePrimario<V extends I_Indexable>
     }
 
     /**
-     * Añade un elemento al índice si su clave primaria no se encuentra ya.
+     * Añade un elemento al índice si su clave primaria no se encuentra ya.<br>
+     * <b>Pre:</b> los atributos de nuevo distintos a la clave primaria son correctos.<br>
+     * <b>Post:</b> el índice tiene un elemento más.
      * @param nuevo elemento tipo V a agregar.
      * @throws ClaveYaExistenteException un elemento de la colección ya contaba con esa clave.
      */
@@ -32,24 +34,44 @@ public class IndicePrimario<V extends I_Indexable>
         else
             this.elementos.put(nuevo.getClavePrimaria(), nuevo);
     }
-
+    
+    /**
+     * Elimina del índice la referencia al objeto ingresado como parámetro.<br>
+     * <b>Post:</b> el índice tiene un elemento menos.
+     * @param elim objeto de tipo V a eliminar del índice.
+     * @throws NoEncontradoException no se encontró en el índice la referencia de entrada.
+     */
     public void eliminar(V elim)
-        throws ElementoNoExisteException
+        throws NoEncontradoException
     {
         if (!this.contieneValor(elim))
-            throw new ElementoNoExisteException(elim);
+            throw new NoEncontradoException(elim, "No se encontró el objeto entre los elementos del índice.");
         else
             this.elementos.remove(elim);
     }
-
+    
+    /**
+     * Busca un objeto por su clave primaria y devuelve su referencia.<br>
+     * <b>Pre:</b> el parámetro clave es del tipo del objeto otorgado por getClavePrimaria() de la clase V.
+     * @param clave clave a buscar en el índice.
+     * @return la referencia al objeto de tipo V asociado a la clave dada.
+     * @throws NoEncontradoException no existe la clave ingresada dentro del índice. 
+     */
     public V buscarPorClavePrimaria(Object clave)
+        throws NoEncontradoException
     {
         if (!this.contieneClave(clave))
-            ;
-        // TODO
-        return this.elementos.get(clave);
+            throw new NoEncontradoException(clave, "No se encontró la clave solicitada en el índice.");
+        else
+            return this.elementos.get(clave);
     }
 
+    /**
+     * Comprueba si la clave dada tiene una entrada en el índice.<br>
+     * <b>Pre:</b> el parámetro clave es del tipo del objeto otorgado por getClavePrimaria() de la clase V.
+     * @param clave clave a buscar en el índice
+     * @return <b>true</b> si la clave se encuentra, <b>false</b> en caso contrario.
+     */
     public boolean contieneClave(Object clave)
     {
         return this.elementos.containsKey(clave);
@@ -58,7 +80,7 @@ public class IndicePrimario<V extends I_Indexable>
     /**
      * Comprueba si la referencia al objeto de tipo V pasado como parámetro se encuentra en el índice.
      * @param valor elemento a buscar.
-     * @return true si se encontró el elemento, false en caso contrario.
+     * @return <b>true</b> si se encontró el elemento, <b>false</b> en caso contrario.
      */
     public boolean contieneValor(V valor)
     {
@@ -66,7 +88,7 @@ public class IndicePrimario<V extends I_Indexable>
     }
 
     /**
-     * Devuelve un iterador con los elementos del indice ordenados de forma ascendente según su clave primaria.
+     * Devuelve un iterador con los elementos del índice ordenados de forma ascendente, según su clave primaria.
      * @return iterador de elementos V.
      */
     public Iterator<V> elementos()
@@ -75,13 +97,14 @@ public class IndicePrimario<V extends I_Indexable>
                    .values()
                    .iterator();
     }
-
-    public void setElementos(TreeMap<Object, V> elementos)
+    
+    
+    public void setElementos(TreeMap<Object, V> elementos) //Para XML
     {
         this.elementos = elementos;
     }
 
-    public TreeMap<Object, V> getElementos()
+    public TreeMap<Object, V> getElementos() //Para XML
     {
         return elementos;
     }

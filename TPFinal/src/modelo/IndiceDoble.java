@@ -1,7 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
-import excepciones.ElementoNoExisteException;
+import excepciones.NoEncontradoException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ public class IndiceDoble<V extends I_Indexable>
     }
 
     public void eliminar(V elim)
-        throws ElementoNoExisteException
+        throws NoEncontradoException
     {
         ArrayList<V> aux;
         this.indice1.eliminar(elim);
@@ -41,6 +41,7 @@ public class IndiceDoble<V extends I_Indexable>
     }
 
     public V buscarPorClavePrimaria(Object clave)
+        throws NoEncontradoException
     {
         return this.indice1.buscarPorClavePrimaria(clave);
     }

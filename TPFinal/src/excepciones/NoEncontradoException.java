@@ -1,14 +1,14 @@
 package excepciones;
 
 
-public class ElementoNoExisteException
+public class NoEncontradoException
     extends Exception
 {
     private Object dato;
 
-    public ElementoNoExisteException(Object dato)
+    public NoEncontradoException(Object dato, String mensaje)
     {
-        super("No se encontró el objeto entre los elementos de la colección.");
+        super(mensaje);
         this.dato = dato;
     }
 
