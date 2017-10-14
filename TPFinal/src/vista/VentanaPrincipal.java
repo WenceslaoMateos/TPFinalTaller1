@@ -38,234 +38,265 @@ public class VentanaPrincipal
   {
 
     jPanelAlumno = new javax.swing.JPanel();
-    altaAlumno = new javax.swing.JButton();
-    bajaAlumno = new javax.swing.JButton();
-    modificacionAlumno = new javax.swing.JButton();
+    jButtonAltaAlumno = new javax.swing.JButton();
+    jButtonBajaAlumno = new javax.swing.JButton();
+    jButtonModificacionAlumno = new javax.swing.JButton();
+    jButtonUbicarAlumno = new javax.swing.JButton();
     jPanelProfesor = new javax.swing.JPanel();
-    altaProfesor = new javax.swing.JButton();
-    bajaProfesor = new javax.swing.JButton();
-    modificacionProfesor = new javax.swing.JButton();
+    jButtonAltaProfesor = new javax.swing.JButton();
+    jButtonBajaProfesor = new javax.swing.JButton();
+    jButtonModificacionProfesor = new javax.swing.JButton();
+    jButtonUbicarProfesor = new javax.swing.JButton();
     jPanelCursada = new javax.swing.JPanel();
-    altaCursada = new javax.swing.JButton();
-    bajaCursada = new javax.swing.JButton();
-    modificacionCursada = new javax.swing.JButton();
+    jButtonAltaCursada = new javax.swing.JButton();
+    jButtonBajaCursada = new javax.swing.JButton();
+    jButtonModificacionCursada = new javax.swing.JButton();
+    jButtonUbicarCursada = new javax.swing.JButton();
     jPanelAsignatura = new javax.swing.JPanel();
-    altaAsignatura = new javax.swing.JButton();
-    bajaAsignatura = new javax.swing.JButton();
-    modificacionAsignatura = new javax.swing.JButton();
+    jButtonAltaAsignatura = new javax.swing.JButton();
+    jButtonBajaAsignatura = new javax.swing.JButton();
+    jButtonModificacionAsignatura = new javax.swing.JButton();
+    jButtonUbicarAsignatura = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     jPanelAlumno.setBorder(javax.swing.BorderFactory.createTitledBorder("Alumno"));
 
-    altaAlumno.setText("Alta");
-    altaAlumno.addActionListener(new java.awt.event.ActionListener()
+    jButtonAltaAlumno.setText("Alta");
+    jButtonAltaAlumno.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        altaAlumnoActionPerformed(evt);
+        jButtonAltaAlumnoActionPerformed(evt);
       }
     });
 
-    bajaAlumno.setText("Baja");
-    bajaAlumno.addActionListener(new java.awt.event.ActionListener()
+    jButtonBajaAlumno.setText("Baja");
+    jButtonBajaAlumno.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        bajaAlumnoActionPerformed(evt);
+        jButtonBajaAlumnoActionPerformed(evt);
       }
     });
 
-    modificacionAlumno.setText("Modificación");
-    modificacionAlumno.addActionListener(new java.awt.event.ActionListener()
+    jButtonModificacionAlumno.setText("Modificacion");
+    jButtonModificacionAlumno.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        modificacionAlumnoActionPerformed(evt);
+        jButtonModificacionAlumnoActionPerformed(evt);
       }
     });
+
+    jButtonUbicarAlumno.setText("Ubicar");
 
     javax.swing.GroupLayout jPanelAlumnoLayout = new javax.swing.GroupLayout(jPanelAlumno);
     jPanelAlumno.setLayout(jPanelAlumnoLayout);
     jPanelAlumnoLayout.setHorizontalGroup(
       jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlumnoLayout.createSequentialGroup()
+      .addGroup(jPanelAlumnoLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(modificacionAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-          .addComponent(bajaAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(altaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonModificacionAlumno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(jButtonBajaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonAltaAlumno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonUbicarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelAlumnoLayout.setVerticalGroup(
       jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelAlumnoLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(altaAlumno)
+        .addComponent(jButtonAltaAlumno)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(bajaAlumno)
+        .addComponent(jButtonBajaAlumno)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(modificacionAlumno)
-        .addContainerGap(69, Short.MAX_VALUE))
+        .addComponent(jButtonModificacionAlumno)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonUbicarAlumno)
+        .addContainerGap(37, Short.MAX_VALUE))
     );
 
     jPanelProfesor.setBorder(javax.swing.BorderFactory.createTitledBorder("Profesor"));
 
-    altaProfesor.setText("Alta");
-    altaProfesor.addActionListener(new java.awt.event.ActionListener()
+    jButtonAltaProfesor.setText("Alta");
+    jButtonAltaProfesor.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        altaProfesorActionPerformed(evt);
+        jButtonAltaProfesorActionPerformed(evt);
       }
     });
 
-    bajaProfesor.setText("Baja");
-    bajaProfesor.addActionListener(new java.awt.event.ActionListener()
+    jButtonBajaProfesor.setText("Baja");
+    jButtonBajaProfesor.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        bajaProfesorActionPerformed(evt);
+        jButtonBajaProfesorActionPerformed(evt);
       }
     });
 
-    modificacionProfesor.setText("Modificación");
-    modificacionProfesor.addActionListener(new java.awt.event.ActionListener()
+    jButtonModificacionProfesor.setText("Modificacion");
+    jButtonModificacionProfesor.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        modificacionProfesorActionPerformed(evt);
+        jButtonModificacionProfesorActionPerformed(evt);
       }
     });
+
+    jButtonUbicarProfesor.setText("Ubicar");
 
     javax.swing.GroupLayout jPanelProfesorLayout = new javax.swing.GroupLayout(jPanelProfesor);
     jPanelProfesor.setLayout(jPanelProfesorLayout);
     jPanelProfesorLayout.setHorizontalGroup(
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
+      .addGroup(jPanelProfesorLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(modificacionProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-          .addComponent(bajaProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(altaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonModificacionProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(jButtonBajaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonAltaProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonUbicarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelProfesorLayout.setVerticalGroup(
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelProfesorLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(altaProfesor)
+        .addComponent(jButtonAltaProfesor)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(bajaProfesor)
+        .addComponent(jButtonBajaProfesor)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(modificacionProfesor)
-        .addContainerGap(69, Short.MAX_VALUE))
+        .addComponent(jButtonModificacionProfesor)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonUbicarProfesor)
+        .addContainerGap(37, Short.MAX_VALUE))
     );
 
     jPanelCursada.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursada"));
 
-    altaCursada.setText("Alta");
-    altaCursada.addActionListener(new java.awt.event.ActionListener()
+    jButtonAltaCursada.setText("Alta");
+    jButtonAltaCursada.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        altaCursadaActionPerformed(evt);
+        jButtonAltaCursadaActionPerformed(evt);
       }
     });
 
-    bajaCursada.setText("Baja");
-    bajaCursada.addActionListener(new java.awt.event.ActionListener()
+    jButtonBajaCursada.setText("Baja");
+    jButtonBajaCursada.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        bajaCursadaActionPerformed(evt);
+        jButtonBajaCursadaActionPerformed(evt);
       }
     });
 
-    modificacionCursada.setText("Modificación");
-    modificacionCursada.addActionListener(new java.awt.event.ActionListener()
+    jButtonModificacionCursada.setText("Modificacion");
+    jButtonModificacionCursada.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        modificacionCursadaActionPerformed(evt);
+        jButtonModificacionCursadaActionPerformed(evt);
       }
     });
+
+    jButtonUbicarCursada.setText("Ubicar");
 
     javax.swing.GroupLayout jPanelCursadaLayout = new javax.swing.GroupLayout(jPanelCursada);
     jPanelCursada.setLayout(jPanelCursadaLayout);
     jPanelCursadaLayout.setHorizontalGroup(
       jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCursadaLayout.createSequentialGroup()
+      .addGroup(jPanelCursadaLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(modificacionCursada, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-          .addComponent(bajaCursada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(altaCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonModificacionCursada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(jButtonBajaCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonAltaCursada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonUbicarCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelCursadaLayout.setVerticalGroup(
       jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelCursadaLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(altaCursada)
+        .addComponent(jButtonAltaCursada)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(bajaCursada)
+        .addComponent(jButtonBajaCursada)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(modificacionCursada)
-        .addContainerGap(69, Short.MAX_VALUE))
+        .addComponent(jButtonModificacionCursada)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonUbicarCursada)
+        .addContainerGap(37, Short.MAX_VALUE))
     );
 
     jPanelAsignatura.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignatura"));
 
-    altaAsignatura.setText("Alta");
-    altaAsignatura.addActionListener(new java.awt.event.ActionListener()
+    jButtonAltaAsignatura.setText("Alta");
+    jButtonAltaAsignatura.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        altaAsignaturaActionPerformed(evt);
+        jButtonAltaAsignaturaActionPerformed(evt);
       }
     });
 
-    bajaAsignatura.setText("Baja");
-    bajaAsignatura.addActionListener(new java.awt.event.ActionListener()
+    jButtonBajaAsignatura.setText("Baja");
+    jButtonBajaAsignatura.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        bajaAsignaturaActionPerformed(evt);
+        jButtonBajaAsignaturaActionPerformed(evt);
       }
     });
 
-    modificacionAsignatura.setText("Modificación");
-    modificacionAsignatura.addActionListener(new java.awt.event.ActionListener()
+    jButtonModificacionAsignatura.setText("Modificacion");
+    jButtonModificacionAsignatura.addMouseListener(new java.awt.event.MouseAdapter()
+    {
+      public void mouseClicked(java.awt.event.MouseEvent evt)
+      {
+        jButtonModificacionAsignaturaMouseClicked(evt);
+      }
+    });
+    jButtonModificacionAsignatura.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        modificacionAsignaturaActionPerformed(evt);
+        jButtonModificacionAsignaturaActionPerformed(evt);
       }
     });
+
+    jButtonUbicarAsignatura.setText("Ubicar");
 
     javax.swing.GroupLayout jPanelAsignaturaLayout = new javax.swing.GroupLayout(jPanelAsignatura);
     jPanelAsignatura.setLayout(jPanelAsignaturaLayout);
     jPanelAsignaturaLayout.setHorizontalGroup(
       jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAsignaturaLayout.createSequentialGroup()
+      .addGroup(jPanelAsignaturaLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(modificacionAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-          .addComponent(bajaAsignatura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(altaAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonModificacionAsignatura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+          .addComponent(jButtonBajaAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonAltaAsignatura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonUbicarAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelAsignaturaLayout.setVerticalGroup(
       jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelAsignaturaLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(altaAsignatura)
+        .addComponent(jButtonAltaAsignatura)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(bajaAsignatura)
+        .addComponent(jButtonBajaAsignatura)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(modificacionAsignatura)
-        .addContainerGap(69, Short.MAX_VALUE))
+        .addComponent(jButtonModificacionAsignatura)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonUbicarAsignatura)
+        .addContainerGap(37, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -298,65 +329,70 @@ public class VentanaPrincipal
     pack();
   }//GEN-END:initComponents
 
-  private void altaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaAlumnoActionPerformed
-  {//GEN-HEADEREND:event_altaAlumnoActionPerformed
+  private void jButtonAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAlumnoActionPerformed
+  {//GEN-HEADEREND:event_jButtonAltaAlumnoActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_altaAlumnoActionPerformed
+  }//GEN-LAST:event_jButtonAltaAlumnoActionPerformed
 
-  private void bajaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaAlumnoActionPerformed
-  {//GEN-HEADEREND:event_bajaAlumnoActionPerformed
+  private void jButtonBajaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaAlumnoActionPerformed
+  {//GEN-HEADEREND:event_jButtonBajaAlumnoActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_bajaAlumnoActionPerformed
+  }//GEN-LAST:event_jButtonBajaAlumnoActionPerformed
 
-  private void modificacionAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionAlumnoActionPerformed
-  {//GEN-HEADEREND:event_modificacionAlumnoActionPerformed
+  private void jButtonModificacionAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificacionAlumnoActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificacionAlumnoActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_modificacionAlumnoActionPerformed
+  }//GEN-LAST:event_jButtonModificacionAlumnoActionPerformed
 
-  private void altaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaProfesorActionPerformed
-  {//GEN-HEADEREND:event_altaProfesorActionPerformed
+  private void jButtonAltaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaProfesorActionPerformed
+  {//GEN-HEADEREND:event_jButtonAltaProfesorActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_altaProfesorActionPerformed
+  }//GEN-LAST:event_jButtonAltaProfesorActionPerformed
 
-  private void bajaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaProfesorActionPerformed
-  {//GEN-HEADEREND:event_bajaProfesorActionPerformed
+  private void jButtonBajaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaProfesorActionPerformed
+  {//GEN-HEADEREND:event_jButtonBajaProfesorActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_bajaProfesorActionPerformed
+  }//GEN-LAST:event_jButtonBajaProfesorActionPerformed
 
-  private void modificacionProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionProfesorActionPerformed
-  {//GEN-HEADEREND:event_modificacionProfesorActionPerformed
+  private void jButtonModificacionProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificacionProfesorActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificacionProfesorActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_modificacionProfesorActionPerformed
+  }//GEN-LAST:event_jButtonModificacionProfesorActionPerformed
 
-  private void altaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaCursadaActionPerformed
-  {//GEN-HEADEREND:event_altaCursadaActionPerformed
+  private void jButtonAltaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAltaCursadaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_altaCursadaActionPerformed
+  }//GEN-LAST:event_jButtonAltaCursadaActionPerformed
 
-  private void bajaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaCursadaActionPerformed
-  {//GEN-HEADEREND:event_bajaCursadaActionPerformed
+  private void jButtonBajaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonBajaCursadaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_bajaCursadaActionPerformed
+  }//GEN-LAST:event_jButtonBajaCursadaActionPerformed
 
-  private void modificacionCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionCursadaActionPerformed
-  {//GEN-HEADEREND:event_modificacionCursadaActionPerformed
+  private void jButtonModificacionCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificacionCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificacionCursadaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_modificacionCursadaActionPerformed
+  }//GEN-LAST:event_jButtonModificacionCursadaActionPerformed
 
-  private void altaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_altaAsignaturaActionPerformed
-  {//GEN-HEADEREND:event_altaAsignaturaActionPerformed
+  private void jButtonAltaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAltaAsignaturaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_altaAsignaturaActionPerformed
+  }//GEN-LAST:event_jButtonAltaAsignaturaActionPerformed
 
-  private void bajaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bajaAsignaturaActionPerformed
-  {//GEN-HEADEREND:event_bajaAsignaturaActionPerformed
+  private void jButtonBajaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_jButtonBajaAsignaturaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_bajaAsignaturaActionPerformed
+  }//GEN-LAST:event_jButtonBajaAsignaturaActionPerformed
 
-  private void modificacionAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modificacionAsignaturaActionPerformed
-  {//GEN-HEADEREND:event_modificacionAsignaturaActionPerformed
+  private void jButtonModificacionAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificacionAsignaturaActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificacionAsignaturaActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_modificacionAsignaturaActionPerformed
+  }//GEN-LAST:event_jButtonModificacionAsignaturaActionPerformed
+
+  private void jButtonModificacionAsignaturaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonModificacionAsignaturaMouseClicked
+  {//GEN-HEADEREND:event_jButtonModificacionAsignaturaMouseClicked
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonModificacionAsignaturaMouseClicked
 
   /**
    * @param args the command line arguments
@@ -442,22 +478,25 @@ public class VentanaPrincipal
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton altaAlumno;
-  private javax.swing.JButton altaAsignatura;
-  private javax.swing.JButton altaCursada;
-  private javax.swing.JButton altaProfesor;
-  private javax.swing.JButton bajaAlumno;
-  private javax.swing.JButton bajaAsignatura;
-  private javax.swing.JButton bajaCursada;
-  private javax.swing.JButton bajaProfesor;
-  private javax.swing.JPanel jPanel2;
+  private javax.swing.JButton jButtonAltaAlumno;
+  private javax.swing.JButton jButtonAltaAsignatura;
+  private javax.swing.JButton jButtonAltaCursada;
+  private javax.swing.JButton jButtonAltaProfesor;
+  private javax.swing.JButton jButtonBajaAlumno;
+  private javax.swing.JButton jButtonBajaAsignatura;
+  private javax.swing.JButton jButtonBajaCursada;
+  private javax.swing.JButton jButtonBajaProfesor;
+  private javax.swing.JButton jButtonModificacionAlumno;
+  private javax.swing.JButton jButtonModificacionAsignatura;
+  private javax.swing.JButton jButtonModificacionCursada;
+  private javax.swing.JButton jButtonModificacionProfesor;
+  private javax.swing.JButton jButtonUbicarAlumno;
+  private javax.swing.JButton jButtonUbicarAsignatura;
+  private javax.swing.JButton jButtonUbicarCursada;
+  private javax.swing.JButton jButtonUbicarProfesor;
   private javax.swing.JPanel jPanelAlumno;
   private javax.swing.JPanel jPanelAsignatura;
   private javax.swing.JPanel jPanelCursada;
   private javax.swing.JPanel jPanelProfesor;
-  private javax.swing.JButton modificacionAlumno;
-  private javax.swing.JButton modificacionAsignatura;
-  private javax.swing.JButton modificacionCursada;
-  private javax.swing.JButton modificacionProfesor;
   // End of variables declaration//GEN-END:variables
 }
