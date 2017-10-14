@@ -69,7 +69,7 @@ public class IndicePrimario<V extends I_Indexable>
     /**
      * Comprueba si la clave dada tiene una entrada en el índice.<br>
      * <b>Pre:</b> el parámetro clave es del tipo del objeto otorgado por getClavePrimaria() de la clase V.
-     * @param clave clave a buscar en el índice
+     * @param clave clave a buscar en el índice.
      * @return <b>true</b> si la clave se encuentra, <b>false</b> en caso contrario.
      */
     public boolean contieneClave(Object clave)
@@ -98,14 +98,15 @@ public class IndicePrimario<V extends I_Indexable>
                    .iterator();
     }
     
-    
-    public void setElementos(TreeMap<Object, V> elementos) //Para XML
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   
+    public void setElementos(TreeMap<Object, V> elementos)
     {
         this.elementos = elementos;
     }
 
-    public TreeMap<Object, V> getElementos() //Para XML
+    public TreeMap<Object, V> getElementos()
     {
         return elementos;
     }
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

@@ -90,6 +90,7 @@ public class Sistema
             throw new DatoInvalidoException(nuevo.getHora(), "Hora inválida.");
         else if (!Cursada.validaPeriodo(nuevo.getPeriodo()))
             throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
+        // TODO faltan verificaciones
         else
             this.calendario.agregar(nuevo);
     }
