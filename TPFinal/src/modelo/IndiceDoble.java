@@ -42,12 +42,11 @@ public class IndiceDoble<V extends I_Indexable>
     
     /**
      * Elimina del índice la referencia al objeto ingresado como parámetro.<br>
+     * <b>Pre:</b> el elemento a eliminar se encuentra en el índice.<br>
      * <b>Post:</b> el índice tiene un elemento menos.
      * @param elim objeto de tipo V a eliminar del índice.
-     * @throws NoEncontradoException no se encontró en el índice la referencia de entrada.
      */
     public void eliminar(V elim)
-        throws NoEncontradoException
     {
         ArrayList<V> aux;
         this.indice1.eliminar(elim); // Elimina del índice primario.

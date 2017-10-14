@@ -704,3 +704,47 @@ div.contentContainer ul.blockList li.blockList h2{
   cursor: default;
 }
 
+
+/* Use Case Element */
+.UseCaseTableCellContents, .UseCaseTableCellTitle
+{
+  /*border : solid thin;*/
+  border-color : #D2D2D2;
+}
+
+.UseCaseTableCellTitle
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333333;
+  font-weight: bold;
+}
+
+.UseCaseTableCellContents
+{
+  background-color : white;
+  padding : 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #525252;
+  font-weight: normal;
+  line-height: 16px;
+}
+
+.UseCaseTable
+{
+  background-color : #F8F8F8;
+}
+
+.UseCaseSubHeader 
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #525252;
+  font-weight: normal;
+  line-height: 15px;
+  background-color: #E3E3E3;
+  background-repeat: repeat-x;
+  cursor: default;
+}
+
