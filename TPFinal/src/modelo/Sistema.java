@@ -13,6 +13,7 @@ public class Sistema
     private IndiceDoble<Asignatura> planDeEstudio;
     private IndiceDoble<Cursada> calendario;
 
+
     public Sistema()
     {
         this.alumnos = new IndiceDoble<Alumno>();
@@ -21,6 +22,7 @@ public class Sistema
         this.calendario = new IndiceDoble<Cursada>();
     }
     
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setAlumnos(IndiceDoble<Alumno> alumnos)
     {
         this.alumnos = alumnos;
@@ -60,6 +62,7 @@ public class Sistema
     {
         return calendario;
     }
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     
     public void agregarAlumno(Alumno nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException

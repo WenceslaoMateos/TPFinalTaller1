@@ -44,13 +44,13 @@ public class Asignatura
     @Override
     public Object getClavePrimaria()
     {
-        return this.identificacion;
+        return this.getIdentificacion();
     }
 
     @Override
     public Object getClaveSecundaria()
     {
-        return this.nombre;
+        return this.getNombre();
     }
 
     public String getIdentificacion()

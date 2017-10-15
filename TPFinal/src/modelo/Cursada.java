@@ -37,7 +37,7 @@ public class Cursada
     @Override
     public Object getClavePrimaria()
     {
-        return this.identificacion;
+        return this.getIdentificacion();
     }
 
     @Override
