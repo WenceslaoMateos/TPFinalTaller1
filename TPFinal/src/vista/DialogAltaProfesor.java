@@ -45,4 +45,11 @@ public class DialogAltaProfesor
     elementos.add(campos[3]);
     elementos.add(new JLabel("AAAA@AAAAA"));
   }
+
+  @Override
+  public Object generaObjeto()
+  {
+    // TODO Implement this method
+    return null;
+  }
 }

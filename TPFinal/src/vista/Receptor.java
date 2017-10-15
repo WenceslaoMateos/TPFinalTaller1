@@ -1,5 +1,9 @@
 package vista;
 
+import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
+
+import modelo.Alumno;
 import modelo.Sistema;
 
 
@@ -20,11 +24,12 @@ public class Receptor
   }
 
   public void alta(Object obj, int comando)
+    throws ClaveYaExistenteException, DatoInvalidoException
   {
     switch(comando)
     {
       case Receptor.ALTA_ALUMNO:
-        
+        this.modelo.agregarAlumno((Alumno)obj);
         break;
     }
   }

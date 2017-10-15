@@ -29,4 +29,11 @@ public class DialogAltaAsignatura
     elementos.add(campos[0]);
     elementos.add(new JLabel("---"));
   }
+
+  @Override
+  public Object generaObjeto()
+  {
+    // TODO Implement this method
+    return null;
+  }
 }

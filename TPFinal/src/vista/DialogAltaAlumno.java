@@ -13,7 +13,7 @@ public class DialogAltaAlumno
   {
     super(receptor);
   }
-
+  
   @Override
   public void generaCampos(JPanel elementos)
   {
@@ -40,5 +40,12 @@ public class DialogAltaAlumno
     elementos.add(new JLabel("Mail"));
     elementos.add(campos[2]);
     elementos.add(new JLabel("AAAA@AAAAA"));
+  }
+
+  @Override
+  public Object generaObjeto()
+  {
+    
+    return null;
   }
 }
