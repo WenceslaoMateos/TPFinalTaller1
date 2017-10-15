@@ -260,7 +260,6 @@ public class VentanaPrincipal
   private void jButtonAltaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaProfesorActionPerformed
     DialogAltaProfesor emergente = new DialogAltaProfesor();
-    emergente.setControlador(this.controlador);
   }//GEN-LAST:event_jButtonAltaProfesorActionPerformed
 
   private void jButtonAltaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaCursadaActionPerformed
@@ -271,7 +270,6 @@ public class VentanaPrincipal
   private void jButtonAltaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaAsignaturaActionPerformed
     DialogAltaAsignatura emergente = new DialogAltaAsignatura();
-    emergente.setControlador(this.controlador);
   }//GEN-LAST:event_jButtonAltaAsignaturaActionPerformed
       
   private void jButtonAltaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonAltaAlumnoMouseClicked
@@ -323,9 +321,7 @@ public class VentanaPrincipal
     aceptar.addActionListener(this.controlador);
     */
       
-      DialogAltaAlumno emergente = new DialogAltaAlumno();
-      emergente.setControlador(this.controlador);
-    
+      DialogAltaAlumno emergente = new DialogAltaAlumno(); 
   }//GEN-LAST:event_jButtonAltaAlumnoMouseClicked
 
   /**
