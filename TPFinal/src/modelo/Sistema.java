@@ -2,8 +2,10 @@ package modelo;
 
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
+import excepciones.NoEncontradoException;
 
 import java.util.Iterator;
+import java.util.Observable;
 
 
 public class Sistema
@@ -131,10 +133,23 @@ public class Sistema
     
     public void eliminarAsignatura(Asignatura elim)
     {
+        Cursada aux;
+        Iterator<Cursada> it;
         this.planDeEstudio.eliminar(elim);
         this.eliminaAsignaturaEnAlumnos(elim);
         this.eliminaAsignaturaEnProfesores(elim);
-        // TODO eliminar cursadas asociadas a la asignatura
+        it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext())
+        {
+            aux = it.next();
+            if (aux.getAsignatura().equals(elim))
+                this.eliminarCursada(aux);
+        }
+    }
+    
+    public void eliminarCursada(Cursada elim)
+    {
+        this.calendario.eliminar(elim);
     }
     
     private void eliminaAsignaturaEnAlumnos(Asignatura elim)
@@ -159,5 +174,23 @@ public class Sistema
             if (aux.habilitadoParaAsignatura(elim))
                 aux.eliminarCompetencia(elim);
         }
+    }
+    
+    public Iterator<Alumno> buscarAlumno(String nombre)
+        throws NoEncontradoException
+    {
+        return this.alumnos.buscarPorClaveSecundaria(nombre);
+    }
+    
+    public Iterator<Profesor> buscarProfesor(String nombre)
+        throws NoEncontradoException
+    {
+        return this.profesores.buscarPorClaveSecundaria(nombre);
+    }
+    
+    public Iterator<Asignatura> buscarAsigatura(String nombre)
+        throws NoEncontradoException
+    {
+        return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
     }
 }
