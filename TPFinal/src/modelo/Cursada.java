@@ -12,6 +12,11 @@ public class Cursada
     private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
     private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
     private static int CANT_CURSADAS = 0;
+    
+    public Cursada()
+    {
+        super();
+    }
 
     public Cursada(Asignatura asignatura, String periodo, Dia dia, String hora)
     {
@@ -147,9 +152,9 @@ public class Cursada
     public static boolean validaHora(String hora)
     {
         boolean ret;
-        if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 3)) <= 99) &&
-            (Integer.parseInt(hora.substring(0, 3)) >= 0) && (Integer.parseInt(hora.substring(4, 6)) <= 99) &&
-            (Integer.parseInt(hora.substring(4, 6)) >= 0) && hora.charAt(2) == '-')
+        if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 99) &&
+            (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 99) &&
+            (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':')
             ret = true;
         else
             ret = false;
@@ -159,10 +164,10 @@ public class Cursada
     public static String getNuevaIdentificacion()
     {
         Cursada.CANT_CURSADAS++;
-        String ret = "ASI";
+        String ret = "CUR";
         String aux = "" + Cursada.CANT_CURSADAS;
         int i, j = aux.length();
-        for (i = 1; i < 4 - j; i++)
+        for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
     }

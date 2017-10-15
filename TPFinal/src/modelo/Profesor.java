@@ -15,7 +15,7 @@ public class Profesor
         super();
     }
 
-    public Profesor(String legajo, String apellidoNombre, String domicilio, String mail, String telefono)
+    public Profesor(String apellidoNombre, String domicilio, String mail, String telefono)
     {
         super(Profesor.getNuevaIdentificacion(), apellidoNombre, domicilio, mail);
         this.telefono = telefono;
@@ -76,10 +76,10 @@ public class Profesor
     public static String getNuevaIdentificacion()
     {
         Profesor.CANT_PROFESORES++;
-        String ret = "ASI";
+        String ret = "PRO";
         String aux = "" + Profesor.CANT_PROFESORES;
         int i, j = aux.length();
-        for (i = 1; i < 4 - j; i++)
+        for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
     }

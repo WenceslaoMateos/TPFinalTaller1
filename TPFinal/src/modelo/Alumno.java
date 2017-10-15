@@ -14,7 +14,7 @@ public class Alumno
         super();
     }
 
-    public Alumno(String legajo, String apellidoNombre, String domicilio, String mail)
+    public Alumno(String apellidoNombre, String domicilio, String mail)
     {
         super(Alumno.getNuevoLegajo(), apellidoNombre, domicilio, mail);
         this.historia = new IndicePrimario<Asignatura>();
@@ -62,7 +62,7 @@ public class Alumno
         String ret = "ALU";
         String aux = "" + Alumno.CANT_ALUMNOS;
         int i, j = aux.length();
-        for (i = 1; i < 4 - j; i++)
+        for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
     }

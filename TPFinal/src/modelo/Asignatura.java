@@ -12,10 +12,14 @@ public class Asignatura
     private String nombre;
     private IndicePrimario<Asignatura> correlatividades;
     private static int CANT_ASIGNATURAS = 0;
-
-    public Asignatura(String identificacion, String nombre)
+    
+    public Asignatura()
     {
-        this.identificacion = identificacion;
+        super();
+    }
+
+    public Asignatura(String nombre)
+    {
         this.nombre = nombre;
         this.correlatividades = new IndicePrimario<Asignatura>();
         this.identificacion = Asignatura.getNuevaIdentificacion();
@@ -99,9 +103,8 @@ public class Asignatura
         String ret = "ASI";
         String aux = "" + Asignatura.CANT_ASIGNATURAS;
         int i, j = aux.length();
-        for (i = 1; i < 4 - j; i++)
+        for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
     }
-
 }
