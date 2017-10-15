@@ -3,28 +3,12 @@ package vista;
 
 import controlador.ControlSistema;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JDialog;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
-import modelo.Alumno;
 import modelo.Sistema;
 
 /**
@@ -275,7 +259,8 @@ public class VentanaPrincipal
 
   private void jButtonAltaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaProfesorActionPerformed
-    // TODO add your handling code here:
+    DialogAltaProfesor emergente = new DialogAltaProfesor();
+    emergente.setControlador(this.controlador);
   }//GEN-LAST:event_jButtonAltaProfesorActionPerformed
 
   private void jButtonAltaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaCursadaActionPerformed
@@ -285,13 +270,15 @@ public class VentanaPrincipal
 
   private void jButtonAltaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaAsignaturaActionPerformed
-    // TODO add your handling code here:
+    DialogAltaAsignatura emergente = new DialogAltaAsignatura();
+    emergente.setControlador(this.controlador);
   }//GEN-LAST:event_jButtonAltaAsignaturaActionPerformed
-
+      
   private void jButtonAltaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonAltaAlumnoMouseClicked
   {//GEN-HEADEREND:event_jButtonAltaAlumnoMouseClicked
     
     
+    /* 
     JDialog emergente = new JDialog();
     JPanel finalizacion = new JPanel();
     JPanel elementos = new JPanel();
@@ -331,9 +318,13 @@ public class VentanaPrincipal
     cancelar = new JButton("Cancelar");
     finalizacion.add(cancelar);
     aceptar.setSize(50, 100);
-    cancelar.setSize(50, 100);
+    cancelar.setSize(50, 100); 
 
-    aceptar.addMouseListener(this.controlador);
+    aceptar.addActionListener(this.controlador);
+    */
+      
+      DialogAltaAlumno emergente = new DialogAltaAlumno();
+      emergente.setControlador(this.controlador);
     
   }//GEN-LAST:event_jButtonAltaAlumnoMouseClicked
 
@@ -417,7 +408,7 @@ public class VentanaPrincipal
         {
           Sistema modelo=new Sistema();
           VentanaPrincipal vista=new VentanaPrincipal();
-          ControlSistema control= new ControlSistema(vista);
+          ControlSistema control= new ControlSistema(modelo, vista);
           vista.setControlador(control);
           vista.setVisible(true);
         }
