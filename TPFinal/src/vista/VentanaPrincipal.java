@@ -1,6 +1,12 @@
 
 package vista;
 
+import java.awt.event.WindowAdapter;
+
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+
 
 /**
  *
@@ -19,6 +25,18 @@ public class VentanaPrincipal
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
     this.setVisible(true);
+    this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    this.addWindowListener(new WindowAdapter()
+    {
+
+      @Override
+      public void windowClosing(WindowEvent e)
+      {
+        super.windowClosing(e);
+        VentanaPrincipal.this.receptor.guardar();
+        VentanaPrincipal.this.dispose();
+      }
+    });
   }
 
   public void setReceptor(Receptor receptor)

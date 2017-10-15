@@ -3,10 +3,15 @@ package vista;
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Profesor;
 import modelo.Sistema;
+
+import persistencia.SerializadorXML;
 
 
 public class Receptor
@@ -40,5 +45,10 @@ public class Receptor
         this.modelo.agregarAsignatura((Asignatura) obj);
         break;
     }
+  }
+  
+  public void guardar()
+  {
+    SerializadorXML.guardar(this.modelo);
   }
 }

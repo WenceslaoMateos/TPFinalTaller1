@@ -2,6 +2,8 @@ package lanzador;
 
 import modelo.Sistema;
 
+import persistencia.SerializadorXML;
+
 import vista.Receptor;
 import vista.VentanaPrincipal;
 
@@ -15,7 +17,7 @@ public class Lanzador
   public static void main(String[] args)
   {
     VentanaPrincipal vista = new VentanaPrincipal();
-    Sistema modelo = new Sistema();
+    Sistema modelo = SerializadorXML.cargar();
     Receptor receptor = new Receptor(modelo, vista);
     vista.setReceptor(receptor);
   }
