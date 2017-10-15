@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 
 public class Sistema
+  extends Observable
 {
     private IndiceDoble<Alumno> alumnos;
     private IndiceDoble<Profesor> profesores;
@@ -71,7 +72,7 @@ public class Sistema
             throw new DatoInvalidoException(nuevo.getMail(), "Mail inválido.");
         else
             this.alumnos.agregar(nuevo);
-    }
+}
     
     public void agregarProfesor(Profesor nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException

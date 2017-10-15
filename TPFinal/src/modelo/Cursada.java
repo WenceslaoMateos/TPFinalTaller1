@@ -12,7 +12,7 @@ public class Cursada
     private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
     private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
     private static int CANT_CURSADAS = 0;
-    
+
     public Cursada()
     {
         super();
@@ -139,8 +139,7 @@ public class Cursada
     public static boolean validaPeriodo(String periodo)
     {
         boolean ret;
-        if ((periodo.length() == 7) &&
-            (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
             Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
             Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
             ret = true;

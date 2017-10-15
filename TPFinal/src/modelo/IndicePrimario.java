@@ -43,7 +43,7 @@ public class IndicePrimario<V extends I_Indexable>
      */
     public void eliminar(V elim)
     {
-        this.elementos.remove(elim);
+            this.elementos.remove(elim);
     }
     
     /**
