@@ -1,16 +1,27 @@
 package vista;
 
+import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+
+import modelo.Alumno;
+import modelo.Asignatura;
+import modelo.Profesor;
 import modelo.Sistema;
+
+import persistencia.SerializadorXML;
 
 
 public class Receptor
 {
   private Sistema modelo;
   private VentanaPrincipal vista;
-  public static final int ALTA_ALUMNO=0;
-  public static final int ALTA_PROFESOR=1;
-  public static final int ALTA_ASIGNATURA=2;
-  
+  public static final int ALUMNO = 0;
+  public static final int PROFESOR = 1;
+  public static final int ASIGNATURA = 2;
+
 
   public Receptor(Sistema modelo, VentanaPrincipal vista)
   {
@@ -20,12 +31,24 @@ public class Receptor
   }
 
   public void alta(Object obj, int comando)
+    throws ClaveYaExistenteException, DatoInvalidoException
   {
-    switch(comando)
+    switch (comando)
     {
-      case Receptor.ALTA_ALUMNO:
-        
+      case Receptor.ALUMNO:
+        this.modelo.agregarAlumno((Alumno) obj);
+        break;
+      case Receptor.PROFESOR:
+        this.modelo.agregarProfesor((Profesor) obj);
+        break;
+      case Receptor.ASIGNATURA:
+        this.modelo.agregarAsignatura((Asignatura) obj);
         break;
     }
+  }
+  
+  public void guardar()
+  {
+    SerializadorXML.guardar(this.modelo);
   }
 }

@@ -12,7 +12,7 @@ public class Asignatura
     private String nombre;
     private IndicePrimario<Asignatura> correlatividades;
     private static int CANT_ASIGNATURAS = 0;
-    
+
     public Asignatura()
     {
         super();

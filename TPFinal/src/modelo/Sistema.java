@@ -72,24 +72,40 @@ public class Sistema
     {
         if (!Persona.validaMail(nuevo.getMail()))
             throw new DatoInvalidoException(nuevo.getMail(), "Mail inválido.");
+    else if (nuevo.getApellidoNombre().equals(""))
+      throw new DatoInvalidoException(nuevo, "El nombre del alumno esta vacio");
         else
+    {
+      nuevo.setLegajo(Alumno.getNuevoLegajo());
             this.alumnos.agregar(nuevo);
 }
+  }
     
     public void agregarProfesor(Profesor nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
         if (!Persona.validaMail(nuevo.getMail()))
             throw new DatoInvalidoException(nuevo.getMail(), "Mail inválido.");
+    else if (nuevo.getApellidoNombre().equals(""))
+      throw new DatoInvalidoException(nuevo, "El nombre del profesor esta vacio");
         else
+    {
+      nuevo.setLegajo(Profesor.getNuevaIdentificacion());
             this.profesores.agregar(nuevo);
     }
+  }
     
     public void agregarAsignatura(Asignatura nuevo)
-        throws ClaveYaExistenteException
+    throws ClaveYaExistenteException, DatoInvalidoException
     {
+    if (nuevo.getNombre().equals(""))
+      throw new DatoInvalidoException(nuevo, "El nombre de la asignatura es invalido");
+    else
+    {
+      nuevo.setIdentificacion(Asignatura.getNuevaIdentificacion());
         this.planDeEstudio.agregar(nuevo);
     }
+  }
     
     public void agregarCursada(Cursada nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
@@ -100,8 +116,11 @@ public class Sistema
             throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
         // TODO faltan verificaciones
         else
+    {
+      nuevo.setIdentificacion(Cursada.getNuevaIdentificacion());
             this.calendario.agregar(nuevo);
     }
+  }
     
     public void eliminarAlumno(Alumno elim)
     {

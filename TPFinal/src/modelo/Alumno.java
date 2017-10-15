@@ -16,7 +16,7 @@ public class Alumno
 
     public Alumno(String apellidoNombre, String domicilio, String mail)
     {
-        super(Alumno.getNuevoLegajo(), apellidoNombre, domicilio, mail);
+    super(apellidoNombre, domicilio, mail);
         this.historia = new IndicePrimario<Asignatura>();
     }
 

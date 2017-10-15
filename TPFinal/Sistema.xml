@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_131" class="java.beans.XMLDecoder">
+<java version="1.8.0_144" class="java.beans.XMLDecoder">
  <object class="modelo.Sistema" id="Sistema0">
   <void id="IndiceDoble0" property="alumnos">
    <void id="IndicePrimario0" property="indice1">
@@ -68,6 +68,20 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ASI0004</string>
+      <object class="modelo.Asignatura" id="Asignatura2">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="identificacion">
+        <string>ASI0004</string>
+       </void>
+       <void property="nombre">
+        <string>aaa</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -84,6 +98,14 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Asignatura0"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>aaa</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Asignatura2"/>
       </void>
      </object>
     </void>
@@ -131,6 +153,6 @@
  </object>
  <int>1</int>
  <int>1</int>
- <int>2</int>
+ <int>4</int>
  <int>0</int>
 </java>

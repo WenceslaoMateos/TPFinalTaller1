@@ -1,5 +1,8 @@
 package vista;
 
+import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -7,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -47,12 +51,23 @@ public abstract class DialogAlta
 
   public abstract void generaCampos(JPanel elementos);
 
+  public abstract Object generaObjeto();
+  
+  public abstract int getComando();
+
   @Override
   public void actionPerformed(ActionEvent actionEvent)
   {
     if (actionEvent.getActionCommand().equals("Aceptar"))
-      ;
-    // TODO
+      try
+      {
+        this.receptor.alta(generaObjeto(), this.getComando());
+        JOptionPane.showMessageDialog(this, "La operacion fue realizada con exito");
+      }
+      catch (ClaveYaExistenteException | DatoInvalidoException e)
+      {
+        JOptionPane.showMessageDialog(this, e.getMessage()+", por favor vuelva a ingresarlo");
+      }
     else if (actionEvent.getActionCommand().equals("Cancelar"))
       this.dispose();
   }

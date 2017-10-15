@@ -17,7 +17,7 @@ public class Profesor
 
     public Profesor(String apellidoNombre, String domicilio, String mail, String telefono)
     {
-        super(Profesor.getNuevaIdentificacion(), apellidoNombre, domicilio, mail);
+    super(apellidoNombre, domicilio, mail);
         this.telefono = telefono;
         this.competencia = new IndicePrimario<Asignatura>();
     }

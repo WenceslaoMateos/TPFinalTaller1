@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Profesor;
+
 public class DialogAltaProfesor
   extends DialogAlta
 {
@@ -44,5 +46,18 @@ public class DialogAltaProfesor
     elementos.add(new JLabel("Mail"));
     elementos.add(campos[3]);
     elementos.add(new JLabel("AAAA@AAAAA"));
+  }
+
+  @Override
+  public Object generaObjeto()
+  {
+    return new Profesor(this.campos[0].getText(), this.campos[1].getText(), this.campos[2].getText(),
+                        this.campos[3].getText());
+  }
+
+  @Override
+  public int getComando()
+  {
+    return Receptor.PROFESOR;
   }
 }
