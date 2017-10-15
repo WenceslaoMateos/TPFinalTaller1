@@ -3,7 +3,8 @@ package modelo;
 import java.util.Observable;
 
 
-public class Sistema extends Observable
+public class Sistema
+  extends Observable
 {
   private IndiceDoble<Alumno> alumnos;
   private IndiceDoble<Profesor> profesores;

@@ -27,7 +27,7 @@ public class VentanaPrincipal
   public VentanaPrincipal()
   {
     initComponents();
-    this.controlador=controlador;
+    this.controlador = controlador;
     this.setExtendedState(MAXIMIZED_VERT);
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
@@ -276,7 +276,7 @@ public class VentanaPrincipal
   {//GEN-HEADEREND:event_jButtonAltaAlumnoMouseClicked
     
     
-    /* 
+    /*
     JDialog emergente = new JDialog();
     JPanel finalizacion = new JPanel();
     JPanel elementos = new JPanel();
@@ -316,12 +316,12 @@ public class VentanaPrincipal
     cancelar = new JButton("Cancelar");
     finalizacion.add(cancelar);
     aceptar.setSize(50, 100);
-    cancelar.setSize(50, 100); 
+    cancelar.setSize(50, 100);
 
     aceptar.addActionListener(this.controlador);
     */
-      
-      DialogAltaAlumno emergente = new DialogAltaAlumno(); 
+
+    DialogAltaAlumno emergente = new DialogAltaAlumno(); 
   }//GEN-LAST:event_jButtonAltaAlumnoMouseClicked
 
   /**
@@ -402,9 +402,9 @@ public class VentanaPrincipal
       {
         public void run()
         {
-          Sistema modelo=new Sistema();
-          VentanaPrincipal vista=new VentanaPrincipal();
-          ControlSistema control= new ControlSistema(modelo, vista);
+          Sistema modelo = new Sistema();
+          VentanaPrincipal vista = new VentanaPrincipal();
+          ControlSistema control = new ControlSistema(modelo, vista);
           vista.setControlador(control);
           vista.setVisible(true);
         }
