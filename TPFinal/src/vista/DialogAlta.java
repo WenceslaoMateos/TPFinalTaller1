@@ -52,6 +52,8 @@ public abstract class DialogAlta
   public abstract void generaCampos(JPanel elementos);
 
   public abstract Object generaObjeto();
+  
+  public abstract int getComando();
 
   @Override
   public void actionPerformed(ActionEvent actionEvent)
@@ -59,13 +61,13 @@ public abstract class DialogAlta
     if (actionEvent.getActionCommand().equals("Aceptar"))
       try
       {
-        this.receptor.alta(generaObjeto(), Receptor.ALTA_ALUMNO);
+        this.receptor.alta(generaObjeto(), this.getComando());
+        JOptionPane.showMessageDialog(this, "La operacion fue realizada con exito");
       }
       catch (ClaveYaExistenteException | DatoInvalidoException e)
       {
-        JOptionPane.showMessageDialog(this, e.getMessage());
+        JOptionPane.showMessageDialog(this, e.getMessage()+", por favor vuelva a ingresarlo");
       }
-    // TODO
     else if (actionEvent.getActionCommand().equals("Cancelar"))
       this.dispose();
   }

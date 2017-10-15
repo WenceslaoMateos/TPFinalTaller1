@@ -19,7 +19,6 @@ public class Cursada
     this.periodo = periodo;
     this.dia = dia;
     this.hora = hora;
-    this.identificacion = Cursada.getNuevaIdentificacion();
     this.profesores = new IndiceDoble<Profesor>();
     this.alumnos = new IndiceDoble<Alumno>();
   }

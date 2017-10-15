@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Asignatura;
+
 public class DialogAltaAsignatura
   extends DialogAlta
 {
@@ -33,7 +35,12 @@ public class DialogAltaAsignatura
   @Override
   public Object generaObjeto()
   {
-    // TODO Implement this method
-    return null;
+    return new Asignatura(this.campos[0].getText());
+  }
+
+  @Override
+  public int getComando()
+  {
+    return Receptor.ASIGNATURA;
   }
 }

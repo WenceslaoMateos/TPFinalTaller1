@@ -14,9 +14,8 @@ public abstract class Persona
     super();
   }
 
-  public Persona(String legajo, String apellidoNombre, String domicilio, String mail)
+  public Persona(String apellidoNombre, String domicilio, String mail)
   {
-    this.legajo = legajo;
     this.apellidoNombre = apellidoNombre;
     this.domicilio = domicilio;
     this.mail = mail;

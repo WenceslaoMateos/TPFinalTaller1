@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Alumno;
+
 public class DialogAltaAlumno
   extends DialogAlta
 {
@@ -13,7 +15,7 @@ public class DialogAltaAlumno
   {
     super(receptor);
   }
-  
+
   @Override
   public void generaCampos(JPanel elementos)
   {
@@ -45,7 +47,12 @@ public class DialogAltaAlumno
   @Override
   public Object generaObjeto()
   {
-    
-    return null;
+    return new Alumno(this.campos[0].getText(), this.campos[1].getText(), this.campos[2].getText());
+  }
+
+  @Override
+  public int getComando()
+  {
+    return Receptor.ALUMNO;
   }
 }
