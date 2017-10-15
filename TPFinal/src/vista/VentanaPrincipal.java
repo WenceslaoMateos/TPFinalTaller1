@@ -1,7 +1,6 @@
 
 package vista;
 
-import controlador.ControlSistema;
 
 /**
  *
@@ -10,22 +9,21 @@ import controlador.ControlSistema;
 public class VentanaPrincipal
   extends javax.swing.JFrame
 {
-  private ControlSistema controlador;
+  private Receptor receptor;
 
   /** Creates new form VentanaPrincipal */
   public VentanaPrincipal()
   {
     initComponents();
-    this.controlador = controlador;
     this.setExtendedState(MAXIMIZED_VERT);
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
     this.setVisible(true);
   }
 
-  public void setControlador(ControlSistema controlador)
+  public void setReceptor(Receptor receptor)
   {
-    this.controlador = controlador;
+    this.receptor = receptor;
   }
 
   /** This method is called from within the constructor to
@@ -243,7 +241,7 @@ public class VentanaPrincipal
 
   private void jButtonAltaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaProfesorActionPerformed
-    DialogAltaProfesor emergente = new DialogAltaProfesor();
+    DialogAltaProfesor emergente = new DialogAltaProfesor(this.receptor);
   }//GEN-LAST:event_jButtonAltaProfesorActionPerformed
 
   private void jButtonAltaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaCursadaActionPerformed
@@ -253,59 +251,12 @@ public class VentanaPrincipal
 
   private void jButtonAltaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaAsignaturaActionPerformed
-    DialogAltaAsignatura emergente = new DialogAltaAsignatura();
+    DialogAltaAsignatura emergente = new DialogAltaAsignatura(this.receptor);
   }//GEN-LAST:event_jButtonAltaAsignaturaActionPerformed
       
   private void jButtonAltaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonAltaAlumnoMouseClicked
   {//GEN-HEADEREND:event_jButtonAltaAlumnoMouseClicked
-    
-    
-    /*
-    JDialog emergente = new JDialog();
-    JPanel finalizacion = new JPanel();
-    JPanel elementos = new JPanel();
-    Container contenedor;
-    JButton aceptar, cancelar;
-    emergente.setSize(200, 200);
-    emergente.setVisible(true);
-    contenedor = emergente.getContentPane();
-    contenedor.setLayout(new BorderLayout());
-
-    contenedor.add(elementos, BorderLayout.CENTER);
-    elementos.setLayout(new GridLayout(4, 3));
-
-    JTextField fieldNombre = new JTextField();
-    JTextField fieldDomicilio = new JTextField();
-    JTextField fieldMail = new JTextField();
-
-    elementos.add(new JLabel("Descripcion"));
-    elementos.add(new JLabel("Campo"));
-    elementos.add(new JLabel("Formato"));
-
-    elementos.add(new JLabel("Nombre y Apellido"));
-    elementos.add(fieldNombre);
-    elementos.add(new JLabel("---"));
-
-    elementos.add(new JLabel("Domicilio"));
-    elementos.add(fieldDomicilio);
-    elementos.add(new JLabel("---"));
-
-    elementos.add(new JLabel("Mail"));
-    elementos.add(fieldMail);
-    elementos.add(new JLabel("AAAA@AAAAA"));
-
-    contenedor.add(finalizacion, BorderLayout.SOUTH);
-    aceptar = new JButton("Aceptar");
-    finalizacion.add(aceptar);
-    cancelar = new JButton("Cancelar");
-    finalizacion.add(cancelar);
-    aceptar.setSize(50, 100);
-    cancelar.setSize(50, 100);
-
-    aceptar.addActionListener(this.controlador);
-    */
-
-    DialogAltaAlumno emergente = new DialogAltaAlumno(); 
+    DialogAltaAlumno emergente = new DialogAltaAlumno(this.receptor); 
   }//GEN-LAST:event_jButtonAltaAlumnoMouseClicked
 
   /**

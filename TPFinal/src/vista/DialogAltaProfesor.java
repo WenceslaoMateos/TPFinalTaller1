@@ -9,9 +9,9 @@ import javax.swing.JTextField;
 public class DialogAltaProfesor
   extends DialogAlta
 {
-  public DialogAltaProfesor()
+  public DialogAltaProfesor(Receptor receptor)
   {
-    super();
+    super(receptor);
   }
 
   @Override

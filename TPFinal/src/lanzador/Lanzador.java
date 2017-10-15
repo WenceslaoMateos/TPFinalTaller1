@@ -1,9 +1,8 @@
 package lanzador;
 
-import controlador.ControlSistema;
-
 import modelo.Sistema;
 
+import vista.Receptor;
 import vista.VentanaPrincipal;
 
 public class Lanzador
@@ -16,7 +15,8 @@ public class Lanzador
   public static void main(String[] args)
   {
     VentanaPrincipal vista = new VentanaPrincipal();
-    ControlSistema controlador;
-    Sistema modelo;
+    Sistema modelo = new Sistema();
+    Receptor receptor = new Receptor(modelo, vista);
+    vista.setReceptor(receptor);
   }
 }

@@ -15,11 +15,14 @@ public abstract class DialogAlta
   implements ActionListener
 {
   protected JTextField[] campos;
+  protected Receptor receptor;
   protected JButton aceptar;
   protected JButton cancelar;
 
-  public DialogAlta()
+  public DialogAlta(Receptor receptor)
   {
+    super();
+    this.receptor = receptor;
     JPanel finalizacion = new JPanel();
     JPanel elementos = new JPanel();
     Container contenedor;
