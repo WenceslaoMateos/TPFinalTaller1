@@ -1,7 +1,6 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
-import excepciones.NoEncontradoException;
 
 import java.util.Iterator;
 
@@ -29,7 +28,6 @@ public class Asignatura
     }
 
     public void eliminarCorrelativa(Asignatura elim)
-        throws NoEncontradoException
     {
         this.correlatividades.eliminar(elim);
     }

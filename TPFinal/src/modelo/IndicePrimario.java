@@ -34,22 +34,18 @@ public class IndicePrimario<V extends I_Indexable>
         else
             this.elementos.put(nuevo.getClavePrimaria(), nuevo);
     }
-
+    
     /**
      * Elimina del índice la referencia al objeto ingresado como parámetro.<br>
+     * <b>Pre:</b> el elemento a eliminar se encuentra en el índice.<br>
      * <b>Post:</b> el índice tiene un elemento menos.
      * @param elim objeto de tipo V a eliminar del índice.
-     * @throws NoEncontradoException no se encontró en el índice la referencia de entrada.
      */
     public void eliminar(V elim)
-        throws NoEncontradoException
     {
-        if (!this.contieneValor(elim))
-            throw new NoEncontradoException(elim, "No se encontró el objeto entre los elementos del índice.");
-        else
             this.elementos.remove(elim);
     }
-
+    
     /**
      * Busca un objeto por su clave primaria y devuelve su referencia.<br>
      * <b>Pre:</b> el parámetro clave es del tipo del objeto otorgado por getClavePrimaria() de la clase V.
@@ -63,13 +59,13 @@ public class IndicePrimario<V extends I_Indexable>
         if (!this.contieneClave(clave))
             throw new NoEncontradoException(clave, "No se encontró la clave solicitada en el índice.");
         else
-        return this.elementos.get(clave);
+            return this.elementos.get(clave);
     }
 
     /**
      * Comprueba si la clave dada tiene una entrada en el índice.<br>
      * <b>Pre:</b> el parámetro clave es del tipo del objeto otorgado por getClavePrimaria() de la clase V.
-     * @param clave clave a buscar en el índice
+     * @param clave clave a buscar en el índice.
      * @return <b>true</b> si la clave se encuentra, <b>false</b> en caso contrario.
      */
     public boolean contieneClave(Object clave)
@@ -97,15 +93,16 @@ public class IndicePrimario<V extends I_Indexable>
                    .values()
                    .iterator();
     }
-
     
-    public void setElementos(TreeMap<Object, V> elementos) //Para XML
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   
+    public void setElementos(TreeMap<Object, V> elementos)
     {
         this.elementos = elementos;
     }
 
-    public TreeMap<Object, V> getElementos() //Para XML
+    public TreeMap<Object, V> getElementos()
     {
         return elementos;
     }
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }
