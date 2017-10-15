@@ -16,39 +16,39 @@ import persistencia.SerializadorXML;
 
 public class Receptor
 {
-  private Sistema modelo;
-  private VentanaPrincipal vista;
-  public static final int ALUMNO = 0;
-  public static final int PROFESOR = 1;
-  public static final int ASIGNATURA = 2;
+    private Sistema modelo;
+    private VentanaPrincipal vista;
+    public static final int ALUMNO = 0;
+    public static final int PROFESOR = 1;
+    public static final int ASIGNATURA = 2;
 
 
-  public Receptor(Sistema modelo, VentanaPrincipal vista)
-  {
-    super();
-    this.modelo = modelo;
-    this.vista = vista;
-  }
-
-  public void alta(Object obj, int comando)
-    throws ClaveYaExistenteException, DatoInvalidoException
-  {
-    switch (comando)
+    public Receptor(Sistema modelo, VentanaPrincipal vista)
     {
-      case Receptor.ALUMNO:
-        this.modelo.agregarAlumno((Alumno) obj);
-        break;
-      case Receptor.PROFESOR:
-        this.modelo.agregarProfesor((Profesor) obj);
-        break;
-      case Receptor.ASIGNATURA:
-        this.modelo.agregarAsignatura((Asignatura) obj);
-        break;
+        super();
+        this.modelo = modelo;
+        this.vista = vista;
     }
-  }
-  
-  public void guardar()
-  {
-    SerializadorXML.guardar(this.modelo);
-  }
+
+    public void alta(Object obj, int comando)
+        throws ClaveYaExistenteException, DatoInvalidoException
+    {
+        switch (comando)
+        {
+            case Receptor.ALUMNO:
+                this.modelo.agregarAlumno((Alumno) obj);
+                break;
+            case Receptor.PROFESOR:
+                this.modelo.agregarProfesor((Profesor) obj);
+                break;
+            case Receptor.ASIGNATURA:
+                this.modelo.agregarAsignatura((Asignatura) obj);
+                break;
+        }
+    }
+
+    public void guardar()
+    {
+        SerializadorXML.guardar(this.modelo);
+    }
 }

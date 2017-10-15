@@ -17,9 +17,9 @@ import modelo.Sistema;
 
 
 public abstract class SerializadorXML
-{   
+{
     private static final String ARCHIVO = "Sistema.xml";
-    
+
     /**
      * Almacena la información del sistema en un archivo XML.
      * @param sistema El sistema a persistir.
@@ -42,7 +42,7 @@ public abstract class SerializadorXML
             throw new InternalError("Error fatal al tratar de guardar el sistema");
         }
     }
-    
+
     /**
      * Carga el sistema desde el archivo XML por defecto. Si dicho archivo no existe, se crea una instancia nueva.
      * @return Si se pudo leer el archivo, instancia de Sistema con la información almacenada. En caso contrario se
@@ -66,5 +66,5 @@ public abstract class SerializadorXML
             res = new Sistema();
         }
         return res;
-    }    
+    }
 }

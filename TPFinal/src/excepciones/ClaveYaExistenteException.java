@@ -2,18 +2,18 @@ package excepciones;
 
 
 public class ClaveYaExistenteException
-  extends Exception
+    extends Exception
 {
-  private Object clave;
+    private Object clave;
 
-  public ClaveYaExistenteException(Object clave)
-  {
-    super("La clave del elemento a agregar ya se encuentra en la colección.");
-    this.clave = clave;
-  }
+    public ClaveYaExistenteException(Object clave)
+    {
+        super("La clave del elemento a agregar ya se encuentra en la colección.");
+        this.clave = clave;
+    }
 
-  public Object getClave()
-  {
-    return clave;
-  }
+    public Object getClave()
+    {
+        return clave;
+    }
 }
