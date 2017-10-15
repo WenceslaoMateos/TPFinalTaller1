@@ -3,27 +3,16 @@ package vista;
 
 import controlador.ControlSistema;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JTextField;
-
-import modelo.Sistema;
-
 /**
  *
  * @author wence
  */
 public class VentanaPrincipal
   extends javax.swing.JFrame
-  implements Observer
 {
   private ControlSistema controlador;
 
   /** Creates new form VentanaPrincipal */
-  private ArrayList<JTextField> datos;
-
   public VentanaPrincipal()
   {
     initComponents();
@@ -31,17 +20,12 @@ public class VentanaPrincipal
     this.setExtendedState(MAXIMIZED_VERT);
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
+    this.setVisible(true);
   }
 
   public void setControlador(ControlSistema controlador)
   {
     this.controlador = controlador;
-  }
-
-  @Override
-  public void update(Observable o, Object arg)
-  {
-    // TODO Implement this method
   }
 
   /** This method is called from within the constructor to
@@ -394,21 +378,6 @@ public class VentanaPrincipal
                    .SEVERE, null, ex);
     }
     //</editor-fold>
-
-    /* Create and display the form */
-    java.awt
-        .EventQueue
-        .invokeLater(new Runnable()
-      {
-        public void run()
-        {
-          Sistema modelo = new Sistema();
-          VentanaPrincipal vista = new VentanaPrincipal();
-          ControlSistema control = new ControlSistema(modelo, vista);
-          vista.setControlador(control);
-          vista.setVisible(true);
-        }
-      });
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
