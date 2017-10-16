@@ -217,6 +217,30 @@ public class Sistema
         return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
     }
     
+    public Alumno buscarAlumnoPorLegajo(String legajo)
+        throws NoEncontradoException
+    {
+        return this.alumnos.buscarPorClavePrimaria(legajo);
+    }
+    
+    public Profesor buscarProfesorPorLegajo(String legajo)
+        throws NoEncontradoException
+    {
+        return this.profesores.buscarPorClavePrimaria(legajo);
+    }
+    
+    public Asignatura buscarAsignaturaPorIdentifiacion(String identificacion)
+        throws NoEncontradoException
+    {
+        return this.planDeEstudio.buscarPorClavePrimaria(identificacion);
+    }
+    
+    public Cursada buscarCursadaPorIdentificacion(String identificacion)
+        throws NoEncontradoException
+    {
+        return this.calendario.buscarPorClavePrimaria(identificacion);
+    }
+    
     public void agregarAlumnoEnCursada(Alumno alumno, Cursada cursada)
         throws DatoInvalidoException, ClaveYaExistenteException
     {
