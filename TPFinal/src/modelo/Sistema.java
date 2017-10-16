@@ -94,11 +94,15 @@ public class Sistema
     public void agregarCursada(Cursada nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (!Cursada.validaHora(nuevo.getHora()))
-            throw new DatoInvalidoException(nuevo.getHora(), "Hora inválida.");
+        if (!Cursada.validaHora(nuevo.getHoraInicio()))
+            throw new DatoInvalidoException(nuevo.getHoraInicio(), "Hora de inicio inválida.");
+        else if (!Cursada.validaHora(nuevo.getHoraFinalizacion())
+                 || nuevo.getHoraInicio().compareTo(nuevo.getHoraFinalizacion()) >= 0)
+            throw new DatoInvalidoException(nuevo.getHoraFinalizacion(), "Hora de finalización inválida.");
         else if (!Cursada.validaPeriodo(nuevo.getPeriodo()))
             throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
-        // TODO faltan verificaciones
+        else if (!this.horarioCursadaDisponible(nuevo))
+            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado.");
         else
             this.calendario.agregar(nuevo);
     }
@@ -199,14 +203,26 @@ public class Sistema
         
     }
     
-    private boolean horarioCursadaDisponible(Cursada nuevo)
+    private boolean horarioCursadaDisponible(Cursada cursada)
     {
-        return false;
+        boolean res = true;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+            res = !cursada.hayColision(it.next());
+        return res;
     }
     
     private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
     {
-        // TODO
-        return false;
+        boolean res = true;
+        Cursada aux;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+        {
+            aux = it.next();
+            // El alumno no debe estar en la cursada o la misma no debe colisionar con la solicitada
+            res = !aux.tieneAlumno(alumno) || !aux.hayColision(cursada);
+        }
+        return res;
     }
 }

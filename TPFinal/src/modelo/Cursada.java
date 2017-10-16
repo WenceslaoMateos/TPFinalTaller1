@@ -11,7 +11,8 @@ public class Cursada
     private String identificacion;
     private String periodo;
     private Dia dia;
-    private String hora;
+    private String horaInicio;
+    private String horaFinalizacion;
     private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
     private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
     private static int CANT_CURSADAS = 0;
@@ -21,12 +22,13 @@ public class Cursada
         super();
     }
 
-    public Cursada(Asignatura asignatura, String periodo, Dia dia, String hora)
+    public Cursada(Asignatura asignatura, String periodo, Dia dia, String horaInicio, String horaFinalizacion)
     {
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.dia = dia;
-        this.hora = hora;
+        this.horaInicio = horaInicio;
+        this.horaFinalizacion = horaFinalizacion;
         this.identificacion = Cursada.getNuevaIdentificacion();
         this.profesores = new IndiceDoble<Profesor>();
         this.alumnos = new IndiceDoble<Alumno>();
@@ -51,7 +53,7 @@ public class Cursada
     @Override
     public Object getClaveSecundaria()
     {
-        return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.hora);
+        return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.horaInicio);
     }
 
     private int parseInt(String hora)
@@ -99,14 +101,24 @@ public class Cursada
         return dia;
     }
 
-    public void setHora(String hora)
+    public void setHoraInicio(String horaInicio)
     {
-        this.hora = hora;
+        this.horaInicio = horaInicio;
     }
 
-    public String getHora()
+    public String getHoraInicio()
     {
-        return hora;
+        return horaInicio;
+    }
+
+    public void setHoraFinalizacion(String horaFinalizacion)
+    {
+        this.horaFinalizacion = horaFinalizacion;
+    }
+
+    public String getHoraFinalizacion()
+    {
+        return horaFinalizacion;
     }
 
     public void setProfesores(IndiceDoble<Profesor> profesores)
@@ -225,5 +237,23 @@ public class Cursada
     {
         // Es precondición que el profesor exista.
         this.profesores.eliminar(elim);
+    }
+    
+    public boolean hayColision(Cursada otro)
+    {
+        return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia()
+               && !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0
+                    || this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
+        // Las cursadas deben estar en el mismo periodo, en el mismo día y deben superponerse los horarios.
+    }
+    
+    public boolean tieneAlumno(Alumno alumno)
+    {
+        return this.alumnos.contieneValor(alumno);
+    }
+    
+    public boolean tieneProfesor(Profesor profesor)
+    {
+        return this.profesores.contieneValor(profesor);
     }
 }
