@@ -46,13 +46,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jPanelAsignatura" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanelCursada" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jPanelAsignatura" max="32767" attributes="0"/>
+                  <Component id="jPanelAlumno" max="32767" attributes="0"/>
+                  <Component id="jPanelCursada" max="32767" attributes="0"/>
                   <Component id="jPanelProfesor" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanelAlumno" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,7 +74,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonAltaAlumno" pref="120" max="32767" attributes="0"/>
-                      <Component id="jButtonUbicarAlumno" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonConsultaAlumno" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonModificacionAlumno" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonBajaAlumno" alignment="0" pref="120" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -86,7 +88,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonAltaAlumno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButtonUbicarAlumno" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBajaAlumno" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonModificacionAlumno" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonConsultaAlumno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -102,12 +108,28 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaAlumnoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonUbicarAlumno">
+        <Component class="javax.swing.JButton" name="jButtonConsultaAlumno">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ubicar"/>
+            <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonUbicarAlumnoMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonConsultaAlumnoMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonModificacionAlumno">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificacion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonModificacionAlumnoMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonBajaAlumno">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Baja"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonBajaAlumnoMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -128,7 +150,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonAltaProfesor" pref="120" max="32767" attributes="0"/>
-                      <Component id="jButtonUbicarProfesor" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonBajaProfesor" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonConsultaProfesor" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonModificacionProfesor" alignment="1" pref="120" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -140,7 +164,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonAltaProfesor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButtonUbicarProfesor" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBajaProfesor" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonModificacionProfesor" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonConsultaProfesor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -155,9 +183,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaProfesorActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonUbicarProfesor">
+        <Component class="javax.swing.JButton" name="jButtonBajaProfesor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ubicar"/>
+            <Property name="text" type="java.lang.String" value="Baja"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonModificacionProfesor">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificacion"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonConsultaProfesor">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -178,7 +216,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonAltaCursada" pref="120" max="32767" attributes="0"/>
-                      <Component id="jButtonUbicarCursada" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonBajaCursada" alignment="1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonModificacionCursada" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonConsultaCursada" alignment="0" pref="120" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -190,7 +230,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonAltaCursada" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButtonUbicarCursada" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBajaCursada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonModificacionCursada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonConsultaCursada" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -205,9 +249,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaCursadaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonUbicarCursada">
+        <Component class="javax.swing.JButton" name="jButtonBajaCursada">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ubicar"/>
+            <Property name="text" type="java.lang.String" value="Baja"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonModificacionCursada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificacion"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonConsultaCursada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -228,7 +282,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonAltaAsignatura" pref="120" max="32767" attributes="0"/>
-                      <Component id="jButtonUbicarAsignatura" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonBajaAsignatura" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonModificacionAsignatura" alignment="0" pref="120" max="32767" attributes="0"/>
+                      <Component id="jButtonConsultaAsignatura" alignment="0" pref="120" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -240,7 +296,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonAltaAsignatura" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButtonUbicarAsignatura" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBajaAsignatura" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonModificacionAsignatura" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonConsultaAsignatura" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -255,9 +315,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaAsignaturaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonUbicarAsignatura">
+        <Component class="javax.swing.JButton" name="jButtonBajaAsignatura">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ubicar"/>
+            <Property name="text" type="java.lang.String" value="Baja"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonModificacionAsignatura">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificacion"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonConsultaAsignatura">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
         </Component>
       </SubComponents>

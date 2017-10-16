@@ -9,16 +9,16 @@ import vista.VentanaPrincipal;
 
 public class Lanzador
 {
-    public Lanzador()
-    {
-        super();
-    }
+  public Lanzador()
+  {
+    super();
+  }
 
-    public static void main(String[] args)
-    {
-        VentanaPrincipal vista = new VentanaPrincipal();
-        Sistema modelo = SerializadorXML.cargar();
-        Receptor receptor = new Receptor(modelo, vista);
-        vista.setReceptor(receptor);
-    }
+  public static void main(String[] args)
+  {
+    VentanaPrincipal vista = new VentanaPrincipal();
+    Sistema modelo = SerializadorXML.cargar();
+    Receptor receptor = new Receptor(modelo, vista);
+    vista.setReceptor(receptor);
+  }
 }

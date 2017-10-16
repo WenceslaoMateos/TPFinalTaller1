@@ -2,6 +2,9 @@ package vista;
 
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
+import excepciones.NoEncontradoException;
+
+import java.util.Iterator;
 
 import modelo.Alumno;
 import modelo.Asignatura;
@@ -43,21 +46,30 @@ public class Receptor
         break;
     }
   }
-  
-  public void ubicar(Object obj, int comando)
+
+  public Iterator ubicar(Object obj, int comando)
   {
-    switch (comando)
+    Iterator ret = null;
+    try
     {
-      case Receptor.ALUMNO:
-        this.modelo.buscarAlumno((String) obj);
-        break;
-      case Receptor.PROFESOR:
-        this.modelo.buscarProfesor((String) obj);
-        break;
-      case Receptor.ASIGNATURA:
-        this.modelo.buscarAsignatura((String) obj);
-        break;
+      switch (comando)
+      {
+        case Receptor.ALUMNO:
+          ret = this.modelo.buscarAlumno((String) obj);
+          break;
+        case Receptor.PROFESOR:
+          ret = this.modelo.buscarProfesor((String) obj);
+          break;
+        case Receptor.ASIGNATURA:
+          ret = this.modelo.buscarAsignatura((String) obj);
+          break;
+      }
     }
+    catch (NoEncontradoException nee)
+    {
+      nee.printStackTrace();
+    }
+    return ret;
   }
 
   public void guardar()

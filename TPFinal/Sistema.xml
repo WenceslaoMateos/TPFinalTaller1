@@ -24,6 +24,66 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0002</string>
+      <object class="modelo.Alumno" id="Alumno1">
+       <void property="apellidoNombre">
+        <string>Wen</string>
+       </void>
+       <void property="domicilio">
+        <string></string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0002</string>
+       </void>
+       <void property="mail">
+        <string>aaa@qqq</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0003</string>
+      <object class="modelo.Alumno" id="Alumno2">
+       <void property="apellidoNombre">
+        <string>wen</string>
+       </void>
+       <void property="domicilio">
+        <string>w</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0003</string>
+       </void>
+       <void property="mail">
+        <string>aqa@a</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0004</string>
+      <object class="modelo.Alumno" id="Alumno3">
+       <void property="apellidoNombre">
+        <string>Wenceslao Mateos</string>
+       </void>
+       <void property="domicilio">
+        <string>Alberti 2530</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0004</string>
+       </void>
+       <void property="mail">
+        <string>wenceslaomateos@gmail.com</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -32,6 +92,30 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Alumno0"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Wen</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno1"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Wenceslao Mateos</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno3"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>wen</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno2"/>
       </void>
      </object>
     </void>
@@ -82,6 +166,20 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ASI0006</string>
+      <object class="modelo.Asignatura" id="Asignatura3">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="identificacion">
+        <string>ASI0006</string>
+       </void>
+       <void property="nombre">
+        <string>aaa</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -106,6 +204,9 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Asignatura2"/>
+      </void>
+      <void method="add">
+       <object idref="Asignatura3"/>
       </void>
      </object>
     </void>
@@ -151,8 +252,8 @@
    </void>
   </void>
  </object>
- <int>1</int>
- <int>1</int>
  <int>4</int>
+ <int>1</int>
+ <int>6</int>
  <int>0</int>
 </java>
