@@ -1,5 +1,8 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
+
 
 public class Cursada
     implements I_Indexable
@@ -8,7 +11,8 @@ public class Cursada
     private String identificacion;
     private String periodo;
     private Dia dia;
-    private String hora;
+    private String horaInicio;
+    private String horaFinalizacion;
     private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
     private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
     private static int CANT_CURSADAS = 0;
@@ -18,12 +22,13 @@ public class Cursada
         super();
     }
 
-    public Cursada(Asignatura asignatura, String periodo, Dia dia, String hora)
+    public Cursada(Asignatura asignatura, String periodo, Dia dia, String horaInicio, String horaFinalizacion)
     {
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.dia = dia;
-        this.hora = hora;
+        this.horaInicio = horaInicio;
+        this.horaFinalizacion = horaFinalizacion;
         this.profesores = new IndiceDoble<Profesor>();
         this.alumnos = new IndiceDoble<Alumno>();
     }
@@ -47,7 +52,7 @@ public class Cursada
     @Override
     public Object getClaveSecundaria()
     {
-        return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.hora);
+        return Dia.parseInt(this.dia) * 10000 + this.parseInt(this.horaInicio);
     }
 
     private int parseInt(String hora)
@@ -95,14 +100,24 @@ public class Cursada
         return dia;
     }
 
-    public void setHora(String hora)
+    public void setHoraInicio(String horaInicio)
     {
-        this.hora = hora;
+        this.horaInicio = horaInicio;
     }
 
-    public String getHora()
+    public String getHoraInicio()
     {
-        return hora;
+        return horaInicio;
+    }
+
+    public void setHoraFinalizacion(String horaFinalizacion)
+    {
+        this.horaFinalizacion = horaFinalizacion;
+    }
+
+    public String getHoraFinalizacion()
+    {
+        return horaFinalizacion;
     }
 
     public void setProfesores(IndiceDoble<Profesor> profesores)
@@ -169,5 +184,76 @@ public class Cursada
         for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
+    }
+    
+    /**
+     * Agrega un nuevo alumno a la cursada.<br>
+     * <b>Pre:</b> nuevo es un Aumno ya existente en el sistema y tiene disponibilidad horaria.<br>
+     * <b>Post:</b> La cursada cuenta con un alumno más.
+     * @param nuevo Alumno a agregar.
+     * @throws DatoInvalidoException El alumno no cumple con las correlatividades o ya hizo la materia.
+     * @throws ClaveYaExistenteException El alumno ya forma parte de la cursada.
+     */
+    public void altaAlumno(Alumno nuevo)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!this.correlativasAprobadas(nuevo))
+            throw new DatoInvalidoException(nuevo, "El alumno no tiene todas las precorrelatividades aprobadas.");
+        else if (nuevo.asignaturaAprobada(this.asignatura))
+            throw new DatoInvalidoException(nuevo, "El alumno ya tiene aprobada la asignatura.");
+        else
+            this.alumnos.agregar(nuevo);
+}
+    
+    /**
+     * Da de baja en la cursada al alumno parámetro.<br>
+     * <b>Pre:</b> El alumno fue ubicado previamente entre los participantes de la cursada.<br>
+     * <b>Post:</b> La cursada cuenta con un alumno menos.
+     * @param elim Alumno a dar de baja.
+     */
+    public void bajaAlumno(Alumno elim)
+    {
+        this.alumnos.eliminar(elim);
+    }
+    
+    /**
+     * Agrega un nuevo profesor a la cursada.<br>
+     * <b>Pre:</b> nuevo es un Profesor ya existente en el sistema y tiene disponibilidad horaria.<br>
+     * <b>Post:</b> La cursada cuente con un profesor más.
+     * @param nuevo Profesor a agregar.
+     * @throws DatoInvalidoException El profesor no tiene a la asignatura entre sus competencias.
+     * @throws ClaveYaExistenteException El profesor ya forma parte de la cursada.
+     */
+    public void altaProfesor(Profesor nuevo)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!nuevo.habilitadoParaAsignatura(this.asignatura))
+            throw new DatoInvalidoException(nuevo, "El profesor no está habilitado para la asignatura.");
+        else
+            this.profesores.agregar(nuevo);
+    }
+    
+    public void bajaProfesor(Profesor elim)
+    {
+        // Es precondición que el profesor exista.
+        this.profesores.eliminar(elim);
+    }
+    
+    public boolean hayColision(Cursada otro)
+    {
+        return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia()
+               && !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0
+                    || this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
+        // Las cursadas deben estar en el mismo periodo, en el mismo día y deben superponerse los horarios.
+    }
+    
+    public boolean tieneAlumno(Alumno alumno)
+    {
+        return this.alumnos.contieneValor(alumno);
+    }
+    
+    public boolean tieneProfesor(Profesor profesor)
+    {
+        return this.profesores.contieneValor(profesor);
     }
 }

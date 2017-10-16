@@ -9,7 +9,7 @@ import java.util.Observable;
 
 
 public class Sistema
-    extends Observable
+  extends Observable
 {
     private IndiceDoble<Alumno> alumnos;
     private IndiceDoble<Profesor> profesores;
@@ -24,8 +24,8 @@ public class Sistema
         this.planDeEstudio = new IndiceDoble<Asignatura>();
         this.calendario = new IndiceDoble<Cursada>();
     }
-
-    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setAlumnos(IndiceDoble<Alumno> alumnos)
     {
         this.alumnos = alumnos;
@@ -65,8 +65,8 @@ public class Sistema
     {
         return calendario;
     }
-    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    
     public void agregarAlumno(Alumno nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
@@ -78,9 +78,9 @@ public class Sistema
         {
             nuevo.setLegajo(Alumno.getNuevoLegajo());
             this.alumnos.agregar(nuevo);
-        }
+}
     }
-
+    
     public void agregarProfesor(Profesor nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
@@ -92,9 +92,9 @@ public class Sistema
         {
             nuevo.setLegajo(Profesor.getNuevaIdentificacion());
             this.profesores.agregar(nuevo);
-        }
     }
-
+    }
+    
     public void agregarAsignatura(Asignatura nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
@@ -103,25 +103,29 @@ public class Sistema
         else
         {
             nuevo.setIdentificacion(Asignatura.getNuevaIdentificacion());
-            this.planDeEstudio.agregar(nuevo);
-        }
+        this.planDeEstudio.agregar(nuevo);
     }
-
+    }
+    
     public void agregarCursada(Cursada nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (!Cursada.validaHora(nuevo.getHora()))
-            throw new DatoInvalidoException(nuevo.getHora(), "Hora inválida.");
+        if (!Cursada.validaHora(nuevo.getHoraInicio()))
+            throw new DatoInvalidoException(nuevo.getHoraInicio(), "Hora de inicio inválida.");
+        else if (!Cursada.validaHora(nuevo.getHoraFinalizacion())
+                 || nuevo.getHoraInicio().compareTo(nuevo.getHoraFinalizacion()) >= 0)
+            throw new DatoInvalidoException(nuevo.getHoraFinalizacion(), "Hora de finalización inválida.");
         else if (!Cursada.validaPeriodo(nuevo.getPeriodo()))
             throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
-        // TODO faltan verificaciones
+        else if (!this.horarioCursadaDisponible(nuevo))
+            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado.");
         else
         {
             nuevo.setIdentificacion(Cursada.getNuevaIdentificacion());
             this.calendario.agregar(nuevo);
-        }
     }
-
+    }
+    
     public void eliminarAlumno(Alumno elim)
     {
         Cursada aux;
@@ -131,11 +135,11 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getAlumnos().contieneValor(elim))
-                aux.getAlumnos().eliminar(elim);
+            if (aux.tieneAlumno(elim))
+                aux.bajaAlumno(elim);
         }
     }
-
+    
     public void eliminarProfesor(Profesor elim)
     {
         Cursada aux;
@@ -145,11 +149,11 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getProfesores().contieneValor(elim))
-                aux.getProfesores().eliminar(elim);
+            if (aux.tieneProfesor(elim))
+                aux.bajaProfesor(elim);
         }
     }
-
+    
     public void eliminarAsignatura(Asignatura elim)
     {
         Cursada aux;
@@ -165,12 +169,12 @@ public class Sistema
                 this.eliminarCursada(aux);
         }
     }
-
+    
     public void eliminarCursada(Cursada elim)
     {
         this.calendario.eliminar(elim);
     }
-
+    
     private void eliminaAsignaturaEnAlumnos(Asignatura elim)
     {
         Iterator<Alumno> it = this.alumnos.elementosPorClavePrimaria();
@@ -178,11 +182,11 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getHistoria().contieneValor(elim))
+            if (aux.asignaturaAprobada(elim))
                 aux.eliminarHistoria(elim);
         }
     }
-
+    
     private void eliminaAsignaturaEnProfesores(Asignatura elim)
     {
         Iterator<Profesor> it = this.profesores.elementosPorClavePrimaria();
@@ -194,22 +198,79 @@ public class Sistema
                 aux.eliminarCompetencia(elim);
         }
     }
-
+    
     public Iterator<Alumno> buscarAlumno(String nombre)
         throws NoEncontradoException
     {
         return this.alumnos.buscarPorClaveSecundaria(nombre);
     }
-
+    
     public Iterator<Profesor> buscarProfesor(String nombre)
         throws NoEncontradoException
     {
         return this.profesores.buscarPorClaveSecundaria(nombre);
     }
-
-    public Iterator<Asignatura> buscarAsigatura(String nombre)
+    
+    public Iterator<Asignatura> buscarAsignatura(String nombre)
         throws NoEncontradoException
     {
         return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
+    }
+    
+    public void agregarAlumnoEnCursada(Alumno alumno, Cursada cursada)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!this.alumnoDisponible(alumno, cursada))
+            throw new DatoInvalidoException(alumno,
+                                            "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
+        else
+            cursada.altaAlumno(alumno);
+}
+    
+    public void agregarProfesorEnCursada(Profesor profesor, Cursada cursada)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!this.profesorDisponible(profesor, cursada))
+            throw new DatoInvalidoException(profesor,
+                                            "El profesor solicitado se encuentra ocupado en el horario de la cursada.");
+        else
+            cursada.altaProfesor(profesor);
+    }
+    
+    private boolean horarioCursadaDisponible(Cursada cursada)
+    {
+        boolean res = true;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+            res = !cursada.hayColision(it.next());
+        return res;
+    }
+    
+    private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
+    {
+        boolean res = true;
+        Cursada aux;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+        {
+            aux = it.next();
+            // El alumno no debe estar en la cursada o la misma no debe colisionar con la solicitada
+            res = !aux.tieneAlumno(alumno) || !aux.hayColision(cursada);
+        }
+        return res;
+    }
+    
+    private boolean profesorDisponible(Profesor profesor, Cursada cursada)
+    {
+        boolean res = true;
+        Cursada aux;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+        {
+            aux = it.next();
+            // El profesor no debe estar en la cursada o la misma no debe colisionar con la solicitada
+            res = !aux.tieneProfesor(profesor) || !aux.hayColision(cursada);
+        }
+        return res;
     }
 }
