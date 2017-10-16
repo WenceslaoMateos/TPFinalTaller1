@@ -1,5 +1,8 @@
 package modelo;
 
+import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
+
 
 public class Cursada
     implements I_Indexable
@@ -169,5 +172,58 @@ public class Cursada
         for (i = 1; i <= 4 - j; i++)
             ret = ret + "0";
         return ret + aux;
+    }
+    
+    /**
+     * Agrega un nuevo alumno a la cursada.<br>
+     * <b>Pre:</b> nuevo es un Aumno ya existente en el sistema y tiene disponibilidad horaria.<br>
+     * <b>Post:</b> La cursada cuenta con un alumno más.
+     * @param nuevo Alumno a agregar.
+     * @throws DatoInvalidoException El alumno no cumple con las correlatividades o ya hizo la materia.
+     * @throws ClaveYaExistenteException El alumno ya forma parte de la cursada.
+     */
+    public void altaAlumno(Alumno nuevo)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!this.correlativasAprobadas(nuevo))
+            throw new DatoInvalidoException(nuevo, "El alumno no tiene todas las precorrelatividades aprobadas.");
+        else if (nuevo.asignaturaAprobada(this.asignatura))
+            throw new DatoInvalidoException(nuevo, "El alumno ya tiene aprobada la asignatura.");
+        else
+            this.alumnos.agregar(nuevo);
+    }
+    
+    /**
+     * Da de baja en la cursada al alumno parámetro.<br>
+     * <b>Pre:</b> El alumno fue ubicado previamente entre los participantes de la cursada.<br>
+     * <b>Post:</b> La cursada cuenta con un alumno menos.
+     * @param elim Alumno a dar de baja.
+     */
+    public void bajaAlumno(Alumno elim)
+    {
+        this.alumnos.eliminar(elim);
+    }
+    
+    /**
+     * Agrega un nuevo profesor a la cursada.<br>
+     * <b>Pre:</b> nuevo es un Profesor ya existente en el sistema y tiene disponibilidad horaria.<br>
+     * <b>Post:</b> La cursada cuente con un profesor más.
+     * @param nuevo Profesor a agregar.
+     * @throws DatoInvalidoException El profesor no tiene a la asignatura entre sus competencias.
+     * @throws ClaveYaExistenteException El profesor ya forma parte de la cursada.
+     */
+    public void altaProfesor(Profesor nuevo)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!nuevo.habilitadoParaAsignatura(this.asignatura))
+            throw new DatoInvalidoException(nuevo, "El profesor no está habilitado para la asignatura.");
+        else
+            this.profesores.agregar(nuevo);
+    }
+    
+    public void bajaProfesor(Profesor elim)
+    {
+        // Es precondición que el profesor exista.
+        this.profesores.eliminar(elim);
     }
 }

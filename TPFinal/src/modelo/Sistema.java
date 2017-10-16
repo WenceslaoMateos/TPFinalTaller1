@@ -159,7 +159,7 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getHistoria().contieneValor(elim))
+            if (aux.asignaturaAprobada(elim))
                 aux.eliminarHistoria(elim);
         }
     }
@@ -188,9 +188,25 @@ public class Sistema
         return this.profesores.buscarPorClaveSecundaria(nombre);
     }
     
-    public Iterator<Asignatura> buscarAsigatura(String nombre)
+    public Iterator<Asignatura> buscarAsignatura(String nombre)
         throws NoEncontradoException
     {
         return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
+    }
+    
+    public void agregarAlumnoEnCursada(Alumno alumno, Cursada cursada)
+    {
+        
+    }
+    
+    private boolean horarioCursadaDisponible(Cursada nuevo)
+    {
+        return false;
+    }
+    
+    private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
+    {
+        // TODO
+        return false;
     }
 }
