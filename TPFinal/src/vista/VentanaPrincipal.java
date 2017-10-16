@@ -2,7 +2,6 @@
 package vista;
 
 import java.awt.event.WindowAdapter;
-
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
@@ -53,6 +52,8 @@ public class VentanaPrincipal
   private void initComponents()//GEN-BEGIN:initComponents
   {
 
+    buttonGroup1 = new javax.swing.ButtonGroup();
+    buttonGroup2 = new javax.swing.ButtonGroup();
     jPanelAlumno = new javax.swing.JPanel();
     jButtonAltaAlumno = new javax.swing.JButton();
     jButtonUbicarAlumno = new javax.swing.JButton();
@@ -65,8 +66,6 @@ public class VentanaPrincipal
     jPanelAsignatura = new javax.swing.JPanel();
     jButtonAltaAsignatura = new javax.swing.JButton();
     jButtonUbicarAsignatura = new javax.swing.JButton();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    jTextPane1 = new javax.swing.JTextPane();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +88,13 @@ public class VentanaPrincipal
     });
 
     jButtonUbicarAlumno.setText("Ubicar");
+    jButtonUbicarAlumno.addMouseListener(new java.awt.event.MouseAdapter()
+    {
+      public void mouseClicked(java.awt.event.MouseEvent evt)
+      {
+        jButtonUbicarAlumnoMouseClicked(evt);
+      }
+    });
 
     javax.swing.GroupLayout jPanelAlumnoLayout = new javax.swing.GroupLayout(jPanelAlumno);
     jPanelAlumno.setLayout(jPanelAlumnoLayout);
@@ -213,26 +219,20 @@ public class VentanaPrincipal
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    jScrollPane1.setViewportView(jTextPane1);
-
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane1)
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(44, 44, 44)
-            .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(44, 44, 44)
-            .addComponent(jPanelAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(44, 44, 44)
-            .addComponent(jPanelCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE)))
-        .addContainerGap())
+        .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(44, 44, 44)
+        .addComponent(jPanelCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,12 +241,9 @@ public class VentanaPrincipal
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addComponent(jPanelAsignatura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelCursada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-            .addComponent(jPanelProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        .addGap(18, 18, 18)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-        .addContainerGap())
+          .addComponent(jPanelProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanelAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
@@ -259,7 +256,7 @@ public class VentanaPrincipal
 
   private void jButtonAltaProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaProfesorActionPerformed
-    DialogAltaProfesor emergente = new DialogAltaProfesor(this.receptor);
+    new DialogAltaProfesor(this.receptor);
   }//GEN-LAST:event_jButtonAltaProfesorActionPerformed
 
   private void jButtonAltaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaCursadaActionPerformed
@@ -269,13 +266,19 @@ public class VentanaPrincipal
 
   private void jButtonAltaAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAltaAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAltaAsignaturaActionPerformed
-    DialogAltaAsignatura emergente = new DialogAltaAsignatura(this.receptor);
+    new DialogAltaAsignatura(this.receptor);
   }//GEN-LAST:event_jButtonAltaAsignaturaActionPerformed
       
   private void jButtonAltaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonAltaAlumnoMouseClicked
   {//GEN-HEADEREND:event_jButtonAltaAlumnoMouseClicked
-    DialogAltaAlumno emergente = new DialogAltaAlumno(this.receptor); 
+    new DialogAltaAlumno(this.receptor); 
   }//GEN-LAST:event_jButtonAltaAlumnoMouseClicked
+
+  private void jButtonUbicarAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonUbicarAlumnoMouseClicked
+  {//GEN-HEADEREND:event_jButtonUbicarAlumnoMouseClicked
+    new DialogUbicarAlumno(this.receptor);
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonUbicarAlumnoMouseClicked
 
   /**
    * @param args the command line arguments
@@ -350,6 +353,8 @@ public class VentanaPrincipal
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.ButtonGroup buttonGroup1;
+  private javax.swing.ButtonGroup buttonGroup2;
   private javax.swing.JButton jButtonAltaAlumno;
   private javax.swing.JButton jButtonAltaAsignatura;
   private javax.swing.JButton jButtonAltaCursada;
@@ -362,7 +367,5 @@ public class VentanaPrincipal
   private javax.swing.JPanel jPanelAsignatura;
   private javax.swing.JPanel jPanelCursada;
   private javax.swing.JPanel jPanelProfesor;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JTextPane jTextPane1;
   // End of variables declaration//GEN-END:variables
 }

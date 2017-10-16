@@ -3,9 +3,6 @@ package vista;
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
-
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Profesor;
@@ -46,7 +43,23 @@ public class Receptor
         break;
     }
   }
-  
+
+  public void ubicar(Object obj, int comando)
+  {
+    switch (comando)
+    {
+      case Receptor.ALUMNO:
+        this.modelo.buscarAlumno((String) obj);
+        break;
+      case Receptor.PROFESOR:
+        this.modelo.buscarProfesor((String) obj);
+        break;
+      case Receptor.ASIGNATURA:
+        this.modelo.buscarAsignatura((String) obj);
+        break;
+    }
+  }
+
   public void guardar()
   {
     SerializadorXML.guardar(this.modelo);
