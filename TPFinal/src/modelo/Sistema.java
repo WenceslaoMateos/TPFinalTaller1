@@ -103,8 +103,8 @@ public class Sistema
         else
         {
             nuevo.setIdentificacion(Asignatura.getNuevaIdentificacion());
-        this.planDeEstudio.agregar(nuevo);
-    }
+            this.planDeEstudio.agregar(nuevo);
+        }
     }
     
     public void agregarCursada(Cursada nuevo)
@@ -123,7 +123,7 @@ public class Sistema
         {
             nuevo.setIdentificacion(Cursada.getNuevaIdentificacion());
             this.calendario.agregar(nuevo);
-    }
+        }
     }
     
     public void eliminarAlumno(Alumno elim)
@@ -225,7 +225,7 @@ public class Sistema
                                             "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
         else
             cursada.altaAlumno(alumno);
-}
+    }
     
     public void agregarProfesorEnCursada(Profesor profesor, Cursada cursada)
         throws DatoInvalidoException, ClaveYaExistenteException
