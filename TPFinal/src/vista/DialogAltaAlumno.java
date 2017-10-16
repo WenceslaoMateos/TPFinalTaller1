@@ -9,50 +9,50 @@ import javax.swing.JTextField;
 import modelo.Alumno;
 
 public class DialogAltaAlumno
-  extends DialogAlta
+    extends DialogAlta
 {
-  public DialogAltaAlumno(Receptor receptor)
-  {
-    super(receptor);
-  }
-
-  @Override
-  public void generaCampos(JPanel elementos)
-  {
-    int i;
-    elementos.setLayout(new GridLayout(4, 3));
-    this.campos = new JTextField[3];
-    for (i = 0; i < this.campos.length; i++)
+    public DialogAltaAlumno(Receptor receptor)
     {
-      this.campos[i] = new JTextField();
+        super(receptor);
     }
 
-    elementos.add(new JLabel("Descripcion"));
-    elementos.add(new JLabel("Campo"));
-    elementos.add(new JLabel("Formato"));
+    @Override
+    public void generaCampos(JPanel elementos)
+    {
+        int i;
+        elementos.setLayout(new GridLayout(4, 3));
+        this.campos = new JTextField[3];
+        for (i = 0; i < this.campos.length; i++)
+        {
+            this.campos[i] = new JTextField();
+        }
 
-    elementos.add(new JLabel("Apellido y Nombre"));
-    elementos.add(campos[0]);
-    elementos.add(new JLabel("---"));
+        elementos.add(new JLabel("Descripcion"));
+        elementos.add(new JLabel("Campo"));
+        elementos.add(new JLabel("Formato"));
 
-    elementos.add(new JLabel("Domicilio"));
-    elementos.add(campos[1]);
-    elementos.add(new JLabel("---"));
+        elementos.add(new JLabel("Apellido y Nombre"));
+        elementos.add(campos[0]);
+        elementos.add(new JLabel("---"));
 
-    elementos.add(new JLabel("Mail"));
-    elementos.add(campos[2]);
-    elementos.add(new JLabel("AAAA@AAAAA"));
-  }
+        elementos.add(new JLabel("Domicilio"));
+        elementos.add(campos[1]);
+        elementos.add(new JLabel("---"));
 
-  @Override
-  public Object generaObjeto()
-  {
-    return new Alumno(this.campos[0].getText(), this.campos[1].getText(), this.campos[2].getText());
-  }
+        elementos.add(new JLabel("Mail"));
+        elementos.add(campos[2]);
+        elementos.add(new JLabel("AAAA@AAAAA"));
+    }
 
-  @Override
-  public int getComando()
-  {
-    return Receptor.ALUMNO;
-  }
+    @Override
+    public Object generaObjeto()
+    {
+        return new Alumno(this.campos[0].getText(), this.campos[1].getText(), this.campos[2].getText());
+    }
+
+    @Override
+    public int getComando()
+    {
+        return Receptor.ALUMNO;
+    }
 }

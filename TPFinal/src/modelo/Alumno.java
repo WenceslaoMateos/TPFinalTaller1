@@ -4,66 +4,66 @@ import excepciones.ClaveYaExistenteException;
 
 
 public class Alumno
-  extends Persona
+    extends Persona
 {
-  private IndicePrimario<Asignatura> historia;
-  private static int CANT_ALUMNOS = 0;
+    private IndicePrimario<Asignatura> historia;
+    private static int CANT_ALUMNOS = 0;
 
-  public Alumno()
-  {
-    super();
-  }
+    public Alumno()
+    {
+        super();
+    }
 
-  public Alumno(String apellidoNombre, String domicilio, String mail)
-  {
+    public Alumno(String apellidoNombre, String domicilio, String mail)
+    {
     super(apellidoNombre, domicilio, mail);
-    this.historia = new IndicePrimario<Asignatura>();
-  }
+        this.historia = new IndicePrimario<Asignatura>();
+    }
 
-  public void agregarHistoria(Asignatura nuevo)
-    throws ClaveYaExistenteException
-  {
-    this.historia.agregar(nuevo);
-  }
+    public void agregarHistoria(Asignatura nuevo)
+        throws ClaveYaExistenteException
+    {
+        this.historia.agregar(nuevo);
+    }
 
-  public void eliminarHistoria(Asignatura elim)
-  {
-    this.historia.eliminar(elim);
-  }
+    public void eliminarHistoria(Asignatura elim)
+    {
+        this.historia.eliminar(elim);
+    }
 
-  public boolean asignaturaAprobada(Asignatura asignatura)
-  {
-    return this.historia.contieneValor(asignatura);
-  }
+    public boolean asignaturaAprobada(Asignatura asignatura)
+    {
+        return this.historia.contieneValor(asignatura);
+    }
 
-  public void setHistoria(IndicePrimario<Asignatura> historia)
-  {
-    this.historia = historia;
-  }
+    public void setHistoria(IndicePrimario<Asignatura> historia)
+    {
+        this.historia = historia;
+    }
 
-  public IndicePrimario<Asignatura> getHistoria()
-  {
-    return historia;
-  }
+    public IndicePrimario<Asignatura> getHistoria()
+    {
+        return historia;
+    }
 
-  public static void setCANT_ALUMNOS(int CANT_ALUMNOS)
-  {
-    Alumno.CANT_ALUMNOS = CANT_ALUMNOS;
-  }
+    public static void setCANT_ALUMNOS(int CANT_ALUMNOS)
+    {
+        Alumno.CANT_ALUMNOS = CANT_ALUMNOS;
+    }
 
-  public static int getCANT_ALUMNOS()
-  {
-    return CANT_ALUMNOS;
-  }
+    public static int getCANT_ALUMNOS()
+    {
+        return CANT_ALUMNOS;
+    }
 
-  public static String getNuevoLegajo()
-  {
-    Alumno.CANT_ALUMNOS++;
-    String ret = "ALU";
-    String aux = "" + Alumno.CANT_ALUMNOS;
-    int i, j = aux.length();
-    for (i = 1; i <= 4 - j; i++)
-      ret = ret + "0";
-    return ret + aux;
-  }
+    public static String getNuevoLegajo()
+    {
+        Alumno.CANT_ALUMNOS++;
+        String ret = "ALU";
+        String aux = "" + Alumno.CANT_ALUMNOS;
+        int i, j = aux.length();
+        for (i = 1; i <= 4 - j; i++)
+            ret = ret + "0";
+        return ret + aux;
+    }
 }

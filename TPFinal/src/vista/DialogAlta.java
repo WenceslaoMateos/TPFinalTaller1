@@ -52,7 +52,7 @@ public abstract class DialogAlta
   public abstract void generaCampos(JPanel elementos);
 
   public abstract Object generaObjeto();
-
+  
   public abstract int getComando();
 
   @Override
@@ -66,7 +66,7 @@ public abstract class DialogAlta
       }
       catch (ClaveYaExistenteException | DatoInvalidoException e)
       {
-        JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
+        JOptionPane.showMessageDialog(this, e.getMessage()+", por favor vuelva a ingresarlo");
       }
     else if (actionEvent.getActionCommand().equals("Cancelar"))
       this.dispose();

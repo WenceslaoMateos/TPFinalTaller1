@@ -43,7 +43,7 @@ public class Receptor
         break;
     }
   }
-
+  
   public void ubicar(Object obj, int comando)
   {
     switch (comando)

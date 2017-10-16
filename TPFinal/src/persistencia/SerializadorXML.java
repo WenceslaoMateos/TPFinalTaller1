@@ -17,54 +17,54 @@ import modelo.Sistema;
 
 
 public abstract class SerializadorXML
-{
-  private static final String ARCHIVO = "Sistema.xml";
-
-  /**
-   * Almacena la información del sistema en un archivo XML.
-   * @param sistema El sistema a persistir.
-   */
-  public static void guardar(Sistema sistema)
-  {
-    XMLEncoder encoder;
-    try
+{   
+    private static final String ARCHIVO = "Sistema.xml";
+    
+    /**
+     * Almacena la información del sistema en un archivo XML.
+     * @param sistema El sistema a persistir.
+     */
+    public static void guardar(Sistema sistema)
     {
-      encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(SerializadorXML.ARCHIVO)));
-      encoder.writeObject(sistema);
-      encoder.writeObject(Alumno.getCANT_ALUMNOS());
-      encoder.writeObject(Profesor.getCANT_PROFESORES());
-      encoder.writeObject(Asignatura.getCANT_ASIGNATURAS());
-      encoder.writeObject(Cursada.getCANT_CURSADAS());
-      encoder.close();
+        XMLEncoder encoder;
+        try
+        {
+            encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(SerializadorXML.ARCHIVO)));
+            encoder.writeObject(sistema);
+            encoder.writeObject(Alumno.getCANT_ALUMNOS());
+            encoder.writeObject(Profesor.getCANT_PROFESORES());
+            encoder.writeObject(Asignatura.getCANT_ASIGNATURAS());
+            encoder.writeObject(Cursada.getCANT_CURSADAS());
+            encoder.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new InternalError("Error fatal al tratar de guardar el sistema");
+        }
     }
-    catch (FileNotFoundException e)
+    
+    /**
+     * Carga el sistema desde el archivo XML por defecto. Si dicho archivo no existe, se crea una instancia nueva.
+     * @return Si se pudo leer el archivo, instancia de Sistema con la información almacenada. En caso contrario se
+     * devuelve una instancia nueva.
+     */
+    public static Sistema cargar()
     {
-      throw new InternalError("Error fatal al tratar de guardar el sistema");
-    }
-  }
-
-  /**
-   * Carga el sistema desde el archivo XML por defecto. Si dicho archivo no existe, se crea una instancia nueva.
-   * @return Si se pudo leer el archivo, instancia de Sistema con la información almacenada. En caso contrario se
-   * devuelve una instancia nueva.
-   */
-  public static Sistema cargar()
-  {
-    Sistema res;
-    XMLDecoder decoder;
-    try
-    {
-      decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SerializadorXML.ARCHIVO)));
-      res = (Sistema) decoder.readObject();
-      Alumno.setCANT_ALUMNOS((Integer) decoder.readObject());
-      Profesor.setCANT_PROFESORES((Integer) decoder.readObject());
-      Asignatura.setCANT_ASIGNATURAS((Integer) decoder.readObject());
-      Cursada.setCANT_CURSADAS((Integer) decoder.readObject());
-    }
-    catch (FileNotFoundException e)
-    {
-      res = new Sistema();
-    }
-    return res;
-  }
+        Sistema res;
+        XMLDecoder decoder;
+        try
+        {
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SerializadorXML.ARCHIVO)));
+            res = (Sistema) decoder.readObject();
+            Alumno.setCANT_ALUMNOS((Integer) decoder.readObject());
+            Profesor.setCANT_PROFESORES((Integer) decoder.readObject());
+            Asignatura.setCANT_ASIGNATURAS((Integer) decoder.readObject());
+            Cursada.setCANT_CURSADAS((Integer) decoder.readObject());
+        }
+        catch (FileNotFoundException e)
+        {
+            res = new Sistema();
+        }
+        return res;
+    }    
 }

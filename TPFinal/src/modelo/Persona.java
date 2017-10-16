@@ -24,13 +24,13 @@ public abstract class Persona
   @Override
   public Object getClavePrimaria()
   {
-    return this.getLegajo();
+        return this.getLegajo();
   }
 
   @Override
   public Object getClaveSecundaria()
   {
-    return this.getApellidoNombre();
+        return this.getApellidoNombre();
   }
 
   public String getLegajo()
