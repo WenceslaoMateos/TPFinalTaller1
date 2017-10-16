@@ -2,6 +2,8 @@ package modelo;
 
 import excepciones.ClaveYaExistenteException;
 
+import java.util.Iterator;
+
 
 public class Alumno
   extends Persona
@@ -65,5 +67,10 @@ public class Alumno
     for (i = 1; i <= 4 - j; i++)
       ret = ret + "0";
     return ret + aux;
+  }
+
+  public Iterator historiaAcademica()
+  {
+    return null;
   }
 }

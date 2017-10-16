@@ -212,4 +212,19 @@ public class Sistema
   {
     return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
   }
+
+  public Alumno alumnoPorLegajo(String string)
+  {
+    return null;
+  }
+
+  public Profesor profesorPorLegajo(String string)
+  {
+    return null;
+  }
+
+  public Asignatura asignaturaPorIdentifica(String string)
+  {
+    return null;
+  }
 }

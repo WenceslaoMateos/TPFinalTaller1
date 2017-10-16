@@ -55,7 +55,7 @@ public class DialogUbicarAlumno
     while (alumnos.hasNext())
     {
       aux = (Alumno) alumnos.next();
-      model.addRow(new Object[] { aux.getLegajo(), aux.getApellidoNombre(), aux.getDomicilio(), aux.getMail() });
+      model.addRow(new Object[] { aux.getLegajo(), aux.getApellidoNombre(), aux.getDomicilio(), aux.getMail(), aux });
     }
   }
 }

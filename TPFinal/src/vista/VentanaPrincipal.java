@@ -338,7 +338,8 @@ public class VentanaPrincipal
 
   private void jButtonConsultaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButtonConsultaAlumnoMouseClicked
   {//GEN-HEADEREND:event_jButtonConsultaAlumnoMouseClicked
-    new DialogUbicarAlumno(this.receptor);
+    //new DialogUbicarAlumno(this.receptor);
+    new DialogAlumno(this.receptor);
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonConsultaAlumnoMouseClicked
 

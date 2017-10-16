@@ -48,26 +48,38 @@ public class Receptor
   }
 
   public Iterator ubicar(Object obj, int comando)
+    throws NoEncontradoException
   {
     Iterator ret = null;
-    try
+    switch (comando)
     {
-      switch (comando)
-      {
-        case Receptor.ALUMNO:
-          ret = this.modelo.buscarAlumno((String) obj);
-          break;
-        case Receptor.PROFESOR:
-          ret = this.modelo.buscarProfesor((String) obj);
-          break;
-        case Receptor.ASIGNATURA:
-          ret = this.modelo.buscarAsignatura((String) obj);
-          break;
-      }
+      case Receptor.ALUMNO:
+        ret = this.modelo.buscarAlumno((String) obj);
+        break;
+      case Receptor.PROFESOR:
+        ret = this.modelo.buscarProfesor((String) obj);
+        break;
+      case Receptor.ASIGNATURA:
+        ret = this.modelo.buscarAsignatura((String) obj);
+        break;
     }
-    catch (NoEncontradoException nee)
+    return ret;
+  }
+
+  public Object buscar(Object obj, int comando)
+  {
+    Object ret = null;
+    switch (comando)
     {
-      nee.printStackTrace();
+      case Receptor.ALUMNO:
+        ret = this.modelo.alumnoPorLegajo((String) obj);
+        break;
+      case Receptor.PROFESOR:
+        ret = this.modelo.profesorPorLegajo((String) obj);
+        break;
+      case Receptor.ASIGNATURA:
+        ret = this.modelo.asignaturaPorIdentifica((String) obj);
+        break;
     }
     return ret;
   }
