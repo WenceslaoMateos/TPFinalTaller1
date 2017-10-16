@@ -116,8 +116,8 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getAlumnos().contieneValor(elim))
-                aux.getAlumnos().eliminar(elim);
+            if (aux.tieneAlumno(elim))
+                aux.bajaAlumno(elim);
         }
     }
     
@@ -130,8 +130,8 @@ public class Sistema
         while (it.hasNext())
         {
             aux = it.next();
-            if (aux.getProfesores().contieneValor(elim))
-                aux.getProfesores().eliminar(elim);
+            if (aux.tieneProfesor(elim))
+                aux.bajaProfesor(elim);
         }
     }
     
@@ -199,8 +199,23 @@ public class Sistema
     }
     
     public void agregarAlumnoEnCursada(Alumno alumno, Cursada cursada)
+        throws DatoInvalidoException, ClaveYaExistenteException
     {
-        
+        if (!this.alumnoDisponible(alumno, cursada))
+            throw new DatoInvalidoException(alumno,
+                                            "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
+        else
+            cursada.altaAlumno(alumno);
+    }
+    
+    public void agregarProfesorEnCursada(Profesor profesor, Cursada cursada)
+        throws DatoInvalidoException, ClaveYaExistenteException
+    {
+        if (!this.profesorDisponible(profesor, cursada))
+            throw new DatoInvalidoException(profesor,
+                                            "El profesor solicitado se encuentra ocupado en el horario de la cursada.");
+        else
+            cursada.altaProfesor(profesor);
     }
     
     private boolean horarioCursadaDisponible(Cursada cursada)
@@ -222,6 +237,20 @@ public class Sistema
             aux = it.next();
             // El alumno no debe estar en la cursada o la misma no debe colisionar con la solicitada
             res = !aux.tieneAlumno(alumno) || !aux.hayColision(cursada);
+        }
+        return res;
+    }
+    
+    private boolean profesorDisponible(Profesor profesor, Cursada cursada)
+    {
+        boolean res = true;
+        Cursada aux;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+        {
+            aux = it.next();
+            // El profesor no debe estar en la cursada o la misma no debe colisionar con la solicitada
+            res = !aux.tieneProfesor(profesor) || !aux.hayColision(cursada);
         }
         return res;
     }
