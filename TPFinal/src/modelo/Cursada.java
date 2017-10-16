@@ -3,6 +3,8 @@ package modelo;
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
 
+import java.util.Iterator;
+
 
 public class Cursada
     implements I_Indexable
@@ -255,5 +257,15 @@ public class Cursada
     public boolean tieneProfesor(Profesor profesor)
     {
         return this.profesores.contieneValor(profesor);
+    }
+    
+    public Iterator<Alumno> alumnos()
+    {
+        return this.alumnos.elementosPorClavePrimaria();
+    }
+    
+    public Iterator<Profesor> profesores()
+    {
+        return this.profesores.elementosPorClavePrimaria();
     }
 }

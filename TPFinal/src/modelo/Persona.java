@@ -12,7 +12,7 @@ public abstract class Persona
     private String domicilio;
     private String mail;
 
-    public Persona()
+    public Persona() //XML
     {
         super();
     }

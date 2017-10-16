@@ -13,6 +13,12 @@ public class Alumno
     private IndicePrimario<Asignatura> historia;
     private static int CANT_ALUMNOS = 0;
 
+    /**
+     * Constructor para crear una instancia preliminar de Alumno. No valida sus parámetros ni asigna un legajo. 
+     * @param apellidoNombre String con el apellido y nombre del alumno nuevo. Es clave secundaria.
+     * @param domicilio
+     * @param mail
+     */
     public Alumno(String apellidoNombre, String domicilio, String mail)
     {
         super(apellidoNombre, domicilio, mail);
@@ -54,6 +60,11 @@ public class Alumno
         return this.historia.contieneValor(asignatura);
     }
 
+    /**
+     * Genera un nuevo legajo cumpliendo con las especificaciones para un Alumno.<br>
+     * <b>Post:</b> Se otorga un nuevo legajo válido.
+     * @return String con el nuevo legajo.
+     */
     public static String getNuevoLegajo()
     {
         Alumno.CANT_ALUMNOS++;

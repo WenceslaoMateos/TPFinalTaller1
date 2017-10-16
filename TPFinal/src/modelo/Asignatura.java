@@ -22,7 +22,6 @@ public class Asignatura
     {
         this.nombre = nombre;
         this.correlatividades = new IndicePrimario<Asignatura>();
-        this.identificacion = Asignatura.getNuevaIdentificacion();
     }
 
     public void agregarCorrelativa(Asignatura correlativa)
@@ -87,16 +86,6 @@ public class Asignatura
         this.nombre = nombre;
     }
 
-    public void setCorrelatividades(IndicePrimario<Asignatura> correlatividades)
-    {
-        this.correlatividades = correlatividades;
-    }
-
-    public IndicePrimario<Asignatura> getCorrelatividades()
-    {
-        return correlatividades;
-    }
-
     public static String getNuevaIdentificacion()
     {
         Asignatura.CANT_ASIGNATURAS++;
@@ -107,4 +96,21 @@ public class Asignatura
             ret = ret + "0";
         return ret + aux;
     }
+
+    public Iterator<Asignatura> precorrelativas()
+    {
+        return this.correlatividades.elementos();
+    }
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public void setCorrelatividades(IndicePrimario<Asignatura> correlatividades)
+    {
+        this.correlatividades = correlatividades;
+    }
+
+    public IndicePrimario<Asignatura> getCorrelatividades()
+    {
+        return correlatividades;
+    }
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

@@ -14,6 +14,13 @@ public class Profesor
     private IndicePrimario<Asignatura> competencia;
     private static int CANT_PROFESORES = 0;
 
+    /**
+     * Constructor para crear una instancia preliminar de Profesor. No valida sus parámetros ni asigna un legajo.
+     * @param apellidoNombre String con el apellido y nombre del profesor nuevo. Es clave secundaria.
+     * @param domicilio
+     * @param mail
+     * @param telefono
+     */
     public Profesor(String apellidoNombre, String domicilio, String mail, String telefono)
     {
         super(apellidoNombre, domicilio, mail);
@@ -65,6 +72,11 @@ public class Profesor
         return this.competencia.contieneValor(asignatura);
     }
 
+    /**
+     * Genera un nuevo legajo cumpliendo con las especifiaciones para un profesor.<br>
+     * <b>Post:</b> Devuelve un legajo válido nuevo.
+     * @return String con el nuevo legajo.
+     */
     public static String getNuevaIdentificacion()
     {
         Profesor.CANT_PROFESORES++;
