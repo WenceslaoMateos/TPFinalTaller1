@@ -15,8 +15,8 @@ public class Cursada
     private Dia dia;
     private String horaInicio;
     private String horaFinalizacion;
-    private IndiceDoble<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
-    private IndiceDoble<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
+    private IndicePrimario<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
+    private IndicePrimario<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
     private static int CANT_CURSADAS = 0;
 
     public Cursada()
@@ -31,8 +31,8 @@ public class Cursada
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFinalizacion = horaFinalizacion;
-        this.profesores = new IndiceDoble<Profesor>();
-        this.alumnos = new IndiceDoble<Alumno>();
+        this.profesores = new IndicePrimario<Profesor>();
+        this.alumnos = new IndicePrimario<Alumno>();
     }
 
     public boolean correlativasAprobadas(Alumno alumno)
@@ -122,22 +122,22 @@ public class Cursada
         return horaFinalizacion;
     }
 
-    public void setProfesores(IndiceDoble<Profesor> profesores)
+    public void setProfesores(IndicePrimario<Profesor> profesores)
     {
         this.profesores = profesores;
     }
 
-    public IndiceDoble<Profesor> getProfesores()
+    public IndicePrimario<Profesor> getProfesores()
     {
         return profesores;
     }
 
-    public void setAlumnos(IndiceDoble<Alumno> alumnos)
+    public void setAlumnos(IndicePrimario<Alumno> alumnos)
     {
         this.alumnos = alumnos;
     }
 
-    public IndiceDoble<Alumno> getAlumnos()
+    public IndicePrimario<Alumno> getAlumnos()
     {
         return alumnos;
     }
@@ -261,11 +261,11 @@ public class Cursada
     
     public Iterator<Alumno> alumnos()
     {
-        return this.alumnos.elementosPorClavePrimaria();
+        return this.alumnos.elementos();
     }
     
     public Iterator<Profesor> profesores()
     {
-        return this.profesores.elementosPorClavePrimaria();
+        return this.profesores.elementos();
     }
 }
