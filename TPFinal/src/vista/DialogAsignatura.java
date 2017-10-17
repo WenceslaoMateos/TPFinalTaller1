@@ -1,0 +1,70 @@
+package vista;
+
+import excepciones.NoEncontradoException;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+
+import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
+
+import modelo.Asignatura;
+
+public class DialogAsignatura
+  extends MiDialogo
+{
+  private TableModelAsignatura modeloAsignatura;
+
+
+  public DialogAsignatura(Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  {
+    super(receptor, fuente);
+    this.modeloAsignatura = (TableModelAsignatura) modelo;
+  }
+
+  @Override
+  public void generaTabla(Container resultado)
+  {
+    this.modeloAsignatura = new TableModelAsignatura();
+    this.tabla = new JTable(this.modeloAsignatura);
+    this.scroll = new JScrollPane(tabla);
+    this.tabla.setFillsViewportHeight(true);
+    resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
+    resultado.add(tabla, BorderLayout.CENTER);
+  }
+
+  @Override
+  public void agregaResultadosTabla(Iterator alumnos)
+  {
+    this.modeloAsignatura.agregarFilas(alumnos);
+  }
+
+  @Override
+  public int getComandoAccion()
+  {
+    return Receptor.ASIGNATURA;
+  }
+
+  ///este va a mandar el resultado a la ventana
+  @Override
+  public void valueChanged(ListSelectionEvent e)
+  {
+    try
+    {
+      Asignatura elemento =
+        (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
+      DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
+      model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
+    }
+    catch (NoEncontradoException f)
+    {
+      JOptionPane.showMessageDialog(this, f.getMessage());
+    }
+    this.dispose();
+  }
+}

@@ -5,10 +5,10 @@
    <void id="IndicePrimario0" property="indice1">
     <void property="elementos">
      <void method="put">
-      <string>ALU0001</string>
+      <string>ALU0005</string>
       <object class="modelo.Alumno" id="Alumno0">
        <void property="apellidoNombre">
-        <string>PABLOS Braulio</string>
+        <string>Pablos Braulio</string>
        </void>
        <void property="domicilio">
         <string>Chaco 33</string>
@@ -17,10 +17,10 @@
         <object class="modelo.IndicePrimario"/>
        </void>
        <void property="legajo">
-        <string>ALU0001</string>
+        <string>ALU0005</string>
        </void>
        <void property="mail">
-        <string>brauliopablos@outlook.com</string>
+        <string>bravlinleonel@gmail.com</string>
        </void>
       </object>
      </void>
@@ -28,7 +28,7 @@
    </void>
    <void property="indice2">
     <void method="put">
-     <string>PABLOS Braulio</string>
+     <string>Pablos Braulio</string>
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Alumno0"/>
@@ -37,122 +37,9 @@
     </void>
    </void>
   </void>
-  <void id="IndiceDoble1" property="planDeEstudio">
-   <void id="IndicePrimario1" property="indice1">
-    <void property="elementos">
-     <void method="put">
-      <string>ASI0001</string>
-      <object class="modelo.Asignatura" id="Asignatura0">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="identificacion">
-        <string>ASI0001</string>
-       </void>
-       <void property="nombre">
-        <string>Programación</string>
-       </void>
-      </object>
-     </void>
-     <void method="put">
-      <string>ASI0002</string>
-      <object class="modelo.Asignatura" id="Asignatura1">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="identificacion">
-        <string>ASI0002</string>
-       </void>
-       <void property="nombre">
-        <string>Análisis</string>
-       </void>
-      </object>
-     </void>
-     <void method="put">
-      <string>ASI0004</string>
-      <object class="modelo.Asignatura" id="Asignatura2">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="identificacion">
-        <string>ASI0004</string>
-       </void>
-       <void property="nombre">
-        <string>aaa</string>
-       </void>
-      </object>
-     </void>
-    </void>
-   </void>
-   <void property="indice2">
-    <void method="put">
-     <string>Análisis</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Asignatura1"/>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>Programación</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Asignatura0"/>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>aaa</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Asignatura2"/>
-      </void>
-     </object>
-    </void>
-   </void>
-  </void>
-  <void id="IndiceDoble2" property="profesores">
-   <void id="IndicePrimario2" property="indice1">
-    <void property="elementos">
-     <void method="put">
-      <string>PRO0001</string>
-      <object class="modelo.Profesor" id="Profesor0">
-       <void property="apellidoNombre">
-        <string>LAZZURRI Guillermo</string>
-       </void>
-       <void property="competencia">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="domicilio">
-        <string>Juan B. Justo 4330</string>
-       </void>
-       <void property="legajo">
-        <string>PRO0001</string>
-       </void>
-       <void property="mail">
-        <string>cgl@facu.com</string>
-       </void>
-       <void property="telefono">
-        <string>223456789</string>
-       </void>
-      </object>
-     </void>
-    </void>
-   </void>
-   <void property="indice2">
-    <void method="put">
-     <string>LAZZURRI Guillermo</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Profesor0"/>
-      </void>
-     </object>
-    </void>
-   </void>
-  </void>
  </object>
- <int>1</int>
- <int>1</int>
- <int>4</int>
+ <int>5</int>
+ <int>0</int>
+ <int>0</int>
  <int>0</int>
 </java>
