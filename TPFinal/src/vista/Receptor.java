@@ -17,13 +17,13 @@ import persistencia.SerializadorXML;
 public class Receptor
 {
   private Sistema modelo;
-  private VentanaPrincipal vista;
+  private Ventana vista;
   public static final int ALUMNO = 0;
   public static final int PROFESOR = 1;
   public static final int ASIGNATURA = 2;
 
 
-  public Receptor(Sistema modelo, VentanaPrincipal vista)
+  public Receptor(Sistema modelo, Ventana vista)
   {
     super();
     this.modelo = modelo;
@@ -67,18 +67,38 @@ public class Receptor
   }
 
   public Object buscar(Object obj, int comando)
+    throws NoEncontradoException
   {
     Object ret = null;
     switch (comando)
     {
       case Receptor.ALUMNO:
-        ret = this.modelo.alumnoPorLegajo((String) obj);
+        ret = this.modelo.buscarAlumnoPorLegajo((String) obj);
         break;
       case Receptor.PROFESOR:
-        ret = this.modelo.profesorPorLegajo((String) obj);
+        ret = this.modelo.buscarProfesorPorLegajo((String) obj);
         break;
       case Receptor.ASIGNATURA:
-        ret = this.modelo.asignaturaPorIdentifica((String) obj);
+        ret = this.modelo.buscarAsignaturaPorIdentifiacion((String) obj);
+        break;
+    }
+    return ret;
+  }
+
+  public Object baja(Object obj, int comando)
+    throws NoEncontradoException
+  {
+    Object ret = null;
+    switch (comando)
+    {
+      case Receptor.ALUMNO:
+        this.modelo.eliminarAlumno((Alumno) this.buscar(obj, comando));
+        break;
+      case Receptor.PROFESOR:
+        this.modelo.eliminarProfesor((Profesor) this.buscar(obj, comando));
+        break;
+      case Receptor.ASIGNATURA:
+        this.modelo.eliminarAsignatura((Asignatura) this.buscar(obj, comando));
         break;
     }
     return ret;

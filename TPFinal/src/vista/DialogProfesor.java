@@ -14,23 +14,24 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Alumno;
+import modelo.Profesor;
 
-public class DialogAlumno
+public class DialogProfesor
   extends MiDialogo
 {
-  private TableModelAlumno modeloAlumno;
+  private TableModelProfesor modeloProfesor;
 
-  public DialogAlumno(Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  public DialogProfesor(Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
     super(receptor, fuente);
-    this.modeloAlumno = (TableModelAlumno) modelo;
+    this.modeloProfesor = (TableModelProfesor) modelo;
   }
 
   @Override
   public void generaTabla(Container resultado)
   {
-    this.modeloAlumno = new TableModelAlumno();
-    this.tabla = new JTable(this.modeloAlumno);
+    this.modeloProfesor = new TableModelProfesor();
+    this.tabla = new JTable(this.modeloProfesor);
     this.scroll = new JScrollPane(tabla);
     this.tabla.setFillsViewportHeight(true);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
@@ -40,13 +41,13 @@ public class DialogAlumno
   @Override
   public void agregaResultadosTabla(Iterator alumnos)
   {
-    this.modeloAlumno.agregarFilas(alumnos);
+    this.modeloProfesor.agregarFilas(alumnos);
   }
 
   @Override
   public int getComandoAccion()
   {
-    return Receptor.ALUMNO;
+    return Receptor.PROFESOR;
   }
 
   ///este va a mandar el resultado a la ventana
@@ -55,11 +56,11 @@ public class DialogAlumno
   {
     try
     {
-      Alumno elemento =
-        (Alumno) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ALUMNO);
+      Profesor elemento =
+        (Profesor) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.PROFESOR);
       DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
       model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
-                                  elemento.getMail() });
+                                  elemento.getMail(), elemento.getTelefono() });
     }
     catch (NoEncontradoException f)
     {

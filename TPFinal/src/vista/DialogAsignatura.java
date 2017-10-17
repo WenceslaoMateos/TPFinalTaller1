@@ -13,24 +13,25 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
-import modelo.Alumno;
+import modelo.Asignatura;
 
-public class DialogAlumno
+public class DialogAsignatura
   extends MiDialogo
 {
-  private TableModelAlumno modeloAlumno;
+  private TableModelAsignatura modeloAsignatura;
 
-  public DialogAlumno(Receptor receptor, JTable fuente, DefaultTableModel modelo)
+
+  public DialogAsignatura(Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
     super(receptor, fuente);
-    this.modeloAlumno = (TableModelAlumno) modelo;
+    this.modeloAsignatura = (TableModelAsignatura) modelo;
   }
 
   @Override
   public void generaTabla(Container resultado)
   {
-    this.modeloAlumno = new TableModelAlumno();
-    this.tabla = new JTable(this.modeloAlumno);
+    this.modeloAsignatura = new TableModelAsignatura();
+    this.tabla = new JTable(this.modeloAsignatura);
     this.scroll = new JScrollPane(tabla);
     this.tabla.setFillsViewportHeight(true);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
@@ -40,13 +41,13 @@ public class DialogAlumno
   @Override
   public void agregaResultadosTabla(Iterator alumnos)
   {
-    this.modeloAlumno.agregarFilas(alumnos);
+    this.modeloAsignatura.agregarFilas(alumnos);
   }
 
   @Override
   public int getComandoAccion()
   {
-    return Receptor.ALUMNO;
+    return Receptor.ASIGNATURA;
   }
 
   ///este va a mandar el resultado a la ventana
@@ -55,11 +56,10 @@ public class DialogAlumno
   {
     try
     {
-      Alumno elemento =
-        (Alumno) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ALUMNO);
+      Asignatura elemento =
+        (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
       DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
-      model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
-                                  elemento.getMail() });
+      model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
     }
     catch (NoEncontradoException f)
     {

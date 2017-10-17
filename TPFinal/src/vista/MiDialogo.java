@@ -4,7 +4,8 @@ import excepciones.NoEncontradoException;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,35 +32,40 @@ public abstract class MiDialogo
   protected JScrollPane scroll;
   protected JPanel busqueda;
   protected JPanel resultado;
-  protected JPanel campos;
+  public static final Dimension JTEXTFIEDL_DIMEN = new Dimension(200, 20);
+  public static final Dimension JBUTTON_DIMEN = new Dimension(100, 30);
+  protected JTable fuente;
 
-  public MiDialogo(Receptor receptor)
+  public MiDialogo(Receptor receptor, JTable fuente)
   {
     super();
-    this.setSize(200, 200);
+    this.fuente = fuente;
+    this.setSize(750, 500);
     this.setVisible(true);
     this.receptor = receptor;
     this.busqueda = new JPanel();
-    this.resultado = new JPanel();
-    this.campos = new JPanel();
+    this.resultado = new JPanel(new BorderLayout());
 
     Container contenedor = this.getContentPane();
     contenedor.setLayout(new BorderLayout());
-    contenedor.add(this.busqueda, BorderLayout.NORTH);
-    contenedor.add(this.resultado, BorderLayout.WEST);
-    contenedor.add(this.campos, BorderLayout.CENTER);
+    contenedor.add(this.busqueda, BorderLayout.WEST);
 
-    this.busqueda.setLayout(new GridLayout(1, 2));
+    this.busqueda.setLayout(new BorderLayout());
     this.texto = new JTextField();
-    this.busqueda.add(this.texto);
+
+    JPanel aux = new JPanel(new FlowLayout());
+    this.busqueda.add(aux, BorderLayout.NORTH);
+    aux.add(this.texto);
+    this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
     this.aceptar = new JButton("Aceptar");
-    this.busqueda.add(this.aceptar);
+    aux.add(this.aceptar);
     this.aceptar.addActionListener(this);
 
-    this.generaTablaYCampos(this.resultado, this.campos);
+    this.busqueda.add(this.resultado);
+    this.generaTabla(this.resultado);
   }
 
-  public abstract void generaTablaYCampos(Container tabla, Container campos);
+  public abstract void generaTabla(Container tabla);
 
   public abstract void agregaResultadosTabla(Iterator alumnos);
 

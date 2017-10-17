@@ -21,7 +21,7 @@ public class TableModelAsignatura
     while (asignaturas.hasNext())
     {
       aux = (Asignatura) asignaturas.next();
-      this.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre()});
+      this.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
     }
   }
 }

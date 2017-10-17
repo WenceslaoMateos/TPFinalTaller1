@@ -18,10 +18,10 @@ public class TableModelAlumno
   {
     Alumno aux;
     this.setRowCount(0);
-    while (alumnos != null && alumnos.hasNext())
+    while (alumnos.hasNext())
     {
       aux = (Alumno) alumnos.next();
-      this.addRow(new Object[] { aux.getLegajo(), aux.getApellidoNombre(), aux.getDomicilio(), aux.getMail()});
+      this.addRow(new Object[] { aux.getLegajo(), aux.getApellidoNombre(), aux.getDomicilio(), aux.getMail() });
     }
   }
 }
