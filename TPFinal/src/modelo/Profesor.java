@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
 
 import java.util.Iterator;
 
@@ -97,7 +98,18 @@ public class Profesor
         return this.competencia.elementos();
     }
 
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    @Override
+    public void modificarDatos(I_Indexable modif)
+        throws DatoInvalidoException
+    {
+        Profesor aux;
+        super.modificarDatos(modif);
+        aux = (Profesor) modif;
+        if (!this.getTelefono().equals(aux.getTelefono()))
+            this.setTelefono(aux.getTelefono());
+    }
+
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public Profesor()
     {
         super();

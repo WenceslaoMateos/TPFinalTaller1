@@ -255,6 +255,30 @@ public class Sistema
         }
         return res;
     }
+    
+    public void modificarAlumno(Alumno alumno, Alumno modif)
+        throws DatoInvalidoException
+    {
+        this.alumnos.modificarValor(alumno, modif);
+    }
+    
+    public void modificarProfesor(Profesor profesor, Profesor modif)
+        throws DatoInvalidoException
+    {
+        this.profesores.modificarValor(profesor, modif);
+    }
+    
+    public void modificarAsignatura(Asignatura asignatura, Asignatura modif)
+        throws DatoInvalidoException
+    {
+        this.planDeEstudio.modificarValor(asignatura, modif);
+    }
+    
+    public void modificarCursada(Cursada cursada, Cursada modif)
+        throws DatoInvalidoException
+    {
+        this.calendario.modificarValor(cursada, modif);
+    }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setAlumnos(IndiceDoble<Alumno> alumnos)

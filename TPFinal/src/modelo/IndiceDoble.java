@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
 import excepciones.NoEncontradoException;
 
 import java.util.ArrayList;
@@ -135,6 +136,33 @@ public class IndiceDoble<V extends I_Indexable>
     public Iterator<V> elementosPorClavePrimaria()
     {
         return this.indice1.elementos();
+    }
+    
+    public void modificarValor(V elem, V modif)
+        throws DatoInvalidoException
+    {
+        Object claveAux = elem.getClaveSecundaria();
+        this.eliminar(elem);
+        try
+        {
+            this.indice1.modificarValor(elem, modif);
+            this.agregar(elem);
+        }
+        catch (DatoInvalidoException die)
+        {
+            try
+            {
+                this.agregar(elem);
+            }
+            catch (ClaveYaExistenteException e)
+            {
+                // No puede haber este problema debido a que no puede haber claves primarias repetidas
+            }
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            // No puede haber este problema debido a que no puede haber claves primarias repetidas
+        }
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

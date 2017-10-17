@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.DatoInvalidoException;
+
 
 /**
  * Clase abstracta que define los atributos comunes de las personas. Implementa I_Indexable.
@@ -93,5 +95,30 @@ public abstract class Persona
     public static boolean validaMail(String mail)
     {
         return mail.contains("@") && ((mail.charAt(mail.length() - 1)) != '@') && (mail.charAt(0) != '@');
+    }
+    
+    @Override
+    public void modificarDatos(I_Indexable modif)
+        throws DatoInvalidoException
+    {
+        Persona aux;
+        if (this.getClass() != modif.getClass())
+            throw new DatoInvalidoException(modif, "Tipo de dato incompatible.");
+        else
+        {
+            aux = (Persona) modif;
+            if (!this.getMail().equals(aux.getMail()))
+                if (!Persona.validaMail(aux.getMail()))
+                    throw new DatoInvalidoException(aux.getMail(), "Mail inválido");
+                else
+                    this.setMail(aux.getMail());
+            if (!this.getApellidoNombre().equals(aux.getApellidoNombre()))
+                if (aux.getApellidoNombre().equals(""))
+                    throw new DatoInvalidoException(aux.getApellidoNombre(), "Nombre vacío.");
+                else
+                    this.setApellidoNombre(aux.getApellidoNombre());
+            if (!this.getDomicilio().equals(aux.getDomicilio()))
+                this.setDomicilio(aux.getDomicilio());
+        }
     }
 }

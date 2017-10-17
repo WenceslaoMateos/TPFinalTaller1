@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
 
 import java.util.Iterator;
 
@@ -100,6 +101,21 @@ public class Asignatura
     public Iterator<Asignatura> precorrelativas()
     {
         return this.correlatividades.elementos();
+    }
+
+    @Override
+    public void modificarDatos(I_Indexable modif)
+        throws DatoInvalidoException
+    {
+        Asignatura aux;
+        if (this.getClass() != modif.getClass())
+            throw new DatoInvalidoException(modif, "Tipo de dato inválido.");
+        else
+        {
+            aux = (Asignatura) modif;
+            if (!aux.getNombre().equals(aux.getNombre()))
+                this.setNombre(aux.getNombre());
+        }
     }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
+import excepciones.DatoInvalidoException;
 import excepciones.NoEncontradoException;
 
 import java.util.Iterator;
@@ -21,7 +22,7 @@ public class IndicePrimario<V extends I_Indexable>
 
     /**
      * Añade un elemento al índice si su clave primaria no se encuentra ya.<br>
-     * <b>Pre:</b> los atributos de nuevo distintos a la clave primaria son correctos.<br>
+     * <b>Pre:</b> los atributos de nuevo son correctos.<br>
      * <b>Post:</b> el índice tiene un elemento más.
      * @param nuevo elemento tipo V a agregar.
      * @throws ClaveYaExistenteException un elemento de la colección ya contaba con esa clave.
@@ -92,6 +93,12 @@ public class IndicePrimario<V extends I_Indexable>
         return this.elementos
                    .values()
                    .iterator();
+    }
+    
+    public void modificarValor(V elem, V modif)
+        throws DatoInvalidoException
+    {
+        elem.modificarDatos(modif);
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
