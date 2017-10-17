@@ -24,9 +24,37 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0006</string>
+      <object class="modelo.Alumno" id="Alumno1">
+       <void property="apellidoNombre">
+        <string>Mateos Wenceslao</string>
+       </void>
+       <void property="domicilio">
+        <string>Alberti 2530</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0006</string>
+       </void>
+       <void property="mail">
+        <string>wenceslaomateos@gmail.com</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
+    <void method="put">
+     <string>Mateos Wenceslao</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno1"/>
+      </void>
+     </object>
+    </void>
     <void method="put">
      <string>Pablos Braulio</string>
      <object class="java.util.ArrayList">
@@ -38,7 +66,7 @@
    </void>
   </void>
  </object>
- <int>5</int>
+ <int>6</int>
  <int>0</int>
  <int>0</int>
  <int>0</int>
