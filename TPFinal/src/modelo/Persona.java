@@ -119,6 +119,6 @@ public abstract class Persona
                     this.setApellidoNombre(aux.getApellidoNombre());
             if (!this.getDomicilio().equals(aux.getDomicilio()))
                 this.setDomicilio(aux.getDomicilio());
-        }
+}
     }
 }

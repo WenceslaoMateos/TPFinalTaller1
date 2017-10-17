@@ -155,8 +155,7 @@ public class Cursada
     public static boolean validaPeriodo(String periodo)
     {
         boolean ret;
-        if ((periodo.length() == 7) &&
-            (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
             Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
             Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
             ret = true;
@@ -243,9 +242,9 @@ public class Cursada
     
     public boolean hayColision(Cursada otro)
     {
-        return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia()
-               && !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0
-                    || this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
+    return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia() &&
+           !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0 ||
+             this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
         // Las cursadas deben estar en el mismo periodo, en el mismo día y deben superponerse los horarios.
     }
     
@@ -295,7 +294,7 @@ public class Cursada
                 {
                     this.setHoraInicio(aux.getHoraInicio());
                     this.setHoraFinalizacion(aux.getHoraFinalizacion());
-                }
+}
         }
     }
 }

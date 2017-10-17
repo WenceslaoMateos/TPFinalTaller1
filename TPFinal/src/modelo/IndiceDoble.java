@@ -137,7 +137,7 @@ public class IndiceDoble<V extends I_Indexable>
     {
         return this.indice1.elementos();
     }
-    
+
     public void modificarValor(V elem, V modif)
         throws DatoInvalidoException
     {

@@ -44,7 +44,7 @@ public class IndicePrimario<V extends I_Indexable>
      */
     public void eliminar(V elim)
     {
-        this.elementos.remove(elim);
+    this.elementos.remove(elim.getClavePrimaria());
     }
 
     /**
@@ -94,7 +94,7 @@ public class IndicePrimario<V extends I_Indexable>
                    .values()
                    .iterator();
     }
-    
+
     public void modificarValor(V elem, V modif)
         throws DatoInvalidoException
     {
