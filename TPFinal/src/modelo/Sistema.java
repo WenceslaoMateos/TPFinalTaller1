@@ -4,6 +4,7 @@ import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
 import excepciones.NoEncontradoException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 
@@ -158,22 +159,60 @@ public class Sistema
         }
     }
     
+    private Iterator busquedaPorNombre(String nombre, IndiceDoble indice)
+    {
+        String clave;
+        Iterator<I_Indexable> elementos;
+        Iterator<String> claves = (Iterator<String>) indice.clavesSecundarias();
+        ArrayList aux = new ArrayList();
+        String nombreUpper = nombre.toUpperCase();
+        while (claves.hasNext())
+        {
+            clave = claves.next();
+            if (clave.toUpperCase().contains(nombreUpper))
+            {
+                try
+                {
+                    elementos = indice.buscarPorClaveSecundaria(clave);
+                    elementos.forEachRemaining(aux::add);
+                }
+                catch (NoEncontradoException e)
+                {
+                    //Ya se verificó que la clave está
+                }
+            }
+        }
+        return aux.iterator();
+    }
+    
     public Iterator<Alumno> buscarAlumno(String nombre)
         throws NoEncontradoException
     {
-        return this.alumnos.buscarPorClaveSecundaria(nombre);
+        Iterator<Alumno> ret = this.busquedaPorNombre(nombre, this.alumnos);
+        if (!ret.hasNext())
+            throw new NoEncontradoException(nombre, "El nombre solicitado no fue encontrado.");
+        else
+            return ret;
     }
     
     public Iterator<Profesor> buscarProfesor(String nombre)
         throws NoEncontradoException
     {
-        return this.profesores.buscarPorClaveSecundaria(nombre);
+        Iterator<Profesor> ret = this.busquedaPorNombre(nombre, this.profesores);
+        if (!ret.hasNext())
+            throw new NoEncontradoException(nombre, "El nombre solicitado no fue encontrado.");
+        else
+            return ret;
     }
     
     public Iterator<Asignatura> buscarAsignatura(String nombre)
         throws NoEncontradoException
     {
-        return this.planDeEstudio.buscarPorClaveSecundaria(nombre);
+        Iterator<Asignatura> ret = this.busquedaPorNombre(nombre, this.planDeEstudio);
+        if (!ret.hasNext())
+            throw new NoEncontradoException(nombre, "El nombre solicitado no fue encontrado.");
+        else
+            return ret;
     }
     
     public Alumno buscarAlumnoPorLegajo(String legajo)
@@ -204,7 +243,8 @@ public class Sistema
         throws DatoInvalidoException, ClaveYaExistenteException
     {
         if (!this.alumnoDisponible(alumno, cursada))
-      throw new DatoInvalidoException(alumno, "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
+            throw new DatoInvalidoException(alumno,
+                                            "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
         else
             cursada.altaAlumno(alumno);
     }

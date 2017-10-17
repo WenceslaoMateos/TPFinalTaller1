@@ -164,6 +164,16 @@ public class IndiceDoble<V extends I_Indexable>
             // No puede haber este problema debido a que no puede haber claves primarias repetidas
         }
     }
+    
+    public Iterator clavesPrimarias()
+    {
+        return this.indice1.clavesPrimarias();
+    }
+    
+    public Iterator clavesSecundarias()
+    {
+        return this.indice2.keySet().iterator();
+    }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setIndice1(IndicePrimario<V> indice1)
