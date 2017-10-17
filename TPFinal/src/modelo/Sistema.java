@@ -75,8 +75,9 @@ public class Sistema
             throw new DatoInvalidoException(nuevo.getHoraFinalizacion(), "Hora de finalización inválida.");
         else if (!Cursada.validaPeriodo(nuevo.getPeriodo()))
             throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
+        /* 
         else if (!this.horarioCursadaDisponible(nuevo))
-            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado.");
+            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado."); */
         else
         {
             nuevo.setIdentificacion(Cursada.getNuevaIdentificacion());
@@ -219,6 +220,7 @@ public class Sistema
             cursada.altaProfesor(profesor);
     }
 
+    /* 
     private boolean horarioCursadaDisponible(Cursada cursada)
     {
         boolean res = true;
@@ -226,7 +228,7 @@ public class Sistema
         while (it.hasNext() && res)
             res = !cursada.hayColision(it.next());
         return res;
-    }
+    } */
 
     private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
     {
