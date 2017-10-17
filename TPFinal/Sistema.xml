@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_144" class="java.beans.XMLDecoder">
+<java version="1.8.0_131" class="java.beans.XMLDecoder">
  <object class="modelo.Sistema" id="Sistema0">
   <void id="IndiceDoble0" property="alumnos">
    <void id="IndicePrimario0" property="indice1">
@@ -24,9 +24,65 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0006</string>
+      <object class="modelo.Alumno" id="Alumno1">
+       <void property="apellidoNombre">
+        <string>Mateos Wenceslao</string>
+       </void>
+       <void property="domicilio">
+        <string>Alberti 2345</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0006</string>
+       </void>
+       <void property="mail">
+        <string>wenceslaomateos@gmail.com</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0007</string>
+      <object class="modelo.Alumno" id="Alumno2">
+       <void property="apellidoNombre">
+        <string>Lanzillotta Franco</string>
+       </void>
+       <void property="domicilio">
+        <string>Chubut 2070</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0007</string>
+       </void>
+       <void property="mail">
+        <string>francolanzi96@gmail.com</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
+    <void method="put">
+     <string>Lanzillotta Franco</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno2"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Mateos Wenceslao</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno1"/>
+      </void>
+     </object>
+    </void>
     <void method="put">
      <string>Pablos Braulio</string>
      <object class="java.util.ArrayList">
