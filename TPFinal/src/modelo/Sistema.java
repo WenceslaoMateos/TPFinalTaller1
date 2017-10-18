@@ -37,7 +37,7 @@ public class Sistema
         {
             nuevo.setLegajo(Alumno.getNuevoLegajo());
             this.alumnos.agregar(nuevo);
-}
+        }
     }
     
     public void agregarProfesor(Profesor nuevo)
@@ -213,6 +213,21 @@ public class Sistema
             throw new NoEncontradoException(nombre, "El nombre solicitado no fue encontrado.");
         else
             return ret;
+    }
+    
+    public Iterator<Cursada> buscarCursada(String nombreAsignatura)
+    {
+        Cursada cursada;
+        Iterator<Cursada> cursadas = this.calendario.elementosPorClavePrimaria();
+        ArrayList<Cursada> aux = new ArrayList<Cursada>();
+        String nombreUpper = nombreAsignatura.toUpperCase();
+        while (cursadas.hasNext())
+        {
+            cursada = cursadas.next();
+            if (cursada.getAsignatura().getNombre().toUpperCase().contains(nombreUpper))
+                aux.add(cursada);
+        }
+        return aux.iterator();
     }
     
     public Alumno buscarAlumnoPorLegajo(String legajo)
