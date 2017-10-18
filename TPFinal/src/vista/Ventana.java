@@ -1678,7 +1678,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
             nuevo.agregarCompetencia(elemento);
@@ -1701,7 +1701,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
             modif.agregarCompetencia(elemento);
@@ -1848,7 +1848,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
             nuevo.agregarCorrelativa(elemento);
@@ -1869,7 +1869,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
             modif.agregarCorrelativa(elemento);
@@ -2009,7 +2009,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Alumno alu;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             alu = (Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO);
             nuevo.altaAlumno(alu);
@@ -2017,7 +2017,7 @@ public class Ventana
           aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
           n = aux.getRowCount();
           Profesor prof;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             prof = (Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0), Receptor.PROFESOR);
             nuevo.altaProfesor(prof);
@@ -2042,7 +2042,7 @@ public class Ventana
           int n = aux.getRowCount();
           int i;
           Alumno alu;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             alu = (Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO);
             nuevo.altaAlumno(alu);
@@ -2050,7 +2050,7 @@ public class Ventana
           aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
           n = aux.getRowCount();
           Profesor prof;
-          for (i = 0; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             prof = (Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0), Receptor.PROFESOR);
             nuevo.altaProfesor(prof);

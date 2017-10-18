@@ -121,6 +121,33 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0010</string>
+      <object class="modelo.Alumno" id="Alumno5">
+       <void property="apellidoNombre">
+        <string>Lopez Jose</string>
+       </void>
+       <void property="domicilio">
+        <string>lalal</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario" id="IndicePrimario2">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0001</string>
+           <object idref="Asignatura0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="legajo">
+        <string>ALU0010</string>
+       </void>
+       <void property="mail">
+        <string>pepe@pupu</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -129,6 +156,14 @@
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Alumno2"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Lopez Jose</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno5"/>
       </void>
      </object>
     </void>
@@ -167,7 +202,7 @@
    </void>
   </void>
   <void id="IndiceDoble1" property="planDeEstudio">
-   <void id="IndicePrimario2" property="indice1">
+   <void id="IndicePrimario3" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>ASI0001</string>
@@ -187,7 +222,7 @@
    </void>
   </void>
   <void id="IndiceDoble2" property="profesores">
-   <void id="IndicePrimario3" property="indice1">
+   <void id="IndicePrimario4" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0001</string>
@@ -226,7 +261,7 @@
    </void>
   </void>
  </object>
- <int>9</int>
+ <int>10</int>
  <int>1</int>
  <int>1</int>
  <int>0</int>
