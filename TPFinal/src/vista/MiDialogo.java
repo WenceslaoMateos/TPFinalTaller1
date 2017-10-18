@@ -42,31 +42,27 @@ public abstract class MiDialogo
     super(owner,true);
     this.fuente = fuente;
     this.setSize(750, 500);
-    this.setVisible(true);
+    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     this.receptor = receptor;
-    this.busqueda = new JPanel();
-    this.resultado = new JPanel(new BorderLayout());
+    this.busqueda = new JPanel(new FlowLayout());
+    this.resultado = new JPanel();
 
     Container contenedor = this.getContentPane();
     contenedor.setLayout(new BorderLayout());
-    contenedor.add(this.busqueda, BorderLayout.WEST);
-
-    this.busqueda.setLayout(new BorderLayout());
+    contenedor.add(this.resultado,BorderLayout.CENTER);
+    contenedor.add(this.busqueda, BorderLayout.NORTH);
+  
     this.texto = new JTextField();
-
-    JPanel aux = new JPanel(new FlowLayout());
-    this.busqueda.add(aux, BorderLayout.NORTH);
-    aux.add(this.texto);
-    this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
     this.aceptar = new JButton("Aceptar");
-    aux.add(this.aceptar);
+
+    this.busqueda.add(this.texto);
+    this.busqueda.add(this.aceptar);
+    
+    this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
     this.aceptar.addActionListener(this);
 
-    this.busqueda.add(this.resultado);
-    this.generaTabla(this.resultado);
   }
 
-  public abstract void generaTabla(Container tabla);
 
   public abstract void agregaResultadosTabla(Iterator alumnos);
 

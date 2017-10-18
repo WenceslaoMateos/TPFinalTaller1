@@ -25,17 +25,14 @@ public class DialogProfesor
   {
     super(owner,receptor, fuente);
     this.modeloProfesor = (TableModelProfesor) modelo;
-  }
-
-  @Override
-  public void generaTabla(Container resultado)
-  {
-    this.modeloProfesor = new TableModelProfesor();
     this.tabla = new JTable(this.modeloProfesor);
+    resultado.setLayout(new BorderLayout());
     this.scroll = new JScrollPane(tabla);
     this.tabla.setFillsViewportHeight(true);
+    this.resultado.add(this.scroll);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla, BorderLayout.CENTER);
+    resultado.add(tabla,BorderLayout.CENTER);
+    this.setVisible(true);
   }
 
   @Override

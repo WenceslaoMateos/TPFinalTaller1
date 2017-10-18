@@ -11,6 +11,7 @@ import java.awt.HeadlessException;
 
 import java.util.Iterator;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -155,7 +156,36 @@ public class Ventana
     }
     else if (this.focus.equals(Ventana.ASIGNATURA))
     {
-      ;
+      Asignatura elemento;
+      try
+      {
+        elemento =
+          (Asignatura) this.receptor.buscar(this.jTableAsignaturaAsignatura.getValueAt(this.jTableAsignaturaAsignatura.getSelectedRow(),
+                                                                                       0), Receptor.ASIGNATURA);
+        this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
+        this.jTextFieldNombreAsignatura.setText(elemento.getNombre());
+
+        Iterator<Asignatura> asignaturas = elemento.precorrelativas();
+        Asignatura aux;
+        DefaultTableModel model = (DefaultTableModel) this.jTableCorrelativas.getModel();
+        int n = model.getRowCount();
+        int i;
+        for (i = n; i > 0; i--)
+          model.removeRow(i);
+        while (asignaturas.hasNext())
+        {
+          aux = asignaturas.next();
+          model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
+        }
+        this.jTableCorrelativas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.jTableCorrelativas.setRowSelectionAllowed(true);
+      }
+      catch (NoEncontradoException f)
+      {
+      }
+      catch (ArrayIndexOutOfBoundsException g)
+      {
+      }
     }
     else if (this.focus.equals(Ventana.CURSADA))
     {
@@ -244,7 +274,7 @@ public class Ventana
     jTableCorrelativas = new javax.swing.JTable();
     jButtonNuevoAsignatura = new javax.swing.JButton();
     jButtonEliminarAsignatura = new javax.swing.JButton();
-    jButtonAgregarCorrelativas = new javax.swing.JButton();
+    jButtonAgregarCorrelativa = new javax.swing.JButton();
     jButtonAceptarAsignatura = new javax.swing.JButton();
     jButtonCancelarAsignatura = new javax.swing.JButton();
     jButtonModificarAsignatura = new javax.swing.JButton();
@@ -252,6 +282,39 @@ public class Ventana
     jScrollPane8 = new javax.swing.JScrollPane();
     jTableAsignaturaAsignatura = new javax.swing.JTable();
     jPanelCursada = new javax.swing.JPanel();
+    jPanelBuscarCursada = new javax.swing.JPanel();
+    jButtonBuscarCursada = new javax.swing.JButton();
+    jTextFieldBuscarCursada = new javax.swing.JTextField();
+    jPanel4 = new javax.swing.JPanel();
+    jScrollPane9 = new javax.swing.JScrollPane();
+    jTableCursadaCursada = new javax.swing.JTable();
+    jPanelResultadosCursada = new javax.swing.JPanel();
+    jLabel14 = new javax.swing.JLabel();
+    jLabel17 = new javax.swing.JLabel();
+    jTextFieldIdentificadorCursada = new javax.swing.JTextField();
+    jScrollPane10 = new javax.swing.JScrollPane();
+    jTableProfesoresCursada = new javax.swing.JTable();
+    jButtonNuevoCursada = new javax.swing.JButton();
+    jButtonEliminarCursada = new javax.swing.JButton();
+    jButtonAgregarProfesorCursada = new javax.swing.JButton();
+    jButtonAceptarCursada = new javax.swing.JButton();
+    jButtonCancelarCursada = new javax.swing.JButton();
+    jButtonModificarCursada = new javax.swing.JButton();
+    jLabel18 = new javax.swing.JLabel();
+    jTextFieldPeriodoCursada = new javax.swing.JTextField();
+    jLabel19 = new javax.swing.JLabel();
+    jTextFieldNombreAsignaturaCursada = new javax.swing.JTextField();
+    jTextFieldIDAsignaturaCursada = new javax.swing.JTextField();
+    jTextFieldDiaCursada = new javax.swing.JTextField();
+    jLabel20 = new javax.swing.JLabel();
+    jTextFieldInicioCursada = new javax.swing.JTextField();
+    jLabel21 = new javax.swing.JLabel();
+    jLabel22 = new javax.swing.JLabel();
+    jTextFieldFinCursada = new javax.swing.JTextField();
+    jScrollPane11 = new javax.swing.JScrollPane();
+    jTableAlumnosCursada = new javax.swing.JTable();
+    jLabel23 = new javax.swing.JLabel();
+    jButtonAgregarAlumnoCursada = new javax.swing.JButton();
     jButtonAgradecimientos = new javax.swing.JButton();
 
     javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -339,36 +402,7 @@ public class Ventana
 
     jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableAlumnoAlumno.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Legajo", "Apellido y Nombre", "Domicilio", "Mail"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false, false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableAlumnoAlumno.setModel(new TableModelAlumno());
     jScrollPane3.setViewportView(jTableAlumnoAlumno);
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -379,9 +413,7 @@ public class Ventana
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        .addContainerGap())
+      .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
     );
 
     jPanelResultadosAlumno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -408,36 +440,7 @@ public class Ventana
     jTextFieldMailAlumno.setEditable(false);
     jTextFieldMailAlumno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableHistoria.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Identificador", "Nombre"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableHistoria.setModel(new TableModelAsignatura());
     jScrollPane4.setViewportView(jTableHistoria);
 
     jButtonNuevoAlumno.setText("Nuevo");
@@ -559,18 +562,15 @@ public class Ventana
           .addComponent(jTextFieldMailAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanelResultadosAlumnoLayout.createSequentialGroup()
-            .addComponent(jLabel6)
-            .addGap(18, 18, 18))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResultadosAlumnoLayout.createSequentialGroup()
-            .addComponent(jButtonAgregarHistoria)
-            .addGap(2, 2, 2)))
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel6)
+          .addComponent(jButtonAgregarHistoria))
+        .addGap(2, 2, 2)
+        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jButtonAceptarAlumno)
           .addComponent(jButtonCancelarAlumno))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
     );
 
     javax.swing.GroupLayout jPanelAlumnoLayout = new javax.swing.GroupLayout(jPanelAlumno);
@@ -632,36 +632,7 @@ public class Ventana
 
     jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableProfesorProfesor.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Legajo", "Apellido y Nombre", "Domicilio", "Mail", "Telefono"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false, false, false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableProfesorProfesor.setModel(new TableModelProfesor());
     jScrollPane5.setViewportView(jTableProfesorProfesor);
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -672,9 +643,7 @@ public class Ventana
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-        .addContainerGap())
+      .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
     );
 
     jPanelResultadosProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -701,36 +670,7 @@ public class Ventana
     jTextFieldMailProfesor.setEditable(false);
     jTextFieldMailProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableCompetencia.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Identificador", "Nombre"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableCompetencia.setModel(new TableModelAsignatura());
     jScrollPane6.setViewportView(jTableCompetencia);
 
     jButtonNuevoProfesor.setText("Nuevo");
@@ -866,12 +806,12 @@ public class Ventana
           .addComponent(jLabel10)
           .addComponent(jButtonAgregarCompetencia))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
+        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarProfesor)
           .addComponent(jButtonAceptarProfesor))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
     );
 
     javax.swing.GroupLayout jPanelAlumno1Layout = new javax.swing.GroupLayout(jPanelAlumno1);
@@ -910,7 +850,7 @@ public class Ventana
     );
     jPanelProfesorLayout.setVerticalGroup(
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 506, Short.MAX_VALUE)
+      .addGap(0, 566, Short.MAX_VALUE)
       .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addComponent(jPanelAlumno1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -958,36 +898,7 @@ public class Ventana
     jTextFieldNombreAsignatura.setEditable(false);
     jTextFieldNombreAsignatura.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableCorrelativas.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Identificador", "Nombre"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableCorrelativas.setModel(new TableModelAsignatura());
     jScrollPane7.setViewportView(jTableCorrelativas);
 
     jButtonNuevoAsignatura.setText("Nuevo");
@@ -1008,12 +919,12 @@ public class Ventana
       }
     });
 
-    jButtonAgregarCorrelativas.setText("Agregar...");
-    jButtonAgregarCorrelativas.addActionListener(new java.awt.event.ActionListener()
+    jButtonAgregarCorrelativa.setText("Agregar...");
+    jButtonAgregarCorrelativa.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButtonAgregarCorrelativasActionPerformed(evt);
+        jButtonAgregarCorrelativaActionPerformed(evt);
       }
     });
 
@@ -1053,19 +964,6 @@ public class Ventana
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
-                .addComponent(jButtonAceptarAsignatura)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCancelarAsignatura))
-              .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
-                .addComponent(jButtonNuevoAsignatura)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonEliminarAsignatura)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonModificarAsignatura)))
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
-            .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabel13)
               .addComponent(jLabel12))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1076,7 +974,20 @@ public class Ventana
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButtonAgregarCorrelativas)))
+            .addComponent(jButtonAgregarCorrelativa))
+          .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
+            .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
+                .addComponent(jButtonNuevoAsignatura)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonEliminarAsignatura)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonModificarAsignatura))
+              .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
+                .addComponent(jButtonAceptarAsignatura)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelarAsignatura)))
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
     jPanelResultadosAsignaturaLayout.setVerticalGroup(
@@ -1095,51 +1006,22 @@ public class Ventana
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel13)
           .addComponent(jTextFieldNombreAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(90, 90, 90)
+        .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel16)
-          .addComponent(jButtonAgregarCorrelativas))
+          .addComponent(jButtonAgregarCorrelativa))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarAsignatura)
           .addComponent(jButtonAceptarAsignatura))
-        .addContainerGap(26, Short.MAX_VALUE))
+        .addContainerGap())
     );
 
     jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableAsignaturaAsignatura.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Legajo", "Apellido y Nombre", "Domicilio", "Mail", "Telefono"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false, false, false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableAsignaturaAsignatura.setModel(new TableModelAsignatura());
     jScrollPane8.setViewportView(jTableAsignaturaAsignatura);
 
     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1150,9 +1032,7 @@ public class Ventana
     );
     jPanel3Layout.setVerticalGroup(
       jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel3Layout.createSequentialGroup()
-        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
-        .addContainerGap())
+      .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout jPanelAsignaturaLayout = new javax.swing.GroupLayout(jPanelAsignatura);
@@ -1183,15 +1063,315 @@ public class Ventana
 
     jTabbedPane.addTab("Asignatura", jPanelAsignatura);
 
+    jPanelBuscarCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jButtonBuscarCursada.setText("Buscar");
+    jButtonBuscarCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonBuscarCursadaActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelBuscarCursadaLayout = new javax.swing.GroupLayout(jPanelBuscarCursada);
+    jPanelBuscarCursada.setLayout(jPanelBuscarCursadaLayout);
+    jPanelBuscarCursadaLayout.setHorizontalGroup(
+      jPanelBuscarCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelBuscarCursadaLayout.createSequentialGroup()
+        .addComponent(jTextFieldBuscarCursada)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonBuscarCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+    jPanelBuscarCursadaLayout.setVerticalGroup(
+      jPanelBuscarCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelBuscarCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addComponent(jTextFieldBuscarCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jButtonBuscarCursada))
+    );
+
+    jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTableCursadaCursada.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][]
+      {
+
+      },
+      new String []
+      {
+        "Identificador", "ID Asignatura", "Nombre Asignatura", "Periodo", "Dia", "Hora Inicio", "Hora Finalizacion"
+      }
+    )
+    {
+      Class[] types = new Class []
+      {
+        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+      };
+      boolean[] canEdit = new boolean []
+      {
+        false, false, false, false, false, false, false
+      };
+
+      public Class getColumnClass(int columnIndex)
+      {
+        return types [columnIndex];
+      }
+
+      public boolean isCellEditable(int rowIndex, int columnIndex)
+      {
+        return canEdit [columnIndex];
+      }
+    });
+    jScrollPane9.setViewportView(jTableCursadaCursada);
+
+    javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+    jPanel4.setLayout(jPanel4Layout);
+    jPanel4Layout.setHorizontalGroup(
+      jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+    );
+    jPanel4Layout.setVerticalGroup(
+      jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+    );
+
+    jPanelResultadosCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jLabel14.setText("Identificador");
+
+    jLabel17.setText("Profesores");
+
+    jTextFieldIdentificadorCursada.setEditable(false);
+    jTextFieldIdentificadorCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTableProfesoresCursada.setModel(new TableModelProfesor());
+    jScrollPane10.setViewportView(jTableProfesoresCursada);
+
+    jButtonNuevoCursada.setText("Nuevo");
+    jButtonNuevoCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonNuevoCursadaActionPerformed(evt);
+      }
+    });
+
+    jButtonEliminarCursada.setText("Eliminar");
+    jButtonEliminarCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarCursadaActionPerformed(evt);
+      }
+    });
+
+    jButtonAgregarProfesorCursada.setText("Agregar...");
+    jButtonAgregarProfesorCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonAgregarProfesorCursadaActionPerformed(evt);
+      }
+    });
+
+    jButtonAceptarCursada.setText("Aceptar");
+    jButtonAceptarCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonAceptarCursadaActionPerformed(evt);
+      }
+    });
+
+    jButtonCancelarCursada.setText("Cancelar");
+    jButtonCancelarCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonCancelarCursadaActionPerformed(evt);
+      }
+    });
+
+    jButtonModificarCursada.setText("Modificar");
+    jButtonModificarCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonModificarCursadaActionPerformed(evt);
+      }
+    });
+
+    jLabel18.setText("Periodo");
+
+    jTextFieldPeriodoCursada.setEditable(false);
+    jTextFieldPeriodoCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jLabel19.setText("Asignatura");
+
+    jTextFieldNombreAsignaturaCursada.setEditable(false);
+    jTextFieldNombreAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldIDAsignaturaCursada.setEditable(false);
+    jTextFieldIDAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldDiaCursada.setEditable(false);
+    jTextFieldDiaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jLabel20.setText("Dia");
+
+    jTextFieldInicioCursada.setEditable(false);
+    jTextFieldInicioCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jLabel21.setText("Hora Inicio");
+
+    jLabel22.setText("Hora Finalizacion");
+
+    jTextFieldFinCursada.setEditable(false);
+    jTextFieldFinCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTableAlumnosCursada.setModel(new TableModelAlumno());
+    jScrollPane11.setViewportView(jTableAlumnosCursada);
+
+    jLabel23.setText("Alumnos");
+
+    jButtonAgregarAlumnoCursada.setText("Agregar...");
+    jButtonAgregarAlumnoCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonAgregarAlumnoCursadaActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelResultadosCursadaLayout = new javax.swing.GroupLayout(jPanelResultadosCursada);
+    jPanelResultadosCursada.setLayout(jPanelResultadosCursadaLayout);
+    jPanelResultadosCursadaLayout.setHorizontalGroup(
+      jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+          .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonAgregarProfesorCursada))
+          .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+            .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+                .addComponent(jButtonAceptarCursada)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelarCursada))
+              .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+                .addComponent(jButtonNuevoCursada)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonEliminarCursada)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonModificarCursada)))
+            .addGap(0, 0, Short.MAX_VALUE))
+          .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+            .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel14)
+              .addComponent(jLabel19)
+              .addComponent(jLabel18))
+            .addGap(17, 17, 17)
+            .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jTextFieldIdentificadorCursada)
+              .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+                .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jTextFieldPeriodoCursada)
+                  .addComponent(jTextFieldIDAsignaturaCursada))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+                    .addComponent(jLabel20)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldDiaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel21)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldInicioCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel22)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldFinCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addComponent(jTextFieldNombreAsignaturaCursada)))))
+          .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+          .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonAgregarAlumnoCursada)))
+        .addContainerGap())
+    );
+    jPanelResultadosCursadaLayout.setVerticalGroup(
+      jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jButtonNuevoCursada)
+          .addComponent(jButtonEliminarCursada)
+          .addComponent(jButtonModificarCursada))
+        .addGap(18, 18, 18)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel14)
+          .addComponent(jTextFieldIdentificadorCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel19)
+          .addComponent(jTextFieldNombreAsignaturaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jTextFieldIDAsignaturaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jTextFieldPeriodoCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel18)
+          .addComponent(jTextFieldFinCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel22)
+          .addComponent(jTextFieldInicioCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel21)
+          .addComponent(jTextFieldDiaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel20))
+        .addGap(36, 36, 36)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel17)
+          .addComponent(jButtonAgregarProfesorCursada))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel23)
+          .addComponent(jButtonAgregarAlumnoCursada))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonCancelarCursada)
+          .addComponent(jButtonAceptarCursada))
+        .addContainerGap())
+    );
+
     javax.swing.GroupLayout jPanelCursadaLayout = new javax.swing.GroupLayout(jPanelCursada);
     jPanelCursada.setLayout(jPanelCursadaLayout);
     jPanelCursadaLayout.setHorizontalGroup(
       jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 1135, Short.MAX_VALUE)
+      .addGroup(jPanelCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanelBuscarCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGap(18, 18, 18)
+        .addComponent(jPanelResultadosCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap())
     );
     jPanelCursadaLayout.setVerticalGroup(
       jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 506, Short.MAX_VALUE)
+      .addGroup(jPanelCursadaLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jPanelResultadosCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(jPanelCursadaLayout.createSequentialGroup()
+            .addComponent(jPanelBuscarCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addContainerGap())
     );
 
     jTabbedPane.addTab("Cursada", jPanelCursada);
@@ -1262,7 +1442,7 @@ public class Ventana
 
   private void jButtonAgregarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarHistoriaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarHistoriaActionPerformed
-    new DialogAsignatura(this,this.receptor, this.jTableHistoria, new TableModelAsignatura());  
+    new DialogAsignatura(this, this.receptor, this.jTableHistoria, new TableModelAsignatura());  
   }//GEN-LAST:event_jButtonAgregarHistoriaActionPerformed
 
   private void jButtonModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAlumnoActionPerformed
@@ -1440,7 +1620,7 @@ public class Ventana
 
   private void jButtonAgregarCompetenciaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCompetenciaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarCompetenciaActionPerformed
-    // TODO add your handling code here:
+    new DialogAsignatura(this, this.receptor, this.jTableCompetencia, new TableModelAsignatura());  
   }//GEN-LAST:event_jButtonAgregarCompetenciaActionPerformed
 
   private void jButtonAceptarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarProfesorActionPerformed
@@ -1553,38 +1733,188 @@ public class Ventana
 
   private void jButtonBuscarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonBuscarAsignaturaActionPerformed
+
+    try
+    {
+      Iterator<Asignatura> asignaturas =
+        this.receptor.ubicar(this.jTextFieldBuscarAsignatura.getText(), Receptor.ASIGNATURA);
+      Asignatura aux;
+      DefaultTableModel model = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+      model.setRowCount(0);
+      while (asignaturas.hasNext())
+      {
+        aux = asignaturas.next();
+        model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
+      }
+    }
+    catch (NoEncontradoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
+    }
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonBuscarAsignaturaActionPerformed
 
   private void jButtonNuevoAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoAsignaturaActionPerformed
+    this.accionAceptar = Ventana.NUEVO;
+    this.jButtonEliminarAsignatura.setEnabled(false);
+    this.jButtonModificarAsignatura.setEnabled(false);
+    this.jButtonAgregarCorrelativa.setEnabled(true);
+    this.jButtonCancelarAsignatura.setEnabled(true);
+    this.jTextFieldNombreAsignatura.setEditable(true);
+    this.jTextFieldIdentificadorAsignatura.setText("");
+    this.jTextFieldNombreAsignatura.setText("");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoAsignaturaActionPerformed
 
   private void jButtonEliminarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonEliminarAsignaturaActionPerformed
+    if (!this.jTextFieldIdentificadorAsignatura
+             .getText()
+             .equals(""))
+    {
+      try
+      {
+        this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
+      }
+      catch (NoEncontradoException e)
+      {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+      }
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarAsignaturaActionPerformed
 
-  private void jButtonAgregarCorrelativasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCorrelativasActionPerformed
-  {//GEN-HEADEREND:event_jButtonAgregarCorrelativasActionPerformed
+  private void jButtonAgregarCorrelativaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCorrelativaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAgregarCorrelativaActionPerformed
+    new DialogAsignatura(this, this.receptor, this.jTableCorrelativas, new TableModelAsignatura());
     // TODO add your handling code here:
-  }//GEN-LAST:event_jButtonAgregarCorrelativasActionPerformed
+  }//GEN-LAST:event_jButtonAgregarCorrelativaActionPerformed
 
   private void jButtonAceptarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAsignaturaActionPerformed
+    switch (this.accionAceptar)
+    {
+      case Ventana.NUEVO:
+        try
+        {
+          Asignatura nuevo = new Asignatura(this.jTextFieldNombreAsignatura.getText());
+          int n = this.jTableCorrelativas.getRowCount();
+          int i;
+          Asignatura elemento;
+          for (i = 1; i <= n; i++)
+          {
+            elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
+            nuevo.agregarCorrelativa(elemento);
+          }
+          this.receptor.alta(nuevo, Receptor.ASIGNATURA);
+          this.jButtonCancelarAsignaturaActionPerformed(evt);
+        }
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        break;
+      case Ventana.MODIFICAR:
+        try
+        {
+          Profesor modif =
+            new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
+                         this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
+          int n = this.jTableCompetencia.getRowCount();
+          int i;
+          Asignatura elemento;
+          for (i = 1; i <= n; i++)
+          {
+            elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
+            modif.agregarCompetencia(elemento);
+          }
+          modif.setLegajo(this.jTextFieldLegajoProfesor.getText());
+          this.receptor.modificacion(modif, Receptor.PROFESOR);
+          this.jButtonCancelarProfesorActionPerformed(evt);
+        }
+        catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        break;
+    }
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarAsignaturaActionPerformed
 
   private void jButtonCancelarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarAsignaturaActionPerformed
-    // TODO add your handling code here:
+    this.jTextFieldIdentificadorAsignatura.setText("");
+    this.jTextFieldNombreAsignatura.setText("");
+    this.jTextFieldNombreAsignatura.setEditable(false);
+    this.jButtonAgregarCorrelativa.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+    this.jButtonEliminarAsignatura.setEnabled(true);
+    this.jButtonModificarAsignatura.setEnabled(true);
+    this.jButtonNuevoAsignatura.setEnabled(true);
+    this.jButtonCancelarAsignatura.setEnabled(false);
   }//GEN-LAST:event_jButtonCancelarAsignaturaActionPerformed
 
   private void jButtonModificarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonModificarAsignaturaActionPerformed
+    if (!this.jTextFieldLegajoProfesor
+             .getText()
+             .equals(""))
+    {
+      this.jTextFieldNombreAsignatura.setEditable(true);
+      this.jButtonAgregarCorrelativa.setEnabled(true);
+      this.jButtonEliminarAsignatura.setEnabled(true);
+      this.jButtonNuevoAsignatura.setEnabled(true);
+      this.jButtonAceptarAsignatura.setEnabled(true);
+      this.jButtonCancelarAsignatura.setEnabled(true);
+      this.accionAceptar = Ventana.MODIFICAR;
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarAsignaturaActionPerformed
+
+  private void jButtonBuscarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonBuscarCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonBuscarCursadaActionPerformed
+
+  private void jButtonNuevoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonNuevoCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonNuevoCursadaActionPerformed
+
+  private void jButtonEliminarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarCursadaActionPerformed
+
+  private void jButtonAgregarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarProfesorCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAgregarProfesorCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonAgregarProfesorCursadaActionPerformed
+
+  private void jButtonAceptarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAceptarCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonAceptarCursadaActionPerformed
+
+  private void jButtonCancelarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonCancelarCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonCancelarCursadaActionPerformed
+
+  private void jButtonModificarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificarCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonModificarCursadaActionPerformed
+
+  private void jButtonAgregarAlumnoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarAlumnoCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonAgregarAlumnoCursadaActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonAgregarAlumnoCursadaActionPerformed
 
   /**
    * @param args the command line arguments
@@ -1663,25 +1993,33 @@ public class Ventana
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAceptarAlumno;
   private javax.swing.JButton jButtonAceptarAsignatura;
+  private javax.swing.JButton jButtonAceptarCursada;
   private javax.swing.JButton jButtonAceptarProfesor;
   private javax.swing.JButton jButtonAgradecimientos;
+  private javax.swing.JButton jButtonAgregarAlumnoCursada;
   private javax.swing.JButton jButtonAgregarCompetencia;
-  private javax.swing.JButton jButtonAgregarCorrelativas;
+  private javax.swing.JButton jButtonAgregarCorrelativa;
   private javax.swing.JButton jButtonAgregarHistoria;
+  private javax.swing.JButton jButtonAgregarProfesorCursada;
   private javax.swing.JButton jButtonBuscarAlumno;
   private javax.swing.JButton jButtonBuscarAsignatura;
+  private javax.swing.JButton jButtonBuscarCursada;
   private javax.swing.JButton jButtonBuscarProfesor;
   private javax.swing.JButton jButtonCancelarAlumno;
   private javax.swing.JButton jButtonCancelarAsignatura;
+  private javax.swing.JButton jButtonCancelarCursada;
   private javax.swing.JButton jButtonCancelarProfesor;
   private javax.swing.JButton jButtonEliminarAlumno;
   private javax.swing.JButton jButtonEliminarAsignatura;
+  private javax.swing.JButton jButtonEliminarCursada;
   private javax.swing.JButton jButtonEliminarProfesor;
   private javax.swing.JButton jButtonModificarAlumno;
   private javax.swing.JButton jButtonModificarAsignatura;
+  private javax.swing.JButton jButtonModificarCursada;
   private javax.swing.JButton jButtonModificarProfesor;
   private javax.swing.JButton jButtonNuevoAlumno;
   private javax.swing.JButton jButtonNuevoAsignatura;
+  private javax.swing.JButton jButtonNuevoCursada;
   private javax.swing.JButton jButtonNuevoProfesor;
   private javax.swing.JDialog jDialog1;
   private javax.swing.JDialog jDialog2;
@@ -1692,8 +2030,16 @@ public class Ventana
   private javax.swing.JLabel jLabel11;
   private javax.swing.JLabel jLabel12;
   private javax.swing.JLabel jLabel13;
+  private javax.swing.JLabel jLabel14;
   private javax.swing.JLabel jLabel16;
+  private javax.swing.JLabel jLabel17;
+  private javax.swing.JLabel jLabel18;
+  private javax.swing.JLabel jLabel19;
   private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel20;
+  private javax.swing.JLabel jLabel21;
+  private javax.swing.JLabel jLabel22;
+  private javax.swing.JLabel jLabel23;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
@@ -1704,43 +2050,60 @@ public class Ventana
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel3;
+  private javax.swing.JPanel jPanel4;
   private javax.swing.JPanel jPanelAlumno;
   private javax.swing.JPanel jPanelAlumno1;
   private javax.swing.JPanel jPanelAsignatura;
   private javax.swing.JPanel jPanelBuscarAlumno;
   private javax.swing.JPanel jPanelBuscarAsignatura;
+  private javax.swing.JPanel jPanelBuscarCursada;
   private javax.swing.JPanel jPanelBuscarProfesor;
   private javax.swing.JPanel jPanelCursada;
   private javax.swing.JPanel jPanelProfesor;
   private javax.swing.JPanel jPanelResultadosAlumno;
   private javax.swing.JPanel jPanelResultadosAsignatura;
+  private javax.swing.JPanel jPanelResultadosCursada;
   private javax.swing.JPanel jPanelResultadosProfesor;
+  private javax.swing.JScrollPane jScrollPane10;
+  private javax.swing.JScrollPane jScrollPane11;
   private javax.swing.JScrollPane jScrollPane3;
   private javax.swing.JScrollPane jScrollPane4;
   private javax.swing.JScrollPane jScrollPane5;
   private javax.swing.JScrollPane jScrollPane6;
   private javax.swing.JScrollPane jScrollPane7;
   private javax.swing.JScrollPane jScrollPane8;
+  private javax.swing.JScrollPane jScrollPane9;
   private javax.swing.JTabbedPane jTabbedPane;
   private javax.swing.JTable jTableAlumnoAlumno;
+  private javax.swing.JTable jTableAlumnosCursada;
   private javax.swing.JTable jTableAsignaturaAsignatura;
   private javax.swing.JTable jTableCompetencia;
   private javax.swing.JTable jTableCorrelativas;
+  private javax.swing.JTable jTableCursadaCursada;
   private javax.swing.JTable jTableHistoria;
   private javax.swing.JTable jTableProfesorProfesor;
+  private javax.swing.JTable jTableProfesoresCursada;
   private javax.swing.JTextField jTextFieldBuscarAlumno;
   private javax.swing.JTextField jTextFieldBuscarAsignatura;
+  private javax.swing.JTextField jTextFieldBuscarCursada;
   private javax.swing.JTextField jTextFieldBuscarProfesor;
+  private javax.swing.JTextField jTextFieldDiaCursada;
   private javax.swing.JTextField jTextFieldDomicilioAlumno;
   private javax.swing.JTextField jTextFieldDomicilioProfesor;
+  private javax.swing.JTextField jTextFieldFinCursada;
+  private javax.swing.JTextField jTextFieldIDAsignaturaCursada;
   private javax.swing.JTextField jTextFieldIdentificadorAsignatura;
+  private javax.swing.JTextField jTextFieldIdentificadorCursada;
+  private javax.swing.JTextField jTextFieldInicioCursada;
   private javax.swing.JTextField jTextFieldLegajoAlumno;
   private javax.swing.JTextField jTextFieldLegajoProfesor;
   private javax.swing.JTextField jTextFieldMailAlumno;
   private javax.swing.JTextField jTextFieldMailProfesor;
   private javax.swing.JTextField jTextFieldNombreAlumno;
   private javax.swing.JTextField jTextFieldNombreAsignatura;
+  private javax.swing.JTextField jTextFieldNombreAsignaturaCursada;
   private javax.swing.JTextField jTextFieldNombreProfesor;
+  private javax.swing.JTextField jTextFieldPeriodoCursada;
   private javax.swing.JTextField jTextFieldTelefonoProfesor;
   // End of variables declaration//GEN-END:variables
 }

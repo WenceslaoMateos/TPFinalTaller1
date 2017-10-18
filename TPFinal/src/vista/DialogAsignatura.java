@@ -25,18 +25,16 @@ public class DialogAsignatura
   public DialogAsignatura(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
     super(owner,receptor, fuente);
+    
     this.modeloAsignatura = (TableModelAsignatura) modelo;
-  }
-
-  @Override
-  public void generaTabla(Container resultado)
-  {
-    this.modeloAsignatura = new TableModelAsignatura();
     this.tabla = new JTable(this.modeloAsignatura);
+    resultado.setLayout(new BorderLayout());
     this.scroll = new JScrollPane(tabla);
     this.tabla.setFillsViewportHeight(true);
+    this.resultado.add(this.scroll);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla, BorderLayout.CENTER);
+    resultado.add(tabla,BorderLayout.CENTER);
+    this.setVisible(true);
   }
 
   @Override
