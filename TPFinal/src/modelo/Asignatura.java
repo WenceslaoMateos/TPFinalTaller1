@@ -5,7 +5,10 @@ import excepciones.DatoInvalidoException;
 
 import java.util.Iterator;
 
-
+/**
+ * Clase que representa a las asignaturas del sistema. Implementa I_Indexable siendo la identificación la clave primaria
+ * y el nombre de la materia la clave secundaria.
+ */
 public class Asignatura
     implements I_Indexable
 {
@@ -14,43 +17,32 @@ public class Asignatura
     private IndicePrimario<Asignatura> correlatividades;
     private static int CANT_ASIGNATURAS = 0;
 
-    public Asignatura()
-    {
-        super();
-    }
-
+    /**
+     * Constructor para crear una instancia preliminar de asignatura. No valida el nombre ni asigna un legajo.<br>
+     * <b>Post:</b> Se genera una nueva instancia de asignatura cuyos datos podrán ser validados y, tras esto, se le
+     * podrá asignar una identificación.
+     * @param nombre nombre de la materia.
+     */
     public Asignatura(String nombre)
     {
         this.nombre = nombre;
         this.correlatividades = new IndicePrimario<Asignatura>();
     }
-
-    public void agregarCorrelativa(Asignatura correlativa)
-        throws ClaveYaExistenteException
-    {
-        this.correlatividades.agregar(correlativa);
-    }
-
-    public void eliminarCorrelativa(Asignatura elim)
-    {
-        this.correlatividades.eliminar(elim);
-    }
-
-    public boolean compruebaCorrelativas(Alumno alumno)
-    {
-        Iterator<Asignatura> it = this.correlatividades.elementos();
-        boolean ret = true;
-        while (it.hasNext() && ret)
-            ret = alumno.asignaturaAprobada(it.next());
-        return ret;
-    }
-
+    
+    /**
+     * Clave primaria de una asignatura.
+     * @return Ver getIdentificacion().
+     */
     @Override
     public Object getClavePrimaria()
     {
         return this.getIdentificacion();
     }
-
+    
+    /**
+     * Clave secundaria de una asignatura.
+     * @return Ver getNombre().
+     */
     @Override
     public Object getClaveSecundaria()
     {
@@ -72,21 +64,54 @@ public class Asignatura
         this.identificacion = identificacion;
     }
 
-    public static void setCANT_ASIGNATURAS(int CANT_ASIGNATURAS)
-    {
-        Asignatura.CANT_ASIGNATURAS = CANT_ASIGNATURAS;
-    }
-
-    public static int getCANT_ASIGNATURAS()
-    {
-        return CANT_ASIGNATURAS;
-    }
-
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
     }
+    
+    /**
+     * Agrega una asignatura a las precorrelativas de la materia.<br>
+     * <b>Pre:</b> correlativa se encuentra entre las asignaturas del sistema.<br>
+     * <b>Post:</b> La asignatura que ejecuta el método tiene una precorrelativa más.
+     * @param correlativa Asignatura a agregar como requisito para la materia invocante.
+     * @throws ClaveYaExistenteException La asignatura dada ya se encontraba entre las correlatividades.
+     */
+    public void agregarCorrelativa(Asignatura correlativa)
+        throws ClaveYaExistenteException
+    {
+        this.correlatividades.agregar(correlativa);
+    }
 
+    /**
+     * Elimina una asignatura de entre las precorrelativas del objeto invocante.<br>
+     * <b>Pre:</b> La materia se encuentra entre las precorrelativas del la asignatura invocante.<br>
+     * <b>Post:</b> La asignatura tiene una precorrelativa menos.
+     * @param elim Asignatura a eliminar.
+     */
+    public void eliminarCorrelativa(Asignatura elim)
+    {
+        this.correlatividades.eliminar(elim);
+    }
+
+    /**
+     * Verifica que el alumno proporcionado como parámetro tenga todas las precorrelativas de la asignatura aprobadas.
+     * @param alumno Alumno a verificar su historia académica.
+     * @return <b>true</b> si el alumno tiene aprobadas todas las materias previas, <b>false</b> en caso contrario.
+     */
+    public boolean compruebaCorrelativas(Alumno alumno)
+    {
+        Iterator<Asignatura> it = this.correlatividades.elementos();
+        boolean ret = true;
+        while (it.hasNext() && ret)
+            ret = alumno.asignaturaAprobada(it.next());
+        return ret;
+    }
+
+    /**
+     * Genera una nueva identificación cumpliendo con las especificaciones para una asignatura.<br>
+     * <b>Post:</b> Se otorga una identificación válida y aumenta en uno la cantidad de identificaciones.
+     * @return String que representa la nueva identificación.
+     */
     public static String getNuevaIdentificacion()
     {
         Asignatura.CANT_ASIGNATURAS++;
@@ -97,12 +122,23 @@ public class Asignatura
             ret = ret + "0";
         return ret + aux;
     }
-
+    
+    /**
+     * Otorga las precorrelativas de la materia.
+     * @return Iterator con las asignaturas necesarias para cursar la invocante.
+     */
     public Iterator<Asignatura> precorrelativas()
     {
         return this.correlatividades.elementos();
     }
-
+    
+    /**
+     * Le asigna el nombre proveniente de modif al objeto invocante. No permite modificar la identificación.<br>
+     * <b>Pre:</b> Los atributos de modif son correctos.
+     * <b>Post:</b> Los cambios fueron aplicados sobre el objeto invocante.
+     * @param modif parámetro que contiene las modificaciones a aplicar sobre el objeto invocante.
+     * @throws DatoInvalidoException modif no es una asignatura.
+     */
     @Override
     public void modificarDatos(I_Indexable modif)
         throws DatoInvalidoException
@@ -112,13 +148,23 @@ public class Asignatura
         else
             this.setNombre(((Asignatura) modif).getNombre());
     }
-
+    
+    /**
+     * Verifica que el nombre de la asignatura no está vacío.
+     * @param asignatura Objeto a ser verificado.
+     * @return <b>true</b> si el nombre no es vacío, <b>false</b> en caso contrario.
+     */
     public static boolean validaAsignatura(Asignatura asignatura)
     {
         return asignatura.getNombre().equals("");
     }
 
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public Asignatura()
+    {
+        super();
+    }
+    
     public void setCorrelatividades(IndicePrimario<Asignatura> correlatividades)
     {
         this.correlatividades = correlatividades;
@@ -128,5 +174,15 @@ public class Asignatura
     {
         return correlatividades;
     }
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    
+    public static void setCANT_ASIGNATURAS(int CANT_ASIGNATURAS)
+    {
+        Asignatura.CANT_ASIGNATURAS = CANT_ASIGNATURAS;
+    }
+
+    public static int getCANT_ASIGNATURAS()
+    {
+        return CANT_ASIGNATURAS;
+    }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

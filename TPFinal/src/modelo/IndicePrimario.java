@@ -44,7 +44,7 @@ public class IndicePrimario<V extends I_Indexable>
      */
     public void eliminar(V elim)
     {
-    this.elementos.remove(elim.getClavePrimaria());
+        this.elementos.remove(elim.getClavePrimaria());
     }
 
     /**
@@ -95,21 +95,43 @@ public class IndicePrimario<V extends I_Indexable>
                    .iterator();
     }
 
+    /**
+     * Permite modificar un valor del índice dada su referencia. Las modificaciones se generan mediante el método
+     * modificarDatos(I_Indexable modif) implementado por la clase V. En caso de cambiar la clave primaria,
+     * se reindexa el elemento.<br>
+     * <b>Pre:</b> elem se encuentra en el índice y los atributos de modif ya fueron verificados.<br>
+     * <b>Post:</b> elem fue modificado y mantiene una entrada válida en el índice.
+     * @param elem elemento de tipo V a modificar.
+     * @param modif objeto de tipo V que contiene las modificaciones.
+     */
     public void modificarValor(V elem, V modif)
-        throws DatoInvalidoException
     {
         Object aux = elem.getClavePrimaria();
-        elem.modificarDatos(modif);
-        if (!elem.getClavePrimaria().equals(aux))
+        try
         {
-            this.elementos.remove(aux);
-            this.elementos.put(elem.getClavePrimaria(), elem);
+            elem.modificarDatos(modif);
+            if (!elem.getClavePrimaria().equals(aux))
+            {
+                // Hay que reindexar
+                this.elementos.remove(aux);
+                this.elementos.put(elem.getClavePrimaria(), elem);
+            }
+        }
+        catch (DatoInvalidoException e)
+        {
+            // La restricción en los parámetros no permite que elem y modif sean de distinto tipo.
         }
     }
 
+    /**
+     * Obtiene las claves del índice.
+     * @return Iterator con las claves asociadas a los valores del índice.
+     */
     public Iterator clavesPrimarias()
     {
-        return this.elementos.keySet().iterator();
+        return this.elementos
+                   .keySet()
+                   .iterator();
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

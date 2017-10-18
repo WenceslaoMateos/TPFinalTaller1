@@ -1,7 +1,6 @@
 package modelo;
 
 import excepciones.ClaveYaExistenteException;
-import excepciones.DatoInvalidoException;
 import excepciones.NoEncontradoException;
 
 import java.util.ArrayList;
@@ -83,13 +82,14 @@ public class IndiceDoble<V extends I_Indexable>
     public Iterator<V> buscarPorClaveSecundaria(Object clave)
         throws NoEncontradoException
     {
-        if (!this.indice2.containsKey(clave))
+        if (!this.contieneClaveSecundaria(clave))
             throw new NoEncontradoException(clave, "Clave no encontrada en el índice.");
         return this.indice2
                    .get(clave)
                    .iterator();
     }
-
+    
+    // No usado
     public Iterator<ArrayList<V>> elementosPorClaveSecundaria()
     {
         return this.indice2
@@ -137,30 +137,46 @@ public class IndiceDoble<V extends I_Indexable>
     {
         return this.indice1.elementos();
     }
-
+    
+    /**
+     * Permite modificar un valor del índice dada su referencia. Las modificaciones se generan mediante el método
+     * modificarDatos(I_Indexable modif) implementado por la clase V. En caso de cambiar alguna de sus claves, 
+     * se reindexa el elemento acordemente.
+     * @param elem elemento de tipo V a modificar.
+     * @param modif objeto de tipo V que contiene las modificaciones.
+     */
     public void modificarValor(V elem, V modif)
-        throws DatoInvalidoException
     {
         ArrayList<V> cubeta;
         Object claveAux = elem.getClaveSecundaria();
         this.indice1.modificarValor(elem, modif);
         if (!elem.getClaveSecundaria().equals(claveAux))
         {
+            // Hay que reindexar la clave secundaria
             cubeta = this.indice2.get(claveAux);
             cubeta.remove(elem);
             if (cubeta.isEmpty())
                 this.indice2.remove(claveAux);
             if (!this.contieneClaveSecundaria(elem.getClaveSecundaria()))
+                //Elimina la cubeta en caso de haber quedado vacía
                 this.indice2.put(elem.getClaveSecundaria(), new ArrayList<V>());
             this.indice2.get(elem.getClaveSecundaria()).add(elem);
         }
     }
-
+    
+    /**
+     * Obtiene las claves primarias del índice.
+     * @return Iterator con las claves primarias asociadas a los valores del índice.
+     */
     public Iterator clavesPrimarias()
     {
         return this.indice1.clavesPrimarias();
     }
     
+    /**
+     * Obtiene las claves secundarias del índice.
+     * @return Iterator con las claves primarias asociadas a los valores del índice.
+     */
     public Iterator clavesSecundarias()
     {
         return this.indice2.keySet().iterator();

@@ -5,7 +5,10 @@ import excepciones.DatoInvalidoException;
 
 import java.util.Iterator;
 
-
+/**
+ * Clase que representa a las cursadas del sistema. Implementa I_Indexable siendo la identificación de la cursada la
+ * clave primaria y la clave secundaria una combinación del periodo, día y hora de inicio.
+ */
 public class Cursada
     implements I_Indexable
 {
@@ -19,11 +22,16 @@ public class Cursada
     private IndicePrimario<Alumno> alumnos;
     private static int CANT_CURSADAS = 0;
 
-    public Cursada()
-    {
-        super();
-    }
-
+    /**
+     * Constructor para crear una instancia preliminar de cursada. No valida sus parámetros ni asigna un legajo.<br>
+     * <b>Post:</b> Se genera una nueva instancia de persona cuyos datos podrán ser validados y, tras esto, se le podrá
+     * asignar una identificación.
+     * @param asignatura Asignatura a la que se aplica la cursada.
+     * @param periodo Año y cuatrimestre de la cursada.
+     * @param dia Día de la semana en que se desenvolverá la cursada.
+     * @param horaInicio Hora de comienzo de la clase.
+     * @param horaFinalizacion Hora de finalización de la clase.
+     */
     public Cursada(Asignatura asignatura, String periodo, Dia dia, String horaInicio, String horaFinalizacion)
     {
         this.asignatura = asignatura;
@@ -34,23 +42,21 @@ public class Cursada
         this.profesores = new IndicePrimario<Profesor>();
         this.alumnos = new IndicePrimario<Alumno>();
     }
-
-    public boolean correlativasAprobadas(Alumno alumno)
-    {
-        return this.asignatura.compruebaCorrelativas(alumno);
-    }
-
-    public boolean aceptaCompetencia(Profesor profesor)
-    {
-        return profesor.habilitadoParaAsignatura(this.asignatura);
-    }
-
+    
+    /**
+     * Clave primaria de una cursada.
+     * @return Ver getIdentificacion().
+     */
     @Override
     public Object getClavePrimaria()
     {
         return this.getIdentificacion();
     }
-
+    
+    /**
+     * Clave secundaria de una cursada.
+     * @return
+     */
     @Override
     public Object getClaveSecundaria()
     {
@@ -58,7 +64,8 @@ public class Cursada
     }
 
     private int parseInt(String hora)
-    { //Parsea el string de la hora de acuerdo a la mascara para que trabaje con un numero entero directo
+    {   
+        //Parsea el string de la hora de acuerdo a la mascara para que trabaje con un numero entero directo
         return Integer.parseInt(hora.substring(0, 2)) * 100 + Integer.parseInt(hora.substring(3, 5));
     }
 
@@ -122,34 +129,14 @@ public class Cursada
         return horaFinalizacion;
     }
 
-    public void setProfesores(IndicePrimario<Profesor> profesores)
+    public boolean correlativasAprobadas(Alumno alumno)
     {
-        this.profesores = profesores;
+        return this.asignatura.compruebaCorrelativas(alumno);
     }
 
-    public IndicePrimario<Profesor> getProfesores()
+    public boolean aceptaCompetencia(Profesor profesor)
     {
-        return profesores;
-    }
-
-    public void setAlumnos(IndicePrimario<Alumno> alumnos)
-    {
-        this.alumnos = alumnos;
-    }
-
-    public IndicePrimario<Alumno> getAlumnos()
-    {
-        return alumnos;
-    }
-
-    public static void setCANT_CURSADAS(int CANT_CURSADAS)
-    {
-        Cursada.CANT_CURSADAS = CANT_CURSADAS;
-    }
-
-    public static int getCANT_CURSADAS()
-    {
-        return CANT_CURSADAS;
+        return profesor.habilitadoParaAsignatura(this.asignatura);
     }
 
     public static boolean validaPeriodo(String periodo)
@@ -297,4 +284,41 @@ public class Cursada
             this.setHoraFinalizacion(aux.getHoraFinalizacion());
         }
     }
+    
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public Cursada()
+    {
+        super();
+    }
+    
+    public void setProfesores(IndicePrimario<Profesor> profesores)
+    {
+        this.profesores = profesores;
+    }
+
+    public IndicePrimario<Profesor> getProfesores()
+    {
+        return profesores;
+    }
+
+    public void setAlumnos(IndicePrimario<Alumno> alumnos)
+    {
+        this.alumnos = alumnos;
+    }
+
+    public IndicePrimario<Alumno> getAlumnos()
+    {
+        return alumnos;
+    }
+
+    public static void setCANT_CURSADAS(int CANT_CURSADAS)
+    {
+        Cursada.CANT_CURSADAS = CANT_CURSADAS;
+    }
+
+    public static int getCANT_CURSADAS()
+    {
+        return CANT_CURSADAS;
+    }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

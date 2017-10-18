@@ -4,7 +4,8 @@ import excepciones.DatoInvalidoException;
 
 
 /**
- * Clase abstracta que define los atributos comunes de las personas. Implementa I_Indexable.
+ * Clase abstracta que define los atributos comunes de las personas. Implementa I_Indexable siendo su legajo la clave
+ * primaria y su apellido y nombre la clave secundaria.
  */
 public abstract class Persona
     implements I_Indexable
@@ -13,12 +14,15 @@ public abstract class Persona
     private String apellidoNombre;
     private String domicilio;
     private String mail;
-
-    public Persona() //XML
-    {
-        super();
-    }
-
+    
+    /**
+     * Genera una instancia preliminar de Persona con apellido y nombre, domicilio y mail.<br>
+     * <b>Post:</b> Se genera una nueva instancia de persona cuyos datos podrán ser validados y, tras esto, se le podrá 
+     * asignar un legajo.
+     * @param apellidoNombre nombre completo de la persona. Será clave secundaria.
+     * @param domicilio dirección de la persona.
+     * @param mail dirección electrónica de la persona.
+     */
     public Persona(String apellidoNombre, String domicilio, String mail)
     {
         this.apellidoNombre = apellidoNombre;
@@ -89,24 +93,42 @@ public abstract class Persona
     /**
      * Verifica que el String pasado como parámetro cumpla con las especificaciones de un mail.<br>
      * Las mismas imponen que contenga un símbolo @ y que haya al menos un caracter antes y después de dicho símbolo.
-     * @param mail String a verificar
-     * @return <b>true</b> si el mail cumple con las especifiaciones, <b>false</b> en caso contrario
+     * @param mail String a verificar.
+     * @return <b>true</b> si el mail cumple con las especifiaciones, <b>false</b> en caso contrario.
      */
     public static boolean validaMail(String mail)
     {
         return mail.contains("@") && ((mail.charAt(mail.length() - 1)) != '@') && (mail.charAt(0) != '@');
     }
     
+    /**
+     * Verifica que el nombre pasado como parámetro no sea nulo.
+     * @param nombre String a verificar.
+     * @return <b>true</b> si el nombre no es nulo, <b>false</b> en caso contrario.
+     */
     public static boolean validaNombre(String nombre)
     {
         return !nombre.equals("");
     }
     
+    /**
+     * Verifica que los atributos de una persona sean correctos.
+     * @param persona Persona a verificar.
+     * @return <b>true</b> si los atributos son correctos, <b>false</b> en caso contrario.
+     */
     public static boolean validaPersona(Persona persona)
     {
         return Persona.validaMail(persona.getMail()) && Persona.validaNombre(persona.getApellidoNombre());
     }
     
+    /**
+     * Le asigna el apellido y nombre, domicilio y mail provenientes del parámetro al objeto invocante. No permite 
+     * modificar el legajo.<br>
+     * <b>Pre:</b> Los atributos de modif son correctos.
+     * <b>Post:</b> Los cambios fueron aplicados sobre el objeto invocante.
+     * @param modif parámetro que contiene las modificaciones a aplicar sobre el objeto invocante.
+     * @throws DatoInvalidoException Las clases del parámetro y del objeto invocante son distintas.
+     */
     @Override
     public void modificarDatos(I_Indexable modif)
         throws DatoInvalidoException
@@ -122,4 +144,11 @@ public abstract class Persona
             this.setMail(aux.getMail());
         }
     }
+    
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public Persona()
+    {
+        super();
+    }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }
