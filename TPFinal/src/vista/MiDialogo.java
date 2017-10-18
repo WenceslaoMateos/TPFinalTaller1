@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,9 +37,9 @@ public abstract class MiDialogo
   public static final Dimension JBUTTON_DIMEN = new Dimension(100, 30);
   protected JTable fuente;
 
-  public MiDialogo(Receptor receptor, JTable fuente)
+  public MiDialogo(JFrame owner,Receptor receptor, JTable fuente)
   {
-    super();
+    super(owner,true);
     this.fuente = fuente;
     this.setSize(750, 500);
     this.setVisible(true);

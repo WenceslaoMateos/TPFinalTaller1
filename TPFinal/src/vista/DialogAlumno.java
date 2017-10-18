@@ -7,6 +7,7 @@ import java.awt.Container;
 
 import java.util.Iterator;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,9 +21,9 @@ public class DialogAlumno
 {
   private TableModelAlumno modeloAlumno;
 
-  public DialogAlumno(Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  public DialogAlumno(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
-    super(receptor, fuente);
+    super(owner,receptor, fuente);
     this.modeloAlumno = (TableModelAlumno) modelo;
   }
 
