@@ -141,27 +141,18 @@ public class IndiceDoble<V extends I_Indexable>
     public void modificarValor(V elem, V modif)
         throws DatoInvalidoException
     {
+        ArrayList<V> cubeta;
         Object claveAux = elem.getClaveSecundaria();
-        this.eliminar(elem);
-        try
+        this.indice1.modificarValor(elem, modif);
+        if (!elem.getClaveSecundaria().equals(claveAux))
         {
-            this.indice1.modificarValor(elem, modif);
-            this.agregar(elem);
-        }
-        catch (DatoInvalidoException die)
-        {
-            try
-            {
-                this.agregar(elem);
-            }
-            catch (ClaveYaExistenteException e)
-            {
-                // No puede haber este problema debido a que no puede haber claves primarias repetidas
-            }
-        }
-        catch (ClaveYaExistenteException e)
-        {
-            // No puede haber este problema debido a que no puede haber claves primarias repetidas
+            cubeta = this.indice2.get(claveAux);
+            cubeta.remove(elem);
+            if (cubeta.isEmpty())
+                this.indice2.remove(claveAux);
+            if (!this.contieneClaveSecundaria(elem.getClaveSecundaria()))
+                this.indice2.put(elem.getClaveSecundaria(), new ArrayList<V>());
+            this.indice2.get(elem.getClaveSecundaria()).add(elem);
         }
     }
 

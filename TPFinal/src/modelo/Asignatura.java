@@ -107,15 +107,10 @@ public class Asignatura
     public void modificarDatos(I_Indexable modif)
         throws DatoInvalidoException
     {
-        Asignatura aux;
         if (this.getClass() != modif.getClass())
             throw new DatoInvalidoException(modif, "Tipo de dato inválido.");
         else
-        {
-            aux = (Asignatura) modif;
-            if (!aux.getNombre().equals(aux.getNombre()))
-                this.setNombre(aux.getNombre());
-        }
+            this.setNombre(((Asignatura) modif).getNombre());
     }
 
     public static boolean validaAsignatura(Asignatura asignatura)

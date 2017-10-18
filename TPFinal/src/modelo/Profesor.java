@@ -102,11 +102,8 @@ public class Profesor
   public void modificarDatos(I_Indexable modif)
     throws DatoInvalidoException
   {
-    Profesor aux;
     super.modificarDatos(modif);
-    aux = (Profesor) modif;
-    if (!this.getTelefono().equals(aux.getTelefono()))
-      this.setTelefono(aux.getTelefono());
+    this.setTelefono(((Profesor) modif).getTelefono());
   }
 
   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

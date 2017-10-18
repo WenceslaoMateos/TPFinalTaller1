@@ -290,23 +290,11 @@ public class Cursada
         else
         {
             aux = (Cursada) modif;
-            if (!this.getPeriodo().equals(aux.getPeriodo()))
-                if (!Cursada.validaPeriodo(aux.getPeriodo()))
-                    throw new DatoInvalidoException(aux.getPeriodo(), "Periodo inválido.");
-                else
-                    this.setPeriodo(aux.getPeriodo());
-            if (this.getDia() != aux.getDia())
-                this.setDia(aux.getDia());
-      if (!this.getHoraInicio().equals(aux.getHoraInicio()) ||
-          !this.getHoraFinalizacion().equals(aux.getHoraFinalizacion()))
-        if (!Cursada.validaHora(aux.getHoraInicio()) || !Cursada.validaHora(aux.getHoraFinalizacion()) ||
-            aux.getHoraInicio().compareTo(aux.getHoraFinalizacion()) > 0)
-                    throw new DatoInvalidoException(aux.getHoraInicio(), "Horario inválido.");
-                else
-                {
-                    this.setHoraInicio(aux.getHoraInicio());
-                    this.setHoraFinalizacion(aux.getHoraFinalizacion());
-}
+            this.setAsignatura(aux.getAsignatura());
+            this.setPeriodo(aux.getPeriodo());
+            this.setDia(aux.getDia());
+            this.setHoraInicio(aux.getHoraInicio());
+            this.setHoraFinalizacion(aux.getHoraFinalizacion());
         }
     }
 }

@@ -98,7 +98,13 @@ public class IndicePrimario<V extends I_Indexable>
     public void modificarValor(V elem, V modif)
         throws DatoInvalidoException
     {
+        Object aux = elem.getClavePrimaria();
         elem.modificarDatos(modif);
+        if (!elem.getClavePrimaria().equals(aux))
+        {
+            this.elementos.remove(aux);
+            this.elementos.put(elem.getClavePrimaria(), elem);
+        }
     }
 
     public Iterator clavesPrimarias()

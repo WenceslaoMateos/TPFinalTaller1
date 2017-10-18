@@ -117,18 +117,9 @@ public abstract class Persona
         else
         {
             aux = (Persona) modif;
-            if (!this.getMail().equals(aux.getMail()))
-                if (!Persona.validaMail(aux.getMail()))
-                    throw new DatoInvalidoException(aux.getMail(), "Mail inválido");
-                else
-                    this.setMail(aux.getMail());
-            if (!this.getApellidoNombre().equals(aux.getApellidoNombre()))
-                if (aux.getApellidoNombre().equals(""))
-                    throw new DatoInvalidoException(aux.getApellidoNombre(), "Nombre vacío.");
-                else
-                    this.setApellidoNombre(aux.getApellidoNombre());
-            if (!this.getDomicilio().equals(aux.getDomicilio()))
-                this.setDomicilio(aux.getDomicilio());
-}
+            this.setApellidoNombre(aux.getApellidoNombre());
+            this.setDomicilio(aux.getDomicilio());
+            this.setMail(aux.getMail());
+        }
     }
 }

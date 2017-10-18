@@ -297,24 +297,32 @@ public class Sistema
     public void modificarAlumno(Alumno alumno, Alumno modif)
         throws DatoInvalidoException
     {
+        if (!Persona.validaPersona(modif))
+            throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
         this.alumnos.modificarValor(alumno, modif);
     }
     
     public void modificarProfesor(Profesor profesor, Profesor modif)
         throws DatoInvalidoException
     {
+        if (!Persona.validaPersona(modif))
+            throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
         this.profesores.modificarValor(profesor, modif);
     }
     
     public void modificarAsignatura(Asignatura asignatura, Asignatura modif)
         throws DatoInvalidoException
     {
+        if (!Asignatura.validaAsignatura(modif))
+            throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
         this.planDeEstudio.modificarValor(asignatura, modif);
     }
     
     public void modificarCursada(Cursada cursada, Cursada modif)
         throws DatoInvalidoException
     {
+        if (!Cursada.validaCursada(modif))
+            throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
         this.calendario.modificarValor(cursada, modif);
     }
 
