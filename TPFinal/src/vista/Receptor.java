@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import modelo.Alumno;
 import modelo.Asignatura;
+import modelo.Cursada;
 import modelo.Profesor;
 import modelo.Sistema;
 
@@ -21,6 +22,7 @@ public class Receptor
   public static final int ALUMNO = 0;
   public static final int PROFESOR = 1;
   public static final int ASIGNATURA = 2;
+  public static final int CURSADA = 3;
 
 
   public Receptor(Sistema modelo, Ventana vista)
@@ -43,6 +45,9 @@ public class Receptor
         break;
       case Receptor.ASIGNATURA:
         this.modelo.agregarAsignatura((Asignatura) obj);
+        break;
+      case Receptor.CURSADA:
+        this.modelo.agregarCursada((Cursada) obj);
         break;
     }
   }
@@ -81,6 +86,9 @@ public class Receptor
       case Receptor.ASIGNATURA:
         ret = this.modelo.buscarAsignaturaPorIdentifiacion((String) obj);
         break;
+      case Receptor.CURSADA:
+        this.modelo.buscarCursadaPorIdentificacion((String) obj);
+        break;
     }
     return ret;
   }
@@ -99,6 +107,33 @@ public class Receptor
         break;
       case Receptor.ASIGNATURA:
         this.modelo.eliminarAsignatura((Asignatura) this.buscar(obj, comando));
+        break;
+      case Receptor.CURSADA:
+        this.modelo.eliminarCursada((Cursada) obj);
+        break;
+    }
+    return ret;
+  }
+
+  public Object modificacion(Object obj, int comando)
+    throws DatoInvalidoException, NoEncontradoException
+  {
+    Object ret = null;
+    switch (comando)
+    {
+      case Receptor.ALUMNO:
+        this.modelo.modificarAlumno((Alumno) this.buscar(((Alumno) obj).getLegajo(), comando), (Alumno) obj);
+        break;
+      case Receptor.PROFESOR:
+        this.modelo.modificarProfesor((Profesor) this.buscar(((Profesor) obj).getLegajo(), comando), (Profesor) obj);
+        break;
+      case Receptor.ASIGNATURA:
+        this.modelo.modificarAsignatura((Asignatura) this.buscar(((Asignatura) obj).getIdentificacion(), comando),
+                                        (Asignatura) obj);
+        break;
+      case Receptor.CURSADA:
+        this.modelo.modificarCursada((Cursada) this.buscar(((Cursada) obj).getIdentificacion(), comando),
+                                     (Cursada) obj);
         break;
     }
     return ret;

@@ -13,7 +13,6 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
-import modelo.Alumno;
 import modelo.Profesor;
 
 public class DialogProfesor

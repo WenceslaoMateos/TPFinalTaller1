@@ -7,6 +7,7 @@ import excepciones.NoEncontradoException;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.HeadlessException;
 
 import java.util.Iterator;
 
@@ -29,6 +30,9 @@ public class Ventana
   implements ListSelectionListener
 {
   private Receptor receptor;
+  private int accionAceptar = 0;
+  private static final int NUEVO = 0;
+  private static final int MODIFICAR = 1;
 
   /** Creates new form Ventana */
   public Ventana()
@@ -79,7 +83,10 @@ public class Ventana
       Iterator<Asignatura> asignaturas = this.receptor.ubicar(this.jTextFieldBuscar.getText(), Receptor.ASIGNATURA);
       Asignatura aux;
       DefaultTableModel model = (DefaultTableModel) this.jTableHistoria.getModel();
-      model.setRowCount(0);
+      int n = model.getRowCount();
+      int i;
+      for (i = n; i > 0; i--)
+        model.removeRow(i);
       while (asignaturas.hasNext())
       {
         aux = asignaturas.next();
@@ -89,6 +96,9 @@ public class Ventana
       this.jTableHistoria.setRowSelectionAllowed(true);
     }
     catch (NoEncontradoException f)
+    {
+    }
+    catch (ArrayIndexOutOfBoundsException g)
     {
     }
   }
@@ -134,7 +144,7 @@ public class Ventana
     jButtonAgregarHistoria = new javax.swing.JButton();
     jButtonAceptar = new javax.swing.JButton();
     jButtonCancelar = new javax.swing.JButton();
-    jButton1 = new javax.swing.JButton();
+    jButtonModificar = new javax.swing.JButton();
     jButtonAgradecimientos = new javax.swing.JButton();
 
     javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -399,12 +409,12 @@ public class Ventana
       }
     });
 
-    jButton1.setText("Modificar");
-    jButton1.addActionListener(new java.awt.event.ActionListener()
+    jButtonModificar.setText("Modificar");
+    jButtonModificar.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButton1ActionPerformed(evt);
+        jButtonModificarActionPerformed(evt);
       }
     });
 
@@ -443,7 +453,7 @@ public class Ventana
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEliminar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)))
+                .addComponent(jButtonModificar)))
             .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
@@ -454,7 +464,7 @@ public class Ventana
         .addGroup(jPanelResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jButtonNuevo)
           .addComponent(jButtonEliminar)
-          .addComponent(jButton1))
+          .addComponent(jButtonModificar))
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel1)
@@ -564,12 +574,19 @@ public class Ventana
 
   private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoActionPerformed
+    this.accionAceptar = Ventana.NUEVO;
+    this.jButtonEliminar.setEnabled(false);
+    this.jButtonModificar.setEnabled(false);
     this.jButtonAgregarHistoria.setEnabled(true);
+    this.jButtonCancelar.setEnabled(true);
     this.jTextFieldNombre.setEditable(true);
     this.jTextFieldDomicilio.setEditable(true);
     this.jButtonAceptar.setEnabled(true);
-    this.jButtonCancelar.setEnabled(true);
     this.jTextFieldMail.setEditable(true);
+    this.jTextFieldLegajo.setText("");
+    this.jTextFieldNombre.setText("");
+    this.jTextFieldDomicilio.setText("");
+    this.jTextFieldMail.setText("");
   }//GEN-LAST:event_jButtonNuevoActionPerformed
 
   private void jButtonAgregarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarHistoriaActionPerformed
@@ -577,19 +594,30 @@ public class Ventana
     new DialogAsignatura(this.receptor, this.jTableHistoria, new TableModelAsignatura());  
   }//GEN-LAST:event_jButtonAgregarHistoriaActionPerformed
 
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-  {//GEN-HEADEREND:event_jButton1ActionPerformed
-    this.jTextFieldNombre.setEditable(true);
-    this.jTextFieldDomicilio.setEditable(true);
-    this.jButtonAceptar.setEnabled(true);
-    this.jTextFieldMail.setEditable(true);
-    this.jButtonAgregarHistoria.setEnabled(true);
-    this.jButtonCancelar.setEnabled(true);
-  }//GEN-LAST:event_jButton1ActionPerformed
+  private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarActionPerformed
+  {//GEN-HEADEREND:event_jButtonModificarActionPerformed
+    if (!this.jTextFieldLegajo
+             .getText()
+             .equals(""))
+    {
+      this.jTextFieldNombre.setEditable(true);
+      this.jTextFieldDomicilio.setEditable(true);
+      this.jTextFieldMail.setEditable(true);
+      this.jButtonAgregarHistoria.setEnabled(true);
+      this.jButtonEliminar.setEnabled(true);
+      this.jButtonNuevo.setEnabled(true);
+      this.jButtonAceptar.setEnabled(true);
+      this.jButtonCancelar.setEnabled(true);
+      this.accionAceptar = Ventana.MODIFICAR;
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
+   
+  }//GEN-LAST:event_jButtonModificarActionPerformed
 
   private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarActionPerformed
   {//GEN-HEADEREND:event_jButtonEliminarActionPerformed
-    if (!this.jTextFieldNombre
+    if (!this.jTextFieldLegajo
              .getText()
              .equals(""))
     {
@@ -602,6 +630,8 @@ public class Ventana
         JOptionPane.showMessageDialog(this, e.getMessage());
       }
     }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo");
   }//GEN-LAST:event_jButtonEliminarActionPerformed
 
   private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -615,30 +645,62 @@ public class Ventana
     this.jTextFieldMail.setEditable(false);
     this.jButtonAgregarHistoria.setEnabled(false);
     this.jButtonAceptar.setEnabled(false);
+    this.jButtonEliminar.setEnabled(true);
+    this.jButtonModificar.setEnabled(true);
+    this.jButtonNuevo.setEnabled(true);
     this.jButtonCancelar.setEnabled(false);
   }//GEN-LAST:event_jButtonCancelarActionPerformed
 
   private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarActionPerformed
     
-    try
+    switch (this.accionAceptar)
     {
-      Alumno nuevo =
-        new Alumno(this.jTextFieldNombre.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldMail.getText());
-      int n = this.jTableHistoria.getRowCount();
-      int i;
-      Asignatura elemento;
-      for (i = 1; i <= n; i++)
-      {
-        elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
-        nuevo.agregarHistoria(elemento);
-      }
-      this.receptor.alta(nuevo, Receptor.ALUMNO);
-      this.jButtonCancelarActionPerformed(evt);
-    }
-    catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
-    {
-      JOptionPane.showMessageDialog(this, e.getMessage());
+      case Ventana.NUEVO:
+        try
+        {
+          Alumno nuevo =
+            new Alumno(this.jTextFieldNombre.getText(), this.jTextFieldDomicilio.getText(),
+                       this.jTextFieldMail.getText());
+          int n = this.jTableHistoria.getRowCount();
+          int i;
+          Asignatura elemento;
+          for (i = 1; i <= n; i++)
+          {
+            elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
+            nuevo.agregarHistoria(elemento);
+          }
+          this.receptor.alta(nuevo, Receptor.ALUMNO);
+          this.jButtonCancelarActionPerformed(evt);
+        }
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        break;
+      case Ventana.MODIFICAR:
+        try
+        {
+          Alumno modif =
+            new Alumno(this.jTextFieldNombre.getText(), this.jTextFieldDomicilio.getText(),
+                       this.jTextFieldMail.getText());
+          int n = this.jTableHistoria.getRowCount();
+          int i;
+          Asignatura elemento;
+          for (i = 1; i <= n; i++)
+          {
+            elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
+            modif.agregarHistoria(elemento);
+          }
+          modif.setLegajo(this.jTextFieldLegajo.getText());
+          this.receptor.modificacion(modif, Receptor.ALUMNO);
+          this.jButtonCancelarActionPerformed(evt);
+        }
+        catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        break;
     }
     
     
@@ -719,13 +781,13 @@ public class Ventana
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButton1;
   private javax.swing.JButton jButtonAceptar;
   private javax.swing.JButton jButtonAgradecimientos;
   private javax.swing.JButton jButtonAgregarHistoria;
   private javax.swing.JButton jButtonBuscar;
   private javax.swing.JButton jButtonCancelar;
   private javax.swing.JButton jButtonEliminar;
+  private javax.swing.JButton jButtonModificar;
   private javax.swing.JButton jButtonNuevo;
   private javax.swing.JDialog jDialog1;
   private javax.swing.JDialog jDialog2;
@@ -743,8 +805,6 @@ public class Ventana
   private javax.swing.JPanel jPanelCursada;
   private javax.swing.JPanel jPanelProfesor;
   private javax.swing.JPanel jPanelResultados;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
   private javax.swing.JScrollPane jScrollPane4;
   private javax.swing.JTabbedPane jTabbedPane;

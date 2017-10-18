@@ -155,7 +155,7 @@ public class Cursada
     public static boolean validaPeriodo(String periodo)
     {
         boolean ret;
-        if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
             Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
             Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
             ret = true;
@@ -175,7 +175,7 @@ public class Cursada
             ret = false;
         return ret;
     }
-    
+
     public static boolean validaHorario(String horaInicio, String horaFinalizacion)
     {
         return horaInicio.compareTo(horaFinalizacion) < 0;
@@ -297,10 +297,10 @@ public class Cursada
                     this.setPeriodo(aux.getPeriodo());
             if (this.getDia() != aux.getDia())
                 this.setDia(aux.getDia());
-            if (!this.getHoraInicio().equals(aux.getHoraInicio())
-                || !this.getHoraFinalizacion().equals(aux.getHoraFinalizacion()))
-                if (!Cursada.validaHora(aux.getHoraInicio()) || !Cursada.validaHora(aux.getHoraFinalizacion())
-                    || aux.getHoraInicio().compareTo(aux.getHoraFinalizacion()) > 0)
+      if (!this.getHoraInicio().equals(aux.getHoraInicio()) ||
+          !this.getHoraFinalizacion().equals(aux.getHoraFinalizacion()))
+        if (!Cursada.validaHora(aux.getHoraInicio()) || !Cursada.validaHora(aux.getHoraFinalizacion()) ||
+            aux.getHoraInicio().compareTo(aux.getHoraFinalizacion()) > 0)
                     throw new DatoInvalidoException(aux.getHoraInicio(), "Horario inválido.");
                 else
                 {

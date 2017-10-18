@@ -117,7 +117,7 @@ public class Asignatura
                 this.setNombre(aux.getNombre());
         }
     }
-    
+
     public static boolean validaAsignatura(Asignatura asignatura)
     {
         return asignatura.getNombre().equals("");

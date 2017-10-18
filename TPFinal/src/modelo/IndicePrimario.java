@@ -100,7 +100,7 @@ public class IndicePrimario<V extends I_Indexable>
     {
         elem.modificarDatos(modif);
     }
-    
+
     public Iterator clavesPrimarias()
     {
         return this.elementos.keySet().iterator();
