@@ -29,36 +29,32 @@ public class Sistema
     public void agregarAlumno(Alumno nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (!Persona.validaMail(nuevo.getMail()))
-            throw new DatoInvalidoException(nuevo.getMail(), "Mail inválido.");
-        else if (nuevo.getApellidoNombre().equals(""))
-            throw new DatoInvalidoException(nuevo, "El nombre del alumno esta vacio");
+        if (!Persona.validaPersona(nuevo))
+            throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         else
         {
             nuevo.setLegajo(Alumno.getNuevoLegajo());
             this.alumnos.agregar(nuevo);
-}
+        }
     }
     
     public void agregarProfesor(Profesor nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (!Persona.validaMail(nuevo.getMail()))
-            throw new DatoInvalidoException(nuevo.getMail(), "Mail inválido.");
-        else if (nuevo.getApellidoNombre().equals(""))
-            throw new DatoInvalidoException(nuevo, "El nombre del profesor esta vacio");
+        if (!Persona.validaPersona(nuevo))
+            throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         else
         {
             nuevo.setLegajo(Profesor.getNuevaIdentificacion());
             this.profesores.agregar(nuevo);
-    }
+        }
     }
     
     public void agregarAsignatura(Asignatura nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (nuevo.getNombre().equals(""))
-            throw new DatoInvalidoException(nuevo, "El nombre de la asignatura es invalido");
+        if (!Asignatura.validaAsignatura(nuevo))
+            throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         else
         {
             nuevo.setIdentificacion(Asignatura.getNuevaIdentificacion());
@@ -69,16 +65,12 @@ public class Sistema
     public void agregarCursada(Cursada nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (!Cursada.validaHora(nuevo.getHoraInicio()))
-            throw new DatoInvalidoException(nuevo.getHoraInicio(), "Hora de inicio inválida.");
-        else if (!Cursada.validaHora(nuevo.getHoraFinalizacion()) ||
-                 nuevo.getHoraInicio().compareTo(nuevo.getHoraFinalizacion()) >= 0)
-            throw new DatoInvalidoException(nuevo.getHoraFinalizacion(), "Hora de finalización inválida.");
-        else if (!Cursada.validaPeriodo(nuevo.getPeriodo()))
-            throw new DatoInvalidoException(nuevo.getPeriodo(), "Periodo inválido.");
+        if (!Cursada.validaCursada(nuevo))
+            throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         /* 
         else if (!this.horarioCursadaDisponible(nuevo))
-            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado."); */
+            throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado.");
+        */
         else
         {
             nuevo.setIdentificacion(Cursada.getNuevaIdentificacion());
@@ -215,6 +207,21 @@ public class Sistema
             return ret;
     }
     
+    public Iterator<Cursada> buscarCursada(String nombreAsignatura)
+    {
+        Cursada cursada;
+        Iterator<Cursada> cursadas = this.calendario.elementosPorClavePrimaria();
+        ArrayList<Cursada> aux = new ArrayList<Cursada>();
+        String nombreUpper = nombreAsignatura.toUpperCase();
+        while (cursadas.hasNext())
+        {
+            cursada = cursadas.next();
+            if (cursada.getAsignatura().getNombre().toUpperCase().contains(nombreUpper))
+                aux.add(cursada);
+        }
+        return aux.iterator();
+    }
+    
     public Alumno buscarAlumnoPorLegajo(String legajo)
         throws NoEncontradoException
     {
@@ -259,16 +266,6 @@ public class Sistema
             cursada.altaProfesor(profesor);
     }
     
-    /* 
-    private boolean horarioCursadaDisponible(Cursada cursada)
-    {
-        boolean res = true;
-        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
-        while (it.hasNext() && res)
-            res = !cursada.hayColision(it.next());
-        return res;
-    } */
-    
     private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
     {
         boolean res = true;
@@ -301,7 +298,7 @@ public class Sistema
         throws DatoInvalidoException
     {
         this.alumnos.modificarValor(alumno, modif);
-}
+    }
     
     public void modificarProfesor(Profesor profesor, Profesor modif)
         throws DatoInvalidoException
@@ -321,6 +318,16 @@ public class Sistema
         this.calendario.modificarValor(cursada, modif);
     }
 
+    /* 
+    private boolean horarioCursadaDisponible(Cursada cursada)
+    {
+        boolean res = true;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext() && res)
+            res = !cursada.hayColision(it.next());
+        return res;
+    }
+    */
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setAlumnos(IndiceDoble<Alumno> alumnos)
     {
