@@ -42,4 +42,24 @@ public enum Dia
     }
     return ret;
   }
+
+  public static Dia parseDia(String dia)
+  {
+    Dia ret=DOM;
+    if (dia.equals("Lunes"))
+      ret=LUN;
+    else if (dia.equals("Martes"))
+      ret=MAR;
+    else if (dia.equals("Miercoles"))
+      ret=MIE;
+    else if (dia.equals("Jueves"))
+      ret=JUE;
+    else if (dia.equals("Viernes"))
+      ret=VIE;
+    else if (dia.equals("Sabado"))
+      ret=SAB;
+    else if (dia.equals("Domingo"))
+      ret=DOM;
+    return ret;
+  }
 }
