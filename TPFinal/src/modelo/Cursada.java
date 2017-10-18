@@ -15,8 +15,8 @@ public class Cursada
     private Dia dia;
     private String horaInicio;
     private String horaFinalizacion;
-    private IndicePrimario<Profesor> profesores; //POR QUÉ ESTO WEN??????????????????????
-    private IndicePrimario<Alumno> alumnos; //POR QUÉ ESTO WEN??????????????????????
+    private IndicePrimario<Profesor> profesores;
+    private IndicePrimario<Alumno> alumnos;
     private static int CANT_CURSADAS = 0;
 
     public Cursada()
@@ -155,7 +155,7 @@ public class Cursada
     public static boolean validaPeriodo(String periodo)
     {
         boolean ret;
-    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+        if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
             Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
             Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
             ret = true;
@@ -167,13 +167,25 @@ public class Cursada
     public static boolean validaHora(String hora)
     {
         boolean ret;
-        if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 99) &&
-            (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 99) &&
+        if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 12) &&
+            (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
             (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':')
             ret = true;
         else
             ret = false;
         return ret;
+    }
+    
+    public static boolean validaHorario(String horaInicio, String horaFinalizacion)
+    {
+        return horaInicio.compareTo(horaFinalizacion) < 0;
+    }
+    
+    public static boolean validaCursada(Cursada cursada)
+    {
+        return Cursada.validaPeriodo(cursada.getPeriodo()) && Cursada.validaHora(cursada.getHoraInicio())
+            && Cursada.validaHora(cursada.getHoraFinalizacion())
+            && Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
     }
 
     public static String getNuevaIdentificacion()

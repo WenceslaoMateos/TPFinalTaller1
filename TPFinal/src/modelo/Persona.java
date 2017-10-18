@@ -97,6 +97,16 @@ public abstract class Persona
         return mail.contains("@") && ((mail.charAt(mail.length() - 1)) != '@') && (mail.charAt(0) != '@');
     }
     
+    public static boolean validaNombre(String nombre)
+    {
+        return !nombre.equals("");
+    }
+    
+    public static boolean validaPersona(Persona persona)
+    {
+        return Persona.validaMail(persona.getMail()) && Persona.validaNombre(persona.getApellidoNombre());
+    }
+    
     @Override
     public void modificarDatos(I_Indexable modif)
         throws DatoInvalidoException

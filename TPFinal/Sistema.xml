@@ -64,6 +64,26 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0008</string>
+      <object class="modelo.Alumno" id="Alumno3">
+       <void property="apellidoNombre">
+        <string>Pico Juan</string>
+       </void>
+       <void property="domicilio">
+        <string>Picoland 23</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0008</string>
+       </void>
+       <void property="mail">
+        <string>bokunopico@gmail.com</string>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -91,10 +111,18 @@
       </void>
      </object>
     </void>
+    <void method="put">
+     <string>Pico Juan</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno3"/>
+      </void>
+     </object>
+    </void>
    </void>
   </void>
  </object>
- <int>7</int>
+ <int>8</int>
  <int>0</int>
  <int>0</int>
  <int>0</int>
