@@ -53,7 +53,7 @@ public class Sistema
     public void agregarAsignatura(Asignatura nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (Asignatura.validaAsignatura(nuevo))
+        if (!Asignatura.validaAsignatura(nuevo))
             throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         else
         {
