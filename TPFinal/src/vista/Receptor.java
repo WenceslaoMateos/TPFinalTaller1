@@ -67,6 +67,9 @@ public class Receptor
       case Receptor.ASIGNATURA:
         ret = this.modelo.buscarAsignatura((String) obj);
         break;
+      case Receptor.CURSADA:
+        ret = this.modelo.buscarCursada((String) obj);
+        break;
     }
     return ret;
   }
