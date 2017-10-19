@@ -330,7 +330,7 @@ public class Cursada
     /**
      * Le asigna la asignatura, periodo, día, hora de inicio y hora de finalización de modif al objeto invocante. No
      * permite modificar la identificación.<br>
-     * <b>Pre:</b> Los atributos de modif son correctos.
+     * <b>Pre:</b> Los atributos de modif son correctos.<br>
      * <b>Post:</b> Los cambios fueron aplicados sobre el objeto invocante.
      * @param modif parámetro que contiene las modificaciones a aplicar sobre el objeto invocante.
      * @throws DatoInvalidoException modif no es una cursada.
