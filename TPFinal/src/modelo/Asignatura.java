@@ -77,9 +77,12 @@ public class Asignatura
      * @throws ClaveYaExistenteException La asignatura dada ya se encontraba entre las correlatividades.
      */
     public void agregarCorrelativa(Asignatura correlativa)
-        throws ClaveYaExistenteException
+        throws ClaveYaExistenteException, DatoInvalidoException
     {
-        this.correlatividades.agregar(correlativa);
+        if (this.equals(correlativa))
+            throw new DatoInvalidoException(correlativa, "La asignatura no puede ser correlativa de si misma.");
+        else
+            this.correlatividades.agregar(correlativa);
     }
 
     /**
