@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Iterator;
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Profesor;
@@ -18,6 +20,11 @@ public class TableModelProfesor
   public boolean isCellEditable(int row, int column)
   {
     return false;
+  }
+  public void eliminarFila(int fila)
+  {
+    Vector aux=this.getDataVector();
+    aux.remove(fila);
   }
   public void agregarFilas(Iterator profesores)
   {

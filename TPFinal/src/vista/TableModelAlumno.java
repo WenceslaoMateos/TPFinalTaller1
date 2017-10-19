@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Iterator;
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Alumno;
@@ -20,6 +22,11 @@ public class TableModelAlumno
     return false;
   }
 
+  public void eliminarFila(int fila)
+  {
+    Vector aux=this.getDataVector();
+    aux.remove(fila);
+  }
   public void agregarFilas(Iterator alumnos)
   {
     Alumno aux;
