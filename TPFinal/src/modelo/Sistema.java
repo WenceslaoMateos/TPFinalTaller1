@@ -154,8 +154,9 @@ public class Sistema
     /**
      * Elimina una asignatura del sistema.<br>
      * <b>Pre:</b> La asignatura se encuentra en el sistema.<br>
-     * <b>Post:</b> El sistema tiene una asignatura menos que fue excluida de la historia académica de sus alumnos y de
-     * las competencias de sus profesores. A su vez, se eliminaron todas la cursadas de esa materia.
+     * <b>Post:</b> El sistema tiene una asignatura menos que fue excluida de la historia académica de sus alumnos, de
+     * las competencias de sus profesores y de las precorrelativades de otras materias.
+     * A su vez, se eliminaron todas la cursadas de esa materia.
      * @param elim Asignatura a remover del sistema.
      */
     public void eliminarAsignatura(Asignatura elim)
@@ -165,6 +166,7 @@ public class Sistema
         this.planDeEstudio.eliminar(elim);
         this.eliminaAsignaturaEnAlumnos(elim);
         this.eliminaAsignaturaEnProfesores(elim);
+        this.eliminaAsignaturaEnCorrelatividades(elim);
         it = this.calendario.elementosPorClavePrimaria();
         while (it.hasNext())
         {
@@ -216,6 +218,23 @@ public class Sistema
             aux = it.next();
             if (aux.habilitadoParaAsignatura(elim))
                 aux.eliminarCompetencia(elim);
+        }
+    }
+    
+    /**
+     * Busca entre las asignaturas el parámetro y lo elimina de sus precorrelativas.<br>
+     * <b>Post:</b> Ninguna materia mantiene la asignatura entre sus precorrelativas.
+     * @param elim Asignatura a eliminar de las precorrelativas.
+     */
+    private void eliminaAsignaturaEnCorrelatividades(Asignatura elim)
+    {
+        Iterator<Asignatura> it = this.planDeEstudio.elementosPorClavePrimaria();
+        Asignatura aux;
+        while (it.hasNext())
+        {
+            aux = it.next();
+            if (aux.tienePrecorrelativa(elim))
+                aux.eliminarCorrelativa(elim);
         }
     }
     

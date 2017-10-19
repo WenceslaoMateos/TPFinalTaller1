@@ -133,6 +133,17 @@ public class Asignatura
     }
     
     /**
+     * Comprueba que el parámetro sea una precorrelativa del objeto invocante.<br>
+     * <b>Pre:</b> asignatura forma parte del sistema.
+     * @param asignatura Asignatura a verificar.
+     * @return <b>true</b> si la asignatura se encontró entre las correlatividades, <b>false</b> en caso contrario.
+     */
+    public boolean tienePrecorrelativa(Asignatura asignatura)
+    {
+        return this.correlatividades.contieneValor(asignatura);
+    }
+    
+    /**
      * Le asigna el nombre proveniente de modif al objeto invocante. No permite modificar la identificación.<br>
      * <b>Pre:</b> Los atributos de modif son correctos.
      * <b>Post:</b> Los cambios fueron aplicados sobre el objeto invocante.
