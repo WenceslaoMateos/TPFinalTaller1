@@ -90,7 +90,7 @@ public class Receptor
         ret = this.modelo.buscarAsignaturaPorIdentifiacion((String) obj);
         break;
       case Receptor.CURSADA:
-        this.modelo.buscarCursadaPorIdentificacion((String) obj);
+        ret = this.modelo.buscarCursadaPorIdentificacion((String) obj);
         break;
     }
     return ret;

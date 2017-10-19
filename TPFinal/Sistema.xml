@@ -82,8 +82,152 @@
     </void>
    </void>
   </void>
-  <void id="IndiceDoble1" property="planDeEstudio">
+  <void id="IndiceDoble1" property="calendario">
    <void id="IndicePrimario2" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>CUR0001</string>
+      <object class="modelo.Cursada" id="Cursada0">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0007</string>
+           <object idref="Alumno1"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object class="modelo.Asignatura" id="Asignatura1">
+         <void property="correlatividades">
+          <object class="modelo.IndicePrimario"/>
+         </void>
+         <void property="identificacion">
+          <string>ASI0006</string>
+         </void>
+         <void property="nombre">
+          <string>ddd</string>
+         </void>
+        </object>
+       </void>
+       <void property="dia">
+        <object class="java.lang.Enum" id="Dia0" method="valueOf">
+         <class>modelo.Dia</class>
+         <string>LUN</string>
+        </object>
+       </void>
+       <void property="horaFinalizacion">
+        <string>18:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>16:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0001</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario4">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0002</string>
+           <object class="modelo.Profesor" id="Profesor0">
+            <void property="apellidoNombre">
+             <string>fff</string>
+            </void>
+            <void property="competencia">
+             <object class="modelo.IndicePrimario" id="IndicePrimario5">
+              <void property="elementos">
+               <void method="put">
+                <string>ASI0006</string>
+                <object idref="Asignatura1"/>
+               </void>
+              </void>
+             </object>
+            </void>
+            <void property="domicilio">
+             <string>fff</string>
+            </void>
+            <void property="legajo">
+             <string>PRO0002</string>
+            </void>
+            <void property="mail">
+             <string>fff@fff</string>
+            </void>
+            <void property="telefono">
+             <string>fff</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0002</string>
+      <object class="modelo.Cursada" id="Cursada1">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario6">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0007</string>
+           <object idref="Alumno1"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura1"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>18:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>16:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0002</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario7">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0002</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <int>11630</int>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Cursada0"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada1"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble2" property="planDeEstudio">
+   <void id="IndicePrimario8" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>ASI0005</string>
@@ -91,23 +235,13 @@
      </void>
      <void method="put">
       <string>ASI0006</string>
-      <object class="modelo.Asignatura" id="Asignatura1">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="identificacion">
-        <string>ASI0006</string>
-       </void>
-       <void property="nombre">
-        <string>ddd</string>
-       </void>
-      </object>
+      <object idref="Asignatura1"/>
      </void>
      <void method="put">
       <string>ASI0007</string>
       <object class="modelo.Asignatura" id="Asignatura2">
        <void property="correlatividades">
-        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+        <object class="modelo.IndicePrimario" id="IndicePrimario9">
          <void property="elementos">
           <void method="put">
            <string>ASI0005</string>
@@ -153,38 +287,12 @@
     </void>
    </void>
   </void>
-  <void id="IndiceDoble2" property="profesores">
-   <void id="IndicePrimario4" property="indice1">
+  <void id="IndiceDoble3" property="profesores">
+   <void id="IndicePrimario10" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0002</string>
-      <object class="modelo.Profesor" id="Profesor0">
-       <void property="apellidoNombre">
-        <string>fff</string>
-       </void>
-       <void property="competencia">
-        <object class="modelo.IndicePrimario" id="IndicePrimario5">
-         <void property="elementos">
-          <void method="put">
-           <string>ASI0006</string>
-           <object idref="Asignatura1"/>
-          </void>
-         </void>
-        </object>
-       </void>
-       <void property="domicilio">
-        <string>fff</string>
-       </void>
-       <void property="legajo">
-        <string>PRO0002</string>
-       </void>
-       <void property="mail">
-        <string>fff@fff</string>
-       </void>
-       <void property="telefono">
-        <string>fff</string>
-       </void>
-      </object>
+      <object idref="Profesor0"/>
      </void>
      <void method="put">
       <string>PRO0003</string>
@@ -193,7 +301,7 @@
         <string>ggg</string>
        </void>
        <void property="competencia">
-        <object class="modelo.IndicePrimario" id="IndicePrimario6">
+        <object class="modelo.IndicePrimario" id="IndicePrimario11">
          <void property="elementos">
           <void method="put">
            <string>ASI0005</string>
@@ -245,5 +353,5 @@
  <int>7</int>
  <int>3</int>
  <int>7</int>
- <int>0</int>
+ <int>2</int>
 </java>
