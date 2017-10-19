@@ -2039,19 +2039,35 @@ public class Ventana
       case Ventana.MODIFICAR:
         try
         {
+          DefaultTableModel aux;
           Asignatura modif = new Asignatura(this.jTextFieldNombreAsignatura.getText());
-          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
           int n = aux.getRowCount();
           int i;
-          Asignatura elemento;
+          modif.setIdentificacion(this.jTextFieldIdentificadorAsignatura.getText());
+          Asignatura viejo = (Asignatura) this.receptor.buscar(modif.getIdentificacion(), Receptor.ASIGNATURA);
+
+          ArrayList<Asignatura> nuevaCorrelativa = new ArrayList<Asignatura>();
           for (i = 0; i < n; i++)
           {
-            elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
-            modif.agregarCorrelativa(elemento);
+            nuevaCorrelativa.add((Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0),
+                                                                   Receptor.ASIGNATURA));
           }
-          modif.setIdentificacion(this.jTextFieldLegajoProfesor.getText());
+          Iterator<Asignatura> asignaturasViejas = viejo.precorrelativas();
+          while (asignaturasViejas.hasNext())
+          {
+            Asignatura auxiliar = asignaturasViejas.next();
+            if (!nuevaCorrelativa.contains(auxiliar))
+              asignaturasViejas.remove();
+            else
+              nuevaCorrelativa.remove(auxiliar);
+          }
+          Iterator<Asignatura> nuevas = nuevaCorrelativa.iterator();
+          while (nuevas.hasNext())
+            viejo.agregarCorrelativa(nuevas.next());
+
           this.receptor.modificacion(modif, Receptor.ASIGNATURA);
-          this.jButtonCancelarProfesorActionPerformed(evt);
+          this.jButtonCancelarAsignaturaActionPerformed(evt);
         }
         catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
         {
@@ -2143,6 +2159,7 @@ public class Ventana
     this.accionAceptar = Ventana.NUEVO;
     this.jButtonEliminarCursada.setEnabled(false);
     this.jButtonModificarCursada.setEnabled(false);
+    this.jButtonCambiarAsignaturaCursada.setEnabled(true);
     
     this.jComboBoxDia.setEnabled(true);
     this.jButtonAgregarAlumnoCursada.setEnabled(true);
@@ -2183,7 +2200,15 @@ public class Ventana
     {
       try
       {
-        this.receptor.baja(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA);
+        this.receptor.baja(this.receptor.buscar(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA), Receptor.CURSADA);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+        aux2.setRowCount(0);
+        DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+        aux3.setRowCount(0);
+        this.jButtonCancelarCursadaActionPerformed(evt);
+
       }
       catch (NoEncontradoException e)
       {
@@ -2230,7 +2255,7 @@ public class Ventana
             nuevo.altaProfesor(prof);
           }
           this.receptor.alta(nuevo, Receptor.CURSADA);
-          this.jButtonCancelarAsignaturaActionPerformed(evt);
+          this.jButtonCancelarCursadaActionPerformed(evt);
         }
         catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
         {
@@ -2263,7 +2288,7 @@ public class Ventana
             nuevo.altaProfesor(prof);
           }
           this.receptor.modificacion(nuevo, Receptor.CURSADA);
-          this.jButtonCancelarAsignaturaActionPerformed(evt);
+          this.jButtonCancelarCursadaActionPerformed(evt);
         }
         catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
         {
