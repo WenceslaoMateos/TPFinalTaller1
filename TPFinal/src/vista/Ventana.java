@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Alumno;
 import modelo.Asignatura;
+import modelo.Cursada;
+import modelo.Dia;
 import modelo.Profesor;
 
 /**
@@ -189,7 +192,58 @@ public class Ventana
     }
     else if (this.focus.equals(Ventana.CURSADA))
     {
-      ;
+      Cursada elemento;
+      try
+      {
+        elemento =
+          (Cursada) this.receptor.buscar(this.jTableCursadaCursada.getValueAt(this.jTableCursadaCursada.getSelectedRow(),
+                                                                              0), Receptor.CURSADA);
+        this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
+        this.jTextFieldPeriodoCursada.setText(elemento.getPeriodo());
+        this.jComboBoxDia.setSelectedIndex(Dia.parseInt(elemento.getDia()));
+        this.jTextFieldInicioCursada.setText(elemento.getHoraInicio());
+        this.jTextFieldFinCursada.setText(elemento.getHoraFinalizacion());
+
+        Asignatura asig = elemento.getAsignatura();
+        this.jTextFieldIDAsignaturaCursada.setText(asig.getIdentificacion());
+        this.jTextFieldNombreAsignaturaCursada.setText(asig.getNombre());
+
+        Iterator<Profesor> profesores = elemento.profesores();
+        Profesor prof;
+        DefaultTableModel modelprof = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+        int n = modelprof.getRowCount();
+        int i;
+        for (i = n; i > 0; i--)
+          modelprof.removeRow(i);
+        while (profesores.hasNext())
+        {
+          prof = profesores.next();
+          modelprof.addRow(new Object[] { prof.getLegajo(), prof.getApellidoNombre(), prof.getDomicilio(),
+                                          prof.getMail(), prof.getTelefono() });
+        }
+        this.jTableProfesoresCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.jTableProfesoresCursada.setRowSelectionAllowed(true);
+
+        Iterator<Alumno> alumnos = elemento.alumnos();
+        Alumno alu;
+        DefaultTableModel modelalu = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+        n = modelalu.getRowCount();
+        for (i = n; i > 0; i--)
+          modelalu.removeRow(i);
+        while (alumnos.hasNext())
+        {
+          alu = alumnos.next();
+          modelalu.addRow(new Object[] { alu.getLegajo(), alu.getApellidoNombre(), alu.getDomicilio(), alu.getMail() });
+        }
+        this.jTableAlumnosCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.jTableAlumnosCursada.setRowSelectionAllowed(true);
+      }
+      catch (NoEncontradoException f)
+      {
+      }
+      catch (ArrayIndexOutOfBoundsException g)
+      {
+      }
     }
   }
 
@@ -305,7 +359,6 @@ public class Ventana
     jLabel19 = new javax.swing.JLabel();
     jTextFieldNombreAsignaturaCursada = new javax.swing.JTextField();
     jTextFieldIDAsignaturaCursada = new javax.swing.JTextField();
-    jTextFieldDiaCursada = new javax.swing.JTextField();
     jLabel20 = new javax.swing.JLabel();
     jTextFieldInicioCursada = new javax.swing.JTextField();
     jLabel21 = new javax.swing.JLabel();
@@ -315,6 +368,8 @@ public class Ventana
     jTableAlumnosCursada = new javax.swing.JTable();
     jLabel23 = new javax.swing.JLabel();
     jButtonAgregarAlumnoCursada = new javax.swing.JButton();
+    jButtonCambiarAsignaturaCursada = new javax.swing.JButton();
+    jComboBoxDia = new javax.swing.JComboBox<>();
     jButtonAgradecimientos = new javax.swing.JButton();
 
     javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -1092,36 +1147,7 @@ public class Ventana
 
     jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTableCursadaCursada.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-        "Identificador", "ID Asignatura", "Nombre Asignatura", "Periodo", "Dia", "Hora Inicio", "Hora Finalizacion"
-      }
-    )
-    {
-      Class[] types = new Class []
-      {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-      };
-      boolean[] canEdit = new boolean []
-      {
-        false, false, false, false, false, false, false
-      };
-
-      public Class getColumnClass(int columnIndex)
-      {
-        return types [columnIndex];
-      }
-
-      public boolean isCellEditable(int rowIndex, int columnIndex)
-      {
-        return canEdit [columnIndex];
-      }
-    });
+    jTableCursadaCursada.setModel(new TableModelCursada());
     jScrollPane9.setViewportView(jTableCursadaCursada);
 
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1214,9 +1240,6 @@ public class Ventana
     jTextFieldIDAsignaturaCursada.setEditable(false);
     jTextFieldIDAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jTextFieldDiaCursada.setEditable(false);
-    jTextFieldDiaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
     jLabel20.setText("Dia");
 
     jTextFieldInicioCursada.setEditable(false);
@@ -1242,6 +1265,17 @@ public class Ventana
         jButtonAgregarAlumnoCursadaActionPerformed(evt);
       }
     });
+
+    jButtonCambiarAsignaturaCursada.setText("Asignatura...");
+    jButtonCambiarAsignaturaCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonCambiarAsignaturaCursadaActionPerformed(evt);
+      }
+    });
+
+    jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
 
     javax.swing.GroupLayout jPanelResultadosCursadaLayout = new javax.swing.GroupLayout(jPanelResultadosCursada);
     jPanelResultadosCursada.setLayout(jPanelResultadosCursadaLayout);
@@ -1281,20 +1315,23 @@ public class Ventana
                   .addComponent(jTextFieldPeriodoCursada)
                   .addComponent(jTextFieldIDAsignaturaCursada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
                     .addComponent(jLabel20)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jTextFieldDiaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(14, 14, 14)
                     .addComponent(jLabel21)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jTextFieldInicioCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel22)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jTextFieldFinCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addComponent(jTextFieldNombreAsignaturaCursada)))))
+                    .addComponent(jTextFieldFinCursada))
+                  .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
+                    .addComponent(jTextFieldNombreAsignaturaCursada)
+                    .addGap(18, 18, 18)
+                    .addComponent(jButtonCambiarAsignaturaCursada))))))
           .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
           .addGroup(jPanelResultadosCursadaLayout.createSequentialGroup()
             .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1318,7 +1355,8 @@ public class Ventana
         .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel19)
           .addComponent(jTextFieldNombreAsignaturaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jTextFieldIDAsignaturaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jTextFieldIDAsignaturaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jButtonCambiarAsignaturaCursada))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jTextFieldPeriodoCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1327,9 +1365,9 @@ public class Ventana
           .addComponent(jLabel22)
           .addComponent(jTextFieldInicioCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel21)
-          .addComponent(jTextFieldDiaCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel20))
-        .addGap(36, 36, 36)
+          .addComponent(jLabel20)
+          .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(42, 42, 42)
         .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel17)
           .addComponent(jButtonAgregarProfesorCursada))
@@ -1340,7 +1378,7 @@ public class Ventana
           .addComponent(jLabel23)
           .addComponent(jButtonAgregarAlumnoCursada))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarCursada)
@@ -1512,10 +1550,12 @@ public class Ventana
           Alumno nuevo =
             new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                        this.jTextFieldMailAlumno.getText());
-          int n = this.jTableHistoria.getRowCount();
+
+          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
             nuevo.agregarHistoria(elemento);
@@ -1534,10 +1574,11 @@ public class Ventana
           Alumno modif =
             new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                        this.jTextFieldMailAlumno.getText());
-          int n = this.jTableHistoria.getRowCount();
+          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i <= n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
             modif.agregarHistoria(elemento);
@@ -1633,10 +1674,11 @@ public class Ventana
           Profesor nuevo =
             new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
                          this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
-          int n = this.jTableCompetencia.getRowCount();
+          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
             nuevo.agregarCompetencia(elemento);
@@ -1655,10 +1697,11 @@ public class Ventana
           Profesor modif =
             new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
                          this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
-          int n = this.jTableCompetencia.getRowCount();
+          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
             modif.agregarCompetencia(elemento);
@@ -1801,10 +1844,11 @@ public class Ventana
         try
         {
           Asignatura nuevo = new Asignatura(this.jTextFieldNombreAsignatura.getText());
-          int n = this.jTableCorrelativas.getRowCount();
+          DefaultTableModel aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
             nuevo.agregarCorrelativa(elemento);
@@ -1820,19 +1864,18 @@ public class Ventana
       case Ventana.MODIFICAR:
         try
         {
-          Profesor modif =
-            new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
-                         this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
-          int n = this.jTableCompetencia.getRowCount();
+          Asignatura modif = new Asignatura(this.jTextFieldNombreAsignatura.getText());
+          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          int n = aux.getRowCount();
           int i;
           Asignatura elemento;
-          for (i = 1; i <= n; i++)
+          for (i = 0; i < n; i++)
           {
-            elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
-            modif.agregarCompetencia(elemento);
+            elemento = (Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0), Receptor.ASIGNATURA);
+            modif.agregarCorrelativa(elemento);
           }
-          modif.setLegajo(this.jTextFieldLegajoProfesor.getText());
-          this.receptor.modificacion(modif, Receptor.PROFESOR);
+          modif.setIdentificacion(this.jTextFieldLegajoProfesor.getText());
+          this.receptor.modificacion(modif, Receptor.ASIGNATURA);
           this.jButtonCancelarProfesorActionPerformed(evt);
         }
         catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
@@ -1859,7 +1902,7 @@ public class Ventana
 
   private void jButtonModificarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonModificarAsignaturaActionPerformed
-    if (!this.jTextFieldLegajoProfesor
+    if (!this.jTextFieldIdentificadorAsignatura
              .getText()
              .equals(""))
     {
@@ -1878,43 +1921,212 @@ public class Ventana
 
   private void jButtonBuscarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonBuscarCursadaActionPerformed
+
+    try
+    {
+      Iterator<Cursada> cursadas = this.receptor.ubicar(this.jTextFieldBuscarCursada.getText(), Receptor.CURSADA);
+      Cursada aux;
+      DefaultTableModel model = (DefaultTableModel) this.jTableCursadaCursada.getModel();
+      model.setRowCount(0);
+      while (cursadas.hasNext())
+      {
+        aux = cursadas.next();
+        model.addRow(new Object[] { aux.getIdentificacion(), aux.getAsignatura().getIdentificacion(),
+                                    aux.getAsignatura().getNombre(), aux.getPeriodo(), aux.getDia(),
+                                    aux.getHoraInicio(), aux.getHoraFinalizacion() });
+      }
+    }
+    catch (NoEncontradoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
+    }
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonBuscarCursadaActionPerformed
 
   private void jButtonNuevoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoCursadaActionPerformed
+    this.accionAceptar = Ventana.NUEVO;
+    this.jButtonEliminarCursada.setEnabled(false);
+    this.jButtonModificarCursada.setEnabled(false);
+    this.jButtonAgregarAlumnoCursada.setEnabled(true);
+    this.jButtonAgregarProfesorCursada.setEnabled(true);
+    this.jButtonCancelarCursada.setEnabled(true);
+    this.jButtonAceptarCursada.setEnabled(true);
+    this.jButtonAgregarAlumnoCursada.setEnabled(true);
+    this.jButtonAgregarProfesorCursada.setEnabled(true);
+
+    this.jTextFieldIdentificadorCursada.setText("");
+    this.jTextFieldIDAsignaturaCursada.setText("");
+    this.jTextFieldNombreAsignaturaCursada.setText("");
+    this.jTextFieldPeriodoCursada.setEditable(true);
+    this.jTextFieldPeriodoCursada.setText("");
+    this.jComboBoxDia.setEditable(true);
+    this.jTextFieldInicioCursada.setEditable(true);
+    this.jTextFieldInicioCursada.setText("");
+    this.jTextFieldFinCursada.setEditable(true);
+    this.jTextFieldFinCursada.setText("");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoCursadaActionPerformed
 
   private void jButtonEliminarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonEliminarCursadaActionPerformed
+    if (!this.jTextFieldIdentificadorCursada
+             .getText()
+             .equals(""))
+    {
+      try
+      {
+        this.receptor.baja(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA);
+      }
+      catch (NoEncontradoException e)
+      {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+      }
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCursadaActionPerformed
 
   private void jButtonAgregarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarProfesorCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarProfesorCursadaActionPerformed
-    // TODO add your handling code here:
+    new DialogProfesor(this, this.receptor, this.jTableProfesoresCursada, new TableModelProfesor());
   }//GEN-LAST:event_jButtonAgregarProfesorCursadaActionPerformed
 
   private void jButtonAceptarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarCursadaActionPerformed
+    switch (this.accionAceptar)
+    {
+      case Ventana.NUEVO:
+        try
+        {
+          Cursada nuevo =
+            new Cursada((Asignatura) this.receptor.buscar(this.jTextFieldIDAsignaturaCursada.getText(),
+                                                          Receptor.ASIGNATURA), this.jTextFieldPeriodoCursada.getText(),
+                        Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
+                        this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
+          DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+          int n = aux.getRowCount();
+          int i;
+          Alumno alu;
+          for (i = 0; i < n; i++)
+          {
+            alu = (Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO);
+            nuevo.altaAlumno(alu);
+          }
+          aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+          n = aux.getRowCount();
+          Profesor prof;
+          for (i = 0; i < n; i++)
+          {
+            prof = (Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0), Receptor.PROFESOR);
+            nuevo.altaProfesor(prof);
+          }
+          this.receptor.alta(nuevo, Receptor.CURSADA);
+          this.jButtonCancelarAsignaturaActionPerformed(evt);
+        }
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        break;
+      case Ventana.MODIFICAR:
+        try
+        {
+          Cursada nuevo =
+            new Cursada((Asignatura) this.receptor.buscar(this.jTextFieldIDAsignaturaCursada.getText(),
+                                                          Receptor.ASIGNATURA), this.jTextFieldPeriodoCursada.getText(),
+                        Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
+                        this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
+          DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+          int n = aux.getRowCount();
+          int i;
+          Alumno alu;
+          for (i = 0; i < n; i++)
+          {
+            alu = (Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO);
+            nuevo.altaAlumno(alu);
+          }
+          aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+          n = aux.getRowCount();
+          Profesor prof;
+          for (i = 0; i < n; i++)
+          {
+            prof = (Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0), Receptor.PROFESOR);
+            nuevo.altaProfesor(prof);
+          }
+          this.receptor.modificacion(nuevo, Receptor.CURSADA);
+          this.jButtonCancelarAsignaturaActionPerformed(evt);
+        }
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        {
+          JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarCursadaActionPerformed
 
   private void jButtonCancelarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarCursadaActionPerformed
+    this.jTextFieldIdentificadorCursada.setText("");
+    this.jTextFieldIDAsignaturaCursada.setText("");
+    this.jTextFieldNombreAsignaturaCursada.setText("");
+    this.jTextFieldPeriodoCursada.setText("");
+    this.jTextFieldInicioCursada.setText("");
+    this.jTextFieldFinCursada.setText("");
+
+    this.jTextFieldPeriodoCursada.setEditable(false);
+    this.jComboBoxDia.setEditable(false);
+    this.jTextFieldInicioCursada.setEditable(false);
+    this.jTextFieldFinCursada.setEditable(false);
+
+    this.jButtonAgregarAlumnoCursada.setEnabled(false);
+    this.jButtonAgregarProfesorCursada.setEnabled(false);
+    this.jButtonAceptarCursada.setEnabled(false);
+    this.jButtonEliminarCursada.setEnabled(true);
+    this.jButtonModificarCursada.setEnabled(true);
+    this.jButtonNuevoCursada.setEnabled(true);
+    this.jButtonCancelarCursada.setEnabled(false);
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonCancelarCursadaActionPerformed
 
   private void jButtonModificarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonModificarCursadaActionPerformed
+    if (!this.jTextFieldIdentificadorCursada
+             .getText()
+             .equals(""))
+    {
+      this.jTextFieldPeriodoCursada.setEditable(true);
+      this.jComboBoxDia.setEditable(true);
+      this.jTextFieldInicioCursada.setEditable(true);
+      this.jTextFieldFinCursada.setEditable(true);
+
+      this.jButtonAgregarAlumnoCursada.setEnabled(true);
+      this.jButtonAgregarProfesorCursada.setEnabled(true);
+      this.jButtonEliminarCursada.setEnabled(true);
+      this.jButtonNuevoCursada.setEnabled(true);
+      this.jButtonAceptarCursada.setEnabled(true);
+      this.jButtonCancelarCursada.setEnabled(true);
+      this.accionAceptar = Ventana.MODIFICAR;
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarCursadaActionPerformed
 
   private void jButtonAgregarAlumnoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarAlumnoCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarAlumnoCursadaActionPerformed
+    new DialogAlumno(this, this.receptor, this.jTableAlumnosCursada, new TableModelAlumno());
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAgregarAlumnoCursadaActionPerformed
+
+  private void jButtonCambiarAsignaturaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCambiarAsignaturaCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonCambiarAsignaturaCursadaActionPerformed
+
+    new DialogAsignaturaCursada(this, this.receptor, this.jTextFieldIDAsignaturaCursada,
+                                this.jTextFieldNombreAsignaturaCursada);
+    //new DialogAsignatura(this, this.receptor, this.jTableCorrelativas, new TableModelAsignatura());
+  }//GEN-LAST:event_jButtonCambiarAsignaturaCursadaActionPerformed
 
   /**
    * @param args the command line arguments
@@ -2005,6 +2217,7 @@ public class Ventana
   private javax.swing.JButton jButtonBuscarAsignatura;
   private javax.swing.JButton jButtonBuscarCursada;
   private javax.swing.JButton jButtonBuscarProfesor;
+  private javax.swing.JButton jButtonCambiarAsignaturaCursada;
   private javax.swing.JButton jButtonCancelarAlumno;
   private javax.swing.JButton jButtonCancelarAsignatura;
   private javax.swing.JButton jButtonCancelarCursada;
@@ -2021,6 +2234,7 @@ public class Ventana
   private javax.swing.JButton jButtonNuevoAsignatura;
   private javax.swing.JButton jButtonNuevoCursada;
   private javax.swing.JButton jButtonNuevoProfesor;
+  private javax.swing.JComboBox<String> jComboBoxDia;
   private javax.swing.JDialog jDialog1;
   private javax.swing.JDialog jDialog2;
   private javax.swing.JDialog jDialog3;
@@ -2087,7 +2301,6 @@ public class Ventana
   private javax.swing.JTextField jTextFieldBuscarAsignatura;
   private javax.swing.JTextField jTextFieldBuscarCursada;
   private javax.swing.JTextField jTextFieldBuscarProfesor;
-  private javax.swing.JTextField jTextFieldDiaCursada;
   private javax.swing.JTextField jTextFieldDomicilioAlumno;
   private javax.swing.JTextField jTextFieldDomicilioProfesor;
   private javax.swing.JTextField jTextFieldFinCursada;
