@@ -9,6 +9,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.HeadlessException;
 
+import java.awt.event.ActionEvent;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -53,6 +55,10 @@ public class Ventana
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
     this.setVisible(true);
+    this.jButtonAgregarCorrelativa.setEnabled(false);
+    this.jButtonEliminarCorrelativa.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+    this.jButtonCancelarAsignatura.setEnabled(false);
     this.jButtonEliminarHistoria.setEnabled(false);
     this.jButtonEliminarCompetencia.setEnabled(false);
     this.jButtonAgregarHistoria.setEnabled(false);
@@ -77,6 +83,12 @@ public class Ventana
         .getSelectionModel()
         .addListSelectionListener(this);
     this.jTableProfesorProfesor
+        .getSelectionModel()
+        .addListSelectionListener(this);
+    this.jTableCursadaCursada
+        .getSelectionModel()
+        .addListSelectionListener(this);
+    this.jTableAsignaturaAsignatura
         .getSelectionModel()
         .addListSelectionListener(this);
   }
@@ -167,7 +179,6 @@ public class Ventana
                                                                                          0), Receptor.ASIGNATURA);
           this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
           this.jTextFieldNombreAsignatura.setText(elemento.getNombre());
-
           Iterator<Asignatura> asignaturas = elemento.precorrelativas();
           Asignatura aux;
           DefaultTableModel model = (DefaultTableModel) this.jTableCorrelativas.getModel();
@@ -325,6 +336,7 @@ public class Ventana
     jButtonAceptarAsignatura = new javax.swing.JButton();
     jButtonCancelarAsignatura = new javax.swing.JButton();
     jButtonModificarAsignatura = new javax.swing.JButton();
+    jButtonEliminarCorrelativa = new javax.swing.JButton();
     jPanel3 = new javax.swing.JPanel();
     jScrollPane8 = new javax.swing.JScrollPane();
     jTableAsignaturaAsignatura = new javax.swing.JTable();
@@ -874,10 +886,11 @@ public class Ventana
           .addComponent(jLabel11)
           .addComponent(jTextFieldTelefonoProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel10)
-          .addComponent(jButtonEliminarCompetencia)
-          .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jLabel10)
+            .addComponent(jButtonEliminarCompetencia)))
         .addGap(18, 18, 18)
         .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1028,6 +1041,8 @@ public class Ventana
       }
     });
 
+    jButtonEliminarCorrelativa.setText("Eliminar...");
+
     javax.swing.GroupLayout jPanelResultadosAsignaturaLayout = new javax.swing.GroupLayout(jPanelResultadosAsignatura);
     jPanelResultadosAsignatura.setLayout(jPanelResultadosAsignaturaLayout);
     jPanelResultadosAsignaturaLayout.setHorizontalGroup(
@@ -1046,8 +1061,10 @@ public class Ventana
           .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButtonAgregarCorrelativa))
+            .addGap(152, 152, 152)
+            .addComponent(jButtonAgregarCorrelativa)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jButtonEliminarCorrelativa))
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
@@ -1082,7 +1099,8 @@ public class Ventana
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel16)
-          .addComponent(jButtonAgregarCorrelativa))
+          .addComponent(jButtonAgregarCorrelativa)
+          .addComponent(jButtonEliminarCorrelativa))
         .addGap(18, 18, 18)
         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         .addGap(18, 18, 18)
@@ -1889,6 +1907,8 @@ public class Ventana
     this.jButtonModificarAsignatura.setEnabled(false);
 
     this.jButtonAgregarCorrelativa.setEnabled(true);
+    this.jButtonEliminarCorrelativa.setEnabled(true);
+    this.jButtonAceptarAsignatura.setEnabled(true);
     this.jButtonCancelarAsignatura.setEnabled(true);
     this.jTextFieldNombreAsignatura.setEditable(true);
     this.jTextFieldIdentificadorAsignatura.setText("");
@@ -1978,12 +1998,17 @@ public class Ventana
     this.jTextFieldIdentificadorAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setEditable(false);
+    
     this.jButtonAgregarCorrelativa.setEnabled(false);
-    this.jButtonAceptarAsignatura.setEnabled(false);
+    this.jButtonEliminarCorrelativa.setEnabled(false);
+    
     this.jButtonEliminarAsignatura.setEnabled(true);
     this.jButtonModificarAsignatura.setEnabled(true);
     this.jButtonNuevoAsignatura.setEnabled(true);
+
     this.jButtonCancelarAsignatura.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+    
   }//GEN-LAST:event_jButtonCancelarAsignaturaActionPerformed
 
   private void jButtonModificarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAsignaturaActionPerformed
@@ -1993,9 +2018,11 @@ public class Ventana
              .equals(""))
     {
       this.jTextFieldNombreAsignatura.setEditable(true);
+      
       this.jButtonAgregarCorrelativa.setEnabled(true);
-      this.jButtonEliminarAsignatura.setEnabled(true);
-      this.jButtonNuevoAsignatura.setEnabled(true);
+      this.jButtonEliminarCorrelativa.setEnabled(true);
+      this.jButtonEliminarAsignatura.setEnabled(false);
+      this.jButtonNuevoAsignatura.setEnabled(false);
       this.jButtonAceptarAsignatura.setEnabled(true);
       this.jButtonCancelarAsignatura.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
@@ -2337,6 +2364,7 @@ public class Ventana
   private javax.swing.JButton jButtonEliminarAlumno;
   private javax.swing.JButton jButtonEliminarAsignatura;
   private javax.swing.JButton jButtonEliminarCompetencia;
+  private javax.swing.JButton jButtonEliminarCorrelativa;
   private javax.swing.JButton jButtonEliminarCursada;
   private javax.swing.JButton jButtonEliminarHistoria;
   private javax.swing.JButton jButtonEliminarProfesor;

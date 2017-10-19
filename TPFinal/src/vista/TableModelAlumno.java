@@ -14,6 +14,12 @@ public class TableModelAlumno
     super(new Object[] { "Legajo", "Apellido y Nombre", "Domicilio", "Mail" }, 0);
   }
 
+  @Override
+  public boolean isCellEditable(int row, int column)
+  {
+    return false;
+  }
+
   public void agregarFilas(Iterator alumnos)
   {
     Alumno aux;

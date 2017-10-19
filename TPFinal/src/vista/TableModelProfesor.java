@@ -14,6 +14,11 @@ public class TableModelProfesor
     super(new Object[] { "Legajo", "Apellido y Nombre", "Domicilio", "Mail", "Telefono" }, 0);
   }
 
+  @Override
+  public boolean isCellEditable(int row, int column)
+  {
+    return false;
+  }
   public void agregarFilas(Iterator profesores)
   {
     Profesor aux;
