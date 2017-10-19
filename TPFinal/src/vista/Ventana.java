@@ -106,6 +106,10 @@ public class Ventana
       DefaultTableModel aux2;
       aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
       aux2.setRowCount(0);
+      aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+      aux2.setRowCount(0);
+      aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+      aux2.setRowCount(0);
       if (this.focus.equals(Ventana.ALUMNO))
       {
         Alumno elemento;
@@ -1521,6 +1525,9 @@ public class Ventana
 
     DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
     aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
+    aux2.setRowCount(0);
+
   }//GEN-LAST:event_jButtonNuevoAlumnoActionPerformed
 
   private void jButtonAgregarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarHistoriaActionPerformed
@@ -1568,6 +1575,8 @@ public class Ventana
         this.receptor.baja(this.jTextFieldLegajoAlumno.getText(), Receptor.ALUMNO);
         DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
         aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
+        aux2.setRowCount(0);
         this.jButtonCancelarAlumnoActionPerformed(evt);
       }
       catch (NoEncontradoException e)
@@ -1716,6 +1725,13 @@ public class Ventana
     this.jTextFieldTelefonoProfesor.setText("");
     DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
     aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+    aux2.setRowCount(0);
+
+    this.jButtonBuscarProfesor.setEnabled(false);
+    this.jTextFieldBuscarProfesor.setEditable(false);
+    this.jTextFieldBuscarProfesor.setText("");
+
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoProfesorActionPerformed
 
@@ -1728,6 +1744,11 @@ public class Ventana
       try
       {
         this.receptor.baja(this.jTextFieldLegajoProfesor.getText(), Receptor.PROFESOR);
+        this.jButtonCancelarProfesorActionPerformed(evt);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+        aux2.setRowCount(0);
       }
       catch (NoEncontradoException e)
       {
@@ -1735,7 +1756,7 @@ public class Ventana
       }
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder eliminarlo");
   }//GEN-LAST:event_jButtonEliminarProfesorActionPerformed
 
   private void jButtonAgregarCompetenciaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCompetenciaActionPerformed
@@ -1834,6 +1855,9 @@ public class Ventana
 
     DefaultTableModel aux = ((DefaultTableModel) this.jTableCompetencia.getModel());
     aux.setRowCount(0);
+    this.jButtonBuscarProfesor.setEnabled(true);
+    this.jTextFieldBuscarProfesor.setEditable(true);
+    this.jTextFieldBuscarProfesor.setText("");
 
   }//GEN-LAST:event_jButtonCancelarProfesorActionPerformed
 
@@ -1861,7 +1885,7 @@ public class Ventana
       aux.setRowCount(0);
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder modificarlo");
   }//GEN-LAST:event_jButtonModificarProfesorActionPerformed
 
   private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPaneStateChanged
@@ -1913,6 +1937,15 @@ public class Ventana
     this.jTextFieldNombreAsignatura.setEditable(true);
     this.jTextFieldIdentificadorAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setText("");
+    
+    DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+    aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+    aux2.setRowCount(0);
+
+    this.jButtonBuscarAsignatura.setEnabled(false);
+    this.jTextFieldBuscarAsignatura.setEditable(false);
+    this.jTextFieldBuscarAsignatura.setText("");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoAsignaturaActionPerformed
 
@@ -1925,6 +1958,11 @@ public class Ventana
       try
       {
         this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
+        this.jButtonCancelarAsignaturaActionPerformed(evt);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+        aux2.setRowCount(0);
       }
       catch (NoEncontradoException e)
       {
@@ -2008,6 +2046,12 @@ public class Ventana
 
     this.jButtonCancelarAsignatura.setEnabled(false);
     this.jButtonAceptarAsignatura.setEnabled(false);
+    DefaultTableModel aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
+    aux.setRowCount(0);
+
+    this.jButtonBuscarAsignatura.setEnabled(true);
+    this.jTextFieldBuscarAsignatura.setEditable(true);
+    this.jTextFieldBuscarAsignatura.setText("");
     
   }//GEN-LAST:event_jButtonCancelarAsignaturaActionPerformed
 
@@ -2026,9 +2070,16 @@ public class Ventana
       this.jButtonAceptarAsignatura.setEnabled(true);
       this.jButtonCancelarAsignatura.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
+      
+      DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+      aux.setRowCount(0);
+
+      this.jButtonBuscarAsignatura.setEnabled(false);
+      this.jTextFieldBuscarAsignatura.setEditable(false);
+      this.jTextFieldBuscarAsignatura.setText("");
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder modificarlo");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarAsignaturaActionPerformed
 
