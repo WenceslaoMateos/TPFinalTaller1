@@ -156,7 +156,7 @@ public class Asignatura
      */
     public static boolean validaAsignatura(Asignatura asignatura)
     {
-        return asignatura.getNombre().equals("");
+        return !asignatura.getNombre().equals("");
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

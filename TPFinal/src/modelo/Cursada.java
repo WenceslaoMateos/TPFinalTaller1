@@ -42,7 +42,7 @@ public class Cursada
         this.profesores = new IndicePrimario<Profesor>();
         this.alumnos = new IndicePrimario<Alumno>();
     }
-    
+
     /**
      * Clave primaria de una cursada.
      * @return Ver getIdentificacion().
@@ -52,7 +52,7 @@ public class Cursada
     {
         return this.getIdentificacion();
     }
-    
+
     /**
      * Clave secundaria de una cursada.
      * @return
@@ -64,7 +64,7 @@ public class Cursada
     }
 
     private int parseInt(String hora)
-    {   
+    {
         //Parsea el string de la hora de acuerdo a la mascara para que trabaje con un numero entero directo
         return Integer.parseInt(hora.substring(0, 2)) * 100 + Integer.parseInt(hora.substring(3, 5));
     }
@@ -129,52 +129,83 @@ public class Cursada
         return horaFinalizacion;
     }
 
+    /**
+     * Verifica que el alumno tenga las precorrelativas de la asignatura de la cursada aprobadas.
+     * @param alumno Alumno a verificar su historia académica.
+     * @return <b>true</b> si el alumno cumple con las correlatividades, <b>false</b> en caso contrario.
+     */
     public boolean correlativasAprobadas(Alumno alumno)
     {
         return this.asignatura.compruebaCorrelativas(alumno);
     }
 
+    /**
+     * Verifica que el profesor esté habilitado para dar la asignatura de la cursada.
+     * @param profesor Profesor a verificar sus competencias.
+     * @return <b>true</b> si el profesor está habilitado a dar la asignatura, <b>false</b> en caso contrario.
+     */
     public boolean aceptaCompetencia(Profesor profesor)
     {
         return profesor.habilitadoParaAsignatura(this.asignatura);
     }
 
+    /**
+     * Verifica que el periodo sea correcto, según las especificaciones.<br>
+     * Las mismas imponen que el periodo debe tener la forma CC-AAAA, siendo CC 01 o 02 según que cuatrimeste sea
+     * y AAAA el año.
+     * @param periodo String a verificar.
+     * @return <b>true</b> si el parámetro cumple con las especificaciones, <b>false</b> en caso contrario.
+     */
     public static boolean validaPeriodo(String periodo)
     {
-        boolean ret;
-    if ((periodo.length() == 7) && (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
-            Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
-            Integer.parseInt(periodo.substring(3, periodo.length())) < 2500)
-            ret = true;
-        else
-            ret = false;
-        return ret;
+        return ((periodo.length() == 7) &&
+                (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+                Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
+                Integer.parseInt(periodo.substring(3, periodo.length())) < 2500);
     }
-
+    
+    /**
+     * Verifica que la hora sea correcta, según las especificaciones.<br>
+     * Las mismas imponen que debe tomar el formato xx:xx, siendo x un número del 0 al 9. A su vez, debe ser una hora
+     * posible.
+     * @param hora String a verificar.
+     * @return <b>true</b> si el parámetro cumple con las especificaciones, <b>false</b> en caso contrario.
+     */
     public static boolean validaHora(String hora)
     {
-        boolean ret;
-        if ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 12) &&
-            (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
-            (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':')
-            ret = true;
-        else
-            ret = false;
-        return ret;
+        return ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 12) &&
+                (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
+                (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':');
     }
 
+    /**
+     * Verifica que el horario proporcionado sea posible.
+     * @param horaInicio Hora de comienzo de la cursada.
+     * @param horaFinalizacion Hora de finalización de la cursada.
+     * @return <b>true</b> si la hora de inicio es previa a la de finalización, <b>false</b> en caso contrario.
+     */
     public static boolean validaHorario(String horaInicio, String horaFinalizacion)
     {
         return horaInicio.compareTo(horaFinalizacion) < 0;
     }
-    
+
+    /**
+     * Verifica que los atributos de una cursada sean correctos.
+     * @param cursada Cursada a verificar.
+     * @return <b>true</b> si todos los atributos son correctos, <b>false</b> en caso contrario.
+     */
     public static boolean validaCursada(Cursada cursada)
     {
-        return Cursada.validaPeriodo(cursada.getPeriodo()) && Cursada.validaHora(cursada.getHoraInicio())
-            && Cursada.validaHora(cursada.getHoraFinalizacion())
-            && Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
+        return Cursada.validaPeriodo(cursada.getPeriodo()) && Cursada.validaHora(cursada.getHoraInicio()) &&
+               Cursada.validaHora(cursada.getHoraFinalizacion()) &&
+               Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
     }
-
+    
+    /**
+     * Genera una nueva identificación cumpliendo con las especificaciones para una cursada.<br>
+     * <b>Post:</b> Se otorga una identificación válida y aumenta en uno la cantidad de identificaciones.
+     * @return String que representa la nueva identificación.
+     */
     public static String getNuevaIdentificacion()
     {
         Cursada.CANT_CURSADAS++;
@@ -185,7 +216,7 @@ public class Cursada
             ret = ret + "0";
         return ret + aux;
     }
-    
+
     /**
      * Agrega un nuevo alumno a la cursada.<br>
      * <b>Pre:</b> nuevo es un Aumno ya existente en el sistema y tiene disponibilidad horaria.<br>
@@ -203,8 +234,8 @@ public class Cursada
             throw new DatoInvalidoException(nuevo, "El alumno ya tiene aprobada la asignatura.");
         else
             this.alumnos.agregar(nuevo);
-}
-    
+    }
+
     /**
      * Da de baja en la cursada al alumno parámetro.<br>
      * <b>Pre:</b> El alumno fue ubicado previamente entre los participantes de la cursada.<br>
@@ -215,7 +246,7 @@ public class Cursada
     {
         this.alumnos.eliminar(elim);
     }
-    
+
     /**
      * Agrega un nuevo profesor a la cursada.<br>
      * <b>Pre:</b> nuevo es un Profesor ya existente en el sistema y tiene disponibilidad horaria.<br>
@@ -233,40 +264,77 @@ public class Cursada
             this.profesores.agregar(nuevo);
     }
     
+    /**
+     * Da de baja en la cursada al profesor parámetro.<br>
+     * <b>Pre:</b> El profesor fue ubicado previamente entre los participantes de la cursada.<br>
+     * <b>Post:</b> La cursada cuenta con un profesor menos.
+     * @param elim Profesor a dar de baja.
+     */
     public void bajaProfesor(Profesor elim)
     {
-        // Es precondición que el profesor exista.
         this.profesores.eliminar(elim);
     }
     
+    /**
+     * Verifica si la cursada parámetro se superpone con la invocante.<br>
+     * Esto se produce si ambas cursadas ocurren en el mismo periodo, durante el mismo día y hay una superposición
+     * en sus franjas horarias.
+     * @param otro Cursada a comparar con la invocante.
+     * @return <b>true</b> si existe superposición, <b>false</b> en caso contrario.
+     */
     public boolean hayColision(Cursada otro)
     {
-    return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia() &&
-           !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0 ||
-             this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
-        // Las cursadas deben estar en el mismo periodo, en el mismo día y deben superponerse los horarios.
+        return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia() &&
+               !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0 ||
+                 this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
     }
     
+    /**
+     * Verifica si el alumno parámetro se encuentra entre los participantes de la cursada.
+     * @param alumno Alumno a buscar.
+     * @return <b>true</b> si se encontró al alumno, <b>false</b> en caso contrario.
+     */
     public boolean tieneAlumno(Alumno alumno)
     {
         return this.alumnos.contieneValor(alumno);
     }
-    
+
+    /**
+     * Verifica si el profesor parámetro se encuentra entre los participantes de la cursada.
+     * @param profesor Profesor a buscar.
+     * @return <b>true</b> si se encontró al profesor, <b>false</b> en caso contrario.
+     */
     public boolean tieneProfesor(Profesor profesor)
     {
         return this.profesores.contieneValor(profesor);
     }
-    
+
+    /**
+     * Otorga a los alumnos anotados en la cursada.
+     * @return Iterator con los alumnos de la cursada.
+     */
     public Iterator<Alumno> alumnos()
     {
         return this.alumnos.elementos();
     }
-    
+
+    /**
+     * Otorga a los profesores de la cursada.
+     * @return Iterator con los profesores dictando clases en la cursada.
+     */
     public Iterator<Profesor> profesores()
     {
         return this.profesores.elementos();
     }
-
+    
+    /**
+     * Le asigna la asignatura, periodo, día, hora de inicio y hora de finalización de modif al objeto invocante. No
+     * permite modificar la identificación.<br>
+     * <b>Pre:</b> Los atributos de modif son correctos.
+     * <b>Post:</b> Los cambios fueron aplicados sobre el objeto invocante.
+     * @param modif parámetro que contiene las modificaciones a aplicar sobre el objeto invocante.
+     * @throws DatoInvalidoException modif no es una cursada.
+     */
     @Override
     public void modificarDatos(I_Indexable modif)
         throws DatoInvalidoException
@@ -284,13 +352,13 @@ public class Cursada
             this.setHoraFinalizacion(aux.getHoraFinalizacion());
         }
     }
-    
+
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public Cursada()
     {
         super();
     }
-    
+
     public void setProfesores(IndicePrimario<Profesor> profesores)
     {
         this.profesores = profesores;
