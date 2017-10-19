@@ -1067,6 +1067,13 @@ public class Ventana
     });
 
     jButtonEliminarCorrelativa.setText("Eliminar...");
+    jButtonEliminarCorrelativa.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarCorrelativaActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout jPanelResultadosAsignaturaLayout = new javax.swing.GroupLayout(jPanelResultadosAsignatura);
     jPanelResultadosAsignatura.setLayout(jPanelResultadosAsignaturaLayout);
@@ -2412,6 +2419,19 @@ public class Ventana
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCompetenciaActionPerformed
+
+  private void jButtonEliminarCorrelativaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCorrelativaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarCorrelativaActionPerformed
+  if (this.jTableCorrelativas.getSelectedRow() != -1)
+  {
+    TableModelAsignatura aux = (TableModelAsignatura) this.jTableCorrelativas.getModel();
+    aux.eliminarFila(this.jTableCorrelativas.getSelectedRow());
+    this.jTableCorrelativas.repaint();
+  }
+  else
+    JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+      // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarCorrelativaActionPerformed
 
   /**
    * @param args the command line arguments

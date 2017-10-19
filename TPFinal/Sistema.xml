@@ -202,14 +202,7 @@
       <string>ASI0006</string>
       <object class="modelo.Asignatura" id="Asignatura2">
        <void property="correlatividades">
-        <object class="modelo.IndicePrimario" id="IndicePrimario8">
-         <void property="elementos">
-          <void method="put">
-           <string>ASI0006</string>
-           <object idref="Asignatura2"/>
-          </void>
-         </void>
-        </object>
+        <object class="modelo.IndicePrimario"/>
        </void>
        <void property="identificacion">
         <string>ASI0006</string>
@@ -253,7 +246,7 @@
    </void>
   </void>
   <void id="IndiceDoble3" property="profesores">
-   <void id="IndicePrimario9" property="indice1">
+   <void id="IndicePrimario8" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0002</string>
@@ -262,7 +255,7 @@
         <string>fff</string>
        </void>
        <void property="competencia">
-        <object class="modelo.IndicePrimario" id="IndicePrimario10">
+        <object class="modelo.IndicePrimario" id="IndicePrimario9">
          <void property="elementos">
           <void method="put">
            <string>ASI0006</string>
