@@ -1346,8 +1346,22 @@ public class Ventana
     jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
 
     jButtonEliminarProfesorCursada.setText("Eliminar...");
+    jButtonEliminarProfesorCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarProfesorCursadaActionPerformed(evt);
+      }
+    });
 
     jButtonEliminarAlumnoCursada.setText("Eliminar...");
+    jButtonEliminarAlumnoCursada.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarAlumnoCursadaActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout jPanelResultadosCursadaLayout = new javax.swing.GroupLayout(jPanelResultadosCursada);
     jPanelResultadosCursada.setLayout(jPanelResultadosCursadaLayout);
@@ -2416,7 +2430,7 @@ public class Ventana
       this.jTableCompetencia.repaint();
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la competencia");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCompetenciaActionPerformed
 
@@ -2429,9 +2443,35 @@ public class Ventana
     this.jTableCorrelativas.repaint();
   }
   else
-    JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+    JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de las correlativas");
       // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCorrelativaActionPerformed
+
+  private void jButtonEliminarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarProfesorCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarProfesorCursadaActionPerformed
+  if (this.jTableProfesoresCursada.getSelectedRow() != -1)
+  {
+    TableModelProfesor aux = (TableModelProfesor) this.jTableProfesoresCursada.getModel();
+    aux.eliminarFila(this.jTableProfesoresCursada.getSelectedRow());
+    this.jTableProfesoresCursada.repaint();
+  }
+  else
+    JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder eliminarlo de la cursada");
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarProfesorCursadaActionPerformed
+
+  private void jButtonEliminarAlumnoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarAlumnoCursadaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarAlumnoCursadaActionPerformed
+  if (this.jTableAlumnosCursada.getSelectedRow() != -1)
+  {
+    TableModelAlumno aux = (TableModelAlumno) this.jTableAlumnosCursada.getModel();
+    aux.eliminarFila(this.jTableAlumnosCursada.getSelectedRow());
+    this.jTableAlumnosCursada.repaint();
+  }
+  else
+    JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarAlumnoCursadaActionPerformed
 
   /**
    * @param args the command line arguments
