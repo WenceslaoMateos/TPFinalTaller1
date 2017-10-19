@@ -5,93 +5,73 @@
    <void id="IndicePrimario0" property="indice1">
     <void property="elementos">
      <void method="put">
-      <string>ALU0005</string>
+      <string>ALU0001</string>
       <object class="modelo.Alumno" id="Alumno0">
        <void property="apellidoNombre">
-        <string>Pablos Braulio</string>
+        <string>Wen</string>
        </void>
        <void property="domicilio">
-        <string>Chaco 33</string>
+        <string>lalala</string>
        </void>
        <void property="historia">
         <object class="modelo.IndicePrimario"/>
        </void>
        <void property="legajo">
-        <string>ALU0005</string>
+        <string>ALU0001</string>
        </void>
        <void property="mail">
-        <string>bravlinleonel@gmail.com</string>
+        <string>a@aaa</string>
        </void>
       </object>
      </void>
      <void method="put">
-      <string>ALU0006</string>
+      <string>ALU0002</string>
       <object class="modelo.Alumno" id="Alumno1">
        <void property="apellidoNombre">
-        <string>Mateos Wenceslao</string>
+        <string>lelele</string>
        </void>
        <void property="domicilio">
-        <string>Alberti 2345</string>
+        <string>alalal</string>
        </void>
        <void property="historia">
         <object class="modelo.IndicePrimario"/>
        </void>
        <void property="legajo">
-        <string>ALU0006</string>
+        <string>ALU0002</string>
        </void>
        <void property="mail">
-        <string>wenceslaomateos@gmail.com</string>
+        <string>elele@lalala</string>
        </void>
       </object>
      </void>
      <void method="put">
-      <string>ALU0007</string>
+      <string>ALU0003</string>
       <object class="modelo.Alumno" id="Alumno2">
        <void property="apellidoNombre">
-        <string>Lanzillotta Franco</string>
+        <string>Wen</string>
        </void>
        <void property="domicilio">
-        <string>Chubut 2070</string>
+        <string>lalal</string>
        </void>
        <void property="historia">
         <object class="modelo.IndicePrimario"/>
        </void>
        <void property="legajo">
-        <string>ALU0007</string>
+        <string>ALU0003</string>
        </void>
        <void property="mail">
-        <string>francolanzi96@gmail.com</string>
+        <string>pepep@assdas</string>
        </void>
       </object>
      </void>
      <void method="put">
-      <string>ALU0008</string>
+      <string>ALU0004</string>
       <object class="modelo.Alumno" id="Alumno3">
        <void property="apellidoNombre">
-        <string>Pico Juan</string>
+        <string>asdasd</string>
        </void>
        <void property="domicilio">
-        <string>Picoland 23</string>
-       </void>
-       <void property="historia">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="legajo">
-        <string>ALU0008</string>
-       </void>
-       <void property="mail">
-        <string>bokunopico@gmail.com</string>
-       </void>
-      </object>
-     </void>
-     <void method="put">
-      <string>ALU0009</string>
-      <object class="modelo.Alumno" id="Alumno4">
-       <void property="apellidoNombre">
-        <string>zx</string>
-       </void>
-       <void property="domicilio">
-        <string>czxc</string>
+        <string>wewew</string>
        </void>
        <void property="historia">
         <object class="modelo.IndicePrimario" id="IndicePrimario1">
@@ -114,37 +94,10 @@
         </object>
        </void>
        <void property="legajo">
-        <string>ALU0009</string>
+        <string>ALU0004</string>
        </void>
        <void property="mail">
-        <string>asda@asda</string>
-       </void>
-      </object>
-     </void>
-     <void method="put">
-      <string>ALU0010</string>
-      <object class="modelo.Alumno" id="Alumno5">
-       <void property="apellidoNombre">
-        <string>Lopez Jose</string>
-       </void>
-       <void property="domicilio">
-        <string>lalal</string>
-       </void>
-       <void property="historia">
-        <object class="modelo.IndicePrimario" id="IndicePrimario2">
-         <void property="elementos">
-          <void method="put">
-           <string>ASI0001</string>
-           <object idref="Asignatura0"/>
-          </void>
-         </void>
-        </object>
-       </void>
-       <void property="legajo">
-        <string>ALU0010</string>
-       </void>
-       <void property="mail">
-        <string>pepe@pupu</string>
+        <string>aaa@ssss</string>
        </void>
       </object>
      </void>
@@ -152,39 +105,18 @@
    </void>
    <void property="indice2">
     <void method="put">
-     <string>Lanzillotta Franco</string>
+     <string>Wen</string>
      <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno0"/>
+      </void>
       <void method="add">
        <object idref="Alumno2"/>
       </void>
      </object>
     </void>
     <void method="put">
-     <string>Lopez Jose</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Alumno5"/>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>Mateos Wenceslao</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Alumno1"/>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>Pablos Braulio</string>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object idref="Alumno0"/>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>Pico Juan</string>
+     <string>asdasd</string>
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Alumno3"/>
@@ -192,17 +124,703 @@
      </object>
     </void>
     <void method="put">
-     <string>zx</string>
+     <string>lelele</string>
      <object class="java.util.ArrayList">
       <void method="add">
-       <object idref="Alumno4"/>
+       <object idref="Alumno1"/>
       </void>
      </object>
     </void>
    </void>
   </void>
-  <void id="IndiceDoble1" property="planDeEstudio">
-   <void id="IndicePrimario3" property="indice1">
+  <void id="IndiceDoble1" property="calendario">
+   <void id="IndicePrimario2" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>CUR0001</string>
+      <object class="modelo.Cursada" id="Cursada0">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object class="java.lang.Enum" id="Dia0" method="valueOf">
+         <class>modelo.Dia</class>
+         <string>LUN</string>
+        </object>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0001</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario4">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object class="modelo.Profesor" id="Profesor0">
+            <void property="apellidoNombre">
+             <string>lionel</string>
+            </void>
+            <void property="competencia">
+             <object class="modelo.IndicePrimario" id="IndicePrimario5">
+              <void property="elementos">
+               <void method="put">
+                <string>ASI0001</string>
+                <object idref="Asignatura0"/>
+               </void>
+              </void>
+             </object>
+            </void>
+            <void property="domicilio">
+             <string>lalal</string>
+            </void>
+            <void property="legajo">
+             <string>PRO0001</string>
+            </void>
+            <void property="mail">
+             <string>seses@asasa</string>
+            </void>
+            <void property="telefono">
+             <string>pepepe</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0002</string>
+      <object class="modelo.Cursada" id="Cursada1">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario6">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0002</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario7">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0003</string>
+      <object class="modelo.Cursada" id="Cursada2">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario8">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0003</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario9">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0004</string>
+      <object class="modelo.Cursada" id="Cursada3">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario10">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0004</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario11">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0005</string>
+      <object class="modelo.Cursada" id="Cursada4">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario12">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0005</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario13">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0006</string>
+      <object class="modelo.Cursada" id="Cursada5">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario14">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0006</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario15">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0007</string>
+      <object class="modelo.Cursada" id="Cursada6">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario16">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0007</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario17">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0008</string>
+      <object class="modelo.Cursada" id="Cursada7">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario18">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0008</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario19">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0009</string>
+      <object class="modelo.Cursada" id="Cursada8">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario20">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0009</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario21">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0010</string>
+      <object class="modelo.Cursada" id="Cursada9">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario22">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0010</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario23">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0011</string>
+      <object class="modelo.Cursada" id="Cursada10">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario24">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0011</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario25">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0012</string>
+      <object class="modelo.Cursada" id="Cursada11">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario26">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0012</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario27">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0013</string>
+      <object class="modelo.Cursada" id="Cursada12">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario28">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0013</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario29">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>CUR0014</string>
+      <object class="modelo.Cursada" id="Cursada13">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario" id="IndicePrimario30">
+         <void property="elementos">
+          <void method="put">
+           <string>ALU0001</string>
+           <object idref="Alumno0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura0"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>16:30</string>
+       </void>
+       <void property="horaInicio">
+        <string>14:30</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0014</string>
+       </void>
+       <void property="periodo">
+        <string>01-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario" id="IndicePrimario31">
+         <void property="elementos">
+          <void method="put">
+           <string>PRO0001</string>
+           <object idref="Profesor0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <int>11430</int>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Cursada0"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada1"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada2"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada3"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada4"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada5"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada6"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada7"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada8"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada9"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada10"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada11"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada12"/>
+      </void>
+      <void method="add">
+       <object idref="Cursada13"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble2" property="planDeEstudio">
+   <void id="IndicePrimario32" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>ASI0001</string>
@@ -221,37 +839,18 @@
     </void>
    </void>
   </void>
-  <void id="IndiceDoble2" property="profesores">
-   <void id="IndicePrimario4" property="indice1">
+  <void id="IndiceDoble3" property="profesores">
+   <void id="IndicePrimario33" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0001</string>
-      <object class="modelo.Profesor" id="Profesor0">
-       <void property="apellidoNombre">
-        <string>Guccione Leonel</string>
-       </void>
-       <void property="competencia">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="domicilio">
-        <string>Algunlugar 1234</string>
-       </void>
-       <void property="legajo">
-        <string>PRO0001</string>
-       </void>
-       <void property="mail">
-        <string>leonelito@gmail.com</string>
-       </void>
-       <void property="telefono">
-        <string>472-12344</string>
-       </void>
-      </object>
+      <object idref="Profesor0"/>
      </void>
     </void>
    </void>
    <void property="indice2">
     <void method="put">
-     <string>Guccione Leonel</string>
+     <string>lionel</string>
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Profesor0"/>
@@ -261,8 +860,8 @@
    </void>
   </void>
  </object>
- <int>10</int>
+ <int>4</int>
  <int>1</int>
  <int>1</int>
- <int>0</int>
+ <int>14</int>
 </java>

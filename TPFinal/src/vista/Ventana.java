@@ -1926,7 +1926,7 @@ public class Ventana
     {
       Iterator<Cursada> cursadas = this.receptor.ubicar(this.jTextFieldBuscarCursada.getText(), Receptor.CURSADA);
       Cursada aux;
-      DefaultTableModel model = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+      DefaultTableModel model = (DefaultTableModel) this.jTableCursadaCursada.getModel();
       model.setRowCount(0);
       while (cursadas.hasNext())
       {
