@@ -15,6 +15,11 @@ public class TableModelCursada
                          "Hora Finalizacion" }, 0);
   }
 
+  @Override
+  public boolean isCellEditable(int row, int column)
+  {
+    return false;
+  }
   public void agregarFilas(Iterator cursadas)
   {
     Cursada aux;

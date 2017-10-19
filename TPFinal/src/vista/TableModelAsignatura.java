@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Iterator;
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Asignatura;
@@ -12,6 +14,17 @@ public class TableModelAsignatura
   public TableModelAsignatura()
   {
     super(new Object[] { "Identificacion", "Nombre" }, 0);
+  }
+  
+  @Override
+  public boolean isCellEditable(int row, int column)
+  {
+    return false;
+  }
+  public void eliminarFila(int fila)
+  {
+    Vector aux=this.getDataVector();
+    aux.remove(fila);
   }
 
   public void agregarFilas(Iterator asignaturas)

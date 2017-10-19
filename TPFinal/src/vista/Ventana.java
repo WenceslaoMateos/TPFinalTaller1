@@ -9,6 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.HeadlessException;
 
+import java.awt.event.ActionEvent;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JDialog;
@@ -52,6 +55,12 @@ public class Ventana
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
     this.setVisible(true);
+    this.jButtonAgregarCorrelativa.setEnabled(false);
+    this.jButtonEliminarCorrelativa.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+    this.jButtonCancelarAsignatura.setEnabled(false);
+    this.jButtonEliminarHistoria.setEnabled(false);
+    this.jButtonEliminarCompetencia.setEnabled(false);
     this.jButtonAgregarHistoria.setEnabled(false);
     this.jButtonAceptarAlumno.setEnabled(false);
     this.jButtonCancelarAlumno.setEnabled(false);
@@ -76,6 +85,12 @@ public class Ventana
     this.jTableProfesorProfesor
         .getSelectionModel()
         .addListSelectionListener(this);
+    this.jTableCursadaCursada
+        .getSelectionModel()
+        .addListSelectionListener(this);
+    this.jTableAsignaturaAsignatura
+        .getSelectionModel()
+        .addListSelectionListener(this);
   }
 
   public void setReceptor(Receptor receptor)
@@ -86,163 +101,154 @@ public class Ventana
   @Override
   public void valueChanged(ListSelectionEvent e)
   {
-    if (this.focus.equals(Ventana.ALUMNO))
+    if (e.getValueIsAdjusting())
     {
-      Alumno elemento;
-      try
+      DefaultTableModel aux2;
+      aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
+      aux2.setRowCount(0);
+      aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+      aux2.setRowCount(0);
+      aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+      aux2.setRowCount(0);
+      if (this.focus.equals(Ventana.ALUMNO))
       {
-        elemento =
-          (Alumno) this.receptor.buscar(this.jTableAlumnoAlumno.getValueAt(this.jTableAlumnoAlumno.getSelectedRow(), 0),
-                                        Receptor.ALUMNO);
-        this.jTextFieldLegajoAlumno.setText(elemento.getLegajo());
-        this.jTextFieldNombreAlumno.setText(elemento.getApellidoNombre());
-        this.jTextFieldDomicilioAlumno.setText(elemento.getDomicilio());
-        this.jTextFieldMailAlumno.setText(elemento.getMail());
-
-        Iterator<Asignatura> asignaturas = elemento.historiaAcademica();
-        Asignatura aux;
-        DefaultTableModel model = (DefaultTableModel) this.jTableHistoria.getModel();
-        int n = model.getRowCount();
-        int i;
-        for (i = n; i > 0; i--)
-          model.removeRow(i);
-        while (asignaturas.hasNext())
+        Alumno elemento;
+        try
         {
-          aux = asignaturas.next();
-          model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
-        }
-        this.jTableHistoria.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableHistoria.setRowSelectionAllowed(true);
-      }
-      catch (NoEncontradoException f)
-      {
-      }
-      catch (ArrayIndexOutOfBoundsException g)
-      {
-      }
-    }
-    else if (this.focus.equals(Ventana.PROFESOR))
-    {
-      Profesor elemento;
-      try
-      {
-        elemento =
-          (Profesor) this.receptor.buscar(this.jTableProfesorProfesor.getValueAt(this.jTableProfesorProfesor.getSelectedRow(),
-                                                                                 0), Receptor.PROFESOR);
-        this.jTextFieldLegajoProfesor.setText(elemento.getLegajo());
-        this.jTextFieldNombreProfesor.setText(elemento.getApellidoNombre());
-        this.jTextFieldDomicilioProfesor.setText(elemento.getDomicilio());
-        this.jTextFieldMailProfesor.setText(elemento.getMail());
-        this.jTextFieldTelefonoProfesor.setText(elemento.getTelefono());
+          elemento =
+            (Alumno) this.receptor.buscar(this.jTableAlumnoAlumno.getValueAt(this.jTableAlumnoAlumno.getSelectedRow(),
+                                                                             0), Receptor.ALUMNO);
+          this.jTextFieldLegajoAlumno.setText(elemento.getLegajo());
+          this.jTextFieldNombreAlumno.setText(elemento.getApellidoNombre());
+          this.jTextFieldDomicilioAlumno.setText(elemento.getDomicilio());
+          this.jTextFieldMailAlumno.setText(elemento.getMail());
 
-        Iterator<Asignatura> asignaturas = elemento.competencias();
-        Asignatura aux;
-        DefaultTableModel model = (DefaultTableModel) this.jTableCompetencia.getModel();
-        int n = model.getRowCount();
-        int i;
-        for (i = n; i > 0; i--)
-          model.removeRow(i);
-        while (asignaturas.hasNext())
+          Iterator<Asignatura> asignaturas = elemento.historiaAcademica();
+          Asignatura aux;
+          DefaultTableModel model = (DefaultTableModel) this.jTableHistoria.getModel();
+          while (asignaturas.hasNext())
+          {
+            aux = asignaturas.next();
+            model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
+          }
+          this.jTableHistoria.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          this.jTableHistoria.setRowSelectionAllowed(true);
+        }
+        catch (NoEncontradoException f)
         {
-          aux = asignaturas.next();
-          model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
         }
-        this.jTableCompetencia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableCompetencia.setRowSelectionAllowed(true);
-      }
-      catch (NoEncontradoException f)
-      {
-      }
-      catch (ArrayIndexOutOfBoundsException g)
-      {
-      }
-    }
-    else if (this.focus.equals(Ventana.ASIGNATURA))
-    {
-      Asignatura elemento;
-      try
-      {
-        elemento =
-          (Asignatura) this.receptor.buscar(this.jTableAsignaturaAsignatura.getValueAt(this.jTableAsignaturaAsignatura.getSelectedRow(),
-                                                                                       0), Receptor.ASIGNATURA);
-        this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
-        this.jTextFieldNombreAsignatura.setText(elemento.getNombre());
-
-        Iterator<Asignatura> asignaturas = elemento.precorrelativas();
-        Asignatura aux;
-        DefaultTableModel model = (DefaultTableModel) this.jTableCorrelativas.getModel();
-        int n = model.getRowCount();
-        int i;
-        for (i = n; i > 0; i--)
-          model.removeRow(i);
-        while (asignaturas.hasNext())
+        catch (ArrayIndexOutOfBoundsException g)
         {
-          aux = asignaturas.next();
-          model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
         }
-        this.jTableCorrelativas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableCorrelativas.setRowSelectionAllowed(true);
       }
-      catch (NoEncontradoException f)
+      else if (this.focus.equals(Ventana.PROFESOR))
       {
-      }
-      catch (ArrayIndexOutOfBoundsException g)
-      {
-      }
-    }
-    else if (this.focus.equals(Ventana.CURSADA))
-    {
-      Cursada elemento;
-      try
-      {
-        elemento =
-          (Cursada) this.receptor.buscar(this.jTableCursadaCursada.getValueAt(this.jTableCursadaCursada.getSelectedRow(),
-                                                                              0), Receptor.CURSADA);
-        this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
-        this.jTextFieldPeriodoCursada.setText(elemento.getPeriodo());
-        this.jComboBoxDia.setSelectedIndex(Dia.parseInt(elemento.getDia()));
-        this.jTextFieldInicioCursada.setText(elemento.getHoraInicio());
-        this.jTextFieldFinCursada.setText(elemento.getHoraFinalizacion());
-
-        Asignatura asig = elemento.getAsignatura();
-        this.jTextFieldIDAsignaturaCursada.setText(asig.getIdentificacion());
-        this.jTextFieldNombreAsignaturaCursada.setText(asig.getNombre());
-
-        Iterator<Profesor> profesores = elemento.profesores();
-        Profesor prof;
-        DefaultTableModel modelprof = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-        int n = modelprof.getRowCount();
-        int i;
-        for (i = n; i > 0; i--)
-          modelprof.removeRow(i);
-        while (profesores.hasNext())
+        Profesor elemento;
+        try
         {
-          prof = profesores.next();
-          modelprof.addRow(new Object[] { prof.getLegajo(), prof.getApellidoNombre(), prof.getDomicilio(),
-                                          prof.getMail(), prof.getTelefono() });
-        }
-        this.jTableProfesoresCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableProfesoresCursada.setRowSelectionAllowed(true);
+          elemento =
+            (Profesor) this.receptor.buscar(this.jTableProfesorProfesor.getValueAt(this.jTableProfesorProfesor.getSelectedRow(),
+                                                                                   0), Receptor.PROFESOR);
+          this.jTextFieldLegajoProfesor.setText(elemento.getLegajo());
+          this.jTextFieldNombreProfesor.setText(elemento.getApellidoNombre());
+          this.jTextFieldDomicilioProfesor.setText(elemento.getDomicilio());
+          this.jTextFieldMailProfesor.setText(elemento.getMail());
+          this.jTextFieldTelefonoProfesor.setText(elemento.getTelefono());
 
-        Iterator<Alumno> alumnos = elemento.alumnos();
-        Alumno alu;
-        DefaultTableModel modelalu = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-        n = modelalu.getRowCount();
-        for (i = n; i > 0; i--)
-          modelalu.removeRow(i);
-        while (alumnos.hasNext())
-        {
-          alu = alumnos.next();
-          modelalu.addRow(new Object[] { alu.getLegajo(), alu.getApellidoNombre(), alu.getDomicilio(), alu.getMail() });
+          Iterator<Asignatura> asignaturas = elemento.competencias();
+          Asignatura aux;
+          DefaultTableModel model = (DefaultTableModel) this.jTableCompetencia.getModel();
+          while (asignaturas.hasNext())
+          {
+            aux = asignaturas.next();
+            model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
+          }
+          this.jTableCompetencia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          this.jTableCompetencia.setRowSelectionAllowed(true);
         }
-        this.jTableAlumnosCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableAlumnosCursada.setRowSelectionAllowed(true);
+        catch (NoEncontradoException f)
+        {
+        }
+        catch (ArrayIndexOutOfBoundsException g)
+        {
+        }
       }
-      catch (NoEncontradoException f)
+      else if (this.focus.equals(Ventana.ASIGNATURA))
       {
+        Asignatura elemento;
+        try
+        {
+          elemento =
+            (Asignatura) this.receptor.buscar(this.jTableAsignaturaAsignatura.getValueAt(this.jTableAsignaturaAsignatura.getSelectedRow(),
+                                                                                         0), Receptor.ASIGNATURA);
+          this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
+          this.jTextFieldNombreAsignatura.setText(elemento.getNombre());
+          Iterator<Asignatura> asignaturas = elemento.precorrelativas();
+          Asignatura aux;
+          DefaultTableModel model = (DefaultTableModel) this.jTableCorrelativas.getModel();
+          while (asignaturas.hasNext())
+          {
+            aux = asignaturas.next();
+            model.addRow(new Object[] { aux.getIdentificacion(), aux.getNombre() });
+          }
+          this.jTableCorrelativas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          this.jTableCorrelativas.setRowSelectionAllowed(true);
+        }
+        catch (NoEncontradoException f)
+        {
+        }
+        catch (ArrayIndexOutOfBoundsException g)
+        {
+        }
       }
-      catch (ArrayIndexOutOfBoundsException g)
+      else if (this.focus.equals(Ventana.CURSADA))
       {
+        Cursada elemento;
+        try
+        {
+          elemento =
+            (Cursada) this.receptor.buscar(this.jTableCursadaCursada.getValueAt(this.jTableCursadaCursada.getSelectedRow(),
+                                                                                0), Receptor.CURSADA);
+          this.jTextFieldIdentificadorAsignatura.setText(elemento.getIdentificacion());
+          this.jTextFieldPeriodoCursada.setText(elemento.getPeriodo());
+          this.jComboBoxDia.setSelectedIndex(Dia.parseInt(elemento.getDia()));
+          this.jTextFieldInicioCursada.setText(elemento.getHoraInicio());
+          this.jTextFieldFinCursada.setText(elemento.getHoraFinalizacion());
+
+          Asignatura asig = elemento.getAsignatura();
+          this.jTextFieldIDAsignaturaCursada.setText(asig.getIdentificacion());
+          this.jTextFieldNombreAsignaturaCursada.setText(asig.getNombre());
+
+          Iterator<Profesor> profesores = elemento.profesores();
+          Profesor prof;
+          DefaultTableModel modelprof = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+          while (profesores.hasNext())
+          {
+            prof = profesores.next();
+            modelprof.addRow(new Object[] { prof.getLegajo(), prof.getApellidoNombre(), prof.getDomicilio(),
+                                            prof.getMail(), prof.getTelefono() });
+          }
+          this.jTableProfesoresCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          this.jTableProfesoresCursada.setRowSelectionAllowed(true);
+
+          Iterator<Alumno> alumnos = elemento.alumnos();
+          Alumno alu;
+          DefaultTableModel modelalu = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+          while (alumnos.hasNext())
+          {
+            alu = alumnos.next();
+            modelalu.addRow(new Object[] { alu.getLegajo(), alu.getApellidoNombre(), alu.getDomicilio(),
+                                           alu.getMail() });
+          }
+          this.jTableAlumnosCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          this.jTableAlumnosCursada.setRowSelectionAllowed(true);
+        }
+        catch (NoEncontradoException f)
+        {
+        }
+        catch (ArrayIndexOutOfBoundsException g)
+        {
+        }
       }
     }
   }
@@ -286,6 +292,7 @@ public class Ventana
     jButtonAceptarAlumno = new javax.swing.JButton();
     jButtonCancelarAlumno = new javax.swing.JButton();
     jButtonModificarAlumno = new javax.swing.JButton();
+    jButtonEliminarHistoria = new javax.swing.JButton();
     jPanelProfesor = new javax.swing.JPanel();
     jPanelAlumno1 = new javax.swing.JPanel();
     jPanelBuscarProfesor = new javax.swing.JPanel();
@@ -314,6 +321,7 @@ public class Ventana
     jButtonModificarProfesor = new javax.swing.JButton();
     jLabel11 = new javax.swing.JLabel();
     jTextFieldTelefonoProfesor = new javax.swing.JTextField();
+    jButtonEliminarCompetencia = new javax.swing.JButton();
     jPanelAsignatura = new javax.swing.JPanel();
     jPanelBuscarAsignatura = new javax.swing.JPanel();
     jButtonBuscarAsignatura = new javax.swing.JButton();
@@ -332,6 +340,7 @@ public class Ventana
     jButtonAceptarAsignatura = new javax.swing.JButton();
     jButtonCancelarAsignatura = new javax.swing.JButton();
     jButtonModificarAsignatura = new javax.swing.JButton();
+    jButtonEliminarCorrelativa = new javax.swing.JButton();
     jPanel3 = new javax.swing.JPanel();
     jScrollPane8 = new javax.swing.JScrollPane();
     jTableAsignaturaAsignatura = new javax.swing.JTable();
@@ -552,6 +561,15 @@ public class Ventana
       }
     });
 
+    jButtonEliminarHistoria.setText("Eliminar...");
+    jButtonEliminarHistoria.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarHistoriaActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanelResultadosAlumnoLayout = new javax.swing.GroupLayout(jPanelResultadosAlumno);
     jPanelResultadosAlumno.setLayout(jPanelResultadosAlumnoLayout);
     jPanelResultadosAlumnoLayout.setHorizontalGroup(
@@ -575,7 +593,10 @@ public class Ventana
               .addComponent(jTextFieldDomicilioAlumno)
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResultadosAlumnoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonAgregarHistoria))))
+                .addComponent(jButtonAgregarHistoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEliminarHistoria)
+                .addGap(5, 5, 5))))
           .addGroup(jPanelResultadosAlumnoLayout.createSequentialGroup()
             .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanelResultadosAlumnoLayout.createSequentialGroup()
@@ -616,11 +637,12 @@ public class Ventana
           .addComponent(jLabel5)
           .addComponent(jTextFieldMailAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel6)
-          .addComponent(jButtonAgregarHistoria))
-        .addGap(2, 2, 2)
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+          .addComponent(jButtonAgregarHistoria)
+          .addComponent(jButtonEliminarHistoria))
+        .addGap(5, 5, 5)
+        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jButtonAceptarAlumno)
@@ -787,6 +809,15 @@ public class Ventana
     jTextFieldTelefonoProfesor.setEditable(false);
     jTextFieldTelefonoProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+    jButtonEliminarCompetencia.setText("Eliminar...");
+    jButtonEliminarCompetencia.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEliminarCompetenciaActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanelResultadosProfesorLayout = new javax.swing.GroupLayout(jPanelResultadosProfesor);
     jPanelResultadosProfesor.setLayout(jPanelResultadosProfesorLayout);
     jPanelResultadosProfesorLayout.setHorizontalGroup(
@@ -824,8 +855,10 @@ public class Ventana
           .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
           .addGroup(jPanelResultadosProfesorLayout.createSequentialGroup()
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButtonAgregarCompetencia)))
+            .addGap(186, 186, 186)
+            .addComponent(jButtonAgregarCompetencia)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jButtonEliminarCompetencia)))
         .addContainerGap())
     );
     jPanelResultadosProfesorLayout.setVerticalGroup(
@@ -857,11 +890,13 @@ public class Ventana
           .addComponent(jLabel11)
           .addComponent(jTextFieldTelefonoProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel10)
-          .addComponent(jButtonAgregarCompetencia))
+        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jLabel10)
+            .addComponent(jButtonEliminarCompetencia)))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarProfesor)
@@ -1010,6 +1045,8 @@ public class Ventana
       }
     });
 
+    jButtonEliminarCorrelativa.setText("Eliminar...");
+
     javax.swing.GroupLayout jPanelResultadosAsignaturaLayout = new javax.swing.GroupLayout(jPanelResultadosAsignatura);
     jPanelResultadosAsignatura.setLayout(jPanelResultadosAsignaturaLayout);
     jPanelResultadosAsignaturaLayout.setHorizontalGroup(
@@ -1028,8 +1065,10 @@ public class Ventana
           .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButtonAgregarCorrelativa))
+            .addGap(152, 152, 152)
+            .addComponent(jButtonAgregarCorrelativa)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jButtonEliminarCorrelativa))
           .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
             .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanelResultadosAsignaturaLayout.createSequentialGroup()
@@ -1064,7 +1103,8 @@ public class Ventana
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel16)
-          .addComponent(jButtonAgregarCorrelativa))
+          .addComponent(jButtonAgregarCorrelativa)
+          .addComponent(jButtonEliminarCorrelativa))
         .addGap(18, 18, 18)
         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         .addGap(18, 18, 18)
@@ -1464,18 +1504,30 @@ public class Ventana
   private void jButtonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoAlumnoActionPerformed
     this.accionAceptar = Ventana.NUEVO;
+    this.jButtonCancelarAlumnoActionPerformed(evt);
     this.jButtonEliminarAlumno.setEnabled(false);
     this.jButtonModificarAlumno.setEnabled(false);
-    this.jButtonAgregarHistoria.setEnabled(true);
+
     this.jButtonCancelarAlumno.setEnabled(true);
-    this.jTextFieldNombreAlumno.setEditable(true);
-    this.jTextFieldDomicilioAlumno.setEditable(true);
     this.jButtonAceptarAlumno.setEnabled(true);
-    this.jTextFieldMailAlumno.setEditable(true);
+
     this.jTextFieldLegajoAlumno.setText("");
+    this.jTextFieldNombreAlumno.setEditable(true);
     this.jTextFieldNombreAlumno.setText("");
+    this.jTextFieldDomicilioAlumno.setEditable(true);
     this.jTextFieldDomicilioAlumno.setText("");
+    this.jTextFieldMailAlumno.setEditable(true);
     this.jTextFieldMailAlumno.setText("");
+
+    this.jButtonBuscarAlumno.setEnabled(false);
+    this.jTextFieldBuscarAlumno.setEditable(false);
+    this.jTextFieldBuscarAlumno.setText("");
+
+    DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
+    aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
+    aux2.setRowCount(0);
+
   }//GEN-LAST:event_jButtonNuevoAlumnoActionPerformed
 
   private void jButtonAgregarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarHistoriaActionPerformed
@@ -1493,11 +1545,19 @@ public class Ventana
       this.jTextFieldDomicilioAlumno.setEditable(true);
       this.jTextFieldMailAlumno.setEditable(true);
       this.jButtonAgregarHistoria.setEnabled(true);
-      this.jButtonEliminarAlumno.setEnabled(true);
-      this.jButtonNuevoAlumno.setEnabled(true);
+      this.jButtonEliminarHistoria.setEnabled(true);
+      this.jButtonEliminarAlumno.setEnabled(false);
+      this.jButtonNuevoAlumno.setEnabled(false);
       this.jButtonAceptarAlumno.setEnabled(true);
       this.jButtonCancelarAlumno.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
+
+      this.jButtonBuscarAlumno.setEnabled(false);
+      this.jTextFieldBuscarAlumno.setEditable(false);
+      this.jTextFieldBuscarAlumno.setText("");
+
+      DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
+      aux.setRowCount(0);
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
@@ -1513,6 +1573,11 @@ public class Ventana
       try
       {
         this.receptor.baja(this.jTextFieldLegajoAlumno.getText(), Receptor.ALUMNO);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
+        aux2.setRowCount(0);
+        this.jButtonCancelarAlumnoActionPerformed(evt);
       }
       catch (NoEncontradoException e)
       {
@@ -1533,28 +1598,38 @@ public class Ventana
     this.jTextFieldMailAlumno.setText("");
     this.jTextFieldMailAlumno.setEditable(false);
     this.jButtonAgregarHistoria.setEnabled(false);
+    this.jButtonEliminarHistoria.setEnabled(false);
     this.jButtonAceptarAlumno.setEnabled(false);
     this.jButtonEliminarAlumno.setEnabled(true);
     this.jButtonModificarAlumno.setEnabled(true);
     this.jButtonNuevoAlumno.setEnabled(true);
     this.jButtonCancelarAlumno.setEnabled(false);
+
+    this.jButtonBuscarAlumno.setEnabled(true);
+    this.jTextFieldBuscarAlumno.setEditable(true);
+    this.jTextFieldBuscarAlumno.setText("");
+
+    DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+    aux.setRowCount(0);
+
   }//GEN-LAST:event_jButtonCancelarAlumnoActionPerformed
 
   private void jButtonAceptarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAlumnoActionPerformed
-    switch (this.accionAceptar)
+    try
     {
-      case Ventana.NUEVO:
-        try
-        {
+      DefaultTableModel aux;
+      int n, i;
+      Asignatura elemento;
+      switch (this.accionAceptar)
+      {
+        case Ventana.NUEVO:
           Alumno nuevo =
             new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                        this.jTextFieldMailAlumno.getText());
 
-          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-          int n = aux.getRowCount();
-          int i;
-          Asignatura elemento;
+          aux = (DefaultTableModel) this.jTableHistoria.getModel();
+          n = aux.getRowCount();
           for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
@@ -1562,39 +1637,46 @@ public class Ventana
           }
           this.receptor.alta(nuevo, Receptor.ALUMNO);
           this.jButtonCancelarAlumnoActionPerformed(evt);
-        }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        break;
-      case Ventana.MODIFICAR:
-        try
-        {
+
+          break;
+        case Ventana.MODIFICAR:
           Alumno modif =
             new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                        this.jTextFieldMailAlumno.getText());
-          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-          int n = aux.getRowCount();
-          int i;
-          Asignatura elemento;
-          for (i = 0; i <= n; i++)
-          {
-            elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
-            modif.agregarHistoria(elemento);
-          }
+          aux = (DefaultTableModel) this.jTableHistoria.getModel();
+          n = aux.getRowCount();
+
           modif.setLegajo(this.jTextFieldLegajoAlumno.getText());
+          Alumno viejo = (Alumno) this.receptor.buscar(modif.getLegajo(), Receptor.ALUMNO);
+
+          ArrayList<Asignatura> nuevaHistoria = new ArrayList<Asignatura>();
+          for (i = 0; i < n; i++)
+          {
+            nuevaHistoria.add((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
+                                                                Receptor.ASIGNATURA));
+          }
+          Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
+          while (asignaturasViejas.hasNext())
+          {
+            Asignatura auxiliar = asignaturasViejas.next();
+            if (!nuevaHistoria.contains(auxiliar))
+              asignaturasViejas.remove();
+            else
+              nuevaHistoria.remove(auxiliar);
+          }
+          Iterator<Asignatura> nuevas = nuevaHistoria.iterator();
+          while (nuevas.hasNext())
+            viejo.agregarHistoria(nuevas.next());
+
           this.receptor.modificacion(modif, Receptor.ALUMNO);
           this.jButtonCancelarAlumnoActionPerformed(evt);
-        }
-        catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        break;
+          break;
+      }
     }
-    
-    
+    catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage());
+    }
   }//GEN-LAST:event_jButtonAceptarAlumnoActionPerformed
 
   private void jButtonBuscarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarProfesorActionPerformed
@@ -1623,20 +1705,33 @@ public class Ventana
   private void jButtonNuevoProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoProfesorActionPerformed
     this.accionAceptar = Ventana.NUEVO;
+    this.jButtonCancelarProfesorActionPerformed(evt);
     this.jButtonEliminarProfesor.setEnabled(false);
     this.jButtonModificarProfesor.setEnabled(false);
+
     this.jButtonAgregarCompetencia.setEnabled(true);
+    this.jButtonEliminarCompetencia.setEnabled(true);
     this.jButtonCancelarProfesor.setEnabled(true);
-    this.jTextFieldNombreProfesor.setEditable(true);
-    this.jTextFieldDomicilioProfesor.setEditable(true);
     this.jButtonAceptarProfesor.setEnabled(true);
-    this.jTextFieldMailProfesor.setEditable(true);
-    this.jTextFieldTelefonoProfesor.setEditable(true);
+
     this.jTextFieldLegajoProfesor.setText("");
+    this.jTextFieldNombreProfesor.setEditable(true);
     this.jTextFieldNombreProfesor.setText("");
+    this.jTextFieldDomicilioProfesor.setEditable(true);
     this.jTextFieldDomicilioProfesor.setText("");
+    this.jTextFieldMailProfesor.setEditable(true);
     this.jTextFieldMailProfesor.setText("");
+    this.jTextFieldTelefonoProfesor.setEditable(true);
     this.jTextFieldTelefonoProfesor.setText("");
+    DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
+    aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+    aux2.setRowCount(0);
+
+    this.jButtonBuscarProfesor.setEnabled(false);
+    this.jTextFieldBuscarProfesor.setEditable(false);
+    this.jTextFieldBuscarProfesor.setText("");
+
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoProfesorActionPerformed
 
@@ -1649,6 +1744,11 @@ public class Ventana
       try
       {
         this.receptor.baja(this.jTextFieldLegajoProfesor.getText(), Receptor.PROFESOR);
+        this.jButtonCancelarProfesorActionPerformed(evt);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+        aux2.setRowCount(0);
       }
       catch (NoEncontradoException e)
       {
@@ -1656,7 +1756,7 @@ public class Ventana
       }
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder eliminarlo");
   }//GEN-LAST:event_jButtonEliminarProfesorActionPerformed
 
   private void jButtonAgregarCompetenciaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCompetenciaActionPerformed
@@ -1666,18 +1766,20 @@ public class Ventana
 
   private void jButtonAceptarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarProfesorActionPerformed
-    switch (this.accionAceptar)
+    try
     {
-      case Ventana.NUEVO:
-        try
-        {
+      DefaultTableModel aux;
+      int n, i;
+      Asignatura elemento;
+      switch (this.accionAceptar)
+      {
+        case Ventana.NUEVO:
+
           Profesor nuevo =
             new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
                          this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
-          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
-          int n = aux.getRowCount();
-          int i;
-          Asignatura elemento;
+          aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          n = aux.getRowCount();
           for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
@@ -1685,42 +1787,58 @@ public class Ventana
           }
           this.receptor.alta(nuevo, Receptor.PROFESOR);
           this.jButtonCancelarProfesorActionPerformed(evt);
-        }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        break;
-      case Ventana.MODIFICAR:
-        try
-        {
-          Profesor modif =
-            new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
-                         this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
-          DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
-          int n = aux.getRowCount();
-          int i;
-          Asignatura elemento;
+
+          break;
+        case Ventana.MODIFICAR:
+        Profesor modif =
+          new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
+                       this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
+          aux = (DefaultTableModel) this.jTableCompetencia.getModel();
+          n = aux.getRowCount();
+
+          modif.setLegajo(this.jTextFieldLegajoProfesor.getText());
+          Profesor viejo = (Profesor) this.receptor.buscar(modif.getLegajo(), Receptor.PROFESOR);
+
+          ArrayList<Asignatura> nuevaCompetencia = new ArrayList<Asignatura>();
           for (i = 0; i < n; i++)
           {
-            elemento = (Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0), Receptor.ASIGNATURA);
-            modif.agregarCompetencia(elemento);
+            nuevaCompetencia.add((Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0),
+                                                                Receptor.ASIGNATURA));
           }
-          modif.setLegajo(this.jTextFieldLegajoProfesor.getText());
+          Iterator<Asignatura> asignaturasViejas = viejo.competencias();
+          while (asignaturasViejas.hasNext())
+          {
+            Asignatura auxiliar = asignaturasViejas.next();
+            if (!nuevaCompetencia.contains(auxiliar))
+              asignaturasViejas.remove();
+            else
+              nuevaCompetencia.remove(auxiliar);
+          }
+          Iterator<Asignatura> nuevas = nuevaCompetencia.iterator();
+          while (nuevas.hasNext())
+            viejo.agregarCompetencia(nuevas.next());
+
           this.receptor.modificacion(modif, Receptor.PROFESOR);
           this.jButtonCancelarProfesorActionPerformed(evt);
-        }
-        catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        break;
+          break;
+      }
     }
+    catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarProfesorActionPerformed
 
   private void jButtonCancelarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarProfesorActionPerformed
+
+    this.jButtonEliminarCompetencia.setEnabled(false);
+    this.jButtonAgregarCompetencia.setEnabled(false);
+    this.jButtonAceptarProfesor.setEnabled(false);
+    this.jButtonCancelarProfesor.setEnabled(false);
+
     this.jTextFieldLegajoProfesor.setText("");
     this.jTextFieldNombreProfesor.setText("");
     this.jTextFieldNombreProfesor.setEditable(false);
@@ -1730,12 +1848,16 @@ public class Ventana
     this.jTextFieldMailProfesor.setEditable(false);
     this.jTextFieldTelefonoProfesor.setText("");
     this.jTextFieldTelefonoProfesor.setEditable(false);
-    this.jButtonAgregarCompetencia.setEnabled(false);
-    this.jButtonAceptarProfesor.setEnabled(false);
+
     this.jButtonEliminarProfesor.setEnabled(true);
     this.jButtonModificarProfesor.setEnabled(true);
     this.jButtonNuevoProfesor.setEnabled(true);
-    this.jButtonCancelarProfesor.setEnabled(false);
+
+    DefaultTableModel aux = ((DefaultTableModel) this.jTableCompetencia.getModel());
+    aux.setRowCount(0);
+    this.jButtonBuscarProfesor.setEnabled(true);
+    this.jTextFieldBuscarProfesor.setEditable(true);
+    this.jTextFieldBuscarProfesor.setText("");
 
   }//GEN-LAST:event_jButtonCancelarProfesorActionPerformed
 
@@ -1745,19 +1867,25 @@ public class Ventana
              .getText()
              .equals(""))
     {
+      this.jButtonEliminarProfesor.setEnabled(false);
+      this.jButtonNuevoProfesor.setEnabled(false);
+
       this.jTextFieldNombreProfesor.setEditable(true);
       this.jTextFieldDomicilioProfesor.setEditable(true);
       this.jTextFieldMailProfesor.setEditable(true);
       this.jTextFieldTelefonoProfesor.setEditable(true);
+
       this.jButtonAgregarCompetencia.setEnabled(true);
-      this.jButtonEliminarProfesor.setEnabled(true);
-      this.jButtonNuevoProfesor.setEnabled(true);
+      this.jButtonEliminarCompetencia.setEnabled(true);
       this.jButtonAceptarProfesor.setEnabled(true);
       this.jButtonCancelarProfesor.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
+      
+      DefaultTableModel aux = ((DefaultTableModel) this.jTableProfesorProfesor.getModel());
+      aux.setRowCount(0);
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder modificarlo");
   }//GEN-LAST:event_jButtonModificarProfesorActionPerformed
 
   private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPaneStateChanged
@@ -1776,7 +1904,6 @@ public class Ventana
 
   private void jButtonBuscarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonBuscarAsignaturaActionPerformed
-
     try
     {
       Iterator<Asignatura> asignaturas =
@@ -1802,11 +1929,23 @@ public class Ventana
     this.accionAceptar = Ventana.NUEVO;
     this.jButtonEliminarAsignatura.setEnabled(false);
     this.jButtonModificarAsignatura.setEnabled(false);
+
     this.jButtonAgregarCorrelativa.setEnabled(true);
+    this.jButtonEliminarCorrelativa.setEnabled(true);
+    this.jButtonAceptarAsignatura.setEnabled(true);
     this.jButtonCancelarAsignatura.setEnabled(true);
     this.jTextFieldNombreAsignatura.setEditable(true);
     this.jTextFieldIdentificadorAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setText("");
+    
+    DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+    aux.setRowCount(0);
+    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+    aux2.setRowCount(0);
+
+    this.jButtonBuscarAsignatura.setEnabled(false);
+    this.jTextFieldBuscarAsignatura.setEditable(false);
+    this.jTextFieldBuscarAsignatura.setText("");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoAsignaturaActionPerformed
 
@@ -1819,6 +1958,11 @@ public class Ventana
       try
       {
         this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
+        this.jButtonCancelarAsignaturaActionPerformed(evt);
+        DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+        aux.setRowCount(0);
+        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+        aux2.setRowCount(0);
       }
       catch (NoEncontradoException e)
       {
@@ -1892,12 +2036,23 @@ public class Ventana
     this.jTextFieldIdentificadorAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setEditable(false);
+    
     this.jButtonAgregarCorrelativa.setEnabled(false);
-    this.jButtonAceptarAsignatura.setEnabled(false);
+    this.jButtonEliminarCorrelativa.setEnabled(false);
+    
     this.jButtonEliminarAsignatura.setEnabled(true);
     this.jButtonModificarAsignatura.setEnabled(true);
     this.jButtonNuevoAsignatura.setEnabled(true);
+
     this.jButtonCancelarAsignatura.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+    DefaultTableModel aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
+    aux.setRowCount(0);
+
+    this.jButtonBuscarAsignatura.setEnabled(true);
+    this.jTextFieldBuscarAsignatura.setEditable(true);
+    this.jTextFieldBuscarAsignatura.setText("");
+    
   }//GEN-LAST:event_jButtonCancelarAsignaturaActionPerformed
 
   private void jButtonModificarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAsignaturaActionPerformed
@@ -1907,15 +2062,24 @@ public class Ventana
              .equals(""))
     {
       this.jTextFieldNombreAsignatura.setEditable(true);
+      
       this.jButtonAgregarCorrelativa.setEnabled(true);
-      this.jButtonEliminarAsignatura.setEnabled(true);
-      this.jButtonNuevoAsignatura.setEnabled(true);
+      this.jButtonEliminarCorrelativa.setEnabled(true);
+      this.jButtonEliminarAsignatura.setEnabled(false);
+      this.jButtonNuevoAsignatura.setEnabled(false);
       this.jButtonAceptarAsignatura.setEnabled(true);
       this.jButtonCancelarAsignatura.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
+      
+      DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+      aux.setRowCount(0);
+
+      this.jButtonBuscarAsignatura.setEnabled(false);
+      this.jTextFieldBuscarAsignatura.setEditable(false);
+      this.jTextFieldBuscarAsignatura.setText("");
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder modificarlo");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarAsignaturaActionPerformed
 
@@ -2128,6 +2292,32 @@ public class Ventana
     //new DialogAsignatura(this, this.receptor, this.jTableCorrelativas, new TableModelAsignatura());
   }//GEN-LAST:event_jButtonCambiarAsignaturaCursadaActionPerformed
 
+  private void jButtonEliminarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarHistoriaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarHistoriaActionPerformed
+    if (this.jTableHistoria.getSelectedRow() != -1)
+    {
+      TableModelAsignatura aux = (TableModelAsignatura) this.jTableHistoria.getModel();
+      aux.eliminarFila(this.jTableHistoria.getSelectedRow());
+      this.jTableHistoria.repaint();
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarHistoriaActionPerformed
+
+  private void jButtonEliminarCompetenciaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCompetenciaActionPerformed
+  {//GEN-HEADEREND:event_jButtonEliminarCompetenciaActionPerformed
+    if (this.jTableCompetencia.getSelectedRow() != -1)
+    {
+      TableModelAsignatura aux = (TableModelAsignatura) this.jTableCompetencia.getModel();
+      aux.eliminarFila(this.jTableCompetencia.getSelectedRow());
+      this.jTableCompetencia.repaint();
+    }
+    else
+      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEliminarCompetenciaActionPerformed
+
   /**
    * @param args the command line arguments
    */
@@ -2224,7 +2414,10 @@ public class Ventana
   private javax.swing.JButton jButtonCancelarProfesor;
   private javax.swing.JButton jButtonEliminarAlumno;
   private javax.swing.JButton jButtonEliminarAsignatura;
+  private javax.swing.JButton jButtonEliminarCompetencia;
+  private javax.swing.JButton jButtonEliminarCorrelativa;
   private javax.swing.JButton jButtonEliminarCursada;
+  private javax.swing.JButton jButtonEliminarHistoria;
   private javax.swing.JButton jButtonEliminarProfesor;
   private javax.swing.JButton jButtonModificarAlumno;
   private javax.swing.JButton jButtonModificarAsignatura;
