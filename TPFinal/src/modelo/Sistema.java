@@ -98,7 +98,7 @@ public class Sistema
     public void agregarCursada(Cursada nuevo)
         throws ClaveYaExistenteException, DatoInvalidoException
     {
-        if (Cursada.validaCursada(nuevo))
+        if (!Cursada.validaCursada(nuevo))
             throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         /* 
         else if (!this.horarioCursadaDisponible(nuevo))
