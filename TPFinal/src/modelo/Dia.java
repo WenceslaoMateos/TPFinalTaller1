@@ -21,32 +21,30 @@ public enum Dia
      */
   public static int parseInt(Dia dia)
   {
-    int ret;
+    int ret=7;
     switch (dia)
     {
       case LUN:
-        ret = 1;
+        ret = 0;
         break;
       case MAR:
-        ret = 2;
+        ret = 1;
         break;
       case MIE:
-        ret = 3;
+        ret = 2;
         break;
       case JUE:
-        ret = 4;
+        ret = 3;
         break;
       case VIE:
-        ret = 5;
+        ret = 4;
         break;
       case SAB:
-        ret = 6;
+        ret = 5;
         break;
       case DOM:
-        ret = 7;
+        ret = 6;
         break;
-      default:
-        ret = 0;
     }
     return ret;
   }

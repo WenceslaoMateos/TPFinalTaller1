@@ -6,9 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import java.util.Iterator;
@@ -24,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import modelo.Asignatura;
 

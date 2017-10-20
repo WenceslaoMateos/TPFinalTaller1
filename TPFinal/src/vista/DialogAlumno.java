@@ -3,7 +3,6 @@ package vista;
 import excepciones.NoEncontradoException;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 
 import java.util.Iterator;
 

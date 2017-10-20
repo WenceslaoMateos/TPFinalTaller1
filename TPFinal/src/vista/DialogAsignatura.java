@@ -3,7 +3,6 @@ package vista;
 import excepciones.NoEncontradoException;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 
 import java.util.Iterator;
 
@@ -58,6 +57,7 @@ public class DialogAsignatura
       Asignatura elemento =
         (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
       DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
+            
       model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
     }
     catch (NoEncontradoException f)
