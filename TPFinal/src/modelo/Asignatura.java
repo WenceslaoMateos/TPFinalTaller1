@@ -72,9 +72,10 @@ public class Asignatura
     /**
      * Agrega una asignatura a las precorrelativas de la materia.<br>
      * <b>Pre:</b> correlativa se encuentra entre las asignaturas del sistema.<br>
-     * <b>Post:</b> La asignatura que ejecuta el método tiene una precorrelativa más.
+     * <b>Post:</b> La asignatura que ejecuta el método tiene una precorrelativa más distinta de sí misma.
      * @param correlativa Asignatura a agregar como requisito para la materia invocante.
      * @throws ClaveYaExistenteException La asignatura dada ya se encontraba entre las correlatividades.
+     * @throws DatoInvalidoException La asignatura dada es la misma que la invocante.
      */
     public void agregarCorrelativa(Asignatura correlativa)
         throws ClaveYaExistenteException, DatoInvalidoException
