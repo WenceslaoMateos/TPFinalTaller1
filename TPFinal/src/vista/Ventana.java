@@ -2312,7 +2312,7 @@ public class Ventana
           }
           Iterator<Alumno> nuevas = nuevaCursada.iterator();
           while (nuevas.hasNext())
-            viejo.altaAlumno(nuevas.next());
+            this.receptor.agregaAlumnoEnCursada(nuevas.next(), viejo);
 
           aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
           n = aux.getRowCount();
@@ -2333,8 +2333,8 @@ public class Ventana
               nuevoProfesor.remove(auxiliar);
           }
           Iterator<Profesor> nuevos = nuevoProfesor.iterator();
-          while (nuevas.hasNext())
-            viejo.altaProfesor(nuevos.next());
+          while (nuevos.hasNext())
+            this.receptor.agregaProfesorEnCursada(nuevos.next(), viejo);
 
           this.receptor.modificacion(modif, Receptor.CURSADA);
           this.jButtonCancelarCursadaActionPerformed(evt);
