@@ -15,9 +15,24 @@ import java.util.Observable;
 public class Sistema
   extends Observable
 {
+    /**
+     * @aggregation composite
+     */
     private IndiceDoble<Alumno> alumnos;
+
+    /**
+     * @aggregation composite
+     */
     private IndiceDoble<Profesor> profesores;
+
+    /**
+     * @aggregation composite
+     */
     private IndiceDoble<Asignatura> planDeEstudio;
+
+    /**
+     * @aggregation composite
+     */
     private IndiceDoble<Cursada> calendario;
 
     /**

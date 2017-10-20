@@ -12,6 +12,10 @@ public class Profesor
     extends Persona
 {
     private String telefono;
+
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<Asignatura> competencia;
     private static int CANT_PROFESORES = 0;
 

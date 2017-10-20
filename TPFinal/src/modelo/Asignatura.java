@@ -14,6 +14,10 @@ public class Asignatura
 {
     private String identificacion;
     private String nombre;
+
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<Asignatura> correlatividades;
     private static int CANT_ASIGNATURAS = 0;
 

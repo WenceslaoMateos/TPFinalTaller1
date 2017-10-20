@@ -15,10 +15,22 @@ public class Cursada
     private Asignatura asignatura;
     private String identificacion;
     private String periodo;
+
+    /**
+     * @aggregation composite
+     */
     private Dia dia;
     private String horaInicio;
     private String horaFinalizacion;
+
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<Profesor> profesores;
+
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<Alumno> alumnos;
     private static int CANT_CURSADAS = 0;
 
@@ -55,7 +67,7 @@ public class Cursada
 
     /**
      * Clave secundaria de una cursada.
-     * @return
+     * @return un entero representando un hash calculado con el día y la hora de inicio.
      */
     @Override
     public Object getClaveSecundaria()

@@ -11,6 +11,9 @@ import java.util.Iterator;
 public class Alumno
     extends Persona
 {
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<Asignatura> historia;
     private static int CANT_ALUMNOS = 0;
 

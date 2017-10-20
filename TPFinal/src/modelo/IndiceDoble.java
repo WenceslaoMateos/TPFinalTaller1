@@ -14,6 +14,9 @@ import java.util.TreeMap;
  */
 public class IndiceDoble<V extends I_Indexable>
 {
+    /**
+     * @aggregation composite
+     */
     private IndicePrimario<V> indice1;
     private TreeMap<Object, ArrayList<V>> indice2;
 

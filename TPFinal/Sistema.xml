@@ -5,13 +5,13 @@
    <void id="IndicePrimario0" property="indice1">
     <void property="elementos">
      <void method="put">
-      <string>ALU0001</string>
+      <string>ALU0003</string>
       <object class="modelo.Alumno" id="Alumno0">
        <void property="apellidoNombre">
-        <string>Pablos Braulio</string>
+        <string>Mateos Wenceslao</string>
        </void>
        <void property="domicilio">
-        <string>Chaco 33</string>
+        <string>Alberti 4567</string>
        </void>
        <void property="historia">
         <object class="modelo.IndicePrimario" id="IndicePrimario1">
@@ -34,7 +34,34 @@
         </object>
        </void>
        <void property="legajo">
-        <string>ALU0001</string>
+        <string>ALU0003</string>
+       </void>
+       <void property="mail">
+        <string>wenceslaomateos@gmail.com</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0004</string>
+      <object class="modelo.Alumno" id="Alumno1">
+       <void property="apellidoNombre">
+        <string>Pablos Di Marco Braulio Leonel</string>
+       </void>
+       <void property="domicilio">
+        <string>Chaco 33</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario" id="IndicePrimario2">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0002</string>
+           <object idref="Asignatura0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="legajo">
+        <string>ALU0004</string>
        </void>
        <void property="mail">
         <string>bravlinleonel@gmail.com</string>
@@ -45,26 +72,34 @@
    </void>
    <void property="indice2">
     <void method="put">
-     <string>Pablos Braulio</string>
+     <string>Mateos Wenceslao</string>
      <object class="java.util.ArrayList">
       <void method="add">
        <object idref="Alumno0"/>
       </void>
      </object>
     </void>
+    <void method="put">
+     <string>Pablos Di Marco Braulio Leonel</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno1"/>
+      </void>
+     </object>
+    </void>
    </void>
   </void>
   <void id="IndiceDoble1" property="calendario">
-   <void id="IndicePrimario2" property="indice1">
+   <void id="IndicePrimario3" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>CUR0001</string>
       <object class="modelo.Cursada" id="Cursada0">
        <void property="alumnos">
-        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+        <object class="modelo.IndicePrimario" id="IndicePrimario4">
          <void property="elementos">
           <void method="put">
-           <string>ALU0001</string>
+           <string>ALU0003</string>
            <object idref="Alumno0"/>
           </void>
          </void>
@@ -73,7 +108,7 @@
        <void property="asignatura">
         <object class="modelo.Asignatura" id="Asignatura1">
          <void property="correlatividades">
-          <object class="modelo.IndicePrimario" id="IndicePrimario4">
+          <object class="modelo.IndicePrimario" id="IndicePrimario5">
            <void property="elementos">
             <void method="put">
              <string>ASI0002</string>
@@ -91,7 +126,7 @@
         </object>
        </void>
        <void property="dia">
-        <object class="java.lang.Enum" method="valueOf">
+        <object class="java.lang.Enum" id="Dia0" method="valueOf">
          <class>modelo.Dia</class>
          <string>MAR</string>
         </object>
@@ -109,7 +144,7 @@
         <string>02-2017</string>
        </void>
        <void property="profesores">
-        <object class="modelo.IndicePrimario" id="IndicePrimario5">
+        <object class="modelo.IndicePrimario" id="IndicePrimario6">
          <void property="elementos">
           <void method="put">
            <string>PRO0001</string>
@@ -118,7 +153,7 @@
              <string>Viau Javier</string>
             </void>
             <void property="competencia">
-             <object class="modelo.IndicePrimario" id="IndicePrimario6">
+             <object class="modelo.IndicePrimario" id="IndicePrimario7">
               <void property="elementos">
                <void method="put">
                 <string>ASI0001</string>
@@ -160,6 +195,35 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>CUR0003</string>
+      <object class="modelo.Cursada" id="Cursada1">
+       <void property="alumnos">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="asignatura">
+        <object idref="Asignatura2"/>
+       </void>
+       <void property="dia">
+        <object idref="Dia0"/>
+       </void>
+       <void property="horaFinalizacion">
+        <string>11:00</string>
+       </void>
+       <void property="horaInicio">
+        <string>09:00</string>
+       </void>
+       <void property="identificacion">
+        <string>CUR0003</string>
+       </void>
+       <void property="periodo">
+        <string>02-2017</string>
+       </void>
+       <void property="profesores">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+      </object>
+     </void>
     </void>
    </void>
    <void property="indice2">
@@ -171,10 +235,18 @@
       </void>
      </object>
     </void>
+    <void method="put">
+     <int>10900</int>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Cursada1"/>
+      </void>
+     </object>
+    </void>
    </void>
   </void>
   <void id="IndiceDoble2" property="planDeEstudio">
-   <void id="IndicePrimario7" property="indice1">
+   <void id="IndicePrimario8" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>ASI0001</string>
@@ -218,7 +290,7 @@
    </void>
   </void>
   <void id="IndiceDoble3" property="profesores">
-   <void id="IndicePrimario8" property="indice1">
+   <void id="IndicePrimario9" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0001</string>
@@ -238,8 +310,8 @@
    </void>
   </void>
  </object>
- <int>2</int>
+ <int>4</int>
  <int>1</int>
+ <int>4</int>
  <int>3</int>
- <int>2</int>
 </java>
