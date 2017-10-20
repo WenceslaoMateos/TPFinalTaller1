@@ -46,6 +46,7 @@ public class DialogAsignaturaCursada
   public DialogAsignaturaCursada(JFrame owner, Receptor receptor, JTextField id, JTextField nombre)
   {
     super(owner, true);
+    this.setTitle("Selección de asignatura");
     this.id = id;
     this.nombre = nombre;
     this.setSize(750, 500);

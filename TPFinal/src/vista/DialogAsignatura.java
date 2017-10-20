@@ -25,6 +25,7 @@ public class DialogAsignatura
   {
     super(owner,receptor, fuente);
     
+    this.setTitle("Selección de asignatura");
     this.modeloAsignatura = (TableModelAsignatura) modelo;
     this.tabla = new JTable(this.modeloAsignatura);
     resultado.setLayout(new BorderLayout());

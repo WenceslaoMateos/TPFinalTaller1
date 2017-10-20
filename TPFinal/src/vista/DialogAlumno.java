@@ -23,6 +23,7 @@ public class DialogAlumno
   public DialogAlumno(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
     super(owner,receptor, fuente);
+    this.setTitle("Selección de alumno");
     this.modeloAlumno = (TableModelAlumno) modelo;
     this.tabla = new JTable(this.modeloAlumno);
     resultado.setLayout(new BorderLayout());

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_144" class="java.beans.XMLDecoder">
+ <object class="modelo.Sistema" id="Sistema0">
+  <void id="IndiceDoble0" property="alumnos">
+   <void id="IndicePrimario0" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>ALU0004</string>
+      <object class="modelo.Alumno" id="Alumno0">
+       <void property="apellidoNombre">
+        <string>asdasd</string>
+       </void>
+       <void property="domicilio">
+        <string>asdasd</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0004</string>
+       </void>
+       <void property="mail">
+        <string>asdasd@asdasd</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>asdasd</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno0"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble1" property="planDeEstudio">
+   <void id="IndicePrimario1" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>ASI0001</string>
+      <object class="modelo.Asignatura" id="Asignatura0">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="identificacion">
+        <string>ASI0001</string>
+       </void>
+       <void property="nombre">
+        <string>assdasdasdas</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>assdasdasdas</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Asignatura0"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble2" property="profesores">
+   <void id="IndicePrimario2" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>PRO0001</string>
+      <object class="modelo.Profesor" id="Profesor0">
+       <void property="apellidoNombre">
+        <string>&lt;sdfd</string>
+       </void>
+       <void property="competencia">
+        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0001</string>
+           <object idref="Asignatura0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="domicilio">
+        <string>asdasdas</string>
+       </void>
+       <void property="legajo">
+        <string>PRO0001</string>
+       </void>
+       <void property="mail">
+        <string>asdsada@asdasdasd</string>
+       </void>
+       <void property="telefono">
+        <string>asdasda</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>&lt;sdfd</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Profesor0"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+ </object>
+ <int>4</int>
+ <int>1</int>
+ <int>1</int>
+ <int>0</int>
+</java>

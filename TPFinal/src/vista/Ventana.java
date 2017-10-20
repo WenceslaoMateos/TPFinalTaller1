@@ -469,7 +469,7 @@ public class Ventana
     jPanelBuscarAlumnoLayout.setHorizontalGroup(
       jPanelBuscarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelBuscarAlumnoLayout.createSequentialGroup()
-        .addComponent(jTextFieldBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+        .addComponent(jTextFieldBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jButtonBuscarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
@@ -672,11 +672,11 @@ public class Ventana
       jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelAlumnoLayout.createSequentialGroup()
         .addContainerGap()
+        .addComponent(jPanelResultadosAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGap(18, 18, 18)
-        .addComponent(jPanelResultadosAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
     jPanelAlumnoLayout.setVerticalGroup(
@@ -712,7 +712,7 @@ public class Ventana
     jPanelBuscarProfesorLayout.setHorizontalGroup(
       jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelBuscarProfesorLayout.createSequentialGroup()
-        .addComponent(jTextFieldBuscarProfesor)
+        .addComponent(jTextFieldBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jButtonBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
@@ -732,11 +732,11 @@ public class Ventana
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+      .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+      .addComponent(jScrollPane5)
     );
 
     jPanelResultadosProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -905,14 +905,13 @@ public class Ventana
         .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel11)
           .addComponent(jTextFieldTelefonoProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jLabel10)
-            .addComponent(jButtonEliminarCompetencia)))
+        .addGap(38, 38, 38)
+        .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel10)
+          .addComponent(jButtonEliminarCompetencia)
+          .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarProfesor)
@@ -926,11 +925,11 @@ public class Ventana
       jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelAlumno1Layout.createSequentialGroup()
         .addContainerGap()
+        .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
         .addGroup(jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGap(18, 18, 18)
-        .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
     jPanelAlumno1Layout.setVerticalGroup(
@@ -938,19 +937,20 @@ public class Ventana
       .addGroup(jPanelAlumno1Layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(jPanelAlumno1Layout.createSequentialGroup()
             .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(jPanelAlumno1Layout.createSequentialGroup()
+            .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())))
     );
 
     javax.swing.GroupLayout jPanelProfesorLayout = new javax.swing.GroupLayout(jPanelProfesor);
     jPanelProfesor.setLayout(jPanelProfesorLayout);
     jPanelProfesorLayout.setHorizontalGroup(
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 1135, Short.MAX_VALUE)
+      .addGap(0, 1069, Short.MAX_VALUE)
       .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addComponent(jPanelAlumno1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -979,7 +979,7 @@ public class Ventana
     jPanelBuscarAsignaturaLayout.setHorizontalGroup(
       jPanelBuscarAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelBuscarAsignaturaLayout.createSequentialGroup()
-        .addComponent(jTextFieldBuscarAsignatura)
+        .addComponent(jTextFieldBuscarAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jButtonBuscarAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
@@ -1146,7 +1146,7 @@ public class Ventana
     jPanel3.setLayout(jPanel3Layout);
     jPanel3Layout.setHorizontalGroup(
       jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+      .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
     );
     jPanel3Layout.setVerticalGroup(
       jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1159,11 +1159,11 @@ public class Ventana
       jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelAsignaturaLayout.createSequentialGroup()
         .addContainerGap()
+        .addComponent(jPanelResultadosAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
         .addGroup(jPanelAsignaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelBuscarAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGap(18, 18, 18)
-        .addComponent(jPanelResultadosAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
     jPanelAsignaturaLayout.setVerticalGroup(
@@ -1197,7 +1197,7 @@ public class Ventana
     jPanelBuscarCursadaLayout.setHorizontalGroup(
       jPanelBuscarCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelBuscarCursadaLayout.createSequentialGroup()
-        .addComponent(jTextFieldBuscarCursada)
+        .addComponent(jTextFieldBuscarCursada, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jButtonBuscarCursada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
@@ -1217,7 +1217,7 @@ public class Ventana
     jPanel4.setLayout(jPanel4Layout);
     jPanel4Layout.setHorizontalGroup(
       jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+      .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
     );
     jPanel4Layout.setVerticalGroup(
       jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1479,11 +1479,11 @@ public class Ventana
       jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanelCursadaLayout.createSequentialGroup()
         .addContainerGap()
+        .addComponent(jPanelResultadosCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
         .addGroup(jPanelCursadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelBuscarCursada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGap(18, 18, 18)
-        .addComponent(jPanelResultadosCursada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
     jPanelCursadaLayout.setVerticalGroup(
@@ -1503,6 +1503,13 @@ public class Ventana
 
     jButtonAgradecimientos.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
     jButtonAgradecimientos.setText("Agradecimientos");
+    jButtonAgradecimientos.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonAgradecimientosActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -1619,17 +1626,22 @@ public class Ventana
     {
       try
       {
-        this.receptor.baja(this.jTextFieldLegajoAlumno.getText(), Receptor.ALUMNO);
-        DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-        aux.setRowCount(0);
-        DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
-        aux2.setRowCount(0);
-        this.jButtonCancelarAlumnoActionPerformed(evt);
+        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Alumno",
+                                          JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+          this.receptor.baja(this.jTextFieldLegajoAlumno.getText(), Receptor.ALUMNO);
+          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+          aux.setRowCount(0);
+          DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
+          aux2.setRowCount(0);
+          this.jButtonCancelarAlumnoActionPerformed(evt);
+        }
       }
       catch (NoEncontradoException e)
       {
         JOptionPane.showMessageDialog(this, e.getMessage());
       }
+      JOptionPane.showMessageDialog(this, "");
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo");
@@ -1719,6 +1731,7 @@ public class Ventana
           this.jButtonCancelarAlumnoActionPerformed(evt);
           break;
       }
+      JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
     }
     catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
     {
@@ -1790,12 +1803,16 @@ public class Ventana
     {
       try
       {
-        this.receptor.baja(this.jTextFieldLegajoProfesor.getText(), Receptor.PROFESOR);
-        this.jButtonCancelarProfesorActionPerformed(evt);
-        DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
-        aux.setRowCount(0);
-        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
-        aux2.setRowCount(0);
+        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Profesor",
+                                          JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+          this.receptor.baja(this.jTextFieldLegajoProfesor.getText(), Receptor.PROFESOR);
+          this.jButtonCancelarProfesorActionPerformed(evt);
+          DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
+          aux.setRowCount(0);
+          DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
+          aux2.setRowCount(0);
+        }
       }
       catch (NoEncontradoException e)
       {
@@ -1869,6 +1886,7 @@ public class Ventana
           this.jButtonCancelarProfesorActionPerformed(evt);
           break;
       }
+      JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
     }
     catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
     {
@@ -2004,12 +2022,16 @@ public class Ventana
     {
       try
       {
-        this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
-        this.jButtonCancelarAsignaturaActionPerformed(evt);
-        DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
-        aux.setRowCount(0);
-        DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
-        aux2.setRowCount(0);
+        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Alumno",
+                                          JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+          this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
+          this.jButtonCancelarAsignaturaActionPerformed(evt);
+          DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
+          aux.setRowCount(0);
+          DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
+          aux2.setRowCount(0);
+        }
       }
       catch (NoEncontradoException e)
       {
@@ -2091,6 +2113,7 @@ public class Ventana
         }
         break;
     }
+    JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarAsignaturaActionPerformed
 
@@ -2216,16 +2239,19 @@ public class Ventana
     {
       try
       {
-        this.receptor.baja(this.receptor.buscar(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA),
-                           Receptor.CURSADA);
-        DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
-        aux.setRowCount(0);
-        DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-        aux2.setRowCount(0);
-        DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-        aux3.setRowCount(0);
-        this.jButtonCancelarCursadaActionPerformed(evt);
-
+        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Alumno",
+                                          JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+          this.receptor.baja(this.receptor.buscar(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA),
+                             Receptor.CURSADA);
+          DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
+          aux.setRowCount(0);
+          DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
+          aux2.setRowCount(0);
+          DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
+          aux3.setRowCount(0);
+          this.jButtonCancelarCursadaActionPerformed(evt);
+        }
       }
       catch (NoEncontradoException e)
       {
@@ -2321,7 +2347,7 @@ public class Ventana
           for (i = 0; i < n; i++)
           {
             nuevoProfesor.add((Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0),
-                                                           Receptor.PROFESOR));
+                                                              Receptor.PROFESOR));
           }
           Iterator<Profesor> profesoresViejos = viejo.profesores();
           while (profesoresViejos.hasNext())
@@ -2344,6 +2370,7 @@ public class Ventana
           JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
+    JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarCursadaActionPerformed
 
@@ -2500,6 +2527,12 @@ public class Ventana
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
     // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarAlumnoCursadaActionPerformed
+
+  private void jButtonAgradecimientosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgradecimientosActionPerformed
+  {//GEN-HEADEREND:event_jButtonAgradecimientosActionPerformed
+  JOptionPane.showMessageDialog(this, "Gracias DarioFF");
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonAgradecimientosActionPerformed
 
   /**
    * @param args the command line arguments
