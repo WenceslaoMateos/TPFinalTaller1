@@ -20,9 +20,9 @@ public class DialogProfesor
 {
   private TableModelProfesor modeloProfesor;
 
-  public DialogProfesor(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  public DialogProfesor(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
-    super(owner,receptor, fuente);
+    super(owner, receptor, fuente);
     this.setTitle("Selección de profesor");
     this.modeloProfesor = (TableModelProfesor) modelo;
     this.tabla = new JTable(this.modeloProfesor);
@@ -31,7 +31,7 @@ public class DialogProfesor
     this.tabla.setFillsViewportHeight(true);
     this.resultado.add(this.scroll);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla,BorderLayout.CENTER);
+    resultado.add(tabla, BorderLayout.CENTER);
     this.setVisible(true);
   }
 

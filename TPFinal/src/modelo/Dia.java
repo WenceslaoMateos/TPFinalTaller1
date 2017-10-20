@@ -14,14 +14,14 @@ public enum Dia
   SAB,
   DOM;
 
-    /**
-     * Devuelve el numero asociado a cada día, desde lunes = 1 hasta domingo = 7.
-     * @param dia Dia válido.
-     * @return El número asociado al parámetro dia.
-     */
+  /**
+   * Devuelve el numero asociado a cada día, desde lunes = 1 hasta domingo = 7.
+   * @param dia Dia válido.
+   * @return El número asociado al parámetro dia.
+   */
   public static int parseInt(Dia dia)
   {
-    int ret=7;
+    int ret = 7;
     switch (dia)
     {
       case LUN:
@@ -51,21 +51,21 @@ public enum Dia
 
   public static Dia parseDia(String dia)
   {
-    Dia ret=DOM;
+    Dia ret = DOM;
     if (dia.equals("Lunes"))
-      ret=LUN;
+      ret = LUN;
     else if (dia.equals("Martes"))
-      ret=MAR;
+      ret = MAR;
     else if (dia.equals("Miercoles"))
-      ret=MIE;
+      ret = MIE;
     else if (dia.equals("Jueves"))
-      ret=JUE;
+      ret = JUE;
     else if (dia.equals("Viernes"))
-      ret=VIE;
+      ret = VIE;
     else if (dia.equals("Sabado"))
-      ret=SAB;
+      ret = SAB;
     else if (dia.equals("Domingo"))
-      ret=DOM;
+      ret = DOM;
     return ret;
-}
+  }
 }

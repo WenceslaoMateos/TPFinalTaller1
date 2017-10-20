@@ -20,9 +20,9 @@ public class DialogAlumno
 {
   private TableModelAlumno modeloAlumno;
 
-  public DialogAlumno(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  public DialogAlumno(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
-    super(owner,receptor, fuente);
+    super(owner, receptor, fuente);
     this.setTitle("Selección de alumno");
     this.modeloAlumno = (TableModelAlumno) modelo;
     this.tabla = new JTable(this.modeloAlumno);
@@ -31,7 +31,7 @@ public class DialogAlumno
     this.tabla.setFillsViewportHeight(true);
     this.resultado.add(this.scroll);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla,BorderLayout.CENTER);
+    resultado.add(tabla, BorderLayout.CENTER);
     this.setVisible(true);
   }
 

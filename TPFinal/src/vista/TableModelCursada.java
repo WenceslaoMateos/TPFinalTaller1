@@ -20,6 +20,7 @@ public class TableModelCursada
   {
     return false;
   }
+
   public void agregarFilas(Iterator cursadas)
   {
     Cursada aux;

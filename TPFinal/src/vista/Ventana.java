@@ -1792,7 +1792,6 @@ public class Ventana
     this.jTextFieldBuscarProfesor.setEditable(false);
     this.jTextFieldBuscarProfesor.setText("");
 
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoProfesorActionPerformed
 
   private void jButtonEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarProfesorActionPerformed
@@ -1893,7 +1892,6 @@ public class Ventana
       JOptionPane.showMessageDialog(this, e.getMessage());
     }
 
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarProfesorActionPerformed
 
   private void jButtonCancelarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarProfesorActionPerformed
@@ -1964,7 +1962,6 @@ public class Ventana
       this.focus = Ventana.ASIGNATURA;
     else if (aux.getTitleAt(aux.getSelectedIndex()).equals(Ventana.CURSADA))
       this.focus = Ventana.CURSADA;
-    //1 TODO add your handling code here:
   }//GEN-LAST:event_jTabbedPaneStateChanged
 
   private void jButtonBuscarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarAsignaturaActionPerformed
@@ -1986,7 +1983,6 @@ public class Ventana
     {
       JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
     }
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonBuscarAsignaturaActionPerformed
 
   private void jButtonNuevoAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoAsignaturaActionPerformed
@@ -2011,7 +2007,6 @@ public class Ventana
     this.jButtonBuscarAsignatura.setEnabled(false);
     this.jTextFieldBuscarAsignatura.setEditable(false);
     this.jTextFieldBuscarAsignatura.setText("");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoAsignaturaActionPerformed
 
   private void jButtonEliminarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarAsignaturaActionPerformed
@@ -2040,13 +2035,11 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarAsignaturaActionPerformed
 
   private void jButtonAgregarCorrelativaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarCorrelativaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarCorrelativaActionPerformed
     new DialogAsignatura(this, this.receptor, this.jTableCorrelativas, new TableModelAsignatura());
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAgregarCorrelativaActionPerformed
 
   private void jButtonAceptarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAsignaturaActionPerformed
@@ -2114,7 +2107,6 @@ public class Ventana
         break;
     }
     JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarAsignaturaActionPerformed
 
   private void jButtonCancelarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarAsignaturaActionPerformed
@@ -2166,7 +2158,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder modificarlo");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarAsignaturaActionPerformed
 
   private void jButtonBuscarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarCursadaActionPerformed
@@ -2190,7 +2181,6 @@ public class Ventana
     {
       JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
     }
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonBuscarCursadaActionPerformed
 
   private void jButtonNuevoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoCursadaActionPerformed
@@ -2228,7 +2218,6 @@ public class Ventana
     this.jButtonBuscarCursada.setEnabled(false);
     this.jTextFieldBuscarCursada.setEditable(false);
     this.jTextFieldBuscarCursada.setText("");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonNuevoCursadaActionPerformed
 
   private void jButtonEliminarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCursadaActionPerformed
@@ -2260,7 +2249,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCursadaActionPerformed
 
   private void jButtonAgregarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarProfesorCursadaActionPerformed
@@ -2371,7 +2359,6 @@ public class Ventana
         }
     }
     JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAceptarCursadaActionPerformed
 
   private void jButtonCancelarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarCursadaActionPerformed
@@ -2412,7 +2399,6 @@ public class Ventana
     this.jButtonBuscarCursada.setEnabled(true);
     this.jTextFieldBuscarCursada.setEnabled(true);
     this.jTextFieldBuscarCursada.setText("");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonCancelarCursadaActionPerformed
 
   private void jButtonModificarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarCursadaActionPerformed
@@ -2446,21 +2432,17 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una cursada para poder modificarla");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonModificarCursadaActionPerformed
 
   private void jButtonAgregarAlumnoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarAlumnoCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonAgregarAlumnoCursadaActionPerformed
     new DialogAlumno(this, this.receptor, this.jTableAlumnosCursada, new TableModelAlumno());
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonAgregarAlumnoCursadaActionPerformed
 
   private void jButtonCambiarAsignaturaCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCambiarAsignaturaCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonCambiarAsignaturaCursadaActionPerformed
-
     new DialogAsignaturaCursada(this, this.receptor, this.jTextFieldIDAsignaturaCursada,
                                 this.jTextFieldNombreAsignaturaCursada);
-    //new DialogAsignatura(this, this.receptor, this.jTableCorrelativas, new TableModelAsignatura());
   }//GEN-LAST:event_jButtonCambiarAsignaturaCursadaActionPerformed
 
   private void jButtonEliminarHistoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarHistoriaActionPerformed
@@ -2473,7 +2455,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarHistoriaActionPerformed
 
   private void jButtonEliminarCompetenciaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCompetenciaActionPerformed
@@ -2486,7 +2467,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la competencia");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCompetenciaActionPerformed
 
   private void jButtonEliminarCorrelativaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCorrelativaActionPerformed
@@ -2499,7 +2479,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de las correlativas");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarCorrelativaActionPerformed
 
   private void jButtonEliminarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarProfesorCursadaActionPerformed
@@ -2512,7 +2491,6 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder eliminarlo de la cursada");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarProfesorCursadaActionPerformed
 
   private void jButtonEliminarAlumnoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarAlumnoCursadaActionPerformed
@@ -2525,13 +2503,11 @@ public class Ventana
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
-    // TODO add your handling code here:
   }//GEN-LAST:event_jButtonEliminarAlumnoCursadaActionPerformed
 
   private void jButtonAgradecimientosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgradecimientosActionPerformed
   {//GEN-HEADEREND:event_jButtonAgradecimientosActionPerformed
-  JOptionPane.showMessageDialog(this, "Gracias DarioFF");
-    // TODO add your handling code here:
+    JOptionPane.showMessageDialog(this, "Gracias DarioFF");
   }//GEN-LAST:event_jButtonAgradecimientosActionPerformed
 
   /**
@@ -2603,9 +2579,6 @@ public class Ventana
                    .Level
                    .SEVERE, null, ex);
     }
-    //</editor-fold>
-
-    /* Create and display the form */
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

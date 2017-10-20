@@ -141,18 +141,18 @@ public class Receptor
     }
     return ret;
   }
-  
+
   public void agregaAlumnoEnCursada(Alumno alumno, Cursada cursada)
-        throws DatoInvalidoException, ClaveYaExistenteException
-    {
-      this.modelo.agregarAlumnoEnCursada(alumno, cursada);
-    }
-  
-    public void agregaProfesorEnCursada(Profesor profesor, Cursada cursada)
-          throws DatoInvalidoException, ClaveYaExistenteException
-      {
-        this.modelo.agregarProfesorEnCursada(profesor, cursada);
-      }
+    throws DatoInvalidoException, ClaveYaExistenteException
+  {
+    this.modelo.agregarAlumnoEnCursada(alumno, cursada);
+  }
+
+  public void agregaProfesorEnCursada(Profesor profesor, Cursada cursada)
+    throws DatoInvalidoException, ClaveYaExistenteException
+  {
+    this.modelo.agregarProfesorEnCursada(profesor, cursada);
+  }
 
   public void guardar()
   {
