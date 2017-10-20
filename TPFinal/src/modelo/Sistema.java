@@ -500,7 +500,8 @@ public class Sistema
     {
         if (!Persona.validaPersona(modif))
             throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
-        this.alumnos.modificarValor(alumno, modif);
+        else
+            this.alumnos.modificarValor(alumno, modif);
     }
     
     /**
@@ -518,7 +519,8 @@ public class Sistema
     {
         if (!Persona.validaPersona(modif))
             throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
-        this.profesores.modificarValor(profesor, modif);
+        else
+            this.profesores.modificarValor(profesor, modif);
     }
     
     /**
@@ -536,7 +538,8 @@ public class Sistema
     {
         if (!Asignatura.validaAsignatura(modif))
             throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
-        this.planDeEstudio.modificarValor(asignatura, modif);
+        else
+            this.planDeEstudio.modificarValor(asignatura, modif);
     }
     
     /**
@@ -554,7 +557,8 @@ public class Sistema
     {
         if (!Cursada.validaCursada(modif))
             throw new DatoInvalidoException(modif, "Se detectaron parámetros inválidos al tratar de modificar.");
-        this.calendario.modificarValor(cursada, modif);
+        else
+            this.calendario.modificarValor(cursada, modif);
     }
 
     /* 
