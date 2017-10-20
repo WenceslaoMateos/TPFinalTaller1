@@ -173,8 +173,8 @@ public class Cursada
      */
     public static boolean validaHora(String hora)
     {
-        return ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 2)) <= 12) &&
-                (Integer.parseInt(hora.substring(0, 2)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
+        return ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 1)) <= 12) &&
+                (Integer.parseInt(hora.substring(0, 1)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
                 (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':');
     }
 
