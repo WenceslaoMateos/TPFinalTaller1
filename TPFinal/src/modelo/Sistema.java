@@ -358,7 +358,10 @@ public class Sistema
         while (cursadas.hasNext())
         {
             cursada = cursadas.next();
-            if (cursada.getAsignatura().getNombre().toUpperCase().contains(nombreUpper))
+      if (cursada.getAsignatura()
+                 .getNombre()
+                 .toUpperCase()
+                 .contains(nombreUpper))
                 aux.add(cursada);
         }
         if (aux.isEmpty())
@@ -433,8 +436,7 @@ public class Sistema
         throws DatoInvalidoException, ClaveYaExistenteException
     {
         if (!this.alumnoDisponible(alumno, cursada))
-            throw new DatoInvalidoException(alumno,
-                                            "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
+      throw new DatoInvalidoException(alumno, "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
         else
             cursada.altaAlumno(alumno);
     }

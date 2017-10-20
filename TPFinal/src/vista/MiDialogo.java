@@ -37,27 +37,29 @@ public abstract class MiDialogo
   public static final Dimension JBUTTON_DIMEN = new Dimension(100, 30);
   protected JTable fuente;
 
-  public MiDialogo(JFrame owner,Receptor receptor, JTable fuente)
+  public MiDialogo(JFrame owner, Receptor receptor, JTable fuente)
   {
-    super(owner,true);
+    super(owner, true);
     this.fuente = fuente;
     this.setSize(750, 500);
-    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    this.setDefaultCloseOperation(javax.swing
+                                       .WindowConstants
+                                       .DISPOSE_ON_CLOSE);
     this.receptor = receptor;
     this.busqueda = new JPanel(new FlowLayout());
     this.resultado = new JPanel();
 
     Container contenedor = this.getContentPane();
     contenedor.setLayout(new BorderLayout());
-    contenedor.add(this.resultado,BorderLayout.CENTER);
+    contenedor.add(this.resultado, BorderLayout.CENTER);
     contenedor.add(this.busqueda, BorderLayout.NORTH);
-  
+
     this.texto = new JTextField();
     this.aceptar = new JButton("Aceptar");
 
     this.busqueda.add(this.texto);
     this.busqueda.add(this.aceptar);
-    
+
     this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
     this.aceptar.addActionListener(this);
 

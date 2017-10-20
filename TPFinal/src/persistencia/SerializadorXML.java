@@ -15,7 +15,9 @@ import modelo.Cursada;
 import modelo.Profesor;
 import modelo.Sistema;
 
-
+/**
+ * Guarda y recupera la información de un sistema desde un archivo llamado "Sistema.xml".
+ */
 public abstract class SerializadorXML
 {
   private static final String ARCHIVO = "Sistema.xml";

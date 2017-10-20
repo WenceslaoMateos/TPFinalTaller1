@@ -21,10 +21,11 @@ public class DialogAsignatura
   private TableModelAsignatura modeloAsignatura;
 
 
-  public DialogAsignatura(JFrame owner,Receptor receptor, JTable fuente, DefaultTableModel modelo)
+  public DialogAsignatura(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
   {
-    super(owner,receptor, fuente);
-    
+    super(owner, receptor, fuente);
+
+    this.setTitle("Selección de asignatura");
     this.modeloAsignatura = (TableModelAsignatura) modelo;
     this.tabla = new JTable(this.modeloAsignatura);
     resultado.setLayout(new BorderLayout());
@@ -32,7 +33,7 @@ public class DialogAsignatura
     this.tabla.setFillsViewportHeight(true);
     this.resultado.add(this.scroll);
     resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla,BorderLayout.CENTER);
+    resultado.add(tabla, BorderLayout.CENTER);
     this.setVisible(true);
   }
 
@@ -57,7 +58,7 @@ public class DialogAsignatura
       Asignatura elemento =
         (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
       DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
-            
+
       model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
     }
     catch (NoEncontradoException f)

@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 /**
  * Clase que representa a las cursadas del sistema. Implementa I_Indexable siendo la identificación de la cursada la
- * clave primaria y la clave secundaria una combinación del periodo, día y hora de inicio.
+ * clave primaria y la clave secundaria una combinación del día y hora de inicio.
  */
 public class Cursada
     implements I_Indexable

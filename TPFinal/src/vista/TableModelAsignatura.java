@@ -14,15 +14,16 @@ public class TableModelAsignatura
   {
     super(new Object[] { "Identificacion", "Nombre" }, 0);
   }
-  
+
   @Override
   public boolean isCellEditable(int row, int column)
   {
     return false;
   }
+
   public void eliminarFila(int fila)
   {
-    Vector aux=this.getDataVector();
+    Vector aux = this.getDataVector();
     aux.remove(fila);
   }
 

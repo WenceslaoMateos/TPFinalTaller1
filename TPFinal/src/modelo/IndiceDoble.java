@@ -163,7 +163,9 @@ public class IndiceDoble<V extends I_Indexable>
             if (!this.contieneClaveSecundaria(elem.getClaveSecundaria()))
                 //Elimina la cubeta en caso de haber quedado vacía
                 this.indice2.put(elem.getClaveSecundaria(), new ArrayList<V>());
-            this.indice2.get(elem.getClaveSecundaria()).add(elem);
+      this.indice2
+          .get(elem.getClaveSecundaria())
+          .add(elem);
         }
     }
     
@@ -182,7 +184,9 @@ public class IndiceDoble<V extends I_Indexable>
      */
     public Iterator clavesSecundarias()
     {
-        return this.indice2.keySet().iterator();
+    return this.indice2
+               .keySet()
+               .iterator();
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
