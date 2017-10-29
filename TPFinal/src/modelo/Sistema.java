@@ -13,7 +13,7 @@ import java.util.Observable;
  * realizar sobre los mismos.
  */
 public class Sistema
-  extends Observable
+    extends Observable
 {
     /**
      * @aggregation composite
@@ -45,7 +45,7 @@ public class Sistema
         this.planDeEstudio = new IndiceDoble<Asignatura>();
         this.calendario = new IndiceDoble<Cursada>();
     }
-    
+
     /**
      * Agrega un alumno nuevo al sistema, dándole un legajo.<br>
      * <b>Post:</b> El sistema tiene un alumno válido más que está correctamente indexado.
@@ -64,7 +64,7 @@ public class Sistema
             this.alumnos.agregar(nuevo);
         }
     }
-    
+
     /**
      * Agrega un profesor nuevo al sistema, dándole un legajo.<br>
      * <b>Post:</b> El sistema tiene un profesor válido más que está correctamente indexado.
@@ -79,13 +79,13 @@ public class Sistema
             throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
         else
         {
-            nuevo.setLegajo(Profesor.getNuevaIdentificacion());
+            nuevo.setLegajo(Profesor.getNuevoLegajo());
             this.profesores.agregar(nuevo);
         }
     }
-    
+
     /**
-     * Agrega una aignatura nueva al sistema, dándole una indentificación.<br>
+     * Agrega una asignatura nueva al sistema, dándole una indentificación.<br>
      * <b>Post:</b> El sistema tiene una asignatura válida más que está correctamente indexada.
      * @param nuevo Asignatura a agregar.
      * @throws ClaveYaExistenteException La identificación otorgada ya existía en el sistema.
@@ -102,7 +102,7 @@ public class Sistema
             this.planDeEstudio.agregar(nuevo);
         }
     }
-    
+
     /**
      * Agrega una cursada nueva al sistema, dándole una indentificación.<br>
      * <b>Post:</b> El sistema tiene una cursada válida más que está correctamente indexada.
@@ -115,7 +115,7 @@ public class Sistema
     {
         if (!Cursada.validaCursada(nuevo))
             throw new DatoInvalidoException(nuevo, "Se encontraron datos inválidos.");
-        /* 
+        /*
         else if (!this.horarioCursadaDisponible(nuevo))
             throw new DatoInvalidoException(nuevo, "El horario solicitado ya está ocupado.");
         */
@@ -125,7 +125,7 @@ public class Sistema
             this.calendario.agregar(nuevo);
         }
     }
-    
+
     /**
      * Elimina a un alumno del sistema.<br>
      * <b>Pre:</b> El alumno se encuentra en el sistema.<br>
@@ -145,7 +145,7 @@ public class Sistema
                 aux.bajaAlumno(elim);
         }
     }
-    
+
     /**
      * Elimina a un profesor del sistema.<br>
      * <b>Pre:</b> El profesor se encuentra en el sistema.<br>
@@ -165,7 +165,7 @@ public class Sistema
                 aux.bajaProfesor(elim);
         }
     }
-    
+
     /**
      * Elimina una asignatura del sistema.<br>
      * <b>Pre:</b> La asignatura se encuentra en el sistema.<br>
@@ -190,7 +190,7 @@ public class Sistema
                 this.eliminarCursada(aux);
         }
     }
-    
+
     /**
      * Elimina una cursada del sistema.<br>
      * <b>Pre:</b> La cursada se encuentra en el sistema.<br>
@@ -201,7 +201,7 @@ public class Sistema
     {
         this.calendario.eliminar(elim);
     }
-    
+
     /**
      * Busca entre los alumnos el parámetro y lo elimina de sus materias aprobadas.<br>
      * <b>Post:</b> Ningún alumno mantiene la asignatura en su historia académica.
@@ -218,7 +218,7 @@ public class Sistema
                 aux.eliminarHistoria(elim);
         }
     }
-    
+
     /**
      * Busca entre los profesores el parámetro y lo elimina de sus materias habilitadas.<br>
      * <b>Post:</b> Ningún profesor mantiene la asignatura entre sus competencias.
@@ -235,7 +235,7 @@ public class Sistema
                 aux.eliminarCompetencia(elim);
         }
     }
-    
+
     /**
      * Busca entre las asignaturas el parámetro y lo elimina de sus precorrelativas.<br>
      * <b>Post:</b> Ninguna materia mantiene la asignatura entre sus precorrelativas.
@@ -252,7 +252,7 @@ public class Sistema
                 aux.eliminarCorrelativa(elim);
         }
     }
-    
+
     /**
      * Búsqueda genérica en un índice mediante un nombre parcial.<br>
      * <b>Pre:</b> indice mantiene un conjunto de elementos cuyas claves secundarias son Strings.
@@ -264,7 +264,7 @@ public class Sistema
     {
         String clave;
         Iterator<I_Indexable> elementos;
-        Iterator<String> claves = (Iterator<String>) indice.clavesSecundarias();
+        Iterator<String> claves = indice.clavesSecundarias();
         ArrayList aux = new ArrayList();
         String nombreUpper = nombre.toUpperCase();
         while (claves.hasNext())
@@ -285,7 +285,7 @@ public class Sistema
         }
         return aux.iterator();
     }
-    
+
     /**
      * Busca alumnos en el sistema cuyos nombres contengan el String parámetro.<br>
      * <b>Post:</b> Al menos el nombre de un alumno presentó coincidencias.
@@ -303,7 +303,7 @@ public class Sistema
         else
             return ret;
     }
-    
+
     /**
      * Busca profesores en el sistema cuyos nombres contengan el String parámetro.<br>
      * <b>Post:</b> Al menos el nombre de un profesor presentó coincidencias.
@@ -321,7 +321,7 @@ public class Sistema
         else
             return ret;
     }
-    
+
     /**
      * Busca asignaturas en el sistema cuyos nombres contengan el String parámetro.<br>
      * <b>Post:</b> Al menos el nombre de una asignatura presentó coincidencias.
@@ -339,7 +339,7 @@ public class Sistema
         else
             return ret;
     }
-    
+
     /**
      * Busca cursadas en el sistema cuyas asignaturas tengan nombres que contengan el String parámetro.<br>
      * <b>Post:</b> Al menos el nombre de la asignatura de una cursada presentó coincidencias.
@@ -358,10 +358,10 @@ public class Sistema
         while (cursadas.hasNext())
         {
             cursada = cursadas.next();
-      if (cursada.getAsignatura()
-                 .getNombre()
-                 .toUpperCase()
-                 .contains(nombreUpper))
+            if (cursada.getAsignatura()
+                       .getNombre()
+                       .toUpperCase()
+                       .contains(nombreUpper))
                 aux.add(cursada);
         }
         if (aux.isEmpty())
@@ -370,7 +370,7 @@ public class Sistema
         else
             return aux.iterator();
     }
-    
+
     /**
      * Busca a un alumno en el sistema por su legajo.<br>
      * <b>Post:</b> Se encontró un alumno asociado al legajo dado.
@@ -383,7 +383,7 @@ public class Sistema
     {
         return this.alumnos.buscarPorClavePrimaria(legajo);
     }
-    
+
     /**
      * Busca a un profesor en el sistema por su legajo.<br>
      * <b>Post:</b> Se encontró un profesor asociado al legajo dado.
@@ -396,7 +396,7 @@ public class Sistema
     {
         return this.profesores.buscarPorClavePrimaria(legajo);
     }
-    
+
     /**
      * Busca a una asignatura en el sistema por su identificación.<br>
      * <b>Post:</b> Se encontró una asignatura asociada a la identificación dada.
@@ -409,7 +409,7 @@ public class Sistema
     {
         return this.planDeEstudio.buscarPorClavePrimaria(identificacion);
     }
-    
+
     /**
      * Busca a una cursada en el sistema por su identificación.<br>
      * <b>Post:</b> Se encontró una cursada asociada a la identificación dada.
@@ -422,7 +422,7 @@ public class Sistema
     {
         return this.calendario.buscarPorClavePrimaria(identificacion);
     }
-    
+
     /**
      * Agrega un alumno en la cursada solicitada.<br>
      * <b>Pre:</b> alumno y cursada forman parte del sistema.<br>
@@ -436,11 +436,12 @@ public class Sistema
         throws DatoInvalidoException, ClaveYaExistenteException
     {
         if (!this.alumnoDisponible(alumno, cursada))
-      throw new DatoInvalidoException(alumno, "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
+            throw new DatoInvalidoException(alumno,
+                                            "El alumno solicitado se encuentra ocupado en el horario de la cursada.");
         else
             cursada.altaAlumno(alumno);
     }
-    
+
     /**
      * Agrega un profesor en la cursada solicitada.<br>
      * <b>Pre:</b> profesor y cursada forman parte del sistema.<br>
@@ -459,7 +460,7 @@ public class Sistema
         else
             cursada.altaProfesor(profesor);
     }
-    
+
     /**
      * Comprueba que un alumno esté disponible en el horario de la cursada dada.<br>
      * <b>Pre:</b> alumno y cursada forman parte del sistema.
@@ -480,7 +481,7 @@ public class Sistema
         }
         return res;
     }
-    
+
     /**
      * Comprueba que un profesor esté disponible en el horario de la cursada dada.<br>
      * <b>Pre:</b> profesor y cursada forman parte del sistema.
@@ -501,7 +502,7 @@ public class Sistema
         }
         return res;
     }
-    
+
     /**
      * Dado un alumno, modifica sus atributos a partir del estado del parámetro modif.<br>
      * Ver modificarDatos() de la clase Persona.<br>
@@ -520,7 +521,7 @@ public class Sistema
         else
             this.alumnos.modificarValor(alumno, modif);
     }
-    
+
     /**
      * Dado un profesor, modifica sus atributos a partir del estado del parámetro modif.<br>
      * Ver modificarDatos() de la clase Profesor.<br>
@@ -539,7 +540,7 @@ public class Sistema
         else
             this.profesores.modificarValor(profesor, modif);
     }
-    
+
     /**
      * Dada una asignatura, modifica sus atributos a partir del estado del parámetro modif.<br>
      * Ver modificarDatos() de la clase Asignatura.<br>
@@ -558,7 +559,7 @@ public class Sistema
         else
             this.planDeEstudio.modificarValor(asignatura, modif);
     }
-    
+
     /**
      * Dada una cursada, modifica sus atributos a partir del estado del parámetro modif.<br>
      * Ver modificarDatos() de la clase Cursada.<br>
@@ -578,7 +579,7 @@ public class Sistema
             this.calendario.modificarValor(cursada, modif);
     }
 
-    /* 
+    /*
     private boolean horarioCursadaDisponible(Cursada cursada)
     {
         boolean res = true;
@@ -588,7 +589,7 @@ public class Sistema
         return res;
     }
     */
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public void setAlumnos(IndiceDoble<Alumno> alumnos)
     {
         this.alumnos = alumnos;
@@ -628,5 +629,5 @@ public class Sistema
     {
         return calendario;
     }
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

@@ -23,8 +23,7 @@ public class Asignatura
 
     /**
      * Constructor para crear una instancia preliminar de asignatura. No valida el nombre ni asigna un legajo.<br>
-     * <b>Post:</b> Se genera una nueva instancia de asignatura cuyos datos podrán ser validados y, tras esto, se le
-     * podrá asignar una identificación.
+     * <b>Post:</b> Se genera una nueva instancia de Asignatura cuyo datos aún no están validados.
      * @param nombre nombre de la materia.
      */
     public Asignatura(String nombre)
@@ -32,7 +31,7 @@ public class Asignatura
         this.nombre = nombre;
         this.correlatividades = new IndicePrimario<Asignatura>();
     }
-    
+
     /**
      * Clave primaria de una asignatura.
      * @return Ver getIdentificacion().
@@ -42,7 +41,7 @@ public class Asignatura
     {
         return this.getIdentificacion();
     }
-    
+
     /**
      * Clave secundaria de una asignatura.
      * @return Ver getNombre().
@@ -72,7 +71,7 @@ public class Asignatura
     {
         this.nombre = nombre;
     }
-    
+
     /**
      * Agrega una asignatura a las precorrelativas de la materia.<br>
      * <b>Pre:</b> correlativa se encuentra entre las asignaturas del sistema.<br>
@@ -122,15 +121,15 @@ public class Asignatura
      */
     public static String getNuevaIdentificacion()
     {
+        int i;
+        String aux;
         Asignatura.CANT_ASIGNATURAS++;
-        String ret = "ASI";
-        String aux = "" + Asignatura.CANT_ASIGNATURAS;
-        int i, j = aux.length();
-        for (i = 1; i <= 4 - j; i++)
-            ret = ret + "0";
-        return ret + aux;
+        aux = "" + Asignatura.CANT_ASIGNATURAS;
+        for (i = 4 - aux.length(); i > 0; i--)
+            aux = "0" + aux;
+        return "ASI" + aux;
     }
-    
+
     /**
      * Otorga las precorrelativas de la materia.
      * @return Iterator con las asignaturas necesarias para cursar la invocante.
@@ -139,7 +138,7 @@ public class Asignatura
     {
         return this.correlatividades.elementos();
     }
-    
+
     /**
      * Comprueba que el parámetro sea una precorrelativa del objeto invocante.<br>
      * <b>Pre:</b> asignatura forma parte del sistema.
@@ -150,7 +149,7 @@ public class Asignatura
     {
         return this.correlatividades.contieneValor(asignatura);
     }
-    
+
     /**
      * Le asigna el nombre proveniente de modif al objeto invocante. No permite modificar la identificación.<br>
      * <b>Pre:</b> Los atributos de modif son correctos.
@@ -167,7 +166,7 @@ public class Asignatura
         else
             this.setNombre(((Asignatura) modif).getNombre());
     }
-    
+
     /**
      * Verifica que el nombre de la asignatura no está vacío.
      * @param asignatura Objeto a ser verificado.
@@ -183,7 +182,7 @@ public class Asignatura
     {
         super();
     }
-    
+
     public void setCorrelatividades(IndicePrimario<Asignatura> correlatividades)
     {
         this.correlatividades = correlatividades;
@@ -193,7 +192,7 @@ public class Asignatura
     {
         return correlatividades;
     }
-    
+
     public static void setCANT_ASIGNATURAS(int CANT_ASIGNATURAS)
     {
         Asignatura.CANT_ASIGNATURAS = CANT_ASIGNATURAS;

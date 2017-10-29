@@ -91,7 +91,7 @@ public class IndiceDoble<V extends I_Indexable>
                    .get(clave)
                    .iterator();
     }
-    
+
     // No usado
     public Iterator<ArrayList<V>> elementosPorClaveSecundaria()
     {
@@ -140,10 +140,10 @@ public class IndiceDoble<V extends I_Indexable>
     {
         return this.indice1.elementos();
     }
-    
+
     /**
      * Permite modificar un valor del índice dada su referencia. Las modificaciones se generan mediante el método
-     * modificarDatos(I_Indexable modif) implementado por la clase V. En caso de cambiar alguna de sus claves, 
+     * modificarDatos(I_Indexable modif) implementado por la clase V. En caso de cambiar alguna de sus claves,
      * se reindexa el elemento acordemente.
      * @param elem elemento de tipo V a modificar.
      * @param modif objeto de tipo V que contiene las modificaciones.
@@ -159,16 +159,16 @@ public class IndiceDoble<V extends I_Indexable>
             cubeta = this.indice2.get(claveAux);
             cubeta.remove(elem);
             if (cubeta.isEmpty())
+                //Elimina la cubeta en caso de haber quedado vacía
                 this.indice2.remove(claveAux);
             if (!this.contieneClaveSecundaria(elem.getClaveSecundaria()))
-                //Elimina la cubeta en caso de haber quedado vacía
                 this.indice2.put(elem.getClaveSecundaria(), new ArrayList<V>());
-      this.indice2
-          .get(elem.getClaveSecundaria())
-          .add(elem);
+            this.indice2
+                .get(elem.getClaveSecundaria())
+                .add(elem);
         }
     }
-    
+
     /**
      * Obtiene las claves primarias del índice.
      * @return Iterator con las claves primarias asociadas a los valores del índice.
@@ -177,16 +177,16 @@ public class IndiceDoble<V extends I_Indexable>
     {
         return this.indice1.clavesPrimarias();
     }
-    
+
     /**
      * Obtiene las claves secundarias del índice.
      * @return Iterator con las claves primarias asociadas a los valores del índice.
      */
     public Iterator clavesSecundarias()
     {
-    return this.indice2
-               .keySet()
-               .iterator();
+        return this.indice2
+                   .keySet()
+                   .iterator();
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

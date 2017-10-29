@@ -36,8 +36,7 @@ public class Cursada
 
     /**
      * Constructor para crear una instancia preliminar de cursada. No valida sus parámetros ni asigna un legajo.<br>
-     * <b>Post:</b> Se genera una nueva instancia de persona cuyos datos podrán ser validados y, tras esto, se le podrá
-     * asignar una identificación.
+     * <b>Post:</b> Se genera una nueva instancia de Cursada cuyos datos aún no están validados.
      * @param asignatura Asignatura a la que se aplica la cursada.
      * @param periodo Año y cuatrimestre de la cursada.
      * @param dia Día de la semana en que se desenvolverá la cursada.
@@ -170,12 +169,21 @@ public class Cursada
      */
     public static boolean validaPeriodo(String periodo)
     {
-        return ((periodo.length() == 7) &&
-                (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
-                Integer.parseInt(periodo.substring(3, periodo.length())) > 2000 &&
-                Integer.parseInt(periodo.substring(3, periodo.length())) < 2500);
+        try
+        {
+            return (periodo.length() == 7) &&
+                   (periodo.substring(0, 3).equals("01-") || periodo.substring(0, 3).equals("02-")) &&
+                   Integer.parseInt(periodo.substring(3)) >= 1;
+            /* No se verifica que el año sea menor o igual a 9999 porque por las condiciones anteriores solo puede
+             * tener 4 dígitos */
+        }
+        catch (NumberFormatException nfe)
+        {
+            // El año era incorrecto
+            return false;
+        }
     }
-    
+
     /**
      * Verifica que la hora sea correcta, según las especificaciones.<br>
      * Las mismas imponen que debe tomar el formato xx:xx, siendo x un número del 0 al 9. A su vez, debe ser una hora
@@ -185,9 +193,21 @@ public class Cursada
      */
     public static boolean validaHora(String hora)
     {
-        return ((hora.length() == 5) && (Integer.parseInt(hora.substring(0, 1)) <= 12) &&
-                (Integer.parseInt(hora.substring(0, 1)) >= 0) && (Integer.parseInt(hora.substring(3, 4)) <= 59) &&
-                (Integer.parseInt(hora.substring(3, 4)) >= 0) && hora.charAt(2) == ':');
+        int auxHora, auxMinutos;
+        try
+        {
+            auxHora = Integer.parseInt(hora.substring(0, 2));
+            auxMinutos = Integer.parseInt(hora.substring(3));
+            return hora.length() == 5 &&
+                   auxHora <= 23 && auxHora >= 0 &&
+                   auxMinutos <= 59 && auxMinutos >= 0 &&
+                   hora.charAt(2) == ':';
+        }
+        catch (NumberFormatException nfe)
+        {
+            // Alguno de los parseos falló
+            return false;
+        }
     }
 
     /**
@@ -208,11 +228,11 @@ public class Cursada
      */
     public static boolean validaCursada(Cursada cursada)
     {
-        return Cursada.validaPeriodo(cursada.getPeriodo()) && Cursada.validaHora(cursada.getHoraInicio()) &&
-               Cursada.validaHora(cursada.getHoraFinalizacion()) &&
+        return Cursada.validaPeriodo(cursada.getPeriodo()) &&
+               Cursada.validaHora(cursada.getHoraInicio()) && Cursada.validaHora(cursada.getHoraFinalizacion()) &&
                Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
     }
-    
+
     /**
      * Genera una nueva identificación cumpliendo con las especificaciones para una cursada.<br>
      * <b>Post:</b> Se otorga una identificación válida y aumenta en uno la cantidad de identificaciones.
@@ -220,13 +240,13 @@ public class Cursada
      */
     public static String getNuevaIdentificacion()
     {
+        int i;
+        String aux;
         Cursada.CANT_CURSADAS++;
-        String ret = "CUR";
-        String aux = "" + Cursada.CANT_CURSADAS;
-        int i, j = aux.length();
-        for (i = 1; i <= 4 - j; i++)
-            ret = ret + "0";
-        return ret + aux;
+        aux = "" + Cursada.CANT_CURSADAS;
+        for (i = 4 - aux.length(); i > 0; i--)
+            aux = "0" + aux;
+        return "CUR" + aux;
     }
 
     /**
@@ -275,7 +295,7 @@ public class Cursada
         else
             this.profesores.agregar(nuevo);
     }
-    
+
     /**
      * Da de baja en la cursada al profesor parámetro.<br>
      * <b>Pre:</b> El profesor fue ubicado previamente entre los participantes de la cursada.<br>
@@ -286,7 +306,7 @@ public class Cursada
     {
         this.profesores.eliminar(elim);
     }
-    
+
     /**
      * Verifica si la cursada parámetro se superpone con la invocante.<br>
      * Esto se produce si ambas cursadas ocurren en el mismo periodo, durante el mismo día y hay una superposición
@@ -300,7 +320,7 @@ public class Cursada
                !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) > 0 ||
                  this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) < 0);
     }
-    
+
     /**
      * Verifica si el alumno parámetro se encuentra entre los participantes de la cursada.
      * @param alumno Alumno a buscar.
@@ -338,7 +358,7 @@ public class Cursada
     {
         return this.profesores.elementos();
     }
-    
+
     /**
      * Le asigna la asignatura, periodo, día, hora de inicio y hora de finalización de modif al objeto invocante. No
      * permite modificar la identificación.<br>

@@ -19,8 +19,7 @@ public class Alumno
 
     /**
      * Constructor para crear una instancia preliminar de Alumno. No valida sus parámetros ni asigna un legajo.
-     * <b>Post:</b> Se genera una nueva instancia de alumno cuyos datos podrán ser validados y, tras esto, se le podrá 
-     * asignar un legajo.
+     * <b>Post:</b> Se genera una nueva instancia de Alumno cuyos datos aún no están validados.
      * @param apellidoNombre String con el apellido y nombre del alumno nuevo. Es clave secundaria.
      * @param domicilio dirección del alumno.
      * @param mail dirección electrónica del alumno.
@@ -73,13 +72,13 @@ public class Alumno
      */
     public static String getNuevoLegajo()
     {
+        int i;
+        String aux;
         Alumno.CANT_ALUMNOS++;
-        String ret = "ALU";
-        String aux = "" + Alumno.CANT_ALUMNOS;
-        int i, j = aux.length();
-        for (i = 1; i <= 4 - j; i++)
-            ret = ret + "0";
-        return ret + aux;
+        aux = "" + Alumno.CANT_ALUMNOS;
+        for (i = 4 - aux.length(); i > 0; i--)
+            aux = "0" + aux;
+        return "ALU" + aux;
     }
 
     /**

@@ -21,8 +21,7 @@ public class Profesor
 
     /**
      * Constructor para crear una instancia preliminar de Profesor. No valida sus parámetros ni asigna un legajo.<br>
-     * <b>Post:</b> Se genera una nueva instancia de persona cuyos datos podrán ser validados y, tras esto, se le podrá
-     * asignar un legajo.
+     * <b>Post:</b> Se genera una nueva instancia de Profesor cuyos datos aún no están validados.
      * @param apellidoNombre String con el apellido y nombre del profesor nuevo. Es clave secundaria.
      * @param domicilio dirección del profesor.
      * @param mail dirección electrónica del profesor.
@@ -34,7 +33,7 @@ public class Profesor
         this.telefono = telefono;
         this.competencia = new IndicePrimario<Asignatura>();
     }
-    
+
     public void setTelefono(String telefono)
     {
         this.telefono = telefono;
@@ -84,15 +83,15 @@ public class Profesor
      * <b>Post:</b> Devuelve un legajo válido nuevo e incrementa la cantidad de legajos.
      * @return String con el nuevo legajo.
      */
-    public static String getNuevaIdentificacion()
+    public static String getNuevoLegajo()
     {
+        int i;
+        String aux;
         Profesor.CANT_PROFESORES++;
-        String ret = "PRO";
-        String aux = "" + Profesor.CANT_PROFESORES;
-        int i, j = aux.length();
-        for (i = 1; i <= 4 - j; i++)
-            ret = ret + "0";
-        return ret + aux;
+        aux = "" + Profesor.CANT_PROFESORES;
+        for (i = 4 - aux.length(); i > 0; i--)
+            aux = "0" + aux;
+        return "PRO" + aux;
     }
 
     /**
