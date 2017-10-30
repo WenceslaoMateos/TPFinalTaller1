@@ -422,7 +422,28 @@ public class Sistema
     {
         return this.calendario.buscarPorClavePrimaria(identificacion);
     }
-
+    
+    /**
+     * Elimina la asignatura dada de entre las competencias del profesor.<br>
+     * <b>Pre:</b> El profesor se encuentra en el sistema y la asignatura está entre sus competencias.<br>
+     * <b>Post:</b> El profesor está habilitado para dar una asignatura menos y fue dado de baja en todas las cursadas
+     * de la misma en las que participaba.
+     * @param profesor Profesor a quien se le desea remover una competencia.
+     * @param asignatura Competencia a ser eliminada.
+     */
+    public void quitarCompetenciaAProfesor(Profesor profesor, Asignatura asignatura)
+    {
+        Cursada aux;
+        Iterator<Cursada> it = this.calendario.elementosPorClavePrimaria();
+        while (it.hasNext())
+        {
+            aux = it.next();
+            if (aux.getAsignatura().equals(asignatura) && aux.tieneProfesor(profesor))
+                aux.bajaProfesor(profesor);
+        }
+        profesor.eliminarCompetencia(asignatura);
+    }
+    
     /**
      * Agrega un alumno en la cursada solicitada.<br>
      * <b>Pre:</b> alumno y cursada forman parte del sistema.<br>
@@ -563,7 +584,8 @@ public class Sistema
     /**
      * Dada una cursada, modifica sus atributos a partir del estado del parámetro modif.<br>
      * Ver modificarDatos() de la clase Cursada.<br>
-     * <b>Pre:</b> cursada forma parte del sistema.<br>
+     * <b>Pre:</b> cursada forma parte del sistema y los profesores y alumnos no tienen superposiciones con el
+     * nuevo horario.<br>
      * <b>Post:</b> el estado de la cursada se adaptó a los cambios introducidos por modif y la misma se mantiene
      * correctamente indexada.
      * @param cursada Cursada a modificar sus datos.
