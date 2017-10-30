@@ -21,12 +21,6 @@ public class TableModelProfesor
     return false;
   }
 
-  public void eliminarFila(int fila)
-  {
-    Vector aux = this.getDataVector();
-    aux.remove(fila);
-  }
-
   public void agregarFilas(Iterator profesores)
   {
     Profesor aux;

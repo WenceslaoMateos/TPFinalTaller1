@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_144" class="java.beans.XMLDecoder">
+ <object class="modelo.Sistema" id="Sistema0">
+  <void id="IndiceDoble0" property="alumnos">
+   <void id="IndicePrimario0" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>ALU0002</string>
+      <object class="modelo.Alumno" id="Alumno0">
+       <void property="apellidoNombre">
+        <string>Wenceslao Mateos</string>
+       </void>
+       <void property="domicilio">
+        <string>Independencia 4320</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0002</string>
+       </void>
+       <void property="mail">
+        <string>wenceslaomateos@gmail.com</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0003</string>
+      <object class="modelo.Alumno" id="Alumno1">
+       <void property="apellidoNombre">
+        <string>Braulio Pablos</string>
+       </void>
+       <void property="domicilio">
+        <string>Chaco 33</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0003</string>
+       </void>
+       <void property="mail">
+        <string>bravlionel@gmail.com</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0004</string>
+      <object class="modelo.Alumno" id="Alumno2">
+       <void property="apellidoNombre">
+        <string>Franco Lanzillota</string>
+       </void>
+       <void property="domicilio">
+        <string>Algun Lugar 123</string>
+       </void>
+       <void property="historia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="legajo">
+        <string>ALU0004</string>
+       </void>
+       <void property="mail">
+        <string>francolanzi@gmail.com</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>Braulio Pablos</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno1"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Franco Lanzillota</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno2"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Wenceslao Mateos</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Alumno0"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble1" property="planDeEstudio">
+   <void id="IndicePrimario1" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>ASI0002</string>
+      <object class="modelo.Asignatura" id="Asignatura0">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="identificacion">
+        <string>ASI0002</string>
+       </void>
+       <void property="nombre">
+        <string>Analisis Matematico A</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ASI0003</string>
+      <object class="modelo.Asignatura" id="Asignatura1">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario" id="IndicePrimario2">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0002</string>
+           <object idref="Asignatura0"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="identificacion">
+        <string>ASI0003</string>
+       </void>
+       <void property="nombre">
+        <string>Analisis Matematico B</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ASI0004</string>
+      <object class="modelo.Asignatura" id="Asignatura2">
+       <void property="correlatividades">
+        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0003</string>
+           <object idref="Asignatura1"/>
+          </void>
+         </void>
+        </object>
+       </void>
+       <void property="identificacion">
+        <string>ASI0004</string>
+       </void>
+       <void property="nombre">
+        <string>Analisis Matematico C</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>Analisis Matematico A</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Asignatura0"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Analisis Matematico B</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Asignatura1"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Analisis Matematico C</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Asignatura2"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+  <void id="IndiceDoble2" property="profesores">
+   <void id="IndicePrimario4" property="indice1">
+    <void property="elementos">
+     <void method="put">
+      <string>PRO0001</string>
+      <object class="modelo.Profesor" id="Profesor0">
+       <void property="apellidoNombre">
+        <string>Guillermo Lazurri</string>
+       </void>
+       <void property="competencia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="domicilio">
+        <string>Magallanes 456</string>
+       </void>
+       <void property="legajo">
+        <string>PRO0001</string>
+       </void>
+       <void property="mail">
+        <string>guillesky@gmail.com</string>
+       </void>
+       <void property="telefono">
+        <string>487-3322</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>PRO0002</string>
+      <object class="modelo.Profesor" id="Profesor1">
+       <void property="apellidoNombre">
+        <string>Leonel Guccione</string>
+       </void>
+       <void property="competencia">
+        <object class="modelo.IndicePrimario"/>
+       </void>
+       <void property="domicilio">
+        <string>Otro Lado 789</string>
+       </void>
+       <void property="legajo">
+        <string>PRO0002</string>
+       </void>
+       <void property="mail">
+        <string>leonelito@gmail.com</string>
+       </void>
+       <void property="telefono">
+        <string>456-1234</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </void>
+   <void property="indice2">
+    <void method="put">
+     <string>Guillermo Lazurri</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Profesor0"/>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>Leonel Guccione</string>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Profesor1"/>
+      </void>
+     </object>
+    </void>
+   </void>
+  </void>
+ </object>
+ <int>4</int>
+ <int>2</int>
+ <int>4</int>
+ <int>0</int>
+</java>

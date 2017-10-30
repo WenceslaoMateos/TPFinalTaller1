@@ -18,18 +18,16 @@ import persistencia.SerializadorXML;
 public class Receptor
 {
   private Sistema modelo;
-  private Ventana vista;
   public static final int ALUMNO = 0;
   public static final int PROFESOR = 1;
   public static final int ASIGNATURA = 2;
   public static final int CURSADA = 3;
 
 
-  public Receptor(Sistema modelo, Ventana vista)
+  public Receptor(Sistema modelo)
   {
     super();
     this.modelo = modelo;
-    this.vista = vista;
   }
 
   public void alta(Object obj, int comando)

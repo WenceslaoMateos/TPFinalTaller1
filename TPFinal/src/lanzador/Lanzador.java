@@ -16,9 +16,8 @@ public class Lanzador
 
   public static void main(String[] args)
   {
-    Ventana vista = new Ventana();
     Sistema modelo = SerializadorXML.cargar();
-    Receptor receptor = new Receptor(modelo, vista);
-    vista.setReceptor(receptor);
+    Receptor receptor = new Receptor(modelo);
+    Ventana vista = new Ventana(receptor);
   }
 }

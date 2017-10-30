@@ -3,6 +3,7 @@ package vista;
 
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
+import excepciones.DiaInvalidoException;
 import excepciones.NoEncontradoException;
 
 import java.awt.event.WindowAdapter;
@@ -44,9 +45,10 @@ public class Ventana
   private String focus = "Alumno";
 
   /** Creates new form Ventana */
-  public Ventana()
+  public Ventana(Receptor receptor)
   {
     initComponents();
+    this.receptor = receptor;
     this.setResizable(false);
     this.setTitle("Programa de Gestion de asignaturas");
     this.setVisible(true);
@@ -103,27 +105,17 @@ public class Ventana
         .addListSelectionListener(this);
   }
 
-  public void setReceptor(Receptor receptor)
-  {
-    this.receptor = receptor;
-  }
-
   @Override
   public void valueChanged(ListSelectionEvent e)
   {
     if (e.getValueIsAdjusting())
     {
       DefaultTableModel aux2;
-      aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
-      aux2.setRowCount(0);
-      aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
-      aux2.setRowCount(0);
-      aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
-      aux2.setRowCount(0);
-      aux2 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-      aux2.setRowCount(0);
-      aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-      aux2.setRowCount(0);
+      ((DefaultTableModel) this.jTableHistoria.getModel()).setRowCount(0);
+      ((DefaultTableModel) this.jTableCompetencia.getModel()).setRowCount(0);
+      ((DefaultTableModel) this.jTableCorrelativas.getModel()).setRowCount(0);
+      ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
+      ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
       if (this.focus.equals(Ventana.ALUMNO))
       {
         Alumno elemento;
@@ -257,10 +249,7 @@ public class Ventana
           this.jTableAlumnosCursada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
           this.jTableAlumnosCursada.setRowSelectionAllowed(true);
         }
-        catch (NoEncontradoException f)
-        {
-        }
-        catch (ArrayIndexOutOfBoundsException g)
+        catch (NoEncontradoException | DiaInvalidoException f)
         {
         }
       }
@@ -1558,7 +1547,7 @@ public class Ventana
   private void jButtonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoAlumnoActionPerformed
     this.accionAceptar = Ventana.NUEVO;
-    this.jButtonCancelarAlumnoActionPerformed(evt);
+    this.cancelarAlumno();
     this.jButtonEliminarAlumno.setEnabled(false);
     this.jButtonModificarAlumno.setEnabled(false);
 
@@ -1577,10 +1566,7 @@ public class Ventana
     this.jTextFieldBuscarAlumno.setEditable(false);
     this.jTextFieldBuscarAlumno.setText("");
 
-    DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
-    aux.setRowCount(0);
-    DefaultTableModel aux2 = (DefaultTableModel) this.jTableHistoria.getModel();
-    aux2.setRowCount(0);
+    ((DefaultTableModel) this.jTableAlumnoAlumno.getModel()).setRowCount(0);
 
   }//GEN-LAST:event_jButtonNuevoAlumnoActionPerformed
 
@@ -1610,8 +1596,7 @@ public class Ventana
       this.jTextFieldBuscarAlumno.setEditable(false);
       this.jTextFieldBuscarAlumno.setText("");
 
-      DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
-      aux.setRowCount(0);
+      ((DefaultTableModel) this.jTableAlumnoAlumno.getModel()).setRowCount(0);
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder modificarlo");
@@ -1630,11 +1615,10 @@ public class Ventana
                                           JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
         {
           this.receptor.baja(this.jTextFieldLegajoAlumno.getText(), Receptor.ALUMNO);
-          DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-          aux.setRowCount(0);
-          DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnoAlumno.getModel();
-          aux2.setRowCount(0);
-          this.jButtonCancelarAlumnoActionPerformed(evt);
+
+          ((DefaultTableModel) this.jTableHistoria.getModel()).setRowCount(0);
+          ((DefaultTableModel) this.jTableAlumnoAlumno.getModel()).setRowCount(0);
+          this.cancelarAlumno();
         }
       }
       catch (NoEncontradoException e)
@@ -1649,28 +1633,7 @@ public class Ventana
 
   private void jButtonCancelarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarAlumnoActionPerformed
-    this.jTextFieldLegajoAlumno.setText("");
-    this.jTextFieldNombreAlumno.setText("");
-    this.jTextFieldNombreAlumno.setEditable(false);
-    this.jTextFieldDomicilioAlumno.setText("");
-    this.jTextFieldDomicilioAlumno.setEditable(false);
-    this.jTextFieldMailAlumno.setText("");
-    this.jTextFieldMailAlumno.setEditable(false);
-    this.jButtonAgregarHistoria.setEnabled(false);
-    this.jButtonEliminarHistoria.setEnabled(false);
-    this.jButtonAceptarAlumno.setEnabled(false);
-    this.jButtonEliminarAlumno.setEnabled(true);
-    this.jButtonModificarAlumno.setEnabled(true);
-    this.jButtonNuevoAlumno.setEnabled(true);
-    this.jButtonCancelarAlumno.setEnabled(false);
-
-    this.jButtonBuscarAlumno.setEnabled(true);
-    this.jTextFieldBuscarAlumno.setEditable(true);
-    this.jTextFieldBuscarAlumno.setText("");
-
-    DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-    aux.setRowCount(0);
-
+    this.cancelarAlumno();
   }//GEN-LAST:event_jButtonCancelarAlumnoActionPerformed
 
   private void jButtonAceptarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAlumnoActionPerformed
@@ -1695,7 +1658,7 @@ public class Ventana
             nuevo.agregarHistoria(elemento);
           }
           this.receptor.alta(nuevo, Receptor.ALUMNO);
-          this.jButtonCancelarAlumnoActionPerformed(evt);
+          this.cancelarAlumno();
 
           break;
         case Ventana.MODIFICAR:
@@ -1728,7 +1691,7 @@ public class Ventana
             viejo.agregarHistoria(nuevas.next());
 
           this.receptor.modificacion(modif, Receptor.ALUMNO);
-          this.jButtonCancelarAlumnoActionPerformed(evt);
+          this.cancelarAlumno();
           break;
       }
       JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
@@ -1765,7 +1728,7 @@ public class Ventana
   private void jButtonNuevoProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoProfesorActionPerformed
     this.accionAceptar = Ventana.NUEVO;
-    this.jButtonCancelarProfesorActionPerformed(evt);
+    this.cancelarProfesor();
     this.jButtonEliminarProfesor.setEnabled(false);
     this.jButtonModificarProfesor.setEnabled(false);
 
@@ -1783,10 +1746,9 @@ public class Ventana
     this.jTextFieldMailProfesor.setText("");
     this.jTextFieldTelefonoProfesor.setEditable(true);
     this.jTextFieldTelefonoProfesor.setText("");
-    DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
-    aux.setRowCount(0);
-    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
-    aux2.setRowCount(0);
+
+    ((DefaultTableModel) this.jTableProfesorProfesor.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableCompetencia.getModel()).setRowCount(0);
 
     this.jButtonBuscarProfesor.setEnabled(false);
     this.jTextFieldBuscarProfesor.setEditable(false);
@@ -1806,11 +1768,9 @@ public class Ventana
                                           JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
         {
           this.receptor.baja(this.jTextFieldLegajoProfesor.getText(), Receptor.PROFESOR);
-          this.jButtonCancelarProfesorActionPerformed(evt);
-          DefaultTableModel aux = (DefaultTableModel) this.jTableProfesorProfesor.getModel();
-          aux.setRowCount(0);
-          DefaultTableModel aux2 = (DefaultTableModel) this.jTableCompetencia.getModel();
-          aux2.setRowCount(0);
+          this.cancelarProfesor();
+          ((DefaultTableModel) this.jTableProfesorProfesor.getModel()).setRowCount(0);
+          ((DefaultTableModel) this.jTableCompetencia.getModel()).setRowCount(0);
         }
       }
       catch (NoEncontradoException e)
@@ -1849,7 +1809,7 @@ public class Ventana
             nuevo.agregarCompetencia(elemento);
           }
           this.receptor.alta(nuevo, Receptor.PROFESOR);
-          this.jButtonCancelarProfesorActionPerformed(evt);
+          this.cancelarProfesor();
 
           break;
         case Ventana.MODIFICAR:
@@ -1882,7 +1842,7 @@ public class Ventana
             viejo.agregarCompetencia(nuevas.next());
 
           this.receptor.modificacion(modif, Receptor.PROFESOR);
-          this.jButtonCancelarProfesorActionPerformed(evt);
+          this.cancelarProfesor();
           break;
       }
       JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
@@ -1896,32 +1856,7 @@ public class Ventana
 
   private void jButtonCancelarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarProfesorActionPerformed
-
-    this.jButtonEliminarCompetencia.setEnabled(false);
-    this.jButtonAgregarCompetencia.setEnabled(false);
-    this.jButtonAceptarProfesor.setEnabled(false);
-    this.jButtonCancelarProfesor.setEnabled(false);
-
-    this.jTextFieldLegajoProfesor.setText("");
-    this.jTextFieldNombreProfesor.setText("");
-    this.jTextFieldNombreProfesor.setEditable(false);
-    this.jTextFieldDomicilioProfesor.setText("");
-    this.jTextFieldDomicilioProfesor.setEditable(false);
-    this.jTextFieldMailProfesor.setText("");
-    this.jTextFieldMailProfesor.setEditable(false);
-    this.jTextFieldTelefonoProfesor.setText("");
-    this.jTextFieldTelefonoProfesor.setEditable(false);
-
-    this.jButtonEliminarProfesor.setEnabled(true);
-    this.jButtonModificarProfesor.setEnabled(true);
-    this.jButtonNuevoProfesor.setEnabled(true);
-
-    DefaultTableModel aux = ((DefaultTableModel) this.jTableCompetencia.getModel());
-    aux.setRowCount(0);
-    this.jButtonBuscarProfesor.setEnabled(true);
-    this.jTextFieldBuscarProfesor.setEditable(true);
-    this.jTextFieldBuscarProfesor.setText("");
-
+    this.cancelarProfesor();
   }//GEN-LAST:event_jButtonCancelarProfesorActionPerformed
 
   private void jButtonModificarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarProfesorActionPerformed
@@ -1944,8 +1879,7 @@ public class Ventana
       this.jButtonCancelarProfesor.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
 
-      DefaultTableModel aux = ((DefaultTableModel) this.jTableProfesorProfesor.getModel());
-      aux.setRowCount(0);
+      ((DefaultTableModel) this.jTableProfesorProfesor.getModel()).setRowCount(0);
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder modificarlo");
@@ -1988,6 +1922,7 @@ public class Ventana
   private void jButtonNuevoAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoAsignaturaActionPerformed
     this.accionAceptar = Ventana.NUEVO;
+    this.cancelarAsignatura();
     this.jButtonEliminarAsignatura.setEnabled(false);
     this.jButtonModificarAsignatura.setEnabled(false);
 
@@ -1999,10 +1934,8 @@ public class Ventana
     this.jTextFieldIdentificadorAsignatura.setText("");
     this.jTextFieldNombreAsignatura.setText("");
 
-    DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
-    aux.setRowCount(0);
-    DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
-    aux2.setRowCount(0);
+    ((DefaultTableModel) this.jTableAsignaturaAsignatura.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableCorrelativas.getModel()).setRowCount(0);
 
     this.jButtonBuscarAsignatura.setEnabled(false);
     this.jTextFieldBuscarAsignatura.setEditable(false);
@@ -2021,11 +1954,9 @@ public class Ventana
                                           JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
         {
           this.receptor.baja(this.jTextFieldIdentificadorAsignatura.getText(), Receptor.ASIGNATURA);
-          this.jButtonCancelarAsignaturaActionPerformed(evt);
-          DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
-          aux.setRowCount(0);
-          DefaultTableModel aux2 = (DefaultTableModel) this.jTableCorrelativas.getModel();
-          aux2.setRowCount(0);
+          this.cancelarAsignatura();
+          ((DefaultTableModel) this.jTableAsignaturaAsignatura.getModel()).setRowCount(0);
+          ((DefaultTableModel) this.jTableCorrelativas.getModel()).setRowCount(0);
         }
       }
       catch (NoEncontradoException e)
@@ -2060,7 +1991,7 @@ public class Ventana
             nuevo.agregarCorrelativa(elemento);
           }
           this.receptor.alta(nuevo, Receptor.ASIGNATURA);
-          this.jButtonCancelarAsignaturaActionPerformed(evt);
+          this.cancelarAsignatura();
         }
         catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
         {
@@ -2098,7 +2029,7 @@ public class Ventana
             viejo.agregarCorrelativa(nuevas.next());
 
           this.receptor.modificacion(modif, Receptor.ASIGNATURA);
-          this.jButtonCancelarAsignaturaActionPerformed(evt);
+          this.cancelarAsignatura();
         }
         catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException e)
         {
@@ -2111,26 +2042,7 @@ public class Ventana
 
   private void jButtonCancelarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarAsignaturaActionPerformed
-    this.jTextFieldIdentificadorAsignatura.setText("");
-    this.jTextFieldNombreAsignatura.setText("");
-    this.jTextFieldNombreAsignatura.setEditable(false);
-
-    this.jButtonAgregarCorrelativa.setEnabled(false);
-    this.jButtonEliminarCorrelativa.setEnabled(false);
-
-    this.jButtonEliminarAsignatura.setEnabled(true);
-    this.jButtonModificarAsignatura.setEnabled(true);
-    this.jButtonNuevoAsignatura.setEnabled(true);
-
-    this.jButtonCancelarAsignatura.setEnabled(false);
-    this.jButtonAceptarAsignatura.setEnabled(false);
-    DefaultTableModel aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
-    aux.setRowCount(0);
-
-    this.jButtonBuscarAsignatura.setEnabled(true);
-    this.jTextFieldBuscarAsignatura.setEditable(true);
-    this.jTextFieldBuscarAsignatura.setText("");
-    
+    this.cancelarAsignatura();    
   }//GEN-LAST:event_jButtonCancelarAsignaturaActionPerformed
 
   private void jButtonModificarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarAsignaturaActionPerformed
@@ -2149,8 +2061,7 @@ public class Ventana
       this.jButtonCancelarAsignatura.setEnabled(true);
       this.accionAceptar = Ventana.MODIFICAR;
 
-      DefaultTableModel aux = (DefaultTableModel) this.jTableAsignaturaAsignatura.getModel();
-      aux.setRowCount(0);
+      ((DefaultTableModel) this.jTableAsignaturaAsignatura.getModel()).setRowCount(0);
 
       this.jButtonBuscarAsignatura.setEnabled(false);
       this.jTextFieldBuscarAsignatura.setEditable(false);
@@ -2186,6 +2097,7 @@ public class Ventana
   private void jButtonNuevoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoCursadaActionPerformed
     this.accionAceptar = Ventana.NUEVO;
+    this.cancelarCursada();
     this.jButtonEliminarCursada.setEnabled(false);
     this.jButtonModificarCursada.setEnabled(false);
     this.jButtonCambiarAsignaturaCursada.setEnabled(true);
@@ -2208,12 +2120,9 @@ public class Ventana
     this.jTextFieldFinCursada.setEditable(true);
     this.jTextFieldFinCursada.setText("");
 
-    DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
-    aux.setRowCount(0);
-    DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-    aux2.setRowCount(0);
-    DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-    aux3.setRowCount(0);
+    ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
 
     this.jButtonBuscarCursada.setEnabled(false);
     this.jTextFieldBuscarCursada.setEditable(false);
@@ -2233,13 +2142,10 @@ public class Ventana
         {
           this.receptor.baja(this.receptor.buscar(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA),
                              Receptor.CURSADA);
-          DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
-          aux.setRowCount(0);
-          DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-          aux2.setRowCount(0);
-          DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-          aux3.setRowCount(0);
-          this.jButtonCancelarCursadaActionPerformed(evt);
+          ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
+          ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
+          ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
+          this.cancelarCursada();
         }
       }
       catch (NoEncontradoException e)
@@ -2286,9 +2192,9 @@ public class Ventana
             nuevo.altaProfesor(prof);
           }
           this.receptor.alta(nuevo, Receptor.CURSADA);
-          this.jButtonCancelarCursadaActionPerformed(evt);
+          this.cancelarCursada();
         }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException | DiaInvalidoException e)
         {
           JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -2351,9 +2257,9 @@ public class Ventana
             this.receptor.agregaProfesorEnCursada(nuevos.next(), viejo);
 
           this.receptor.modificacion(modif, Receptor.CURSADA);
-          this.jButtonCancelarCursadaActionPerformed(evt);
+          this.cancelarCursada();
         }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException | DiaInvalidoException e)
         {
           JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -2363,42 +2269,7 @@ public class Ventana
 
   private void jButtonCancelarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonCancelarCursadaActionPerformed
-    this.jTextFieldIdentificadorCursada.setText("");
-    this.jTextFieldIDAsignaturaCursada.setText("");
-    this.jTextFieldNombreAsignaturaCursada.setText("");
-    this.jTextFieldPeriodoCursada.setText("");
-    this.jTextFieldInicioCursada.setText("");
-    this.jTextFieldFinCursada.setText("");
-
-    this.jTextFieldPeriodoCursada.setEditable(false);
-    this.jComboBoxDia.setEnabled(false);
-    this.jTextFieldInicioCursada.setEditable(false);
-    this.jTextFieldFinCursada.setEditable(false);
-
-    this.jTextFieldBuscarCursada.setEditable(true);
-
-    this.jButtonAgregarAlumnoCursada.setEnabled(false);
-    this.jButtonEliminarAlumnoCursada.setEnabled(false);
-    this.jButtonCambiarAsignaturaCursada.setEnabled(false);
-    this.jButtonAgregarProfesorCursada.setEnabled(false);
-    this.jButtonEliminarProfesorCursada.setEnabled(false);
-    this.jButtonAceptarCursada.setEnabled(false);
-    this.jButtonCancelarCursada.setEnabled(false);
-
-    this.jButtonEliminarCursada.setEnabled(true);
-    this.jButtonModificarCursada.setEnabled(true);
-    this.jButtonNuevoCursada.setEnabled(true);
-
-    DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
-    aux.setRowCount(0);
-    DefaultTableModel aux2 = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-    aux2.setRowCount(0);
-    DefaultTableModel aux3 = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-    aux3.setRowCount(0);
-
-    this.jButtonBuscarCursada.setEnabled(true);
-    this.jTextFieldBuscarCursada.setEnabled(true);
-    this.jTextFieldBuscarCursada.setText("");
+    this.cancelarCursada();
   }//GEN-LAST:event_jButtonCancelarCursadaActionPerformed
 
   private void jButtonModificarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonModificarCursadaActionPerformed
@@ -2422,8 +2293,7 @@ public class Ventana
       this.jTextFieldInicioCursada.setEditable(true);
       this.jTextFieldFinCursada.setEditable(true);
 
-      DefaultTableModel aux = (DefaultTableModel) this.jTableCursadaCursada.getModel();
-      aux.setRowCount(0);
+      ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
 
       this.jButtonBuscarCursada.setEnabled(false);
       this.jTextFieldBuscarCursada.setEditable(false);
@@ -2450,8 +2320,7 @@ public class Ventana
     if (this.jTableHistoria.getSelectedRow() != -1)
     {
       TableModelAsignatura aux = (TableModelAsignatura) this.jTableHistoria.getModel();
-      aux.eliminarFila(this.jTableHistoria.getSelectedRow());
-      this.jTableHistoria.repaint();
+      aux.removeRow(this.jTableHistoria.getSelectedRow());
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
@@ -2462,8 +2331,7 @@ public class Ventana
     if (this.jTableCompetencia.getSelectedRow() != -1)
     {
       TableModelAsignatura aux = (TableModelAsignatura) this.jTableCompetencia.getModel();
-      aux.eliminarFila(this.jTableCompetencia.getSelectedRow());
-      this.jTableCompetencia.repaint();
+      aux.removeRow(this.jTableCompetencia.getSelectedRow());
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la competencia");
@@ -2474,8 +2342,7 @@ public class Ventana
     if (this.jTableCorrelativas.getSelectedRow() != -1)
     {
       TableModelAsignatura aux = (TableModelAsignatura) this.jTableCorrelativas.getModel();
-      aux.eliminarFila(this.jTableCorrelativas.getSelectedRow());
-      this.jTableCorrelativas.repaint();
+      aux.removeRow(this.jTableCorrelativas.getSelectedRow());
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de las correlativas");
@@ -2486,8 +2353,7 @@ public class Ventana
     if (this.jTableProfesoresCursada.getSelectedRow() != -1)
     {
       TableModelProfesor aux = (TableModelProfesor) this.jTableProfesoresCursada.getModel();
-      aux.eliminarFila(this.jTableProfesoresCursada.getSelectedRow());
-      this.jTableProfesoresCursada.repaint();
+      aux.removeRow(this.jTableProfesoresCursada.getSelectedRow());
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un profesor para poder eliminarlo de la cursada");
@@ -2498,8 +2364,7 @@ public class Ventana
     if (this.jTableAlumnosCursada.getSelectedRow() != -1)
     {
       TableModelAlumno aux = (TableModelAlumno) this.jTableAlumnosCursada.getModel();
-      aux.eliminarFila(this.jTableAlumnosCursada.getSelectedRow());
-      this.jTableAlumnosCursada.repaint();
+      aux.removeRow(this.jTableAlumnosCursada.getSelectedRow());
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
@@ -2509,6 +2374,136 @@ public class Ventana
   {//GEN-HEADEREND:event_jButtonAgradecimientosActionPerformed
     JOptionPane.showMessageDialog(this, "Gracias DarioFF");
   }//GEN-LAST:event_jButtonAgradecimientosActionPerformed
+
+  private void cancelarAlumno()
+  {
+    this.jTextFieldLegajoAlumno.setText("");
+
+    this.jTextFieldNombreAlumno.setText("");
+    this.jTextFieldNombreAlumno.setEditable(false);
+
+    this.jTextFieldDomicilioAlumno.setText("");
+    this.jTextFieldDomicilioAlumno.setEditable(false);
+
+    this.jTextFieldMailAlumno.setText("");
+    this.jTextFieldMailAlumno.setEditable(false);
+
+    this.jTextFieldBuscarAlumno.setText("");
+    this.jTextFieldBuscarAlumno.setEditable(true);
+    this.jButtonBuscarAlumno.setEnabled(true);
+
+    ((DefaultTableModel) this.jTableHistoria.getModel()).setRowCount(0);
+
+    this.jButtonEliminarAlumno.setEnabled(true);
+    this.jButtonModificarAlumno.setEnabled(true);
+    this.jButtonNuevoAlumno.setEnabled(true);
+
+    this.jButtonAgregarHistoria.setEnabled(false);
+    this.jButtonEliminarHistoria.setEnabled(false);
+
+    this.jButtonAceptarAlumno.setEnabled(false);
+    this.jButtonCancelarAlumno.setEnabled(false);
+  }
+
+  private void cancelarProfesor()
+  {
+    this.jTextFieldLegajoProfesor.setText("");
+
+    this.jTextFieldNombreProfesor.setText("");
+    this.jTextFieldNombreProfesor.setEditable(false);
+
+    this.jTextFieldDomicilioProfesor.setText("");
+    this.jTextFieldDomicilioProfesor.setEditable(false);
+
+    this.jTextFieldMailProfesor.setText("");
+    this.jTextFieldMailProfesor.setEditable(false);
+
+    this.jTextFieldTelefonoProfesor.setText("");
+    this.jTextFieldTelefonoProfesor.setEditable(false);
+
+    this.jTextFieldBuscarProfesor.setText("");
+    this.jTextFieldBuscarProfesor.setEditable(true);
+    this.jButtonBuscarProfesor.setEnabled(true);
+
+    ((DefaultTableModel) this.jTableCompetencia.getModel()).setRowCount(0);
+
+    this.jButtonEliminarProfesor.setEnabled(true);
+    this.jButtonModificarProfesor.setEnabled(true);
+    this.jButtonNuevoProfesor.setEnabled(true);
+
+    this.jButtonEliminarCompetencia.setEnabled(false);
+    this.jButtonAgregarCompetencia.setEnabled(false);
+
+    this.jButtonAceptarProfesor.setEnabled(false);
+    this.jButtonCancelarProfesor.setEnabled(false);
+  }
+
+  private void cancelarAsignatura()
+  {
+    this.jTextFieldIdentificadorAsignatura.setText("");
+
+    this.jTextFieldNombreAsignatura.setText("");
+    this.jTextFieldNombreAsignatura.setEditable(false);
+
+    this.jTextFieldBuscarAsignatura.setText("");
+    this.jTextFieldBuscarAsignatura.setEditable(true);
+    this.jButtonBuscarAsignatura.setEnabled(true);
+
+    ((DefaultTableModel) this.jTableCorrelativas.getModel()).setRowCount(0);
+
+    this.jButtonEliminarAsignatura.setEnabled(true);
+    this.jButtonModificarAsignatura.setEnabled(true);
+    this.jButtonNuevoAsignatura.setEnabled(true);
+
+    this.jButtonAgregarCorrelativa.setEnabled(false);
+    this.jButtonEliminarCorrelativa.setEnabled(false);
+
+    this.jButtonCancelarAsignatura.setEnabled(false);
+    this.jButtonAceptarAsignatura.setEnabled(false);
+  }
+
+  private void cancelarCursada()
+  {
+    this.jTextFieldIdentificadorCursada.setText("");
+
+    this.jTextFieldIDAsignaturaCursada.setText("");
+
+    this.jTextFieldNombreAsignaturaCursada.setText("");
+
+    this.jTextFieldPeriodoCursada.setText("");
+    this.jTextFieldPeriodoCursada.setEditable(false);
+
+    this.jTextFieldInicioCursada.setText("");
+    this.jTextFieldInicioCursada.setEditable(false);
+
+    this.jTextFieldFinCursada.setText("");
+    this.jTextFieldFinCursada.setEditable(false);
+
+    this.jComboBoxDia.setEnabled(false);
+
+    this.jTextFieldBuscarCursada.setText("");
+    this.jTextFieldBuscarCursada.setEditable(true);
+    this.jButtonBuscarCursada.setEnabled(true);
+
+    ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
+
+    this.jButtonEliminarCursada.setEnabled(true);
+    this.jButtonModificarCursada.setEnabled(true);
+    this.jButtonNuevoCursada.setEnabled(true);
+
+    this.jButtonAgregarAlumnoCursada.setEnabled(false);
+    this.jButtonEliminarAlumnoCursada.setEnabled(false);
+
+    this.jButtonCambiarAsignaturaCursada.setEnabled(false);
+
+    this.jButtonAgregarProfesorCursada.setEnabled(false);
+    this.jButtonEliminarProfesorCursada.setEnabled(false);
+
+    this.jButtonAceptarCursada.setEnabled(false);
+    this.jButtonCancelarCursada.setEnabled(false);
+  }
+
 
   /**
    * @param args the command line arguments
