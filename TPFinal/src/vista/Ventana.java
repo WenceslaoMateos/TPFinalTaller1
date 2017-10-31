@@ -12,6 +12,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.util.Vector;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -1566,95 +1568,30 @@ public class Ventana
 
   private void jButtonAceptarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAlumnoActionPerformed
-    try
+    //a un alumno no se le agregan materias a la historia cuando se crea nuevo
+    if (this.accionAceptar == Ventana.MODIFICAR)
     {
-      DefaultTableModel aux;
-      int n, i;
-      Asignatura elemento;
-
+      DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+      int n = aux.getRowCount();
       Alumno provisorio =
         new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                    this.jTextFieldMailAlumno.getText());
+      provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
 
-      aux = (DefaultTableModel) this.jTableHistoria.getModel();
-      n = aux.getRowCount();
-
-      switch (this.accionAceptar)
+      try
       {
-        case Ventana.NUEVO:
-          for (i = 0; i < n; i++)
-          {
-            elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
-            provisorio.agregarHistoria(elemento);
-          }
-          this.receptor.alta(provisorio, Receptor.ALUMNO);
-          break;
-        case Ventana.MODIFICAR:
-          provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
-          Alumno viejo = (Alumno) this.receptor.buscar(provisorio.getLegajo(), Receptor.ALUMNO);
-
-          for (i = 0; i < n; i++)
-          {
-            provisorio.agregarHistoria((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
-                                                                         Receptor.ASIGNATURA));
-          }
-          //si el for funciona, entonces es que el alumno es valido
-
-          ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
-          ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
-
-          Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
-          while (asignaturasViejas.hasNext())
-          {
-            Asignatura auxiliar = asignaturasViejas.next();
-            if (!provisorio.asignaturaAprobada(auxiliar))
-              eliminar.add(auxiliar);
-          }
-
-          Iterator<Asignatura> it = eliminar.iterator();
-          while (it.hasNext())
-            viejo.eliminarHistoria(it.next());
-
-          asignaturasViejas = provisorio.historiaAcademica();
-          while (asignaturasViejas.hasNext())
-          {
-            Asignatura auxiliar = asignaturasViejas.next();
-            if (!viejo.asignaturaAprobada(auxiliar))
-              agregar.add(auxiliar);
-          }
-
-          it = agregar.iterator();
-          while (it.hasNext())
-            viejo.agregarHistoria(it.next());
-          this.receptor.modificacion(provisorio, Receptor.ALUMNO);
-          break;
-
-          /* ArrayList<Asignatura> nuevaHistoria = new ArrayList<Asignatura>();
-          for (i = 0; i < n; i++)
-          {
-            nuevaHistoria.add((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
-                                                                Receptor.ASIGNATURA));
-          }
-          Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
-          while (asignaturasViejas.hasNext())
-          {
-            Asignatura auxiliar = asignaturasViejas.next();
-            if (!nuevaHistoria.contains(auxiliar))
-              asignaturasViejas.remove();
-            else
-              nuevaHistoria.remove(auxiliar);
-          }
-          Iterator<Asignatura> nuevas = nuevaHistoria.iterator();
-          while (nuevas.hasNext())
-            viejo.agregarHistoria(nuevas.next()); */
+        this.modificarHistoria(n, provisorio);
+        this.receptor.modificacion(provisorio, Receptor.ALUMNO);
+        this.cancelarAlumno();
+        JOptionPane.showMessageDialog(this, "Operación realizada exitosamente.");
       }
-      this.cancelarAlumno();
-      JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
+      catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+      {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+      }
     }
-    catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
-    {
-      JOptionPane.showMessageDialog(this, e.getMessage());
-    }
+    else
+      JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
   }//GEN-LAST:event_jButtonAceptarAlumnoActionPerformed
 
   private void jButtonBuscarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarProfesorActionPerformed
@@ -2350,6 +2287,54 @@ public class Ventana
 
     this.jButtonAceptarAlumno.setEnabled(false);
     this.jButtonCancelarAlumno.setEnabled(false);
+  }
+
+  /**
+   * Modifica la historia de un alumno utilizando los metodos propuestos por el modelo
+   * @param cantHistoria Cantidad de filas de la tabla
+   * @param provisorio Alumno que contendrá todas las modificaciones provisorias
+   * @throws NoEncontradoException Nunca será lanzada por que si el elemento está en la tabla, es por que está en la colección
+   * @throws ClaveYaExistenteException Nunca será lanzada por que la vista ya prevee esa situación
+   */
+  private void modificarHistoria(int cantHistoria, Alumno provisorio)
+    throws NoEncontradoException, ClaveYaExistenteException
+  {
+    int i;
+    Alumno viejo = (Alumno) this.receptor.buscar(provisorio.getLegajo(), Receptor.ALUMNO);
+
+    for (i = 0; i < cantHistoria; i++)
+    {
+      provisorio.agregarHistoria((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
+                                                                   Receptor.ASIGNATURA));
+    }
+    //si el for funciona, entonces es que el alumno es valido
+
+    ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+    ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
+
+    Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
+    while (asignaturasViejas.hasNext())
+    {
+      Asignatura auxiliar = asignaturasViejas.next();
+      if (!provisorio.asignaturaAprobada(auxiliar))
+        eliminar.add(auxiliar);
+    }
+
+    asignaturasViejas = provisorio.historiaAcademica();
+    while (asignaturasViejas.hasNext())
+    {
+      Asignatura auxiliar = asignaturasViejas.next();
+      if (!viejo.asignaturaAprobada(auxiliar))
+        agregar.add(auxiliar);
+    }
+
+    Iterator<Asignatura> it = eliminar.iterator();
+    while (it.hasNext())
+      viejo.eliminarHistoria(it.next());
+
+    it = agregar.iterator();
+    while (it.hasNext())
+      viejo.agregarHistoria(it.next());
   }
 
   /**
