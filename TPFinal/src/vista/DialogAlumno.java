@@ -55,14 +55,20 @@ public class DialogAlumno
     {
       Alumno elemento =
         (Alumno) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ALUMNO);
-      DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
-      model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
-                                  elemento.getMail() });
+      TableModelAlumno model = (TableModelAlumno) this.fuente.getModel();
+      if (!model.contieneElemento(elemento.getLegajo()))
+      {
+        model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
+                                    elemento.getMail() });
+        this.dispose();
+      }
+      else
+        JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
     }
     catch (NoEncontradoException f)
     {
       JOptionPane.showMessageDialog(this, f.getMessage());
+      this.dispose();
     }
-    this.dispose();
   }
 }

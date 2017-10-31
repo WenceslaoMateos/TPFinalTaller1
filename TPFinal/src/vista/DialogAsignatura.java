@@ -57,14 +57,19 @@ public class DialogAsignatura
     {
       Asignatura elemento =
         (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
-      DefaultTableModel model = (DefaultTableModel) this.fuente.getModel();
-
-      model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
+      TableModelAsignatura model = (TableModelAsignatura) this.fuente.getModel();
+      if (!model.contieneElemento(elemento.getIdentificacion()))
+      {
+        model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
+        this.dispose();
+      }
+      else
+        JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
     }
     catch (NoEncontradoException f)
     {
       JOptionPane.showMessageDialog(this, f.getMessage());
+      this.dispose();
     }
-    this.dispose();
   }
 }

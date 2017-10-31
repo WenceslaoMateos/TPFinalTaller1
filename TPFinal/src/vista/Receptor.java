@@ -135,6 +135,11 @@ public class Receptor
         break;
     }
   }
+  
+  public void quitarCompetenciaAProfesor(Profesor profesor, Asignatura asignatura)
+  {
+    this.modelo.quitarCompetenciaAProfesor(profesor, asignatura);
+  }
 
   public void agregaAlumnoEnCursada(Alumno alumno, Cursada cursada)
     throws DatoInvalidoException, ClaveYaExistenteException

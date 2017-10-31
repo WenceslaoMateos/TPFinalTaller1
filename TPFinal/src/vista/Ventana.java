@@ -142,7 +142,7 @@ public class Ventana
           //esto nunca se va a ejecutar, ya que si está en la tabla, es por que existe
         }
       }
-      else if (this.jPanelAlumno1.isShowing())
+      else if (this.jPanelProfesor.isShowing())
       {
         Profesor elemento;
         try
@@ -255,17 +255,13 @@ public class Ventana
   private void initComponents()//GEN-BEGIN:initComponents
   {
 
-    jDialog1 = new javax.swing.JDialog();
-    jDialog2 = new javax.swing.JDialog();
-    jDialog3 = new javax.swing.JDialog();
-    jDialog4 = new javax.swing.JDialog();
     jTabbedPane = new javax.swing.JTabbedPane();
     jPanelAlumno = new javax.swing.JPanel();
     jPanelBuscarAlumno = new javax.swing.JPanel();
     jButtonBuscarAlumno = new javax.swing.JButton();
     jTextFieldBuscarAlumno = new javax.swing.JTextField();
-    jPanel1 = new javax.swing.JPanel();
-    jScrollPane3 = new javax.swing.JScrollPane();
+    jPanelTableBusquedaAlumno = new javax.swing.JPanel();
+    jScrollPaneBusquedaAlumno = new javax.swing.JScrollPane();
     jTableAlumnoAlumno = new javax.swing.JTable();
     jPanelResultadosAlumno = new javax.swing.JPanel();
     jLabel1 = new javax.swing.JLabel();
@@ -277,7 +273,7 @@ public class Ventana
     jTextFieldNombreAlumno = new javax.swing.JTextField();
     jTextFieldDomicilioAlumno = new javax.swing.JTextField();
     jTextFieldMailAlumno = new javax.swing.JTextField();
-    jScrollPane4 = new javax.swing.JScrollPane();
+    jScrollPaneHistoria = new javax.swing.JScrollPane();
     jTableHistoria = new javax.swing.JTable();
     jButtonNuevoAlumno = new javax.swing.JButton();
     jButtonEliminarAlumno = new javax.swing.JButton();
@@ -287,24 +283,19 @@ public class Ventana
     jButtonModificarAlumno = new javax.swing.JButton();
     jButtonEliminarHistoria = new javax.swing.JButton();
     jPanelProfesor = new javax.swing.JPanel();
-    jPanelAlumno1 = new javax.swing.JPanel();
-    jPanelBuscarProfesor = new javax.swing.JPanel();
-    jButtonBuscarProfesor = new javax.swing.JButton();
-    jTextFieldBuscarProfesor = new javax.swing.JTextField();
-    jPanel2 = new javax.swing.JPanel();
-    jScrollPane5 = new javax.swing.JScrollPane();
-    jTableProfesorProfesor = new javax.swing.JTable();
     jPanelResultadosProfesor = new javax.swing.JPanel();
     jLabel2 = new javax.swing.JLabel();
     jLabel7 = new javax.swing.JLabel();
     jLabel8 = new javax.swing.JLabel();
     jLabel9 = new javax.swing.JLabel();
     jLabel10 = new javax.swing.JLabel();
+    jLabel11 = new javax.swing.JLabel();
     jTextFieldLegajoProfesor = new javax.swing.JTextField();
     jTextFieldNombreProfesor = new javax.swing.JTextField();
     jTextFieldDomicilioProfesor = new javax.swing.JTextField();
     jTextFieldMailProfesor = new javax.swing.JTextField();
-    jScrollPane6 = new javax.swing.JScrollPane();
+    jTextFieldTelefonoProfesor = new javax.swing.JTextField();
+    jScrollPaneCompetencias = new javax.swing.JScrollPane();
     jTableCompetencia = new javax.swing.JTable();
     jButtonNuevoProfesor = new javax.swing.JButton();
     jButtonEliminarProfesor = new javax.swing.JButton();
@@ -312,9 +303,13 @@ public class Ventana
     jButtonAceptarProfesor = new javax.swing.JButton();
     jButtonCancelarProfesor = new javax.swing.JButton();
     jButtonModificarProfesor = new javax.swing.JButton();
-    jLabel11 = new javax.swing.JLabel();
-    jTextFieldTelefonoProfesor = new javax.swing.JTextField();
     jButtonEliminarCompetencia = new javax.swing.JButton();
+    jPanelBusquedaProfesor = new javax.swing.JPanel();
+    jScrollPaneBusquedaProfesor = new javax.swing.JScrollPane();
+    jTableProfesorProfesor = new javax.swing.JTable();
+    jPanelBuscarProfesor = new javax.swing.JPanel();
+    jButtonBuscarProfesor = new javax.swing.JButton();
+    jTextFieldBuscarProfesor = new javax.swing.JTextField();
     jPanelAsignatura = new javax.swing.JPanel();
     jPanelBuscarAsignatura = new javax.swing.JPanel();
     jButtonBuscarAsignatura = new javax.swing.JButton();
@@ -347,7 +342,19 @@ public class Ventana
     jPanelResultadosCursada = new javax.swing.JPanel();
     jLabel14 = new javax.swing.JLabel();
     jLabel17 = new javax.swing.JLabel();
+    jLabel18 = new javax.swing.JLabel();
+    jLabel19 = new javax.swing.JLabel();
+    jLabel20 = new javax.swing.JLabel();
+    jLabel21 = new javax.swing.JLabel();
+    jLabel22 = new javax.swing.JLabel();
+    jLabel23 = new javax.swing.JLabel();
     jTextFieldIdentificadorCursada = new javax.swing.JTextField();
+    jTextFieldIDAsignaturaCursada = new javax.swing.JTextField();
+    jTextFieldNombreAsignaturaCursada = new javax.swing.JTextField();
+    jTextFieldPeriodoCursada = new javax.swing.JTextField();
+    jTextFieldInicioCursada = new javax.swing.JTextField();
+    jTextFieldFinCursada = new javax.swing.JTextField();
+    jComboBoxDia = new javax.swing.JComboBox<>();
     jScrollPane10 = new javax.swing.JScrollPane();
     jTableProfesoresCursada = new javax.swing.JTable();
     jButtonNuevoCursada = new javax.swing.JButton();
@@ -356,69 +363,13 @@ public class Ventana
     jButtonAceptarCursada = new javax.swing.JButton();
     jButtonCancelarCursada = new javax.swing.JButton();
     jButtonModificarCursada = new javax.swing.JButton();
-    jLabel18 = new javax.swing.JLabel();
-    jTextFieldPeriodoCursada = new javax.swing.JTextField();
-    jLabel19 = new javax.swing.JLabel();
-    jTextFieldNombreAsignaturaCursada = new javax.swing.JTextField();
-    jTextFieldIDAsignaturaCursada = new javax.swing.JTextField();
-    jLabel20 = new javax.swing.JLabel();
-    jTextFieldInicioCursada = new javax.swing.JTextField();
-    jLabel21 = new javax.swing.JLabel();
-    jLabel22 = new javax.swing.JLabel();
-    jTextFieldFinCursada = new javax.swing.JTextField();
     jScrollPane11 = new javax.swing.JScrollPane();
     jTableAlumnosCursada = new javax.swing.JTable();
-    jLabel23 = new javax.swing.JLabel();
     jButtonAgregarAlumnoCursada = new javax.swing.JButton();
     jButtonCambiarAsignaturaCursada = new javax.swing.JButton();
-    jComboBoxDia = new javax.swing.JComboBox<>();
     jButtonEliminarProfesorCursada = new javax.swing.JButton();
     jButtonEliminarAlumnoCursada = new javax.swing.JButton();
     jButtonAgradecimientos = new javax.swing.JButton();
-
-    javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-    jDialog1.getContentPane().setLayout(jDialog1Layout);
-    jDialog1Layout.setHorizontalGroup(
-      jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    jDialog1Layout.setVerticalGroup(
-      jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
-    );
-
-    javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-    jDialog2.getContentPane().setLayout(jDialog2Layout);
-    jDialog2Layout.setHorizontalGroup(
-      jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    jDialog2Layout.setVerticalGroup(
-      jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
-    );
-
-    javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
-    jDialog3.getContentPane().setLayout(jDialog3Layout);
-    jDialog3Layout.setHorizontalGroup(
-      jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    jDialog3Layout.setVerticalGroup(
-      jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
-    );
-
-    javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
-    jDialog4.getContentPane().setLayout(jDialog4Layout);
-    jDialog4Layout.setHorizontalGroup(
-      jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    jDialog4Layout.setVerticalGroup(
-      jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
-    );
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -451,20 +402,20 @@ public class Ventana
         .addComponent(jButtonBuscarAlumno))
     );
 
-    jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    jPanelTableBusquedaAlumno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
     jTableAlumnoAlumno.setModel(new TableModelAlumno());
-    jScrollPane3.setViewportView(jTableAlumnoAlumno);
+    jScrollPaneBusquedaAlumno.setViewportView(jTableAlumnoAlumno);
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+    javax.swing.GroupLayout jPanelTableBusquedaAlumnoLayout = new javax.swing.GroupLayout(jPanelTableBusquedaAlumno);
+    jPanelTableBusquedaAlumno.setLayout(jPanelTableBusquedaAlumnoLayout);
+    jPanelTableBusquedaAlumnoLayout.setHorizontalGroup(
+      jPanelTableBusquedaAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPaneBusquedaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
     );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+    jPanelTableBusquedaAlumnoLayout.setVerticalGroup(
+      jPanelTableBusquedaAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPaneBusquedaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
     );
 
     jPanelResultadosAlumno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -492,7 +443,7 @@ public class Ventana
     jTextFieldMailAlumno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
     jTableHistoria.setModel(new TableModelAsignatura());
-    jScrollPane4.setViewportView(jTableHistoria);
+    jScrollPaneHistoria.setViewportView(jTableHistoria);
 
     jButtonNuevoAlumno.setText("Nuevo");
     jButtonNuevoAlumno.addActionListener(new java.awt.event.ActionListener()
@@ -564,7 +515,7 @@ public class Ventana
       .addGroup(jPanelResultadosAlumnoLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane4)
+          .addComponent(jScrollPaneHistoria)
           .addGroup(jPanelResultadosAlumnoLayout.createSequentialGroup()
             .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
               .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -629,7 +580,7 @@ public class Ventana
           .addComponent(jButtonAgregarHistoria)
           .addComponent(jButtonEliminarHistoria))
         .addGap(5, 5, 5)
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+        .addComponent(jScrollPaneHistoria, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addGroup(jPanelResultadosAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jButtonAceptarAlumno)
@@ -646,7 +597,7 @@ public class Ventana
         .addComponent(jPanelResultadosAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanelTableBusquedaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanelBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
@@ -659,56 +610,11 @@ public class Ventana
           .addGroup(jPanelAlumnoLayout.createSequentialGroup()
             .addComponent(jPanelBuscarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jPanelTableBusquedaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
     );
 
     jTabbedPane.addTab("Alumno", jPanelAlumno);
-
-    jPanelAlumno1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jPanelBuscarProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jButtonBuscarProfesor.setText("Buscar");
-    jButtonBuscarProfesor.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        jButtonBuscarProfesorActionPerformed(evt);
-      }
-    });
-
-    javax.swing.GroupLayout jPanelBuscarProfesorLayout = new javax.swing.GroupLayout(jPanelBuscarProfesor);
-    jPanelBuscarProfesor.setLayout(jPanelBuscarProfesorLayout);
-    jPanelBuscarProfesorLayout.setHorizontalGroup(
-      jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelBuscarProfesorLayout.createSequentialGroup()
-        .addComponent(jTextFieldBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(jButtonBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
-    jPanelBuscarProfesorLayout.setVerticalGroup(
-      jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-        .addComponent(jTextFieldBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addComponent(jButtonBuscarProfesor))
-    );
-
-    jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jTableProfesorProfesor.setModel(new TableModelProfesor());
-    jScrollPane5.setViewportView(jTableProfesorProfesor);
-
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-    );
-    jPanel2Layout.setVerticalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-    );
 
     jPanelResultadosProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -722,6 +628,8 @@ public class Ventana
 
     jLabel10.setText("Competencias:");
 
+    jLabel11.setText("Telefono");
+
     jTextFieldLegajoProfesor.setEditable(false);
     jTextFieldLegajoProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -734,8 +642,11 @@ public class Ventana
     jTextFieldMailProfesor.setEditable(false);
     jTextFieldMailProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+    jTextFieldTelefonoProfesor.setEditable(false);
+    jTextFieldTelefonoProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
     jTableCompetencia.setModel(new TableModelAsignatura());
-    jScrollPane6.setViewportView(jTableCompetencia);
+    jScrollPaneCompetencias.setViewportView(jTableCompetencia);
 
     jButtonNuevoProfesor.setText("Nuevo");
     jButtonNuevoProfesor.addActionListener(new java.awt.event.ActionListener()
@@ -791,11 +702,6 @@ public class Ventana
       }
     });
 
-    jLabel11.setText("Telefono");
-
-    jTextFieldTelefonoProfesor.setEditable(false);
-    jTextFieldTelefonoProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
     jButtonEliminarCompetencia.setText("Eliminar...");
     jButtonEliminarCompetencia.addActionListener(new java.awt.event.ActionListener()
     {
@@ -839,7 +745,7 @@ public class Ventana
               .addComponent(jTextFieldNombreProfesor, javax.swing.GroupLayout.Alignment.TRAILING)
               .addComponent(jTextFieldDomicilioProfesor)
               .addComponent(jTextFieldTelefonoProfesor)))
-          .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+          .addComponent(jScrollPaneCompetencias, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
           .addGroup(jPanelResultadosProfesorLayout.createSequentialGroup()
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGap(186, 186, 186)
@@ -882,7 +788,7 @@ public class Ventana
           .addComponent(jButtonEliminarCompetencia)
           .addComponent(jButtonAgregarCompetencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addComponent(jScrollPaneCompetencias, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanelResultadosProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButtonCancelarProfesor)
@@ -890,31 +796,47 @@ public class Ventana
         .addContainerGap())
     );
 
-    javax.swing.GroupLayout jPanelAlumno1Layout = new javax.swing.GroupLayout(jPanelAlumno1);
-    jPanelAlumno1.setLayout(jPanelAlumno1Layout);
-    jPanelAlumno1Layout.setHorizontalGroup(
-      jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelAlumno1Layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
-        .addGroup(jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap())
+    jPanelBusquedaProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTableProfesorProfesor.setModel(new TableModelProfesor());
+    jScrollPaneBusquedaProfesor.setViewportView(jTableProfesorProfesor);
+
+    javax.swing.GroupLayout jPanelBusquedaProfesorLayout = new javax.swing.GroupLayout(jPanelBusquedaProfesor);
+    jPanelBusquedaProfesor.setLayout(jPanelBusquedaProfesorLayout);
+    jPanelBusquedaProfesorLayout.setHorizontalGroup(
+      jPanelBusquedaProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPaneBusquedaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
     );
-    jPanelAlumno1Layout.setVerticalGroup(
-      jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanelAlumno1Layout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(jPanelAlumno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanelAlumno1Layout.createSequentialGroup()
-            .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .addGroup(jPanelAlumno1Layout.createSequentialGroup()
-            .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())))
+    jPanelBusquedaProfesorLayout.setVerticalGroup(
+      jPanelBusquedaProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jScrollPaneBusquedaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+    );
+
+    jPanelBuscarProfesor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jButtonBuscarProfesor.setText("Buscar");
+    jButtonBuscarProfesor.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonBuscarProfesorActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout jPanelBuscarProfesorLayout = new javax.swing.GroupLayout(jPanelBuscarProfesor);
+    jPanelBuscarProfesor.setLayout(jPanelBuscarProfesorLayout);
+    jPanelBuscarProfesorLayout.setHorizontalGroup(
+      jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelBuscarProfesorLayout.createSequentialGroup()
+        .addComponent(jTextFieldBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jButtonBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+    jPanelBuscarProfesorLayout.setVerticalGroup(
+      jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanelBuscarProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addComponent(jTextFieldBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jButtonBuscarProfesor))
     );
 
     javax.swing.GroupLayout jPanelProfesorLayout = new javax.swing.GroupLayout(jPanelProfesor);
@@ -923,15 +845,28 @@ public class Ventana
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGap(0, 1069, Short.MAX_VALUE)
       .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanelAlumno1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(jPanelProfesorLayout.createSequentialGroup()
+          .addGap(14, 14, 14)
+          .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGap(18, 18, 18)
+          .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelBusquedaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGap(14, 14, 14)))
     );
     jPanelProfesorLayout.setVerticalGroup(
       jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGap(0, 566, Short.MAX_VALUE)
       .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelProfesorLayout.createSequentialGroup()
-          .addComponent(jPanelAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGap(0, 0, Short.MAX_VALUE)))
+          .addGap(8, 8, 8)
+          .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProfesorLayout.createSequentialGroup()
+              .addComponent(jPanelBuscarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+              .addComponent(jPanelBusquedaProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelResultadosProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGap(8, 8, 8)))
     );
 
     jTabbedPane.addTab("Profesor", jPanelProfesor);
@@ -1203,8 +1138,37 @@ public class Ventana
 
     jLabel17.setText("Profesores");
 
+    jLabel18.setText("Periodo");
+
+    jLabel19.setText("Asignatura");
+
+    jLabel20.setText("Dia");
+
+    jLabel21.setText("Hora Inicio");
+
+    jLabel22.setText("Hora Finalizacion");
+
+    jLabel23.setText("Alumnos");
+
     jTextFieldIdentificadorCursada.setEditable(false);
     jTextFieldIdentificadorCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldIDAsignaturaCursada.setEditable(false);
+    jTextFieldIDAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldNombreAsignaturaCursada.setEditable(false);
+    jTextFieldNombreAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldPeriodoCursada.setEditable(false);
+    jTextFieldPeriodoCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldInicioCursada.setEditable(false);
+    jTextFieldInicioCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jTextFieldFinCursada.setEditable(false);
+    jTextFieldFinCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
 
     jTableProfesoresCursada.setModel(new TableModelProfesor());
     jScrollPane10.setViewportView(jTableProfesoresCursada);
@@ -1263,35 +1227,8 @@ public class Ventana
       }
     });
 
-    jLabel18.setText("Periodo");
-
-    jTextFieldPeriodoCursada.setEditable(false);
-    jTextFieldPeriodoCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jLabel19.setText("Asignatura");
-
-    jTextFieldNombreAsignaturaCursada.setEditable(false);
-    jTextFieldNombreAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jTextFieldIDAsignaturaCursada.setEditable(false);
-    jTextFieldIDAsignaturaCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jLabel20.setText("Dia");
-
-    jTextFieldInicioCursada.setEditable(false);
-    jTextFieldInicioCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-    jLabel21.setText("Hora Inicio");
-
-    jLabel22.setText("Hora Finalizacion");
-
-    jTextFieldFinCursada.setEditable(false);
-    jTextFieldFinCursada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
     jTableAlumnosCursada.setModel(new TableModelAlumno());
     jScrollPane11.setViewportView(jTableAlumnosCursada);
-
-    jLabel23.setText("Alumnos");
 
     jButtonAgregarAlumnoCursada.setText("Agregar...");
     jButtonAgregarAlumnoCursada.addActionListener(new java.awt.event.ActionListener()
@@ -1310,8 +1247,6 @@ public class Ventana
         jButtonCambiarAsignaturaCursadaActionPerformed(evt);
       }
     });
-
-    jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
 
     jButtonEliminarProfesorCursada.setText("Eliminar...");
     jButtonEliminarProfesorCursada.addActionListener(new java.awt.event.ActionListener()
@@ -1524,7 +1459,7 @@ public class Ventana
     }
     catch (NoEncontradoException e)
     {
-      JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
+      JOptionPane.showMessageDialog(this, e.getMessage() + " Por favor vuelva a ingresarlo");
     }
   }//GEN-LAST:event_jButtonBuscarAlumnoActionPerformed
 
@@ -1643,7 +1578,7 @@ public class Ventana
 
       aux = (DefaultTableModel) this.jTableHistoria.getModel();
       n = aux.getRowCount();
-      
+
       switch (this.accionAceptar)
       {
         case Ventana.NUEVO:
@@ -1657,8 +1592,44 @@ public class Ventana
         case Ventana.MODIFICAR:
           provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
           Alumno viejo = (Alumno) this.receptor.buscar(provisorio.getLegajo(), Receptor.ALUMNO);
-          
-          ArrayList<Asignatura> nuevaHistoria = new ArrayList<Asignatura>();
+
+          for (i = 0; i < n; i++)
+          {
+            provisorio.agregarHistoria((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
+                                                                         Receptor.ASIGNATURA));
+          }
+          //si el for funciona, entonces es que el alumno es valido
+
+          ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+          ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
+
+          Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
+          while (asignaturasViejas.hasNext())
+          {
+            Asignatura auxiliar = asignaturasViejas.next();
+            if (!provisorio.asignaturaAprobada(auxiliar))
+              eliminar.add(auxiliar);
+          }
+
+          Iterator<Asignatura> it = eliminar.iterator();
+          while (it.hasNext())
+            viejo.eliminarHistoria(it.next());
+
+          asignaturasViejas = provisorio.historiaAcademica();
+          while (asignaturasViejas.hasNext())
+          {
+            Asignatura auxiliar = asignaturasViejas.next();
+            if (!viejo.asignaturaAprobada(auxiliar))
+              agregar.add(auxiliar);
+          }
+
+          it = agregar.iterator();
+          while (it.hasNext())
+            viejo.agregarHistoria(it.next());
+          this.receptor.modificacion(provisorio, Receptor.ALUMNO);
+          break;
+
+          /* ArrayList<Asignatura> nuevaHistoria = new ArrayList<Asignatura>();
           for (i = 0; i < n; i++)
           {
             nuevaHistoria.add((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
@@ -1675,10 +1646,7 @@ public class Ventana
           }
           Iterator<Asignatura> nuevas = nuevaHistoria.iterator();
           while (nuevas.hasNext())
-            viejo.agregarHistoria(nuevas.next());
-          
-          this.receptor.modificacion(provisorio, Receptor.ALUMNO);
-          break;
+            viejo.agregarHistoria(nuevas.next()); */
       }
       this.cancelarAlumno();
       JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
@@ -2608,10 +2576,6 @@ public class Ventana
   private javax.swing.JButton jButtonNuevoCursada;
   private javax.swing.JButton jButtonNuevoProfesor;
   private javax.swing.JComboBox<String> jComboBoxDia;
-  private javax.swing.JDialog jDialog1;
-  private javax.swing.JDialog jDialog2;
-  private javax.swing.JDialog jDialog3;
-  private javax.swing.JDialog jDialog4;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel10;
   private javax.swing.JLabel jLabel11;
@@ -2634,32 +2598,31 @@ public class Ventana
   private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel8;
   private javax.swing.JLabel jLabel9;
-  private javax.swing.JPanel jPanel1;
-  private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel3;
   private javax.swing.JPanel jPanel4;
   private javax.swing.JPanel jPanelAlumno;
-  private javax.swing.JPanel jPanelAlumno1;
   private javax.swing.JPanel jPanelAsignatura;
   private javax.swing.JPanel jPanelBuscarAlumno;
   private javax.swing.JPanel jPanelBuscarAsignatura;
   private javax.swing.JPanel jPanelBuscarCursada;
   private javax.swing.JPanel jPanelBuscarProfesor;
+  private javax.swing.JPanel jPanelBusquedaProfesor;
   private javax.swing.JPanel jPanelCursada;
   private javax.swing.JPanel jPanelProfesor;
   private javax.swing.JPanel jPanelResultadosAlumno;
   private javax.swing.JPanel jPanelResultadosAsignatura;
   private javax.swing.JPanel jPanelResultadosCursada;
   private javax.swing.JPanel jPanelResultadosProfesor;
+  private javax.swing.JPanel jPanelTableBusquedaAlumno;
   private javax.swing.JScrollPane jScrollPane10;
   private javax.swing.JScrollPane jScrollPane11;
-  private javax.swing.JScrollPane jScrollPane3;
-  private javax.swing.JScrollPane jScrollPane4;
-  private javax.swing.JScrollPane jScrollPane5;
-  private javax.swing.JScrollPane jScrollPane6;
   private javax.swing.JScrollPane jScrollPane7;
   private javax.swing.JScrollPane jScrollPane8;
   private javax.swing.JScrollPane jScrollPane9;
+  private javax.swing.JScrollPane jScrollPaneBusquedaAlumno;
+  private javax.swing.JScrollPane jScrollPaneBusquedaProfesor;
+  private javax.swing.JScrollPane jScrollPaneCompetencias;
+  private javax.swing.JScrollPane jScrollPaneHistoria;
   private javax.swing.JTabbedPane jTabbedPane;
   private javax.swing.JTable jTableAlumnoAlumno;
   private javax.swing.JTable jTableAlumnosCursada;

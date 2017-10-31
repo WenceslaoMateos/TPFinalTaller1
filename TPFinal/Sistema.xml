@@ -54,7 +54,41 @@
         <string>Algun Lugar 123</string>
        </void>
        <void property="historia">
-        <object class="modelo.IndicePrimario"/>
+        <object class="modelo.IndicePrimario" id="IndicePrimario1">
+         <void property="elementos">
+          <void method="put">
+           <string>ASI0003</string>
+           <object class="modelo.Asignatura" id="Asignatura0">
+            <void property="correlatividades">
+             <object class="modelo.IndicePrimario" id="IndicePrimario2">
+              <void property="elementos">
+               <void method="put">
+                <string>ASI0002</string>
+                <object class="modelo.Asignatura" id="Asignatura1">
+                 <void property="correlatividades">
+                  <object class="modelo.IndicePrimario"/>
+                 </void>
+                 <void property="identificacion">
+                  <string>ASI0002</string>
+                 </void>
+                 <void property="nombre">
+                  <string>Analisis Matematico A</string>
+                 </void>
+                </object>
+               </void>
+              </void>
+             </object>
+            </void>
+            <void property="identificacion">
+             <string>ASI0003</string>
+            </void>
+            <void property="nombre">
+             <string>Analisis Matematico B</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </object>
        </void>
        <void property="legajo">
         <string>ALU0004</string>
@@ -94,52 +128,25 @@
    </void>
   </void>
   <void id="IndiceDoble1" property="planDeEstudio">
-   <void id="IndicePrimario1" property="indice1">
+   <void id="IndicePrimario3" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>ASI0002</string>
-      <object class="modelo.Asignatura" id="Asignatura0">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario"/>
-       </void>
-       <void property="identificacion">
-        <string>ASI0002</string>
-       </void>
-       <void property="nombre">
-        <string>Analisis Matematico A</string>
-       </void>
-      </object>
+      <object idref="Asignatura1"/>
      </void>
      <void method="put">
       <string>ASI0003</string>
-      <object class="modelo.Asignatura" id="Asignatura1">
-       <void property="correlatividades">
-        <object class="modelo.IndicePrimario" id="IndicePrimario2">
-         <void property="elementos">
-          <void method="put">
-           <string>ASI0002</string>
-           <object idref="Asignatura0"/>
-          </void>
-         </void>
-        </object>
-       </void>
-       <void property="identificacion">
-        <string>ASI0003</string>
-       </void>
-       <void property="nombre">
-        <string>Analisis Matematico B</string>
-       </void>
-      </object>
+      <object idref="Asignatura0"/>
      </void>
      <void method="put">
       <string>ASI0004</string>
       <object class="modelo.Asignatura" id="Asignatura2">
        <void property="correlatividades">
-        <object class="modelo.IndicePrimario" id="IndicePrimario3">
+        <object class="modelo.IndicePrimario" id="IndicePrimario4">
          <void property="elementos">
           <void method="put">
            <string>ASI0003</string>
-           <object idref="Asignatura1"/>
+           <object idref="Asignatura0"/>
           </void>
          </void>
         </object>
@@ -159,7 +166,7 @@
      <string>Analisis Matematico A</string>
      <object class="java.util.ArrayList">
       <void method="add">
-       <object idref="Asignatura0"/>
+       <object idref="Asignatura1"/>
       </void>
      </object>
     </void>
@@ -167,7 +174,7 @@
      <string>Analisis Matematico B</string>
      <object class="java.util.ArrayList">
       <void method="add">
-       <object idref="Asignatura1"/>
+       <object idref="Asignatura0"/>
       </void>
      </object>
     </void>
@@ -182,7 +189,7 @@
    </void>
   </void>
   <void id="IndiceDoble2" property="profesores">
-   <void id="IndicePrimario4" property="indice1">
+   <void id="IndicePrimario5" property="indice1">
     <void property="elementos">
      <void method="put">
       <string>PRO0001</string>

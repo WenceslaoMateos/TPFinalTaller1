@@ -21,6 +21,15 @@ public class TableModelAlumno
     return false;
   }
 
+  public boolean contieneElemento(String id)
+  {
+    int n = this.getRowCount();
+    int i = 0;
+    while (i < n && !this.getValueAt(i, 0).equals(id))
+      i++;
+    return i < n; //true  si lo contiene, por que salio antes
+  }
+
   public void agregarFilas(Iterator alumnos)
   {
     Alumno aux;
