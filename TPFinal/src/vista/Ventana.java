@@ -12,11 +12,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import java.util.Vector;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -41,7 +38,9 @@ public class Ventana
   private static final int NUEVO = 0;
   private static final int MODIFICAR = 1;
 
-  /** Creates new form Ventana */
+  /**Creates new form Ventana
+   * @param receptor Receptor de la ventana
+   */
   public Ventana(Receptor receptor)
   {
     initComponents();
@@ -1569,29 +1568,32 @@ public class Ventana
   private void jButtonAceptarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAlumnoActionPerformed
     //a un alumno no se le agregan materias a la historia cuando se crea nuevo
-    if (this.accionAceptar == Ventana.MODIFICAR)
-    {
-      DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-      int n = aux.getRowCount();
-      Alumno provisorio =
-        new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
-                   this.jTextFieldMailAlumno.getText());
-      provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
+    DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
+    int n = aux.getRowCount();
+    Alumno provisorio =
+      new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
+                 this.jTextFieldMailAlumno.getText());
+    provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
 
-      try
+    try
+    {
+      if (this.accionAceptar == Ventana.NUEVO)
+        this.receptor.alta(provisorio, Receptor.ALUMNO);
+      else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         this.modificarHistoria(n, provisorio);
         this.receptor.modificacion(provisorio, Receptor.ALUMNO);
-        this.cancelarAlumno();
-        JOptionPane.showMessageDialog(this, "Operación realizada exitosamente.");
       }
-      catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
-      {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-      }
+      else
+        JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
+      this.cancelarAlumno();
+      JOptionPane.showMessageDialog(this, "Operación realizada exitosamente.");
     }
-    else
-      JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
+    catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+
   }//GEN-LAST:event_jButtonAceptarAlumnoActionPerformed
 
   private void jButtonBuscarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarProfesorActionPerformed

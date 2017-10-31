@@ -1,5 +1,6 @@
 package excepciones;
 
+
 public class DiaInvalidoException
   extends Exception
 {
