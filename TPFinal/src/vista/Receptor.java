@@ -94,10 +94,9 @@ public class Receptor
     return ret;
   }
 
-  public Object baja(Object obj, int comando)
+  public void baja(Object obj, int comando)
     throws NoEncontradoException
   {
-    Object ret = null;
     switch (comando)
     {
       case Receptor.ALUMNO:
@@ -113,13 +112,11 @@ public class Receptor
         this.modelo.eliminarCursada((Cursada) obj);
         break;
     }
-    return ret;
   }
 
-  public Object modificacion(Object obj, int comando)
+  public void modificacion(Object obj, int comando)
     throws DatoInvalidoException, NoEncontradoException
   {
-    Object ret = null;
     switch (comando)
     {
       case Receptor.ALUMNO:
@@ -137,7 +134,6 @@ public class Receptor
                                      (Cursada) obj);
         break;
     }
-    return ret;
   }
 
   public void agregaAlumnoEnCursada(Alumno alumno, Cursada cursada)

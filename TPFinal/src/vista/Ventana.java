@@ -1618,7 +1618,7 @@ public class Ventana
       {
         JOptionPane.showMessageDialog(this, e.getMessage());
       }
-      JOptionPane.showMessageDialog(this,"Alumno eliminado exitosamente.");
+      JOptionPane.showMessageDialog(this, "Alumno eliminado exitosamente.");
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo");
@@ -1636,34 +1636,28 @@ public class Ventana
       DefaultTableModel aux;
       int n, i;
       Asignatura elemento;
+
+      Alumno provisorio =
+        new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
+                   this.jTextFieldMailAlumno.getText());
+
+      aux = (DefaultTableModel) this.jTableHistoria.getModel();
+      n = aux.getRowCount();
+      
       switch (this.accionAceptar)
       {
         case Ventana.NUEVO:
-          Alumno nuevo =
-            new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
-                       this.jTextFieldMailAlumno.getText());
-
-          aux = (DefaultTableModel) this.jTableHistoria.getModel();
-          n = aux.getRowCount();
           for (i = 0; i < n; i++)
           {
             elemento = (Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0), Receptor.ASIGNATURA);
-            nuevo.agregarHistoria(elemento);
+            provisorio.agregarHistoria(elemento);
           }
-          this.receptor.alta(nuevo, Receptor.ALUMNO);
-          this.cancelarAlumno();
-
+          this.receptor.alta(provisorio, Receptor.ALUMNO);
           break;
         case Ventana.MODIFICAR:
-          Alumno modif =
-            new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
-                       this.jTextFieldMailAlumno.getText());
-          aux = (DefaultTableModel) this.jTableHistoria.getModel();
-          n = aux.getRowCount();
-
-          modif.setLegajo(this.jTextFieldLegajoAlumno.getText());
-          Alumno viejo = (Alumno) this.receptor.buscar(modif.getLegajo(), Receptor.ALUMNO);
-
+          provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
+          Alumno viejo = (Alumno) this.receptor.buscar(provisorio.getLegajo(), Receptor.ALUMNO);
+          
           ArrayList<Asignatura> nuevaHistoria = new ArrayList<Asignatura>();
           for (i = 0; i < n; i++)
           {
@@ -1682,11 +1676,11 @@ public class Ventana
           Iterator<Asignatura> nuevas = nuevaHistoria.iterator();
           while (nuevas.hasNext())
             viejo.agregarHistoria(nuevas.next());
-
-          this.receptor.modificacion(modif, Receptor.ALUMNO);
-          this.cancelarAlumno();
+          
+          this.receptor.modificacion(provisorio, Receptor.ALUMNO);
           break;
       }
+      this.cancelarAlumno();
       JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
     }
     catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException e)
