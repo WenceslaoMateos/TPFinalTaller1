@@ -34,7 +34,6 @@ public abstract class MiDialogo
   protected JPanel busqueda;
   protected JPanel resultado;
   public static final Dimension JTEXTFIEDL_DIMEN = new Dimension(200, 20);
-  public static final Dimension JBUTTON_DIMEN = new Dimension(100, 30);
   protected JTable fuente;
 
   public MiDialogo(JFrame owner, Receptor receptor, JTable fuente)
@@ -46,12 +45,14 @@ public abstract class MiDialogo
                                        .WindowConstants
                                        .DISPOSE_ON_CLOSE);
     this.receptor = receptor;
-    this.busqueda = new JPanel(new FlowLayout());
-    this.resultado = new JPanel();
 
     Container contenedor = this.getContentPane();
     contenedor.setLayout(new BorderLayout());
+
+    this.resultado = new JPanel();
     contenedor.add(this.resultado, BorderLayout.CENTER);
+
+    this.busqueda = new JPanel(new FlowLayout());
     contenedor.add(this.busqueda, BorderLayout.NORTH);
 
     this.texto = new JTextField();
@@ -62,7 +63,6 @@ public abstract class MiDialogo
 
     this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
     this.aceptar.addActionListener(this);
-
   }
 
 
@@ -76,8 +76,10 @@ public abstract class MiDialogo
     try
     {
       this.agregaResultadosTabla(this.receptor.ubicar(this.texto.getText(), this.getComandoAccion()));
+
       this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       this.tabla.setRowSelectionAllowed(true);
+
       ListSelectionModel model = this.tabla.getSelectionModel();
       model.addListSelectionListener(this);
     }
