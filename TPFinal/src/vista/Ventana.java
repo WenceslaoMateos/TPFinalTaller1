@@ -1567,8 +1567,6 @@ public class Ventana
   private void jButtonAceptarAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAlumnoActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAlumnoActionPerformed
     //a un alumno no se le agregan materias a la historia cuando se crea nuevo
-    DefaultTableModel aux = (DefaultTableModel) this.jTableHistoria.getModel();
-    int n = aux.getRowCount();
     Alumno provisorio =
       new Alumno(this.jTextFieldNombreAlumno.getText(), this.jTextFieldDomicilioAlumno.getText(),
                  this.jTextFieldMailAlumno.getText());
@@ -1580,7 +1578,9 @@ public class Ventana
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
-        this.modificarHistoria(n, provisorio);
+        this.modificarHistoria(this.jTableHistoria
+                                   .getModel()
+                                   .getRowCount(), provisorio);
         this.receptor.modificacion(provisorio, Receptor.ALUMNO);
       }
       else
@@ -1619,7 +1619,6 @@ public class Ventana
 
   private void jButtonNuevoProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoProfesorActionPerformed
-
     this.accionAceptar = Ventana.NUEVO;
 
     ((DefaultTableModel) this.jTableProfesorProfesor.getModel()).setRowCount(0);
@@ -1688,8 +1687,6 @@ public class Ventana
 
   private void jButtonAceptarProfesorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarProfesorActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarProfesorActionPerformed
-    DefaultTableModel aux = (DefaultTableModel) this.jTableCompetencia.getModel();
-    int n = aux.getRowCount();
     Profesor provisorio =
       new Profesor(this.jTextFieldNombreProfesor.getText(), this.jTextFieldDomicilioProfesor.getText(),
                    this.jTextFieldMailProfesor.getText(), this.jTextFieldTelefonoProfesor.getText());
@@ -1699,12 +1696,16 @@ public class Ventana
       {
         this.receptor.alta(provisorio, Receptor.PROFESOR);
         this.jTextFieldLegajoProfesor.setText(provisorio.getLegajo());
-        this.modificarCompetencia(n, provisorio);
+        this.modificarCompetencia(this.jTableCompetencia
+                                      .getModel()
+                                      .getRowCount(), provisorio);
       }
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setLegajo(this.jTextFieldLegajoProfesor.getText());
-        this.modificarCompetencia(n, provisorio);
+        this.modificarCompetencia(this.jTableCompetencia
+                                      .getModel()
+                                      .getRowCount(), provisorio);
         this.receptor.modificacion(provisorio, Receptor.PROFESOR);
       }
       else
@@ -1834,20 +1835,22 @@ public class Ventana
   private void jButtonAceptarAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarAsignaturaActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarAsignaturaActionPerformed
     Asignatura provisorio = new Asignatura(this.jTextFieldNombreAsignatura.getText());
-    DefaultTableModel aux = (DefaultTableModel) this.jTableCorrelativas.getModel();
-    int n = aux.getRowCount();
     try
     {
       if (this.accionAceptar == Ventana.NUEVO)
       {
         this.receptor.alta(provisorio, Receptor.ASIGNATURA);
         this.jTextFieldIdentificadorAsignatura.setText(provisorio.getIdentificacion());
-        this.modificarCorrelativa(n, provisorio);
+        this.modificarCorrelativa(this.jTableCorrelativas
+                                      .getModel()
+                                      .getRowCount(), provisorio);
       }
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setIdentificacion(this.jTextFieldIdentificadorAsignatura.getText());
-        this.modificarCorrelativa(n, provisorio);
+        this.modificarCorrelativa(this.jTableCorrelativas
+                                      .getModel()
+                                      .getRowCount(), provisorio);
         this.receptor.modificacion(provisorio, Receptor.ASIGNATURA);
       }
       else
@@ -1915,43 +1918,52 @@ public class Ventana
     }
     catch (NoEncontradoException e)
     {
-      JOptionPane.showMessageDialog(this, e.getMessage() + ", por favor vuelva a ingresarlo");
+      JOptionPane.showMessageDialog(this, e.getMessage() + " Por favor vuelva a ingresarlo");
     }
   }//GEN-LAST:event_jButtonBuscarCursadaActionPerformed
 
   private void jButtonNuevoCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonNuevoCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonNuevoCursadaActionPerformed
     this.accionAceptar = Ventana.NUEVO;
-    this.cancelarCursada();
-    this.jButtonEliminarCursada.setEnabled(false);
-    this.jButtonModificarCursada.setEnabled(false);
-    this.jButtonCambiarAsignaturaCursada.setEnabled(true);
-
-    this.jComboBoxDia.setEnabled(true);
-    this.jButtonAgregarAlumnoCursada.setEnabled(true);
-    this.jButtonEliminarAlumnoCursada.setEnabled(true);
-    this.jButtonAgregarProfesorCursada.setEnabled(true);
-    this.jButtonEliminarProfesorCursada.setEnabled(true);
-    this.jButtonCancelarCursada.setEnabled(true);
-    this.jButtonAceptarCursada.setEnabled(true);
 
     this.jTextFieldIdentificadorCursada.setText("");
+
     this.jTextFieldIDAsignaturaCursada.setText("");
+    this.jButtonCambiarAsignaturaCursada.setEnabled(true);
+
     this.jTextFieldNombreAsignaturaCursada.setText("");
-    this.jTextFieldPeriodoCursada.setEditable(true);
+
+    this.jComboBoxDia.setEnabled(true);
+
     this.jTextFieldPeriodoCursada.setText("");
-    this.jTextFieldInicioCursada.setEditable(true);
+    this.jTextFieldPeriodoCursada.setEditable(true);
+
     this.jTextFieldInicioCursada.setText("");
-    this.jTextFieldFinCursada.setEditable(true);
+    this.jTextFieldInicioCursada.setEditable(true);
+
     this.jTextFieldFinCursada.setText("");
+    this.jTextFieldFinCursada.setEditable(true);
 
     ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
     ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
     ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
 
-    this.jButtonBuscarCursada.setEnabled(false);
-    this.jTextFieldBuscarCursada.setEditable(false);
     this.jTextFieldBuscarCursada.setText("");
+    this.jTextFieldBuscarCursada.setEditable(false);
+    this.jButtonBuscarCursada.setEnabled(false);
+
+    this.jButtonEliminarCursada.setEnabled(false);
+    this.jButtonModificarCursada.setEnabled(false);
+    this.jButtonNuevoAlumno.setEnabled(false);
+
+    this.jButtonAgregarAlumnoCursada.setEnabled(true);
+    this.jButtonEliminarAlumnoCursada.setEnabled(true);
+
+    this.jButtonAgregarProfesorCursada.setEnabled(true);
+    this.jButtonEliminarProfesorCursada.setEnabled(true);
+
+    this.jButtonCancelarCursada.setEnabled(true);
+    this.jButtonAceptarCursada.setEnabled(true);
   }//GEN-LAST:event_jButtonNuevoCursadaActionPerformed
 
   private void jButtonEliminarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarCursadaActionPerformed
@@ -1962,14 +1974,13 @@ public class Ventana
     {
       try
       {
-        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Alumno",
+        if (JOptionPane.showConfirmDialog(this, "¿Esta usted seguro que desea eliminar?", "Eliminar Cursada",
                                           JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
         {
           this.receptor.baja(this.receptor.buscar(this.jTextFieldIdentificadorCursada.getText(), Receptor.CURSADA),
                              Receptor.CURSADA);
+
           ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
-          ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
-          ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
           this.cancelarCursada();
         }
       }
@@ -1979,7 +1990,8 @@ public class Ventana
       }
     }
     else
-      JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla");
+      JOptionPane.showMessageDialog(this, "Seleccione una cursada para poder eliminarla");
+    JOptionPane.showMessageDialog(this, "Cursada eliminada exitosamente.");
   }//GEN-LAST:event_jButtonEliminarCursadaActionPerformed
 
   private void jButtonAgregarProfesorCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgregarProfesorCursadaActionPerformed
@@ -1989,107 +2001,45 @@ public class Ventana
 
   private void jButtonAceptarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarCursadaActionPerformed
   {//GEN-HEADEREND:event_jButtonAceptarCursadaActionPerformed
-    switch (this.accionAceptar)
+    try
     {
-      case Ventana.NUEVO:
-        try
-        {
-          Cursada nuevo =
-            new Cursada((Asignatura) this.receptor.buscar(this.jTextFieldIDAsignaturaCursada.getText(),
-                                                          Receptor.ASIGNATURA), this.jTextFieldPeriodoCursada.getText(),
-                        Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
-                        this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
-          DefaultTableModel aux = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-          int n = aux.getRowCount();
-          int i;
-          Alumno alu;
-          for (i = 0; i < n; i++)
-          {
-            alu = (Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO);
-            nuevo.altaAlumno(alu);
-          }
-          aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-          n = aux.getRowCount();
-          Profesor prof;
-          for (i = 0; i < n; i++)
-          {
-            prof = (Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0), Receptor.PROFESOR);
-            nuevo.altaProfesor(prof);
-          }
-          this.receptor.alta(nuevo, Receptor.CURSADA);
-          this.cancelarCursada();
-        }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException | DiaInvalidoException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        break;
-      case Ventana.MODIFICAR:
-        try
-        {
-          int n, i;
-          DefaultTableModel aux;
-          Cursada modif =
-            new Cursada((Asignatura) this.receptor.buscar(this.jTextFieldIDAsignaturaCursada.getText(),
-                                                          Receptor.ASIGNATURA), this.jTextFieldPeriodoCursada.getText(),
-                        Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
-                        this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
+      Cursada provisorio =
+        new Cursada((Asignatura) this.receptor.buscar(this.jTextFieldIDAsignaturaCursada.getText(),
+                                                      Receptor.ASIGNATURA), this.jTextFieldPeriodoCursada.getText(),
+                    Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
+                    this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
 
-          aux = (DefaultTableModel) this.jTableAlumnosCursada.getModel();
-          n = aux.getRowCount();
-          modif.setIdentificacion(this.jTextFieldIdentificadorCursada.getText());
-          Cursada viejo = (Cursada) this.receptor.buscar(modif.getIdentificacion(), Receptor.CURSADA);
-
-          ArrayList<Alumno> nuevaCursada = new ArrayList<Alumno>();
-          for (i = 0; i < n; i++)
-          {
-            nuevaCursada.add((Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0),
-                                                           Receptor.ALUMNO));
-          }
-          Iterator<Alumno> alumnosViejos = viejo.alumnos();
-          while (alumnosViejos.hasNext())
-          {
-            Alumno auxiliar = alumnosViejos.next();
-            if (!nuevaCursada.contains(auxiliar))
-              alumnosViejos.remove();
-            else
-              nuevaCursada.remove(auxiliar);
-          }
-          Iterator<Alumno> nuevas = nuevaCursada.iterator();
-          while (nuevas.hasNext())
-            this.receptor.agregaAlumnoEnCursada(nuevas.next(), viejo);
-
-          aux = (DefaultTableModel) this.jTableProfesoresCursada.getModel();
-          n = aux.getRowCount();
-
-          ArrayList<Profesor> nuevoProfesor = new ArrayList<Profesor>();
-          for (i = 0; i < n; i++)
-          {
-            nuevoProfesor.add((Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0),
-                                                              Receptor.PROFESOR));
-          }
-          Iterator<Profesor> profesoresViejos = viejo.profesores();
-          while (profesoresViejos.hasNext())
-          {
-            Profesor auxiliar = profesoresViejos.next();
-            if (!nuevoProfesor.contains(auxiliar))
-              profesoresViejos.remove();
-            else
-              nuevoProfesor.remove(auxiliar);
-          }
-          Iterator<Profesor> nuevos = nuevoProfesor.iterator();
-          while (nuevos.hasNext())
-            this.receptor.agregaProfesorEnCursada(nuevos.next(), viejo);
-
-          this.receptor.modificacion(modif, Receptor.CURSADA);
-          this.cancelarCursada();
-        }
-        catch (NoEncontradoException | ClaveYaExistenteException | DatoInvalidoException | DiaInvalidoException e)
-        {
-          JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+      if (this.accionAceptar == Ventana.NUEVO)
+      {
+        this.receptor.alta(provisorio, Receptor.CURSADA);
+        this.jTextFieldIdentificadorCursada.setText(provisorio.getIdentificacion());
+        this.modificarAlumnosCursada(this.jTableAlumnosCursada
+                                         .getModel()
+                                         .getRowCount(), provisorio);
+        this.modificarProfesoresCursada(this.jTableProfesoresCursada
+                                            .getModel()
+                                            .getRowCount(), provisorio);
+      }
+      else if (this.accionAceptar == Ventana.MODIFICAR)
+      {
+        this.jTextFieldIdentificadorCursada.setText(provisorio.getIdentificacion());
+        this.modificarAlumnosCursada(this.jTableAlumnosCursada
+                                         .getModel()
+                                         .getRowCount(), provisorio);
+        this.modificarProfesoresCursada(this.jTableProfesoresCursada
+                                            .getModel()
+                                            .getRowCount(), provisorio);
+        this.receptor.modificacion(provisorio, Receptor.CURSADA);
+      }
+      else
+        JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
+      this.cancelarCursada();
+      JOptionPane.showMessageDialog(this, "Operación realizada exitosamente.");
     }
-    JOptionPane.showMessageDialog(this, "Operación realizada exitosamente");
+    catch (DatoInvalidoException | NoEncontradoException | ClaveYaExistenteException | DiaInvalidoException e)
+    {
+      JOptionPane.showMessageDialog(this, e.getMessage());
+    }
   }//GEN-LAST:event_jButtonAceptarCursadaActionPerformed
 
   private void jButtonCancelarCursadaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarCursadaActionPerformed
@@ -2103,27 +2053,30 @@ public class Ventana
              .getText()
              .equals(""))
     {
-      this.jButtonEliminarCursada.setEnabled(false);
-      this.jButtonNuevoCursada.setEnabled(false);
+      this.accionAceptar = Ventana.MODIFICAR;
+
+      ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
 
       this.jComboBoxDia.setEnabled(true);
-      this.jButtonAgregarAlumnoCursada.setEnabled(true);
-      this.jButtonEliminarAlumnoCursada.setEnabled(true);
-      this.jButtonAgregarProfesorCursada.setEnabled(true);
-      this.jButtonEliminarProfesorCursada.setEnabled(true);
-      this.jButtonCancelarCursada.setEnabled(true);
-      this.jButtonAceptarCursada.setEnabled(true);
-
       this.jTextFieldPeriodoCursada.setEditable(true);
       this.jTextFieldInicioCursada.setEditable(true);
       this.jTextFieldFinCursada.setEditable(true);
 
-      ((DefaultTableModel) this.jTableCursadaCursada.getModel()).setRowCount(0);
+      this.jButtonAgregarAlumnoCursada.setEnabled(true);
+      this.jButtonEliminarAlumnoCursada.setEnabled(true);
+      this.jButtonAgregarProfesorCursada.setEnabled(true);
+      this.jButtonEliminarProfesorCursada.setEnabled(true);
 
-      this.jButtonBuscarCursada.setEnabled(false);
-      this.jTextFieldBuscarCursada.setEditable(false);
+      this.jButtonCancelarCursada.setEnabled(true);
+      this.jButtonAceptarCursada.setEnabled(true);
+
+      this.jButtonEliminarCursada.setEnabled(false);
+      this.jButtonNuevoCursada.setEnabled(false);
+      this.jButtonModificarCursada.setEnabled(false);
+
       this.jTextFieldBuscarCursada.setText("");
-      this.accionAceptar = Ventana.MODIFICAR;
+      this.jTextFieldBuscarCursada.setEditable(false);
+      this.jButtonBuscarCursada.setEnabled(false);
     }
     else
       JOptionPane.showMessageDialog(this, "Seleccione una cursada para poder modificarla");
@@ -2309,6 +2262,9 @@ public class Ventana
    */
   private void cancelarCursada()
   {
+    ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
+    ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
+
     this.jTextFieldIdentificadorCursada.setText("");
 
     this.jTextFieldIDAsignaturaCursada.setText("");
@@ -2329,9 +2285,6 @@ public class Ventana
     this.jTextFieldBuscarCursada.setText("");
     this.jTextFieldBuscarCursada.setEditable(true);
     this.jButtonBuscarCursada.setEnabled(true);
-
-    ((DefaultTableModel) this.jTableAlumnosCursada.getModel()).setRowCount(0);
-    ((DefaultTableModel) this.jTableProfesoresCursada.getModel()).setRowCount(0);
 
     this.jButtonEliminarCursada.setEnabled(true);
     this.jButtonModificarCursada.setEnabled(true);
@@ -2477,6 +2430,87 @@ public class Ventana
     it = agregar.iterator();
     while (it.hasNext())
       viejo.agregarCorrelativa(it.next());
+  }
+
+  private void modificarAlumnosCursada(int cantAlumnos, Cursada provisorio)
+    throws NoEncontradoException, ClaveYaExistenteException, DatoInvalidoException
+  {
+    int i;
+    Cursada viejo = (Cursada) this.receptor.buscar(provisorio.getIdentificacion(), Receptor.CURSADA);
+
+    for (i = 0; i < cantAlumnos; i++)
+    {
+      provisorio.altaAlumno((Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO));
+    }
+    //si el for funciona, entonces es que el alumno es valido
+
+    ArrayList<Alumno> agregar = new ArrayList<Alumno>();
+    ArrayList<Alumno> eliminar = new ArrayList<Alumno>();
+
+    Iterator<Alumno> alumnoViejas = viejo.alumnos();
+    while (alumnoViejas.hasNext())
+    {
+      Alumno auxiliar = alumnoViejas.next();
+      if (!provisorio.tieneAlumno(auxiliar))
+        eliminar.add(auxiliar);
+    }
+
+    alumnoViejas = provisorio.alumnos();
+    while (alumnoViejas.hasNext())
+    {
+      Alumno auxiliar = alumnoViejas.next();
+      if (!viejo.tieneAlumno(auxiliar))
+        agregar.add(auxiliar);
+    }
+
+    Iterator<Alumno> it = eliminar.iterator();
+    while (it.hasNext())
+      viejo.bajaAlumno(it.next());
+
+    it = agregar.iterator();
+    while (it.hasNext())
+      viejo.altaAlumno(it.next());
+  }
+
+  private void modificarProfesoresCursada(int cantProfesores, Cursada provisorio)
+    throws NoEncontradoException, ClaveYaExistenteException, DatoInvalidoException
+  {
+    int i;
+    Cursada viejo = (Cursada) this.receptor.buscar(provisorio.getIdentificacion(), Receptor.CURSADA);
+
+    for (i = 0; i < cantProfesores; i++)
+    {
+      provisorio.altaProfesor((Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0),
+                                                              Receptor.PROFESOR));
+    }
+    //si el for funciona, entonces es que el alumno es valido
+
+    ArrayList<Profesor> agregar = new ArrayList<Profesor>();
+    ArrayList<Profesor> eliminar = new ArrayList<Profesor>();
+
+    Iterator<Profesor> profesorViejas = viejo.profesores();
+    while (profesorViejas.hasNext())
+    {
+      Profesor auxiliar = profesorViejas.next();
+      if (!provisorio.tieneProfesor(auxiliar))
+        eliminar.add(auxiliar);
+    }
+
+    profesorViejas = provisorio.profesores();
+    while (profesorViejas.hasNext())
+    {
+      Profesor auxiliar = profesorViejas.next();
+      if (!viejo.tieneProfesor(auxiliar))
+        agregar.add(auxiliar);
+    }
+
+    Iterator<Profesor> it = eliminar.iterator();
+    while (it.hasNext())
+      viejo.bajaProfesor(it.next());
+
+    it = agregar.iterator();
+    while (it.hasNext())
+      viejo.altaProfesor(it.next());
   }
 
   /**
