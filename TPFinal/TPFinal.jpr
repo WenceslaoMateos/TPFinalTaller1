@@ -82,6 +82,7 @@
             </hash>
             <hash>
                <list n="pattern-filters">
+                  <string v="-Sistema.xml"/>
                   <string v="+*"/>
                </list>
                <list n="url-path">
