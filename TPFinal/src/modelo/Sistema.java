@@ -488,7 +488,7 @@ public class Sistema
    * @param cursada Cursada con los horarios a comparar.
    * @return <b>true</b> si el alumno está libre en el horario de la cursada, <b>false</b> en caso contrario.
    */
-  private boolean alumnoDisponible(Alumno alumno, Cursada cursada)
+  public boolean alumnoDisponible(Alumno alumno, Cursada cursada)
   {
     boolean res = true;
     Cursada aux;
@@ -496,7 +496,7 @@ public class Sistema
     while (it.hasNext() && res)
     {
       aux = it.next();
-      // El alumno no debe estar en la cursada o la misma no debe colisionar con la solicitada
+      // El alumno no está en la cursada o la misma no debe colisionar con la solicitada
       res = !aux.tieneAlumno(alumno) || !aux.hayColision(cursada);
     }
     return res;
@@ -509,7 +509,7 @@ public class Sistema
    * @param cursada Cursada con los horarios a comparar.
    * @return <b>true</b> si el alumno está libre en el horario de la cursada, <b>false</b> en caso contrario.
    */
-  private boolean profesorDisponible(Profesor profesor, Cursada cursada)
+  public boolean profesorDisponible(Profesor profesor, Cursada cursada)
   {
     boolean res = true;
     Cursada aux;
