@@ -319,7 +319,9 @@ public class Cursada
      */
     public boolean hayColision(Cursada otro)
     {
-        return this.getPeriodo().equals(otro.getPeriodo()) && this.getDia() == otro.getDia() &&
+        return !this.getIdentificacion().equals(otro.getIdentificacion()) &&
+               this.getPeriodo().equals(otro.getPeriodo()) &&
+               this.getDia() == otro.getDia() &&
                !(this.getHoraInicio().compareTo(otro.getHoraFinalizacion()) >= 0 ||
                  this.getHoraFinalizacion().compareTo(otro.getHoraInicio()) <= 0);
     }
@@ -387,7 +389,7 @@ public class Cursada
             this.setHoraFinalizacion(aux.getHoraFinalizacion());
         }
     }
-
+    
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public Cursada()
     {

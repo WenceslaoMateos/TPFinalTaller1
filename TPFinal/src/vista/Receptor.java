@@ -164,11 +164,11 @@ public class Receptor
                         if (aux.getLegajo()
                                .substring(0, 3)
                                .equals("ALU"))
-                            curViejo.bajaAlumno((Alumno) eliminar.next());
+                            curViejo.bajaAlumno((Alumno) aux);
                         else if (aux.getLegajo()
                                     .substring(0, 3)
                                     .equals("PRO"))
-                            curViejo.bajaProfesor((Profesor) eliminar.next());
+                            curViejo.bajaProfesor((Profesor) aux);
                     }
 
                     while (agregar.hasNext())
