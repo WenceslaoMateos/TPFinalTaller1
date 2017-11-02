@@ -23,6 +23,7 @@ import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Cursada;
 import modelo.Dia;
+import modelo.Persona;
 import modelo.Profesor;
 
 /**
@@ -1578,10 +1579,12 @@ public class Ventana
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setLegajo(this.jTextFieldLegajoAlumno.getText());
-        this.modificarHistoria(this.jTableHistoria
-                                   .getModel()
-                                   .getRowCount(), provisorio);
-        this.receptor.modificacion(provisorio, Receptor.ALUMNO);
+
+        ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+        ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
+
+        this.modificarHistoria(provisorio, eliminar, agregar);
+        this.receptor.modificacion(provisorio, Receptor.ALUMNO, eliminar.iterator(), agregar.iterator());
       }
       else
         JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
@@ -1696,17 +1699,24 @@ public class Ventana
       {
         this.receptor.alta(provisorio, Receptor.PROFESOR);
         this.jTextFieldLegajoProfesor.setText(provisorio.getLegajo());
-        this.modificarCompetencia(this.jTableCompetencia
-                                      .getModel()
-                                      .getRowCount(), provisorio);
+
+        ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+        ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
+
+        this.modificarCompetencia(provisorio, eliminar, agregar);
+
+        this.receptor.modificacion(provisorio, Receptor.PROFESOR, eliminar.iterator(), agregar.iterator());
       }
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setLegajo(this.jTextFieldLegajoProfesor.getText());
-        this.modificarCompetencia(this.jTableCompetencia
-                                      .getModel()
-                                      .getRowCount(), provisorio);
-        this.receptor.modificacion(provisorio, Receptor.PROFESOR);
+
+        ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+        ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
+
+        this.modificarCompetencia(provisorio, eliminar, agregar);
+
+        this.receptor.modificacion(provisorio, Receptor.PROFESOR, eliminar.iterator(), agregar.iterator());
       }
       else
         JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
@@ -1837,21 +1847,20 @@ public class Ventana
     Asignatura provisorio = new Asignatura(this.jTextFieldNombreAsignatura.getText());
     try
     {
+      ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
+      ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
       if (this.accionAceptar == Ventana.NUEVO)
       {
         this.receptor.alta(provisorio, Receptor.ASIGNATURA);
         this.jTextFieldIdentificadorAsignatura.setText(provisorio.getIdentificacion());
-        this.modificarCorrelativa(this.jTableCorrelativas
-                                      .getModel()
-                                      .getRowCount(), provisorio);
+        this.modificarCorrelativa(provisorio, eliminar, agregar);
+        this.receptor.modificacion(provisorio, Receptor.ASIGNATURA, eliminar.iterator(), agregar.iterator());
       }
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         provisorio.setIdentificacion(this.jTextFieldIdentificadorAsignatura.getText());
-        this.modificarCorrelativa(this.jTableCorrelativas
-                                      .getModel()
-                                      .getRowCount(), provisorio);
-        this.receptor.modificacion(provisorio, Receptor.ASIGNATURA);
+        this.modificarCorrelativa(provisorio, eliminar, agregar);
+        this.receptor.modificacion(provisorio, Receptor.ASIGNATURA, eliminar.iterator(), agregar.iterator());
       }
       else
         JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
@@ -2009,27 +2018,22 @@ public class Ventana
                     Dia.parseDia(this.jComboBoxDia.getItemAt(this.jComboBoxDia.getSelectedIndex())),
                     this.jTextFieldInicioCursada.getText(), this.jTextFieldFinCursada.getText());
 
+      ArrayList<Persona> agregar = new ArrayList<Persona>();
+      ArrayList<Persona> eliminar = new ArrayList<Persona>();
+
       if (this.accionAceptar == Ventana.NUEVO)
       {
         this.receptor.alta(provisorio, Receptor.CURSADA);
         this.jTextFieldIdentificadorCursada.setText(provisorio.getIdentificacion());
-        this.modificarAlumnosCursada(this.jTableAlumnosCursada
-                                         .getModel()
-                                         .getRowCount(), provisorio);
-        this.modificarProfesoresCursada(this.jTableProfesoresCursada
-                                            .getModel()
-                                            .getRowCount(), provisorio);
+
+        this.modificarCursada(provisorio, eliminar, agregar);
+        this.receptor.modificacion(provisorio, Receptor.CURSADA, eliminar.iterator(), agregar.iterator());
       }
       else if (this.accionAceptar == Ventana.MODIFICAR)
       {
         this.jTextFieldIdentificadorCursada.setText(provisorio.getIdentificacion());
-        this.modificarAlumnosCursada(this.jTableAlumnosCursada
-                                         .getModel()
-                                         .getRowCount(), provisorio);
-        this.modificarProfesoresCursada(this.jTableProfesoresCursada
-                                            .getModel()
-                                            .getRowCount(), provisorio);
-        this.receptor.modificacion(provisorio, Receptor.CURSADA);
+        this.modificarCursada(provisorio, eliminar, agregar);
+        this.receptor.modificacion(provisorio, Receptor.CURSADA, eliminar.iterator(), agregar.iterator());
       }
       else
         JOptionPane.showMessageDialog(this, "La operación deseada no existe.");
@@ -2302,28 +2306,21 @@ public class Ventana
     this.jButtonCancelarCursada.setEnabled(false);
   }
 
-  /**
-   * Modifica la historia de un alumno utilizando los metodos propuestos por el modelo
-   * @param cantHistoria Cantidad de filas de la tabla
-   * @param provisorio Alumno que contendrá todas las modificaciones provisorias
-   * @throws NoEncontradoException Nunca será lanzada por que si el elemento está en la tabla, es por que está en la colección
-   * @throws ClaveYaExistenteException Nunca será lanzada por que la vista ya prevee esa situación
-   */
-  private void modificarHistoria(int cantHistoria, Alumno provisorio)
+  private void modificarHistoria(Alumno provisorio, ArrayList<Asignatura> eliminar, ArrayList<Asignatura> agregar)
     throws NoEncontradoException, ClaveYaExistenteException
   {
-    int i;
+    int i, n = this.jTableHistoria
+                   .getModel()
+                   .getRowCount();
     Alumno viejo = (Alumno) this.receptor.buscar(provisorio.getLegajo(), Receptor.ALUMNO);
 
-    for (i = 0; i < cantHistoria; i++)
+    for (i = 0; i < n; i++)
     {
       provisorio.agregarHistoria((Asignatura) this.receptor.buscar(this.jTableHistoria.getValueAt(i, 0),
                                                                    Receptor.ASIGNATURA));
     }
     //si el for funciona, entonces es que el alumno es valido
 
-    ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
-    ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
 
     Iterator<Asignatura> asignaturasViejas = viejo.historiaAcademica();
     while (asignaturasViejas.hasNext())
@@ -2341,30 +2338,22 @@ public class Ventana
         agregar.add(auxiliar);
     }
 
-    Iterator<Asignatura> it = eliminar.iterator();
-    while (it.hasNext())
-      viejo.eliminarHistoria(it.next());
-
-    it = agregar.iterator();
-    while (it.hasNext())
-      viejo.agregarHistoria(it.next());
   }
 
-  private void modificarCompetencia(int cantCompetencia, Profesor provisorio)
+  private void modificarCompetencia(Profesor provisorio, ArrayList<Asignatura> eliminar, ArrayList<Asignatura> agregar)
     throws NoEncontradoException, ClaveYaExistenteException
   {
-    int i;
+    int i, n = this.jTableCompetencia
+                   .getModel()
+                   .getRowCount();
     Profesor viejo = (Profesor) this.receptor.buscar(provisorio.getLegajo(), Receptor.PROFESOR);
 
-    for (i = 0; i < cantCompetencia; i++)
+    for (i = 0; i < n; i++)
     {
       provisorio.agregarCompetencia((Asignatura) this.receptor.buscar(this.jTableCompetencia.getValueAt(i, 0),
                                                                       Receptor.ASIGNATURA));
     }
     //si el for funciona, entonces es que el alumno es valido
-
-    ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
-    ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
 
     Iterator<Asignatura> asignaturasViejas = viejo.competencias();
     while (asignaturasViejas.hasNext())
@@ -2381,31 +2370,23 @@ public class Ventana
       if (!viejo.habilitadoParaAsignatura(auxiliar))
         agregar.add(auxiliar);
     }
-
-    Iterator<Asignatura> it = eliminar.iterator();
-    while (it.hasNext())
-      viejo.eliminarCompetencia(it.next());
-
-    it = agregar.iterator();
-    while (it.hasNext())
-      viejo.agregarCompetencia(it.next());
   }
 
-  private void modificarCorrelativa(int cantCorrelativa, Asignatura provisorio)
+  private void modificarCorrelativa(Asignatura provisorio, ArrayList<Asignatura> eliminar,
+                                    ArrayList<Asignatura> agregar)
     throws NoEncontradoException, ClaveYaExistenteException, DatoInvalidoException
   {
-    int i;
+    int i, n = this.jTableCorrelativas
+                   .getModel()
+                   .getRowCount();
     Asignatura viejo = (Asignatura) this.receptor.buscar(provisorio.getIdentificacion(), Receptor.ASIGNATURA);
 
-    for (i = 0; i < cantCorrelativa; i++)
+    for (i = 0; i < n; i++)
     {
       provisorio.agregarCorrelativa((Asignatura) this.receptor.buscar(this.jTableCorrelativas.getValueAt(i, 0),
                                                                       Receptor.ASIGNATURA));
     }
     //si el for funciona, entonces es que el alumno es valido
-
-    ArrayList<Asignatura> agregar = new ArrayList<Asignatura>();
-    ArrayList<Asignatura> eliminar = new ArrayList<Asignatura>();
 
     Iterator<Asignatura> asignaturasViejas = viejo.precorrelativas();
     while (asignaturasViejas.hasNext())
@@ -2422,30 +2403,23 @@ public class Ventana
       if (!viejo.tienePrecorrelativa(auxiliar))
         agregar.add(auxiliar);
     }
-
-    Iterator<Asignatura> it = eliminar.iterator();
-    while (it.hasNext())
-      viejo.eliminarCorrelativa(it.next());
-
-    it = agregar.iterator();
-    while (it.hasNext())
-      viejo.agregarCorrelativa(it.next());
   }
 
-  private void modificarAlumnosCursada(int cantAlumnos, Cursada provisorio)
+  private void modificarCursada(Cursada provisorio, ArrayList<Persona> eliminar, ArrayList<Persona> agregar)
     throws NoEncontradoException, ClaveYaExistenteException, DatoInvalidoException
   {
-    int i;
+
+    //***************************ALUMNO*************************//
+    int i, n = this.jTableAlumnosCursada
+                   .getModel()
+                   .getRowCount();
     Cursada viejo = (Cursada) this.receptor.buscar(provisorio.getIdentificacion(), Receptor.CURSADA);
 
-    for (i = 0; i < cantAlumnos; i++)
+    for (i = 0; i < n; i++)
     {
       provisorio.altaAlumno((Alumno) this.receptor.buscar(this.jTableAlumnosCursada.getValueAt(i, 0), Receptor.ALUMNO));
     }
     //si el for funciona, entonces es que el alumno es valido
-
-    ArrayList<Alumno> agregar = new ArrayList<Alumno>();
-    ArrayList<Alumno> eliminar = new ArrayList<Alumno>();
 
     Iterator<Alumno> alumnoViejas = viejo.alumnos();
     while (alumnoViejas.hasNext())
@@ -2462,31 +2436,16 @@ public class Ventana
       if (!viejo.tieneAlumno(auxiliar))
         agregar.add(auxiliar);
     }
-
-    Iterator<Alumno> it = eliminar.iterator();
-    while (it.hasNext())
-      viejo.bajaAlumno(it.next());
-
-    it = agregar.iterator();
-    while (it.hasNext())
-      viejo.altaAlumno(it.next());
-  }
-
-  private void modificarProfesoresCursada(int cantProfesores, Cursada provisorio)
-    throws NoEncontradoException, ClaveYaExistenteException, DatoInvalidoException
-  {
-    int i;
-    Cursada viejo = (Cursada) this.receptor.buscar(provisorio.getIdentificacion(), Receptor.CURSADA);
-
-    for (i = 0; i < cantProfesores; i++)
+    
+    //***************************PROFESOR*************************//
+    n = this.jTableProfesoresCursada
+            .getModel()
+            .getRowCount();
+    for (i = 0; i < n; i++)
     {
       provisorio.altaProfesor((Profesor) this.receptor.buscar(this.jTableProfesoresCursada.getValueAt(i, 0),
                                                               Receptor.PROFESOR));
     }
-    //si el for funciona, entonces es que el alumno es valido
-
-    ArrayList<Profesor> agregar = new ArrayList<Profesor>();
-    ArrayList<Profesor> eliminar = new ArrayList<Profesor>();
 
     Iterator<Profesor> profesorViejas = viejo.profesores();
     while (profesorViejas.hasNext())
@@ -2504,13 +2463,6 @@ public class Ventana
         agregar.add(auxiliar);
     }
 
-    Iterator<Profesor> it = eliminar.iterator();
-    while (it.hasNext())
-      viejo.bajaProfesor(it.next());
-
-    it = agregar.iterator();
-    while (it.hasNext())
-      viejo.altaProfesor(it.next());
   }
 
   /**

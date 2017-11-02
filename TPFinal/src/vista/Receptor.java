@@ -4,11 +4,13 @@ import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
 import excepciones.NoEncontradoException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Cursada;
+import modelo.Persona;
 import modelo.Profesor;
 import modelo.Sistema;
 
@@ -114,43 +116,78 @@ public class Receptor
     }
   }
 
-  public void modificacion(Object obj, int comando)
-    throws DatoInvalidoException, NoEncontradoException
+  public void modificacion(Object obj, int comando, Iterator eliminar, Iterator agregar)
+    throws DatoInvalidoException, NoEncontradoException, ClaveYaExistenteException
   {
     switch (comando)
     {
       case Receptor.ALUMNO:
+
+        Alumno aluViejo = (Alumno) obj;
+        while (eliminar.hasNext())
+          aluViejo.eliminarHistoria((Asignatura) eliminar.next());
+
+        while (agregar.hasNext())
+          aluViejo.agregarHistoria((Asignatura) agregar.next());
+
         this.modelo.modificarAlumno((Alumno) this.buscar(((Alumno) obj).getLegajo(), comando), (Alumno) obj);
         break;
       case Receptor.PROFESOR:
+
+        Profesor profViejo = (Profesor) obj;
+        while (eliminar.hasNext())
+          this.modelo.quitarCompetenciaAProfesor(profViejo, (Asignatura) eliminar.next());
+
+        while (agregar.hasNext())
+          profViejo.agregarCompetencia((Asignatura) agregar.next());
+
         this.modelo.modificarProfesor((Profesor) this.buscar(((Profesor) obj).getLegajo(), comando), (Profesor) obj);
         break;
       case Receptor.ASIGNATURA:
+
+        Asignatura asigViejo = (Asignatura) obj;
+        while (eliminar.hasNext())
+          asigViejo.eliminarCorrelativa((Asignatura) eliminar.next());
+
+        while (agregar.hasNext())
+          asigViejo.agregarCorrelativa((Asignatura) agregar.next());
         this.modelo.modificarAsignatura((Asignatura) this.buscar(((Asignatura) obj).getIdentificacion(), comando),
                                         (Asignatura) obj);
         break;
       case Receptor.CURSADA:
+
+        Cursada curViejo = (Cursada) obj;
+        Persona aux;
+        while (eliminar.hasNext())
+        {
+          aux = (Persona) eliminar.next();
+          if (aux.getLegajo()
+                 .substring(0, 2)
+                 .equals("ALU"))
+            curViejo.bajaAlumno((Alumno) eliminar.next());
+          else if (aux.getLegajo()
+                      .substring(0, 2)
+                      .equals("ALU"))
+            curViejo.bajaProfesor((Profesor) eliminar.next());
+        }
+
+        while (agregar.hasNext())
+        {
+          aux = (Persona) agregar.next();
+          if (aux.getLegajo()
+                 .substring(0, 2)
+                 .equals("ALU"))
+            this.modelo.agregarAlumnoEnCursada((Alumno) eliminar.next(), curViejo);
+          else if (aux.getLegajo()
+                      .substring(0, 2)
+                      .equals("ALU"))
+            this.modelo.agregarProfesorEnCursada((Profesor) agregar.next(), curViejo);
+        }
+
         this.modelo.modificarCursada((Cursada) this.buscar(((Cursada) obj).getIdentificacion(), comando),
                                      (Cursada) obj);
         break;
     }
-  }
-
-  public void quitarCompetenciaAProfesor(Profesor profesor, Asignatura asignatura)
-  {
-    this.modelo.quitarCompetenciaAProfesor(profesor, asignatura);
-  }
-
-  public void agregaAlumnoEnCursada(Alumno alumno, Cursada cursada)
-    throws DatoInvalidoException, ClaveYaExistenteException
-  {
-    this.modelo.agregarAlumnoEnCursada(alumno, cursada);
-  }
-
-  public void agregaProfesorEnCursada(Profesor profesor, Cursada cursada)
-    throws DatoInvalidoException, ClaveYaExistenteException
-  {
-    this.modelo.agregarProfesorEnCursada(profesor, cursada);
   }
 
   public void guardar()
