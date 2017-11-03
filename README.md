@@ -11,3 +11,11 @@ Se tomaron las siguientes decisiones, tras consultar con la cátedra de la mater
 4- Agregar una precorrelativa a una asignatura no implica eliminar dicha materia o alguna de sus correlativas de la historia académica de un alumno que no tenga la precorrelativa añadida. Tampoco provoca la baja de un alumno en una cursada bajo las mismas condiciones.
 5- Las correlatividades circulares son un error provenientes de uso del sistema y no son comprobadas.
 6- Los legajos e identificaciones son autogenerados por el sistema e inmodificables.
+
+-------------------------------------------------------------------------
+V1 changelog:
+-Se pulió la documentación, el modelo y la vista en función a las anomalías encontradas en la inspección.
+-Se corrigió el error al eliminar a los profesores de la cursadas en las que participaban cuando se les elimina una competencia.
+-Se estandarizó la interacción de la clase Vista con Receptor en cuanto al manejo de colecciones internas, delegando la responsabilidad de los controles a este último.
+-Se modificó el comportamiento de los TableModel para no poder agregar el mismo elemento más de una vez.
+-Se agregó la excepción DiaValidoException.

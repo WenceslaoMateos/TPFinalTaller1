@@ -2153,7 +2153,7 @@ public class Ventana
             aux.removeRow(this.jTableAlumnosCursada.getSelectedRow());
         }
         else
-            JOptionPane.showMessageDialog(this, "Seleccione una asignatura para poder eliminarla de la historia");
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno para poder eliminarlo de la cursada");
   }//GEN-LAST:event_jButtonEliminarAlumnoCursadaActionPerformed
 
   private void jButtonAgradecimientosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAgradecimientosActionPerformed
