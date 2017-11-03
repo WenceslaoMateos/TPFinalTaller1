@@ -9,11 +9,6 @@ import vista.Ventana;
 
 public class Lanzador
 {
-  public Lanzador()
-  {
-    super();
-  }
-
   public static void main(String[] args)
   {
     Sistema modelo = SerializadorXML.cargar();
