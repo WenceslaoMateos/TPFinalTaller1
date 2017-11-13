@@ -116,6 +116,20 @@
          </list>
       </hash>
    </hash>
+   <hash n="oracle.jdevimpl.config.JProjectLibraries">
+      <list n="exportedReferences">
+         <hash>
+            <value n="id" v="JUnit 4 Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+      </list>
+      <list n="libraryReferences">
+         <hash>
+            <value n="id" v="JUnit 4 Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+      </list>
+   </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
       <url n="outputDirectory" path="classes/"/>
    </hash>
