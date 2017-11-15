@@ -2074,6 +2074,7 @@ public class Ventana
             this.jButtonEliminarAlumnoCursada.setEnabled(true);
             this.jButtonAgregarProfesorCursada.setEnabled(true);
             this.jButtonEliminarProfesorCursada.setEnabled(true);
+            this.jButtonCambiarAsignaturaCursada.setEnabled(true);
 
             this.jButtonCancelarCursada.setEnabled(true);
             this.jButtonAceptarCursada.setEnabled(true);
