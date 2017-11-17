@@ -108,26 +108,4 @@ public class AltaAsignaturaTest
         {
         }
     }
-    
-    /**
-     * @see modelo.Sistema#agregarAsignatura(modelo.Asignatura)
-     */
-    @Test
-    public void testAgregarAsignaturaErroneo6()
-    {
-        Asignatura nuevo = new Asignatura(null);
-        this.sistema.setPlanDeEstudio(null);
-        try
-        {
-            this.sistema.agregarAsignatura(nuevo);
-            Assert.fail("Debería haber salido por nulidad de la colección.");
-        }
-        catch (ClaveYaExistenteException | DatoInvalidoException e)
-        {
-            Assert.fail("Debería haber salido por nulidad de la colección.");
-        }
-        catch (Exception e)
-        {
-        }
-    }
 }

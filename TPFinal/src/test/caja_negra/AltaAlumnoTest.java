@@ -44,7 +44,7 @@ public class AltaAlumnoTest
         {
             this.sistema.agregarAlumno(nuevo);
         }
-        catch (ClaveYaExistenteException | DatoInvalidoException e)
+        catch (Exception e)
         {
             Assert.fail("Salió por excepción cuando debería haber tenido éxito.");
         }
@@ -61,7 +61,7 @@ public class AltaAlumnoTest
         {
             this.sistema.agregarAlumno(nuevo);
         }
-        catch (ClaveYaExistenteException | DatoInvalidoException e)
+        catch (Exception e)
         {
             Assert.fail("Salió por excepción cuando debería haber tenido éxito.");
         }
@@ -78,7 +78,7 @@ public class AltaAlumnoTest
         {
             this.sistema.agregarAlumno(nuevo);
         }
-        catch (ClaveYaExistenteException | DatoInvalidoException e)
+        catch (Exception e)
         {
             Assert.fail("Salió por excepción cuando debería haber tenido éxito.");
         }
@@ -102,7 +102,7 @@ public class AltaAlumnoTest
         }
         catch (DatoInvalidoException e)
         {
-            Assert.assertSame("El objeto contenido no es el alumno que se intentó agregar.", nuevo, e.getDato());
+            Assert.fail("No debería haber intentado agregar siquiera.");
         }
         catch (Exception e)
         {
@@ -154,6 +154,10 @@ public class AltaAlumnoTest
         {
             Assert.assertSame("El objeto contenido no es el alumno que se intentó agregar.", nuevo, e.getDato());
         }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber sido DatoInvalidoException.");
+        }
     }
     
     /**
@@ -201,6 +205,10 @@ public class AltaAlumnoTest
         {
             Assert.fail("No debería haber intentado agregar siquiera.");
         }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber sido DatoInvalidoException.");
+        }
     }
     
     /**
@@ -222,6 +230,10 @@ public class AltaAlumnoTest
         catch (DatoInvalidoException e)
         {
             Assert.assertSame("El objeto contenido no es el alumno que se intentó agregar.", nuevo, e.getDato());
+        }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber sido DatoInvalidoException.");
         }
     }
     
@@ -245,6 +257,10 @@ public class AltaAlumnoTest
         {
             Assert.assertSame("El objeto contenido no es el alumno que se intentó agregar.", nuevo, e.getDato());
         }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber sido DatoInvalidoException.");
+        }
     }
     
     /**
@@ -267,31 +283,9 @@ public class AltaAlumnoTest
         {
             Assert.assertSame("El objeto contenido no es el alumno que se intentó agregar.", nuevo, e.getDato());
         }
-    }
-    
-    /**
-     * @see Sistema#agregarAlumno(Alumno)
-     */
-    @Test
-    public void testAgregarAlumnoErroneo6()
-    {
-        Alumno nuevo = new Alumno("PablosBraulio", "Rawson 273", "braulio@gmail.com");
-        this.sistema.setAlumnos(null);
-        try
-        {
-            this.sistema.agregarAlumno(nuevo);
-            Assert.fail("No debería siquiera haber colección.");
-        }
-        catch (ClaveYaExistenteException e)
-        {
-            Assert.fail("No debería siquiera haber colección.");
-        }
-        catch (DatoInvalidoException e)
-        {
-            Assert.fail("No debería siquiera haber colección.");
-        }
         catch (Exception e)
         {
+            Assert.fail("Debería haber sido DatoInvalidoException.");
         }
     }
 }

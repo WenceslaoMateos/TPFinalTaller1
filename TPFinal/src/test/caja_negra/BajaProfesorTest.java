@@ -1,7 +1,7 @@
 package test.caja_negra;
 
-import modelo.Alumno;
 import modelo.IndiceDoble;
+import modelo.Profesor;
 import modelo.Sistema;
 
 import org.junit.After;
@@ -9,12 +9,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BajaAlumnoTest
+public class BajaProfesorTest
 {
     private Sistema sistema;
-    private Alumno elim;
+    private Profesor elim;
     
-    public BajaAlumnoTest()
+    public BajaProfesorTest()
     {
     }
 
@@ -23,8 +23,8 @@ public class BajaAlumnoTest
         throws Exception
     {
         this.sistema = new Sistema();
-        this.elim = new Alumno("PablosBraulio", "Rawson 273", "braulio@gmail.com");
-        this.sistema.agregarAlumno(this.elim);
+        this.elim = new Profesor("PablosBraulio", "Rawson 273", "braulio@gmail.com", "155555555");
+        this.sistema.agregarProfesor(this.elim);
     }
 
     @After
@@ -36,23 +36,23 @@ public class BajaAlumnoTest
     }
 
     /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+     * @see modelo.Sistema#eliminarProfesor(modelo.Profesor)
      */
     @Test
-    public void testEliminarAlumnoCorrecto()
+    public void testEliminarProfesorCorrecto()
     {
-        this.sistema.eliminarAlumno(this.elim);
+        this.sistema.eliminarProfesor(elim);
     }
     
     /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+     * @see modelo.Sistema#eliminarProfesor(modelo.Profesor)
      */
     @Test
-    public void testEliminarAlumnoErroneo2()
+    public void testEliminarProfesorCorrectoErroneo2()
     {
         try
         {
-            this.sistema.eliminarAlumno(null);
+            this.sistema.eliminarProfesor(null);
             Assert.fail("No debería haber intentado eliminar un elemento nulo.");
         }
         catch (Exception e)
@@ -61,15 +61,15 @@ public class BajaAlumnoTest
     }
     
     /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+     * @see modelo.Sistema#eliminarProfesor(modelo.Profesor)
      */
     @Test
-    public void testEliminarAlumnoErroneo4()
+    public void testEliminarProfesorCorrectoErroneo4()
     {
-        this.sistema.setAlumnos(null);
+        this.sistema.setProfesores(null);
         try
         {
-            this.sistema.eliminarAlumno(this.elim);
+            this.sistema.eliminarProfesor(this.elim);
             Assert.fail("La colección debería haber sido nula.");
         }
         catch (Exception e)
@@ -78,15 +78,15 @@ public class BajaAlumnoTest
     }
     
     /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+     * @see modelo.Sistema#eliminarProfesor(modelo.Profesor)
      */
     @Test
-    public void testEliminarAlumnoErroneo6()
+    public void testEliminarProfesorCorrectoErroneo6()
     {
-        this.sistema.setAlumnos(new IndiceDoble<Alumno>());
+        this.sistema.setProfesores(new IndiceDoble<Profesor>());
         try
         {
-            this.sistema.eliminarAlumno(this.elim);
+            this.sistema.eliminarProfesor(this.elim);
             Assert.fail("No debería haber intentado eliminar un elemento inexistente.");
         }
         catch (Exception e)
@@ -98,12 +98,12 @@ public class BajaAlumnoTest
      * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
      */
     @Test
-    public void testEliminarAlumnoErroneo8()
+    public void testEliminarProfesorErroneo8()
     {
         this.sistema.setCalendario(null);
         try
         {
-            this.sistema.eliminarAlumno(this.elim);
+            this.sistema.eliminarProfesor(this.elim);
             Assert.fail("No debería haber intentado eliminar un elemento cuando el calendario es nulo.");
         }
         catch (Exception e)
