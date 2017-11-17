@@ -11,103 +11,103 @@ import org.junit.Test;
 
 public class BajaAlumnoTest
 {
-    private Sistema sistema;
-    private Alumno elim;
-    
-    public BajaAlumnoTest()
-    {
-    }
+  private Sistema sistema;
+  private Alumno elim;
 
-    @Before
-    public void setUp()
-        throws Exception
-    {
-        this.sistema = new Sistema();
-        this.elim = new Alumno("PablosBraulio", "Rawson 273", "braulio@gmail.com");
-        this.sistema.agregarAlumno(this.elim);
-    }
+  public BajaAlumnoTest()
+  {
+  }
 
-    @After
-    public void tearDown()
-        throws Exception
-    {
-        this.sistema = null;
-        this.elim = null;
-    }
+  @Before
+  public void setUp()
+    throws Exception
+  {
+    this.sistema = new Sistema();
+    this.elim = new Alumno("PablosBraulio", "Rawson 273", "braulio@gmail.com");
+    this.sistema.agregarAlumno(this.elim);
+  }
 
-    /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
-     */
-    @Test
-    public void testEliminarAlumnoCorrecto()
+  @After
+  public void tearDown()
+    throws Exception
+  {
+    this.sistema = null;
+    this.elim = null;
+  }
+
+  /**
+   * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+   */
+  @Test
+  public void testEliminarAlumnoCorrecto()
+  {
+    this.sistema.eliminarAlumno(this.elim);
+  }
+
+  /**
+   * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+   */
+  @Test
+  public void testEliminarAlumnoErroneo2()
+  {
+    try
     {
-        this.sistema.eliminarAlumno(this.elim);
+      this.sistema.eliminarAlumno(null);
+      Assert.fail("No debería haber intentado eliminar un elemento nulo.");
     }
-    
-    /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
-     */
-    @Test
-    public void testEliminarAlumnoErroneo2()
+    catch (Exception e)
     {
-        try
-        {
-            this.sistema.eliminarAlumno(null);
-            Assert.fail("No debería haber intentado eliminar un elemento nulo.");
-        }
-        catch (Exception e)
-        {
-        }
     }
-    
-    /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
-     */
-    @Test
-    public void testEliminarAlumnoErroneo4()
+  }
+
+  /**
+   * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+   */
+  @Test
+  public void testEliminarAlumnoErroneo4()
+  {
+    this.sistema.setAlumnos(null);
+    try
     {
-        this.sistema.setAlumnos(null);
-        try
-        {
-            this.sistema.eliminarAlumno(this.elim);
-            Assert.fail("La colección debería haber sido nula.");
-        }
-        catch (Exception e)
-        {
-        }
+      this.sistema.eliminarAlumno(this.elim);
+      Assert.fail("La colección debería haber sido nula.");
     }
-    
-    /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
-     */
-    @Test
-    public void testEliminarAlumnoErroneo6()
+    catch (Exception e)
     {
-        this.sistema.setAlumnos(new IndiceDoble<Alumno>());
-        try
-        {
-            this.sistema.eliminarAlumno(this.elim);
-            Assert.fail("No debería haber intentado eliminar un elemento nulo.");
-        }
-        catch (Exception e)
-        {
-        }
     }
-    
-    /**
-     * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
-     */
-    @Test
-    public void testEliminarAlumnoErroneo8()
+  }
+
+  /**
+   * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+   */
+  @Test
+  public void testEliminarAlumnoErroneo6()
+  {
+    this.sistema.setAlumnos(new IndiceDoble<Alumno>());
+    try
     {
-        this.sistema.setCalendario(null);
-        try
-        {
-            this.sistema.eliminarAlumno(this.elim);
-            Assert.fail("No debería haber intentado eliminar un elemento nulo.");
-        }
-        catch (Exception e)
-        {
-        }
+      this.sistema.eliminarAlumno(this.elim);
+      Assert.fail("No debería haber intentado eliminar un elemento nulo.");
     }
+    catch (Exception e)
+    {
+    }
+  }
+
+  /**
+   * @see modelo.Sistema#eliminarAlumno(modelo.Alumno)
+   */
+  @Test
+  public void testEliminarAlumnoErroneo8()
+  {
+    this.sistema.setCalendario(null);
+    try
+    {
+      this.sistema.eliminarAlumno(this.elim);
+      Assert.fail("No debería haber intentado eliminar un elemento nulo.");
+    }
+    catch (Exception e)
+    {
+    }
+  }
 }

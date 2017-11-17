@@ -10,7 +10,6 @@ import modelo.Sistema;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -122,7 +121,7 @@ public class BuscarAlumnoTest
     this.sistema.setAlumnos(null);
     try
     {
-       Iterator<Alumno> it = this.sistema.buscarAlumno("PablosBraulio");
+      Iterator<Alumno> it = this.sistema.buscarAlumno("PablosBraulio");
       while (it.hasNext() && it.next()
                                .getApellidoNombre()
                                .equals(this.elemento.getApellidoNombre()))
@@ -130,7 +129,7 @@ public class BuscarAlumnoTest
       if (it.hasNext())
         Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
       Assert.fail("Deberia haber avisado que no encontró ningún alumno");
-     }
+    }
     catch (NoEncontradoException e)
     {
       Assert.fail("Error, el alumno deberia encontrarse en la colección.");
@@ -149,7 +148,7 @@ public class BuscarAlumnoTest
     this.sistema.setAlumnos(new IndiceDoble<Alumno>());
     try
     {
-       Iterator<Alumno> it = this.sistema.buscarAlumno("PablosBraulio");
+      Iterator<Alumno> it = this.sistema.buscarAlumno("PablosBraulio");
       while (it.hasNext() && it.next()
                                .getApellidoNombre()
                                .equals(this.elemento.getApellidoNombre()))
@@ -157,7 +156,7 @@ public class BuscarAlumnoTest
       if (it.hasNext())
         Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
       Assert.fail("Deberia haber avisado que no encontró ningún alumno");
-     }
+    }
     catch (NoEncontradoException e)
     {
     }
