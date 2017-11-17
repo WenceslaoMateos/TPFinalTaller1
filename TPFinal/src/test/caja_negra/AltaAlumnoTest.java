@@ -157,7 +157,7 @@ public class AltaAlumnoTest
         catch (Exception e)
         {
             Assert.fail("Debería haber sido DatoInvalidoException.");
-        }
+    }
     }
     
     /**
@@ -208,7 +208,7 @@ public class AltaAlumnoTest
         catch (Exception e)
         {
             Assert.fail("Debería haber sido DatoInvalidoException.");
-        }
+    }
     }
     
     /**
@@ -234,7 +234,7 @@ public class AltaAlumnoTest
         catch (Exception e)
         {
             Assert.fail("Debería haber sido DatoInvalidoException.");
-        }
+    }
     }
     
     /**
@@ -260,7 +260,7 @@ public class AltaAlumnoTest
         catch (Exception e)
         {
             Assert.fail("Debería haber sido DatoInvalidoException.");
-        }
+    }
     }
     
     /**
