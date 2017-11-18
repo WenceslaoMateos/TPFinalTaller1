@@ -27,7 +27,7 @@ public class AgregarAlumnoEnCursada
     fixture1.setUp();
     this.fixture1
         .alumno
-        .eliminarHistoria(this.fixture1.asignatura);
+        .eliminarHistoria(this.fixture1.asignatura1);
   }
 
   @After
@@ -165,7 +165,7 @@ public class AgregarAlumnoEnCursada
     {
       this.fixture1
           .alumno
-          .agregarHistoria(this.fixture1.asignatura);
+          .agregarHistoria(this.fixture1.asignatura1);
     }
     catch (ClaveYaExistenteException e)
     {
