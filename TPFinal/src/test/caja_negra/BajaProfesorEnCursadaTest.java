@@ -1,18 +1,16 @@
 package test.caja_negra;
 
 import modelo.IndicePrimario;
-
 import modelo.Profesor;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BajaProfesorEnCursadaTest
 {
-  SistemaConElementos fixture1 = new SistemaConElementos();
+  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
   public BajaProfesorEnCursadaTest()
   {

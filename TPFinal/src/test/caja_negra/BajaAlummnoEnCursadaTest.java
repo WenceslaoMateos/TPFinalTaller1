@@ -2,17 +2,15 @@ package test.caja_negra;
 
 import modelo.Alumno;
 import modelo.IndicePrimario;
-import modelo.Profesor;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BajaAlummnoEnCursadaTest
 {
-  SistemaConElementos fixture1 = new SistemaConElementos();
+  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
   public BajaAlummnoEnCursadaTest()
   {
@@ -25,7 +23,7 @@ public class BajaAlummnoEnCursadaTest
     fixture1.setUp();
     this.fixture1
         .alumno
-        .eliminarHistoria(this.fixture1.asignatura);
+        .eliminarHistoria(this.fixture1.asignatura1);
     this.fixture1
         .sistema
         .agregarAlumnoEnCursada(this.fixture1.alumno, this.fixture1.cursada);
