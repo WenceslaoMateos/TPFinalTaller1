@@ -151,7 +151,8 @@ public class Cursada
   }
 
   /**
-   * Verifica que el alumno tenga las precorrelativas de la asignatura de la cursada aprobadas.
+   * Verifica que el alumno tenga las precorrelativas de la asignatura de la cursada aprobadas.<br>
+   * <b>Pre:</b>: alumno forma parte del sistema.
    * @param alumno Alumno a verificar su historia académica.
    * @return <b>true</b> si el alumno cumple con las correlatividades, <b>false</b> en caso contrario.
    */
@@ -204,18 +205,21 @@ public class Cursada
   public static boolean validaHora(String hora)
   {
     int auxHora, auxMinutos;
-    try
-    {
-      auxHora = Integer.parseInt(hora.substring(0, 2));
-      auxMinutos = Integer.parseInt(hora.substring(3));
-      return hora.length() == 5 && auxHora <= 23 && auxHora >= 0 && auxMinutos <= 59 && auxMinutos >= 0 &&
-             hora.charAt(2) == ':';
-    }
-    catch (NumberFormatException nfe)
-    {
-      // Alguno de los parseos falló
-      return false;
-    }
+    if (hora == null || hora.length() != 5)
+        return false;
+    else   
+        try
+        {
+          auxHora = Integer.parseInt(hora.substring(0, 2));
+          auxMinutos = Integer.parseInt(hora.substring(3));
+          return auxHora <= 23 && auxHora >= 0 && auxMinutos <= 59 && auxMinutos >= 0 &&
+                 hora.charAt(2) == ':';
+        }
+        catch (NumberFormatException nfe)
+        {
+          // Alguno de los parseos falló
+          return false;
+        }
   }
 
   /**
@@ -236,9 +240,11 @@ public class Cursada
    */
   public static boolean validaCursada(Cursada cursada)
   {
-    return Cursada.validaPeriodo(cursada.getPeriodo()) && Cursada.validaHora(cursada.getHoraInicio()) &&
-           Cursada.validaHora(cursada.getHoraFinalizacion()) &&
-           Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
+    return Cursada.validaPeriodo(cursada.getPeriodo())
+           && cursada.dia != null
+           && Cursada.validaHora(cursada.getHoraInicio())
+           && Cursada.validaHora(cursada.getHoraFinalizacion()) 
+           && Cursada.validaHorario(cursada.getHoraInicio(), cursada.getHoraFinalizacion());
   }
 
   /**
@@ -293,7 +299,7 @@ public class Cursada
   public void altaProfesor(Profesor nuevo)
     throws DatoInvalidoException, ClaveYaExistenteException
   {
-    if (!nuevo.habilitadoParaAsignatura(this.asignatura))
+    if (!this.aceptaCompetencia(nuevo))
       throw new DatoInvalidoException(nuevo, "El profesor no está habilitado para la asignatura.");
     else
       this.profesores.agregar(nuevo);

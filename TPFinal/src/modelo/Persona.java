@@ -103,11 +103,21 @@ public abstract class Persona
   /**
    * Verifica que el nombre pasado como parámetro no sea nulo.
    * @param nombre String a verificar.
-   * @return <b>true</b> si el nombre no es nulo, <b>false</b> en caso contrario.
+   * @return <b>true</b> si el nombre no es nulo ni vacío, <b>false</b> en caso contrario.
    */
   public static boolean validaNombre(String nombre)
   {
     return !nombre.equals("");
+  }
+  
+    /**
+     * Verifica que la dirección pasada como parámetro no sea nula.
+     * @param domicilio String a verificar.
+     * @return <b>true</b> si la direccion no es nula ni vacía, <b>false</b> en caso contrario.
+     */
+  public static boolean validaDomicilio(String domicilio)
+  {
+      return !domicilio.equals("");
   }
 
   /**
@@ -117,7 +127,8 @@ public abstract class Persona
    */
   public static boolean validaPersona(Persona persona)
   {
-    return Persona.validaMail(persona.getMail()) && Persona.validaNombre(persona.getApellidoNombre());
+    return Persona.validaMail(persona.getMail()) && Persona.validaNombre(persona.getApellidoNombre())
+           && Persona.validaDomicilio(persona.getDomicilio());
   }
 
   /**
