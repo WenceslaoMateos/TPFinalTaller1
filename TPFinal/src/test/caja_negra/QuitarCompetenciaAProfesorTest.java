@@ -147,10 +147,7 @@ public class QuitarCompetenciaAProfesorTest
         {
             this.fixture1
                 .sistema
-                .quitarCompetenciaAProfesor(this.fixture1.profesor, this.fixture1.asignatura1);
-            this.fixture1
-                .sistema
-                .quitarCompetenciaAProfesor(this.fixture1.profesor, this.fixture1.asignatura1);
+                .quitarCompetenciaAProfesor(this.fixture1.profesor, this.fixture1.asignatura3);
             Assert.fail("No deberia haber podido terminar la ejecución del metodo");
         }
         catch (Exception e)

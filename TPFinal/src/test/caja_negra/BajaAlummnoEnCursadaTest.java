@@ -22,9 +22,6 @@ public class BajaAlummnoEnCursadaTest
   {
     fixture1.setUp();
     this.fixture1
-        .alumno
-        .eliminarHistoria(this.fixture1.asignatura1);
-    this.fixture1
         .sistema
         .agregarAlumnoEnCursada(this.fixture1.alumno, this.fixture1.cursada);
   }

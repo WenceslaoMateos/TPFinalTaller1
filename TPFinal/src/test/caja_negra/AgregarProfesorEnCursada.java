@@ -157,7 +157,7 @@ public class AgregarProfesorEnCursada
   {
     this.fixture1
         .profesor
-        .eliminarCompetencia(this.fixture1.asignatura1);
+        .eliminarCompetencia(this.fixture1.asignatura2);
     try
     {
       this.fixture1

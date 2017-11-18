@@ -40,6 +40,7 @@ public class SistemaConElementosFixture
         this.alumno.agregarHistoria(this.asignatura1);
         this.profesor.agregarCompetencia(this.asignatura1);
         this.asignatura2.agregarCorrelativa(asignatura1);
+      this.profesor.agregarCompetencia(this.asignatura2);
     }
 
     public void tearDown()

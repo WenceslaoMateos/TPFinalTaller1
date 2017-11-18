@@ -37,13 +37,13 @@ public class ColeccionesInternasConElementosTest
     {
         try
         {
-            this.fixture1.alumno.agregarHistoria(this.fixture1.asignatura2);
+            this.fixture1.alumno.agregarHistoria(this.fixture1.asignatura1);
             Assert.fail("Debería haber tirado ClaveYaExistenteException.");
         }
         catch (ClaveYaExistenteException e)
         {
             Assert.assertSame("El elemento que se intentó agregar no fue lo que disparó la excepción.",
-                              this.fixture1.asignatura2.getClavePrimaria(), e.getClave());
+                              this.fixture1.asignatura1.getClavePrimaria(), e.getClave());
         }
         catch (Exception e)
         {
