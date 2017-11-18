@@ -9,17 +9,15 @@ import modelo.Asignatura;
 import modelo.Cursada;
 import modelo.IndiceDoble;
 import modelo.Profesor;
-import modelo.Sistema;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BusquedaTest
 {
-  SistemaConElementos fixture1 = new SistemaConElementos();
+  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
   public BusquedaTest()
   {
@@ -299,7 +297,7 @@ public class BusquedaTest
       Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
       while (it.hasNext() && it.next()
                                .getNombre()
-                               .equals(this.fixture1.asignatura.getNombre()))
+                               .equals(this.fixture1.asignatura1.getNombre()))
         ;
       if (it.hasNext())
         Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
@@ -321,7 +319,7 @@ public class BusquedaTest
       Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura(null);
       while (it.hasNext() && it.next()
                                .getNombre()
-                               .equals(this.fixture1.asignatura.getNombre()))
+                               .equals(this.fixture1.asignatura1.getNombre()))
         ;
       if (it.hasNext())
         Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
@@ -347,7 +345,7 @@ public class BusquedaTest
       Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("");
       while (it.hasNext() && it.next()
                                .getNombre()
-                               .equals(this.fixture1.asignatura.getNombre()))
+                               .equals(this.fixture1.asignatura1.getNombre()))
         ;
       if (it.hasNext())
         Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
@@ -374,7 +372,7 @@ public class BusquedaTest
       Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
       while (it.hasNext() && it.next()
                                .getNombre()
-                               .equals(this.fixture1.asignatura.getNombre()))
+                               .equals(this.fixture1.asignatura1.getNombre()))
         ;
       if (it.hasNext())
         Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
@@ -401,7 +399,7 @@ public class BusquedaTest
       Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
       while (it.hasNext() && it.next()
                                .getNombre()
-                               .equals(this.fixture1.asignatura.getNombre()))
+                               .equals(this.fixture1.asignatura1.getNombre()))
         ;
       if (it.hasNext())
         Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");

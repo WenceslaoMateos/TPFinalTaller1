@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class AgregarAlumnoEnCursada
 {
-  SistemaConElementos fixture1 = new SistemaConElementos();
+  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
   public AgregarAlumnoEnCursada()
   {
