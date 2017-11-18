@@ -16,7 +16,7 @@ public class AgregarCorrelativaTest
     private Sistema sistema;
     private Asignatura asignatura;
     private Asignatura correlativa;
-    
+
     public AgregarCorrelativaTest()
     {
     }
@@ -58,7 +58,7 @@ public class AgregarCorrelativaTest
             Assert.fail("Debería haberse agregado sin problemas.");
         }
     }
-    
+
     /**
      * @see modelo.Asignatura#agregarCorrelativa(modelo.Asignatura)
      */
@@ -82,7 +82,7 @@ public class AgregarCorrelativaTest
         {
         }
     }
-    
+
     /**
      * @see modelo.Asignatura#agregarCorrelativa(modelo.Asignatura)
      */
@@ -104,7 +104,7 @@ public class AgregarCorrelativaTest
             Assert.fail("Debería haber tirado DatoInvalidoException.");
         }
     }
-    
+
     /**
      * @see modelo.Asignatura#agregarCorrelativa(modelo.Asignatura)
      */

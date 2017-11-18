@@ -16,59 +16,59 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Alumno;
 
 public class DialogAlumno
-  extends MiDialogo
+    extends MiDialogo
 {
-  private TableModelAlumno modeloAlumno;
+    private TableModelAlumno modeloAlumno;
 
-  public DialogAlumno(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
-  {
-    super(owner, receptor, fuente);
-    this.setTitle("Selección de alumno");
-    this.modeloAlumno = (TableModelAlumno) modelo;
-    this.tabla = new JTable(this.modeloAlumno);
-    resultado.setLayout(new BorderLayout());
-    this.scroll = new JScrollPane(tabla);
-    this.tabla.setFillsViewportHeight(true);
-    this.resultado.add(this.scroll);
-    resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla, BorderLayout.CENTER);
-    this.setVisible(true);
-  }
-
-  @Override
-  public void agregaResultadosTabla(Iterator alumnos)
-  {
-    this.modeloAlumno.agregarFilas(alumnos);
-  }
-
-  @Override
-  public int getComandoAccion()
-  {
-    return Receptor.ALUMNO;
-  }
-
-  ///este va a mandar el resultado a la ventana
-  @Override
-  public void valueChanged(ListSelectionEvent e)
-  {
-    try
+    public DialogAlumno(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
     {
-      Alumno elemento =
-        (Alumno) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ALUMNO);
-      TableModelAlumno model = (TableModelAlumno) this.fuente.getModel();
-      if (!model.contieneElemento(elemento.getLegajo()))
-      {
-        model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
-                                    elemento.getMail() });
-        this.dispose();
-      }
-      else
-        JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        super(owner, receptor, fuente);
+        this.setTitle("Selección de alumno");
+        this.modeloAlumno = (TableModelAlumno) modelo;
+        this.tabla = new JTable(this.modeloAlumno);
+        resultado.setLayout(new BorderLayout());
+        this.scroll = new JScrollPane(tabla);
+        this.tabla.setFillsViewportHeight(true);
+        this.resultado.add(this.scroll);
+        resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
+        resultado.add(tabla, BorderLayout.CENTER);
+        this.setVisible(true);
     }
-    catch (NoEncontradoException f)
+
+    @Override
+    public void agregaResultadosTabla(Iterator alumnos)
     {
-      JOptionPane.showMessageDialog(this, f.getMessage());
-      this.dispose();
+        this.modeloAlumno.agregarFilas(alumnos);
     }
-  }
+
+    @Override
+    public int getComandoAccion()
+    {
+        return Receptor.ALUMNO;
+    }
+
+    ///este va a mandar el resultado a la ventana
+    @Override
+    public void valueChanged(ListSelectionEvent e)
+    {
+        try
+        {
+            Alumno elemento =
+                (Alumno) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ALUMNO);
+            TableModelAlumno model = (TableModelAlumno) this.fuente.getModel();
+            if (!model.contieneElemento(elemento.getLegajo()))
+            {
+                model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
+                                            elemento.getMail() });
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        }
+        catch (NoEncontradoException f)
+        {
+            JOptionPane.showMessageDialog(this, f.getMessage());
+            this.dispose();
+        }
+    }
 }

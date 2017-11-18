@@ -16,9 +16,9 @@ public class SistemaConElementosFixture
     protected Asignatura asignatura2;
     protected Asignatura asignatura3;
     protected Cursada cursada;
-    
+
     public SistemaConElementosFixture()
-    {   
+    {
     }
 
     public void setUp()
@@ -40,7 +40,7 @@ public class SistemaConElementosFixture
         this.alumno.agregarHistoria(this.asignatura1);
         this.profesor.agregarCompetencia(this.asignatura1);
         this.asignatura2.agregarCorrelativa(asignatura1);
-      this.profesor.agregarCompetencia(this.asignatura2);
+        this.profesor.agregarCompetencia(this.asignatura2);
     }
 
     public void tearDown()

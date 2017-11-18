@@ -23,69 +23,69 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 public abstract class MiDialogo
-  extends JDialog
-  implements ActionListener, ListSelectionListener
+    extends JDialog
+    implements ActionListener, ListSelectionListener
 {
-  protected Receptor receptor;
-  protected JTextField texto;
-  protected JButton aceptar;
-  protected JTable tabla;
-  protected JScrollPane scroll;
-  protected JPanel busqueda;
-  protected JPanel resultado;
-  public static final Dimension JTEXTFIEDL_DIMEN = new Dimension(200, 20);
-  protected JTable fuente;
+    protected Receptor receptor;
+    protected JTextField texto;
+    protected JButton aceptar;
+    protected JTable tabla;
+    protected JScrollPane scroll;
+    protected JPanel busqueda;
+    protected JPanel resultado;
+    public static final Dimension JTEXTFIEDL_DIMEN = new Dimension(200, 20);
+    protected JTable fuente;
 
-  public MiDialogo(JFrame owner, Receptor receptor, JTable fuente)
-  {
-    super(owner, true);
-    this.fuente = fuente;
-    this.setSize(750, 500);
-    this.setDefaultCloseOperation(javax.swing
-                                       .WindowConstants
-                                       .DISPOSE_ON_CLOSE);
-    this.receptor = receptor;
-
-    Container contenedor = this.getContentPane();
-    contenedor.setLayout(new BorderLayout());
-
-    this.resultado = new JPanel();
-    contenedor.add(this.resultado, BorderLayout.CENTER);
-
-    this.busqueda = new JPanel(new FlowLayout());
-    contenedor.add(this.busqueda, BorderLayout.NORTH);
-
-    this.texto = new JTextField();
-    this.aceptar = new JButton("Aceptar");
-
-    this.busqueda.add(this.texto);
-    this.busqueda.add(this.aceptar);
-
-    this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
-    this.aceptar.addActionListener(this);
-  }
-
-
-  public abstract void agregaResultadosTabla(Iterator alumnos);
-
-  public abstract int getComandoAccion();
-
-  @Override
-  public void actionPerformed(ActionEvent e)
-  {
-    try
+    public MiDialogo(JFrame owner, Receptor receptor, JTable fuente)
     {
-      this.agregaResultadosTabla(this.receptor.ubicar(this.texto.getText(), this.getComandoAccion()));
+        super(owner, true);
+        this.fuente = fuente;
+        this.setSize(750, 500);
+        this.setDefaultCloseOperation(javax.swing
+                                           .WindowConstants
+                                           .DISPOSE_ON_CLOSE);
+        this.receptor = receptor;
 
-      this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-      this.tabla.setRowSelectionAllowed(true);
+        Container contenedor = this.getContentPane();
+        contenedor.setLayout(new BorderLayout());
 
-      ListSelectionModel model = this.tabla.getSelectionModel();
-      model.addListSelectionListener(this);
+        this.resultado = new JPanel();
+        contenedor.add(this.resultado, BorderLayout.CENTER);
+
+        this.busqueda = new JPanel(new FlowLayout());
+        contenedor.add(this.busqueda, BorderLayout.NORTH);
+
+        this.texto = new JTextField();
+        this.aceptar = new JButton("Aceptar");
+
+        this.busqueda.add(this.texto);
+        this.busqueda.add(this.aceptar);
+
+        this.texto.setPreferredSize(MiDialogo.JTEXTFIEDL_DIMEN);
+        this.aceptar.addActionListener(this);
     }
-    catch (NoEncontradoException f)
+
+
+    public abstract void agregaResultadosTabla(Iterator alumnos);
+
+    public abstract int getComandoAccion();
+
+    @Override
+    public void actionPerformed(ActionEvent e)
     {
-      JOptionPane.showMessageDialog(this, f.getMessage());
+        try
+        {
+            this.agregaResultadosTabla(this.receptor.ubicar(this.texto.getText(), this.getComandoAccion()));
+
+            this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            this.tabla.setRowSelectionAllowed(true);
+
+            ListSelectionModel model = this.tabla.getSelectionModel();
+            model.addListSelectionListener(this);
+        }
+        catch (NoEncontradoException f)
+        {
+            JOptionPane.showMessageDialog(this, f.getMessage());
+        }
     }
-  }
 }

@@ -13,6 +13,9 @@ Se tomaron las siguientes decisiones, tras consultar con la cátedra de la mater
 6- Los legajos e identificaciones son autogenerados por el sistema e inmodificables.
 
 -------------------------------------------------------------------------
+V2 changelog:
+-Se corrigieron los errores encontrados en el test de caja negra que fueron marcados en rojo en el archivo con los resultados anexo. Los demás errores están resueltos a nivel de integración o son problemas de los casos de prueba.
+
 V1 changelog:
 -Se pulió la documentación, el modelo y la vista en función a las anomalías encontradas en la inspección.
 -Se corrigió el error al eliminar a los profesores de la cursadas en las que participaban cuando se les elimina una competencia.

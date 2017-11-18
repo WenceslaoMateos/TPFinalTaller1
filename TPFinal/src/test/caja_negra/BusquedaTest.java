@@ -17,535 +17,626 @@ import org.junit.Test;
 
 public class BusquedaTest
 {
-  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
+    SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
-  public BusquedaTest()
-  {
-  }
+    public BusquedaTest()
+    {
+    }
 
 
-  @Before
-  public void setUp()
-    throws Exception
-  {
-    fixture1.setUp();
-  }
+    @Before
+    public void setUp()
+        throws Exception
+    {
+        fixture1.setUp();
+    }
 
-  @After
-  public void tearDown()
-    throws Exception
-  {
-    fixture1.tearDown();
-  }
+    @After
+    public void tearDown()
+        throws Exception
+    {
+        fixture1.tearDown();
+    }
 
-  /**
-   * @see modelo.Sistema#buscarAlumno(String)
-   */
-  @Test
-  public void testBuscarAlumnoCorrecto()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAlumno(String)
+     */
+    @Test
+    public void testBuscarAlumnoCorrecto()
     {
-      Iterator<Alumno> it = this.fixture1.sistema.buscarAlumno("PablosBraulio");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.alumno.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+        try
+        {
+            Iterator<Alumno> it = this.fixture1
+                                      .sistema
+                                      .buscarAlumno("PablosBraulio");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .alumno
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el alumno deberia encontrarse en la colección.");
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el alumno deberia encontrarse en la colección.");
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAlumno(String)
-   */
-  @Test
-  public void testBuscarAlumnoErroneo2_1()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAlumno(String)
+     */
+    @Test
+    public void testBuscarAlumnoErroneo2_1()
     {
-      Iterator<Alumno> it = this.fixture1.sistema.buscarAlumno(null);
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.alumno.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        try
+        {
+            Iterator<Alumno> it = this.fixture1
+                                      .sistema
+                                      .buscarAlumno(null);
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .alumno
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el alumno deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el alumno deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAlumno(String)
-   */
-  @Test
-  public void testBuscarAlumnoErroneo2_2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAlumno(String)
+     */
+    @Test
+    public void testBuscarAlumnoErroneo2_2()
     {
-      Iterator<Alumno> it = this.fixture1.sistema.buscarAlumno("");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.alumno.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        try
+        {
+            Iterator<Alumno> it = this.fixture1
+                                      .sistema
+                                      .buscarAlumno("");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .alumno
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el alumno deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el alumno deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAlumno(String)
-   */
-  @Test
-  public void testBuscarAlumnoErroneo4()
-  {
-    this.fixture1.sistema.setAlumnos(null);
-    try
+    /**
+     * @see modelo.Sistema#buscarAlumno(String)
+     */
+    @Test
+    public void testBuscarAlumnoErroneo4()
     {
-      Iterator<Alumno> it = this.fixture1.sistema.buscarAlumno("PablosBraulio");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.alumno.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        this.fixture1
+            .sistema
+            .setAlumnos(null);
+        try
+        {
+            Iterator<Alumno> it = this.fixture1
+                                      .sistema
+                                      .buscarAlumno("PablosBraulio");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .alumno
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el alumno deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el alumno deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAlumno(String)
-   */
-  @Test
-  public void testBuscarAlumnoErroneo6()
-  {
-    this.fixture1.sistema.setAlumnos(new IndiceDoble<Alumno>());
-    try
+    /**
+     * @see modelo.Sistema#buscarAlumno(String)
+     */
+    @Test
+    public void testBuscarAlumnoErroneo6()
     {
-      Iterator<Alumno> it = this.fixture1.sistema.buscarAlumno("PablosBraulio");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.alumno.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        this.fixture1
+            .sistema
+            .setAlumnos(new IndiceDoble<Alumno>());
+        try
+        {
+            Iterator<Alumno> it = this.fixture1
+                                      .sistema
+                                      .buscarAlumno("PablosBraulio");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .alumno
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún alumno de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún alumno");
+        }
+        catch (NoEncontradoException e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarProfesor(String)
-   */
-  @Test
-  public void testBuscarProfesorCorrecto()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarProfesor(String)
+     */
+    @Test
+    public void testBuscarProfesorCorrecto()
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("PablosBraulio");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.profesor.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+        try
+        {
+            Iterator<Profesor> it = this.fixture1
+                                        .sistema
+                                        .buscarProfesor("PablosBraulio");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .profesor
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarProfesor(String)
-   */
-  @Test
-  public void testBuscarProfesorErroneo2_1()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarProfesor(String)
+     */
+    @Test
+    public void testBuscarProfesorErroneo2_1()
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor(null);
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.profesor.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        try
+        {
+            Iterator<Profesor> it = this.fixture1
+                                        .sistema
+                                        .buscarProfesor(null);
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .profesor
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarProfesor(String)
-   */
-  @Test
-  public void testBuscarProfesorErroneo2_2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarProfesor(String)
+     */
+    @Test
+    public void testBuscarProfesorErroneo2_2()
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.profesor.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        try
+        {
+            Iterator<Profesor> it = this.fixture1
+                                        .sistema
+                                        .buscarProfesor("");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .profesor
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarProfesor(String)
-   */
-  @Test
-  public void testBuscarProfesorErroneo4()
-  {
-    this.fixture1.sistema.setProfesores(null);
-    try
+    /**
+     * @see modelo.Sistema#buscarProfesor(String)
+     */
+    @Test
+    public void testBuscarProfesorErroneo4()
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("LazzurriGuillermo");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.profesor.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        this.fixture1
+            .sistema
+            .setProfesores(null);
+        try
+        {
+            Iterator<Profesor> it = this.fixture1
+                                        .sistema
+                                        .buscarProfesor("LazzurriGuillermo");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .profesor
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, el Profesor deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarProfesor(String)
-   */
-  @Test
-  public void testBuscarProfesorErroneo6()
-  {
-    this.fixture1.sistema.setProfesores(new IndiceDoble<Profesor>());
-    try
+    /**
+     * @see modelo.Sistema#buscarProfesor(String)
+     */
+    @Test
+    public void testBuscarProfesorErroneo6()
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("LazzurriGuillermo");
-      while (it.hasNext() && it.next()
-                               .getApellidoNombre()
-                               .equals(this.fixture1.profesor.getApellidoNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        this.fixture1
+            .sistema
+            .setProfesores(new IndiceDoble<Profesor>());
+        try
+        {
+            Iterator<Profesor> it = this.fixture1
+                                        .sistema
+                                        .buscarProfesor("LazzurriGuillermo");
+            while (it.hasNext() && it.next()
+                                     .getApellidoNombre()
+                                     .equals(this.fixture1
+                                                 .profesor
+                                                 .getApellidoNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Algún Profesor de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ningún Profesor");
+        }
+        catch (NoEncontradoException e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAsignatura(String)
-   */
-  @Test
-  public void testBuscarAsignaturaCorrecto()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAsignatura(String)
+     */
+    @Test
+    public void testBuscarAsignaturaCorrecto()
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Física 1");
-      while (it.hasNext() && it.next()
-                               .getNombre()
-                               .equals(this.fixture1.asignatura1.getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+        try
+        {
+            Iterator<Asignatura> it = this.fixture1
+                                          .sistema
+                                          .buscarAsignatura("Física 1");
+            while (it.hasNext() && it.next()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .asignatura1
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAsignatura(String)
-   */
-  @Test
-  public void testBuscarAsignaturaErroneo2_1()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAsignatura(String)
+     */
+    @Test
+    public void testBuscarAsignaturaErroneo2_1()
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura(null);
-      while (it.hasNext() && it.next()
-                               .getNombre()
-                               .equals(this.fixture1.asignatura1.getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        try
+        {
+            Iterator<Asignatura> it = this.fixture1
+                                          .sistema
+                                          .buscarAsignatura(null);
+            while (it.hasNext() && it.next()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .asignatura1
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAsignatura(String)
-   */
-  @Test
-  public void testBuscarAsignaturaErroneo2_2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarAsignatura(String)
+     */
+    @Test
+    public void testBuscarAsignaturaErroneo2_2()
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("");
-      while (it.hasNext() && it.next()
-                               .getNombre()
-                               .equals(this.fixture1.asignatura1.getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        try
+        {
+            Iterator<Asignatura> it = this.fixture1
+                                          .sistema
+                                          .buscarAsignatura("");
+            while (it.hasNext() && it.next()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .asignatura1
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAsignatura(String)
-   */
-  @Test
-  public void testBuscarAsignaturaErroneo4()
-  {
-    this.fixture1.sistema.setPlanDeEstudio(null);
-    try
+    /**
+     * @see modelo.Sistema#buscarAsignatura(String)
+     */
+    @Test
+    public void testBuscarAsignaturaErroneo4()
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
-      while (it.hasNext() && it.next()
-                               .getNombre()
-                               .equals(this.fixture1.asignatura1.getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        this.fixture1
+            .sistema
+            .setPlanDeEstudio(null);
+        try
+        {
+            Iterator<Asignatura> it = this.fixture1
+                                          .sistema
+                                          .buscarAsignatura("Programación 3");
+            while (it.hasNext() && it.next()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .asignatura1
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Asignatura deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarAsignatura(String)
-   */
-  @Test
-  public void testBuscarAsignaturaErroneo6()
-  {
-    this.fixture1.sistema.setPlanDeEstudio(new IndiceDoble<Asignatura>());
-    try
+    /**
+     * @see modelo.Sistema#buscarAsignatura(String)
+     */
+    @Test
+    public void testBuscarAsignaturaErroneo6()
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
-      while (it.hasNext() && it.next()
-                               .getNombre()
-                               .equals(this.fixture1.asignatura1.getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        this.fixture1
+            .sistema
+            .setPlanDeEstudio(new IndiceDoble<Asignatura>());
+        try
+        {
+            Iterator<Asignatura> it = this.fixture1
+                                          .sistema
+                                          .buscarAsignatura("Programación 3");
+            while (it.hasNext() && it.next()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .asignatura1
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Asignatura de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Asignatura");
+        }
+        catch (NoEncontradoException e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarCursada(String)
-   */
-  @Test
-  public void testBuscarCursadaCorrecto()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaCorrecto()
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("Física 1");
-      while (it.hasNext() && it.next()
-                               .getAsignatura()
-                               .getNombre()
-                               .equals(this.fixture1.cursada
-                                           .getAsignatura()
-                                           .getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+        try
+        {
+            Iterator<Cursada> it = this.fixture1
+                                       .sistema
+                                       .buscarCursada("Física 1");
+            while (it.hasNext() && it.next()
+                                     .getAsignatura()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .cursada
+                                                 .getAsignatura()
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
-    }
-  }
 
-  /**
-   * @see modelo.sistema#buscarCursada(String)
-   */
-  @Test
-  public void testBuscarCursadaErroneo2_1()
-  {
-    try
+    /**
+     * @see modelo.sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaErroneo2_1()
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada(null);
-      while (it.hasNext() && it.next()
-                               .getAsignatura()
-                               .getNombre()
-                               .equals(this.fixture1.cursada
-                                           .getAsignatura()
-                                           .getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        try
+        {
+            Iterator<Cursada> it = this.fixture1
+                                       .sistema
+                                       .buscarCursada(null);
+            while (it.hasNext() && it.next()
+                                     .getAsignatura()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .cursada
+                                                 .getAsignatura()
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarCursada(String)
-   */
-  @Test
-  public void testBuscarCursadaErroneo2_2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaErroneo2_2()
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("");
-      while (it.hasNext() && it.next()
-                               .getAsignatura()
-                               .getNombre()
-                               .equals(this.fixture1.cursada
-                                           .getAsignatura()
-                                           .getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        try
+        {
+            Iterator<Cursada> it = this.fixture1
+                                       .sistema
+                                       .buscarCursada("");
+            while (it.hasNext() && it.next()
+                                     .getAsignatura()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .cursada
+                                                 .getAsignatura()
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarCursada(String)
-   */
-  @Test
-  public void testBuscarCursadaErroneo4()
-  {
-    this.fixture1.sistema.setCalendario(null);
-    try
+    /**
+     * @see modelo.Sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaErroneo4()
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("Programación 3");
-      while (it.hasNext() && it.next()
-                               .getAsignatura()
-                               .getNombre()
-                               .equals(this.fixture1.cursada
-                                           .getAsignatura()
-                                           .getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        this.fixture1
+            .sistema
+            .setCalendario(null);
+        try
+        {
+            Iterator<Cursada> it = this.fixture1
+                                       .sistema
+                                       .buscarCursada("Programación 3");
+            while (it.hasNext() && it.next()
+                                     .getAsignatura()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .cursada
+                                                 .getAsignatura()
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-      Assert.fail("Error, la Cursada deberia encontrarse en la colección.");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#buscarCursada(String)
-   */
-  @Test
-  public void testBuscarCursadaErroneo6()
-  {
-    this.fixture1.sistema.setCalendario(new IndiceDoble<Cursada>());
-    try
+    /**
+     * @see modelo.Sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaErroneo6()
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("Programación 3");
-      while (it.hasNext() && it.next()
-                               .getAsignatura()
-                               .getNombre()
-                               .equals(this.fixture1.cursada
-                                           .getAsignatura()
-                                           .getNombre()))
-        ;
-      if (it.hasNext())
-        Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
-      Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        this.fixture1
+            .sistema
+            .setCalendario(new IndiceDoble<Cursada>());
+        try
+        {
+            Iterator<Cursada> it = this.fixture1
+                                       .sistema
+                                       .buscarCursada("Programación 3");
+            while (it.hasNext() && it.next()
+                                     .getAsignatura()
+                                     .getNombre()
+                                     .equals(this.fixture1
+                                                 .cursada
+                                                 .getAsignatura()
+                                                 .getNombre()))
+                ;
+            if (it.hasNext())
+                Assert.fail("Alguna Cursada de la colección no coincide con lo solicitado");
+            Assert.fail("Deberia haber avisado que no encontró ninguna Cursada");
+        }
+        catch (NoEncontradoException e)
+        {
+        }
     }
-    catch (NoEncontradoException e)
-    {
-    }
-  }
 }

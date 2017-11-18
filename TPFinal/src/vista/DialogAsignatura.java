@@ -16,60 +16,61 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Asignatura;
 
 public class DialogAsignatura
-  extends MiDialogo
+    extends MiDialogo
 {
-  private TableModelAsignatura modeloAsignatura;
+    private TableModelAsignatura modeloAsignatura;
 
 
-  public DialogAsignatura(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
-  {
-    super(owner, receptor, fuente);
-
-    this.setTitle("Selección de asignatura");
-    this.modeloAsignatura = (TableModelAsignatura) modelo;
-    this.tabla = new JTable(this.modeloAsignatura);
-    resultado.setLayout(new BorderLayout());
-    this.scroll = new JScrollPane(tabla);
-    this.tabla.setFillsViewportHeight(true);
-    this.resultado.add(this.scroll);
-    resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla, BorderLayout.CENTER);
-    this.setVisible(true);
-  }
-
-  @Override
-  public void agregaResultadosTabla(Iterator alumnos)
-  {
-    this.modeloAsignatura.agregarFilas(alumnos);
-  }
-
-  @Override
-  public int getComandoAccion()
-  {
-    return Receptor.ASIGNATURA;
-  }
-
-  ///este va a mandar el resultado a la ventana
-  @Override
-  public void valueChanged(ListSelectionEvent e)
-  {
-    try
+    public DialogAsignatura(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
     {
-      Asignatura elemento =
-        (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.ASIGNATURA);
-      TableModelAsignatura model = (TableModelAsignatura) this.fuente.getModel();
-      if (!model.contieneElemento(elemento.getIdentificacion()))
-      {
-        model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
-        this.dispose();
-      }
-      else
-        JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        super(owner, receptor, fuente);
+
+        this.setTitle("Selección de asignatura");
+        this.modeloAsignatura = (TableModelAsignatura) modelo;
+        this.tabla = new JTable(this.modeloAsignatura);
+        resultado.setLayout(new BorderLayout());
+        this.scroll = new JScrollPane(tabla);
+        this.tabla.setFillsViewportHeight(true);
+        this.resultado.add(this.scroll);
+        resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
+        resultado.add(tabla, BorderLayout.CENTER);
+        this.setVisible(true);
     }
-    catch (NoEncontradoException f)
+
+    @Override
+    public void agregaResultadosTabla(Iterator alumnos)
     {
-      JOptionPane.showMessageDialog(this, f.getMessage());
-      this.dispose();
+        this.modeloAsignatura.agregarFilas(alumnos);
     }
-  }
+
+    @Override
+    public int getComandoAccion()
+    {
+        return Receptor.ASIGNATURA;
+    }
+
+    ///este va a mandar el resultado a la ventana
+    @Override
+    public void valueChanged(ListSelectionEvent e)
+    {
+        try
+        {
+            Asignatura elemento =
+                (Asignatura) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0),
+                                                  Receptor.ASIGNATURA);
+            TableModelAsignatura model = (TableModelAsignatura) this.fuente.getModel();
+            if (!model.contieneElemento(elemento.getIdentificacion()))
+            {
+                model.addRow(new Object[] { elemento.getIdentificacion(), elemento.getNombre() });
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        }
+        catch (NoEncontradoException f)
+        {
+            JOptionPane.showMessageDialog(this, f.getMessage());
+            this.dispose();
+        }
+    }
 }

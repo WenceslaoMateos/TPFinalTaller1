@@ -16,7 +16,7 @@ public class AgregarHistoriaTest
     private Sistema sistema;
     private Asignatura asignatura;
     private Alumno alumno;
-    
+
     public AgregarHistoriaTest()
     {
     }
@@ -58,7 +58,7 @@ public class AgregarHistoriaTest
             Assert.fail("Debería haberse agregado sin problemas.");
         }
     }
-    
+
     /**
      * @see Alumno#agregarHistoria(Asignatura)
      */
@@ -78,7 +78,7 @@ public class AgregarHistoriaTest
         {
         }
     }
-    
+
     /**
      * @see Alumno#agregarHistoria(Asignatura)
      */

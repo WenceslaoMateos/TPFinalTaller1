@@ -9,10 +9,10 @@ import vista.Ventana;
 
 public class Lanzador
 {
-  public static void main(String[] args)
-  {
-    Sistema modelo = SerializadorXML.cargar();
-    Receptor receptor = new Receptor(modelo);
-    Ventana vista = new Ventana(receptor);
-  }
+    public static void main(String[] args)
+    {
+        Sistema modelo = SerializadorXML.cargar();
+        Receptor receptor = new Receptor(modelo);
+        Ventana vista = new Ventana(receptor);
+    }
 }

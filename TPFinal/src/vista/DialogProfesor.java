@@ -16,59 +16,60 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Profesor;
 
 public class DialogProfesor
-  extends MiDialogo
+    extends MiDialogo
 {
-  private TableModelProfesor modeloProfesor;
+    private TableModelProfesor modeloProfesor;
 
-  public DialogProfesor(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
-  {
-    super(owner, receptor, fuente);
-    this.setTitle("Selección de profesor");
-    this.modeloProfesor = (TableModelProfesor) modelo;
-    this.tabla = new JTable(this.modeloProfesor);
-    resultado.setLayout(new BorderLayout());
-    this.scroll = new JScrollPane(tabla);
-    this.tabla.setFillsViewportHeight(true);
-    this.resultado.add(this.scroll);
-    resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
-    resultado.add(tabla, BorderLayout.CENTER);
-    this.setVisible(true);
-  }
-
-  @Override
-  public void agregaResultadosTabla(Iterator alumnos)
-  {
-    this.modeloProfesor.agregarFilas(alumnos);
-  }
-
-  @Override
-  public int getComandoAccion()
-  {
-    return Receptor.PROFESOR;
-  }
-
-  ///este va a mandar el resultado a la ventana
-  @Override
-  public void valueChanged(ListSelectionEvent e)
-  {
-    try
+    public DialogProfesor(JFrame owner, Receptor receptor, JTable fuente, DefaultTableModel modelo)
     {
-      Profesor elemento =
-        (Profesor) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0), Receptor.PROFESOR);
-      TableModelProfesor model = (TableModelProfesor) this.fuente.getModel();
-      if (!model.contieneElemento(elemento.getLegajo()))
-      {
-        model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
-                                    elemento.getMail(), elemento.getTelefono() });
-        this.dispose();
-      }
-      else
-        JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        super(owner, receptor, fuente);
+        this.setTitle("Selección de profesor");
+        this.modeloProfesor = (TableModelProfesor) modelo;
+        this.tabla = new JTable(this.modeloProfesor);
+        resultado.setLayout(new BorderLayout());
+        this.scroll = new JScrollPane(tabla);
+        this.tabla.setFillsViewportHeight(true);
+        this.resultado.add(this.scroll);
+        resultado.add(tabla.getTableHeader(), BorderLayout.PAGE_START);
+        resultado.add(tabla, BorderLayout.CENTER);
+        this.setVisible(true);
     }
-    catch (NoEncontradoException f)
+
+    @Override
+    public void agregaResultadosTabla(Iterator alumnos)
     {
-      JOptionPane.showMessageDialog(this, f.getMessage());
-      this.dispose();
+        this.modeloProfesor.agregarFilas(alumnos);
     }
-  }
+
+    @Override
+    public int getComandoAccion()
+    {
+        return Receptor.PROFESOR;
+    }
+
+    ///este va a mandar el resultado a la ventana
+    @Override
+    public void valueChanged(ListSelectionEvent e)
+    {
+        try
+        {
+            Profesor elemento =
+                (Profesor) this.receptor.buscar(this.tabla.getValueAt(this.tabla.getSelectedRow(), 0),
+                                                Receptor.PROFESOR);
+            TableModelProfesor model = (TableModelProfesor) this.fuente.getModel();
+            if (!model.contieneElemento(elemento.getLegajo()))
+            {
+                model.addRow(new Object[] { elemento.getLegajo(), elemento.getApellidoNombre(), elemento.getDomicilio(),
+                                            elemento.getMail(), elemento.getTelefono() });
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "El elemento seleccionado ya está en la lista");
+        }
+        catch (NoEncontradoException f)
+        {
+            JOptionPane.showMessageDialog(this, f.getMessage());
+            this.dispose();
+        }
+    }
 }

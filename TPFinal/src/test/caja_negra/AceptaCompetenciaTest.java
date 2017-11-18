@@ -17,105 +17,106 @@ import org.junit.Test;
  */
 public class AceptaCompetenciaTest
 {
-  private Sistema sistema;
-  private Cursada cursada;
-  private Profesor profesor;
-  private Asignatura asignatura;
+    private Sistema sistema;
+    private Cursada cursada;
+    private Profesor profesor;
+    private Asignatura asignatura;
 
-  public AceptaCompetenciaTest()
-  {
-  }
-
-  @Before
-  public void setUp()
-    throws Exception
-  {
-    this.sistema = new Sistema();
-    this.profesor = new Profesor("LazzurriGuillermo", "Rawson 273", "guillermo@gmail.com", "155555555");
-    this.asignatura = new Asignatura("Programación 3");
-    this.sistema.agregarAsignatura(this.asignatura);
-    this.profesor.agregarCompetencia(this.asignatura);
-    this.cursada = new Cursada(this.asignatura, "02-2017", Dia.LUN, "12:00", "14:00");
-    this.sistema.agregarCursada(this.cursada);
-  }
-
-  @After
-  public void tearDown()
-    throws Exception
-  {
-    this.sistema = null;
-    this.profesor = null;
-    this.asignatura = null;
-    this.cursada = null;
-  }
-
-  /**
-   * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
-   */
-  @Test
-  public void testAceptaCompetenciaCorrecta5_1()
-  {
-    Assert.assertTrue("Deberia ser posible usar el profesor en la cursada",
-                      this.cursada.aceptaCompetencia(this.profesor));
-  }
-
-  /**
-   * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
-   */
-  @Test
-  public void testAceptaCompetenciaCorrecta5_2()
-  {
-    this.profesor.setCompetencia(new IndicePrimario<Asignatura>());
-    Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
-                       this.cursada.aceptaCompetencia(this.profesor));
-  }
-
-  /**
-   * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
-   */
-  @Test
-  public void testAceptaCompetenciaErronea2()
-  {
-    try
-    {
-      Assert.assertFalse("No deberia ser posible usar el profesor en la cursada", this.cursada.aceptaCompetencia(null));
-    }
-    catch (Exception e)
+    public AceptaCompetenciaTest()
     {
     }
-  }
 
-  /**
-   * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
-   */
-  @Test
-  public void testAceptaCompetenciaErronea4()
-  {
-    try
+    @Before
+    public void setUp()
+        throws Exception
     {
-      this.cursada.setAsignatura(null);
-      Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
-                         this.cursada.aceptaCompetencia(this.profesor));
+        this.sistema = new Sistema();
+        this.profesor = new Profesor("LazzurriGuillermo", "Rawson 273", "guillermo@gmail.com", "155555555");
+        this.asignatura = new Asignatura("Programación 3");
+        this.sistema.agregarAsignatura(this.asignatura);
+        this.profesor.agregarCompetencia(this.asignatura);
+        this.cursada = new Cursada(this.asignatura, "02-2017", Dia.LUN, "12:00", "14:00");
+        this.sistema.agregarCursada(this.cursada);
     }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
-   */
-  @Test
-  public void testAceptaCompetenciaErronea7()
-  {
-    try
+    @After
+    public void tearDown()
+        throws Exception
     {
-      this.profesor.setCompetencia(null);
-      Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
-                         this.cursada.aceptaCompetencia(this.profesor));
+        this.sistema = null;
+        this.profesor = null;
+        this.asignatura = null;
+        this.cursada = null;
     }
-    catch (Exception e)
+
+    /**
+     * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
+     */
+    @Test
+    public void testAceptaCompetenciaCorrecta5_1()
     {
+        Assert.assertTrue("Deberia ser posible usar el profesor en la cursada",
+                          this.cursada.aceptaCompetencia(this.profesor));
     }
-  }
+
+    /**
+     * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
+     */
+    @Test
+    public void testAceptaCompetenciaCorrecta5_2()
+    {
+        this.profesor.setCompetencia(new IndicePrimario<Asignatura>());
+        Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
+                           this.cursada.aceptaCompetencia(this.profesor));
+    }
+
+    /**
+     * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
+     */
+    @Test
+    public void testAceptaCompetenciaErronea2()
+    {
+        try
+        {
+            Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
+                               this.cursada.aceptaCompetencia(null));
+        }
+        catch (Exception e)
+        {
+        }
+    }
+
+    /**
+     * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
+     */
+    @Test
+    public void testAceptaCompetenciaErronea4()
+    {
+        try
+        {
+            this.cursada.setAsignatura(null);
+            Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
+                               this.cursada.aceptaCompetencia(this.profesor));
+        }
+        catch (Exception e)
+        {
+        }
+    }
+
+    /**
+     * @see modelo.Cursada#aceptaCompetencia(modelo.Profesor)
+     */
+    @Test
+    public void testAceptaCompetenciaErronea7()
+    {
+        try
+        {
+            this.profesor.setCompetencia(null);
+            Assert.assertFalse("No deberia ser posible usar el profesor en la cursada",
+                               this.cursada.aceptaCompetencia(this.profesor));
+        }
+        catch (Exception e)
+        {
+        }
+    }
 }

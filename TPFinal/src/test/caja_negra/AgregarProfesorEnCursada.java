@@ -16,219 +16,219 @@ import org.junit.Test;
  */
 public class AgregarProfesorEnCursada
 {
-  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
+    SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
-  public AgregarProfesorEnCursada()
-  {
-  }
+    public AgregarProfesorEnCursada()
+    {
+    }
 
-  @Before
-  public void setUp()
-    throws Exception
-  {
-    fixture1.setUp();
-  }
+    @Before
+    public void setUp()
+        throws Exception
+    {
+        fixture1.setUp();
+    }
 
-  @After
-  public void tearDown()
-    throws Exception
-  {
-    fixture1.tearDown();
-  }
+    @After
+    public void tearDown()
+        throws Exception
+    {
+        fixture1.tearDown();
+    }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaCorrecto()
-  {
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaCorrecto()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
-      Assert.assertTrue("El profesor no fue agregado correctamente", this.fixture1
-                                                                         .cursada
-                                                                         .tieneProfesor(this.fixture1.profesor));
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+            Assert.assertTrue("El profesor no fue agregado correctamente", this.fixture1
+                                                                               .cursada
+                                                                               .tieneProfesor(this.fixture1.profesor));
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo2()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(null, this.fixture1.cursada);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(null, this.fixture1.cursada);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo4_1()
-  {
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo4_1()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, null);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, null);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo4_2()
-  {
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo4_2()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-    try
-    {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
-    }
-    catch (ClaveYaExistenteException e)
-    {
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo6()
-  {
-    this.fixture1
-        .profesor
-        .eliminarCompetencia(this.fixture1.asignatura2);
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo6()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        this.fixture1
+            .profesor
+            .eliminarCompetencia(this.fixture1.asignatura2);
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo8()
-  {
-    this.fixture1
-        .sistema
-        .setCalendario(null);
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo8()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        this.fixture1
+            .sistema
+            .setCalendario(null);
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 
-  /**
-   * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
-   */
-  @Test
-  public void testAgregarProfesorEnCursadaErroneo10()
-  {
-    this.fixture1
-        .sistema
-        .setCalendario(new IndiceDoble<Cursada>());
-    try
+    /**
+     * @see modelo.Sistema#agregarProfesorEnCursada(modelo.Profesor,modelo.Cursada)
+     */
+    @Test
+    public void testAgregarProfesorEnCursadaErroneo10()
     {
-      this.fixture1
-          .sistema
-          .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
-      Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        this.fixture1
+            .sistema
+            .setCalendario(new IndiceDoble<Cursada>());
+        try
+        {
+            this.fixture1
+                .sistema
+                .agregarProfesorEnCursada(this.fixture1.profesor, this.fixture1.cursada);
+            Assert.fail("El profesor no deberia haber sido agregado a la cursada");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("La clave no deberia existir previamente");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("El dato no deberia ser invalido");
+        }
+        catch (Exception e)
+        {
+        }
     }
-    catch (ClaveYaExistenteException e)
-    {
-      Assert.fail("La clave no deberia existir previamente");
-    }
-    catch (DatoInvalidoException e)
-    {
-      Assert.fail("El dato no deberia ser invalido");
-    }
-    catch (Exception e)
-    {
-    }
-  }
 }
