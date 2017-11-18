@@ -4,6 +4,8 @@ import excepciones.DatoInvalidoException;
 
 import modelo.Alumno;
 import modelo.Asignatura;
+import modelo.Cursada;
+import modelo.Dia;
 import modelo.IndiceDoble;
 import modelo.Profesor;
 
@@ -460,4 +462,197 @@ public class ModificacionesSimplesTest
         {
         }
     }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaCorrecta()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos deberian ser invalidos");
+      }
+      Assert.assertSame("La asignatura deberia estar modificada", this.fixture1.asignatura2, this.fixture1.cursada.getAsignatura());
+      Assert.assertTrue("El periodo deberia estar modificado", this.fixture1.cursada
+                                                                   .getPeriodo()
+                                                                   .equals("01-2017"));
+      Assert.assertSame("La asignatura deberia estar modificada", Dia.DOM, this.fixture1.cursada.getDia());
+      Assert.assertTrue("La hora de inicio deberia estar modificada", this.fixture1.cursada
+                                                                          .getHoraInicio()
+                                                                          .equals("11:00"));
+      Assert.assertTrue("La hora de finalización deberia estar modificada", this.fixture1.cursada
+                                                                                .getHoraFinalizacion()
+                                                                                .equals("13:00"));
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea2()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(null, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos no deberian ser invalidos");
+      }
+      catch (Exception e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_1()
+  {
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, null);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos no deberian ser invalidos");
+      }
+      catch (Exception e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_2()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "ab-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_3()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "ab:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_4()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "ab:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_5()
+  {
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "10:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea4_6()
+  {
+      Cursada modif = new Cursada(new Asignatura(""), "01-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos no deberian ser invalidos");
+      }
+      catch (Exception e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea6()
+  {
+      this.fixture1.sistema.setCalendario(new IndiceDoble<Cursada>());
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos no deberian ser invalidos");
+      }
+      catch (Exception e)
+      {
+      }
+  }
+
+  /**
+   * @see Sistema#modificarCursada(Cursada,Cursada)
+   */
+  @Test
+  public void testModificarCursadaErronea8()
+  {
+      this.fixture1.sistema.eliminarAsignatura(this.fixture1.asignatura2);
+      Cursada modif = new Cursada(this.fixture1.asignatura2, "01-2017", Dia.DOM, "11:00", "13:00");
+      try
+      {
+          this.fixture1.sistema.modificarCursada(this.fixture1.cursada, modif);
+      }
+      catch (DatoInvalidoException e)
+      {
+          Assert.fail("Los datos no deberian ser invalidos");
+      }
+      catch (Exception e)
+      {
+      }
+  }
 }
