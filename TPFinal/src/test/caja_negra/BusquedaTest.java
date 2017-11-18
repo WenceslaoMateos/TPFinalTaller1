@@ -170,7 +170,7 @@ public class BusquedaTest
   {
     try
     {
-      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("LazzurriGuillermo");
+      Iterator<Profesor> it = this.fixture1.sistema.buscarProfesor("PablosBraulio");
       while (it.hasNext() && it.next()
                                .getApellidoNombre()
                                .equals(this.fixture1.profesor.getApellidoNombre()))
@@ -294,7 +294,7 @@ public class BusquedaTest
   {
     try
     {
-      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Programación 3");
+      Iterator<Asignatura> it = this.fixture1.sistema.buscarAsignatura("Física 1");
       while (it.hasNext() && it.next()
                                .getNombre()
                                .equals(this.fixture1.asignatura1.getNombre()))
@@ -418,7 +418,7 @@ public class BusquedaTest
   {
     try
     {
-      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("Programación 3");
+      Iterator<Cursada> it = this.fixture1.sistema.buscarCursada("Física 1");
       while (it.hasNext() && it.next()
                                .getAsignatura()
                                .getNombre()

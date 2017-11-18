@@ -8,7 +8,6 @@ import modelo.IndiceDoble;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ import org.junit.Test;
  */
 public class AgregarProfesorEnCursada
 {
-  SistemaConElementos fixture1 = new SistemaConElementos();
+  SistemaConElementosFixture fixture1 = new SistemaConElementosFixture();
 
   public AgregarProfesorEnCursada()
   {
@@ -158,7 +157,7 @@ public class AgregarProfesorEnCursada
   {
     this.fixture1
         .profesor
-        .eliminarCompetencia(this.fixture1.asignatura);
+        .eliminarCompetencia(this.fixture1.asignatura1);
     try
     {
       this.fixture1

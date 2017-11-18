@@ -8,7 +8,6 @@ import modelo.IndiceDoble;
 
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +26,7 @@ public class AgregarAlumnoEnCursada
     fixture1.setUp();
     this.fixture1
         .alumno
-        .eliminarHistoria(this.fixture1.asignatura);
+        .eliminarHistoria(this.fixture1.asignatura1);
   }
 
   @After
@@ -165,7 +164,7 @@ public class AgregarAlumnoEnCursada
     {
       this.fixture1
           .alumno
-          .agregarHistoria(this.fixture1.asignatura);
+          .agregarHistoria(this.fixture1.asignatura1);
     }
     catch (ClaveYaExistenteException e)
     {

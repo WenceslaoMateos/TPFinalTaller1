@@ -292,6 +292,32 @@ public class AltasEscenarioNormal
     }
     
     /**
+     * @see Sistema#agregarAlumno(Alumno)
+     */
+    @Test
+    public void testAgregarAlumnoErroneo6()
+    {
+        Alumno nuevo = new Alumno("PablosBraulio", "Rawson 273", "braulio@gmail.com");
+        this.sistema.setAlumnos(null);
+        try
+        {
+            this.sistema.agregarAlumno(nuevo);
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    /**
      * @see Sistema#agregarProfesor(Profesor)
      */
     @Test
@@ -583,6 +609,32 @@ public class AltasEscenarioNormal
     }
     
     /**
+     * @see Sistema#agregarProfesor(Profesor)
+     */
+    @Test
+    public void testAgregarProfesorErroneo6()
+    {
+        Profesor nuevo = new Profesor("PablosBraulio", "Rawson 273", "braulio@gmail.com", "155555555");
+        this.sistema.setProfesores(null);
+        try
+        {
+            this.sistema.agregarProfesor(nuevo);
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("No debería siquiera haber colección.");
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    /**
      * @see modelo.Sistema#agregarAsignatura(modelo.Asignatura)
      */
     @Test
@@ -652,6 +704,32 @@ public class AltasEscenarioNormal
         catch (ClaveYaExistenteException | DatoInvalidoException e)
         {
             Assert.fail("Debería haberse detenido por contenido nulo.");
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    /**
+     * @see Sistema#agregarAsignatura(Asignatura)
+     */
+    @Test
+    public void testAgregarAsignaturaErroneo6()
+    {
+        Asignatura nuevo = new Asignatura(null);
+        this.sistema.setPlanDeEstudio(null);
+        try
+        {
+            this.sistema.agregarAsignatura(nuevo);
+            Assert.fail("Debería haber salido por nulidad de la colección.");
+        }
+        catch (ClaveYaExistenteException e)
+        {
+            Assert.fail("Debería haber salido por nulidad de la colección.");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.fail("Debería haber salido por nulidad de la colección.");
         }
         catch (Exception e)
         {
