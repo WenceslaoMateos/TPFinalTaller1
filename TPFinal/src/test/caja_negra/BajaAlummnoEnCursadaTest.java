@@ -1,5 +1,9 @@
 package test.caja_negra;
 
+import modelo.Alumno;
+import modelo.IndicePrimario;
+import modelo.Profesor;
+
 import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.*;
@@ -75,7 +79,7 @@ public class BajaAlummnoEnCursadaTest
     try
     {
       this.fixture1
-          .sistema
+          .cursada
           .setAlumnos(null);
       this.fixture1
           .cursada
@@ -93,9 +97,7 @@ public class BajaAlummnoEnCursadaTest
   @Test
   public void testBajaAlumnoErroneo6()
   {
-    this.fixture1
-        .sistema
-        .eliminarAlumno(this.fixture1.alumno);
+    this.fixture1.cursada.setAlumnos(new IndicePrimario<Alumno>());
     try
     {
       this.fixture1
