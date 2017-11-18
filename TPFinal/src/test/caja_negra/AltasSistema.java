@@ -16,12 +16,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AltasEscenarioNormal
+public class AltasSistema
 {
   private Sistema sistema;
   private Asignatura asignatura;
 
-  public AltasEscenarioNormal()
+  public AltasSistema()
   {
   }
 
