@@ -1,4 +1,4 @@
-package test.caja_negra;
+package test;
 
 import excepciones.NoEncontradoException;
 

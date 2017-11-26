@@ -1,4 +1,4 @@
-package test.caja_negra;
+package test;
 
 import excepciones.ClaveYaExistenteException;
 import excepciones.DatoInvalidoException;
@@ -8,6 +8,7 @@ import modelo.Asignatura;
 import modelo.Cursada;
 import modelo.Dia;
 import modelo.IndiceDoble;
+import modelo.Profesor;
 import modelo.Sistema;
 
 import org.junit.After;
@@ -15,15 +16,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AlumnoDisponibleTest
+public class ProfesorDisponibleTest
 {
     private Sistema sistema;
     private Cursada cursada;
     private Cursada superpuesta;
+    private Profesor profesor;
     private Asignatura asignatura;
     private Alumno alumno;
 
-    public AlumnoDisponibleTest()
+    public ProfesorDisponibleTest()
     {
     }
 
@@ -35,6 +37,10 @@ public class AlumnoDisponibleTest
 
         this.asignatura = new Asignatura("Programación 3");
         this.sistema.agregarAsignatura(this.asignatura);
+
+        this.profesor = new Profesor("LazzurriGuillermo", "Rawson 273", "guillermo@gmail.com", "155555555");
+        this.sistema.agregarProfesor(this.profesor);
+        this.profesor.agregarCompetencia(this.asignatura);
 
         this.cursada = new Cursada(this.asignatura, "02-2017", Dia.LUN, "12:00", "14:00");
         this.superpuesta = new Cursada(this.asignatura, "02-2017", Dia.LUN, "12:00", "14:00");
@@ -52,65 +58,68 @@ public class AlumnoDisponibleTest
         throws Exception
     {
         this.sistema = null;
+        this.profesor = null;
         this.asignatura = null;
         this.cursada = null;
         this.superpuesta = null;
     }
 
     /**
-     * @see modelo.Sistema#alumnoDisponible(modelo.Alumno,modelo.Cursada)
+     * @see modelo.Sistema#profesorDisponible(modelo.Profesor,modelo.Cursada)
      */
     @Test
-    public void testAlumnoDisponibleCorrectoTrue()
+    public void testProfesorDisponibleCorrectoTrue()
     {
-        Assert.assertTrue("El alumno deberia estar disponible.",
-                          this.sistema.alumnoDisponible(this.alumno, this.cursada));
+        Assert.assertTrue("El profesor deberia estar disponible.",
+                          this.sistema.profesorDisponible(this.profesor, this.cursada));
     }
 
     /**
-     * @see modelo.Sistema#alumnoDisponible(modelo.Alumno,modelo.Cursada)
+     * @see modelo.Sistema#profesorDisponible(modelo.Profesor,modelo.Cursada)
      */
     @Test
-    public void testAlumnoDisponibleCorrectoFalse()
+    public void testProfesorDisponibleCorrectoFalse()
     {
         try
         {
-            this.sistema.agregarAlumnoEnCursada(this.alumno, this.superpuesta);
+            this.sistema.agregarProfesorEnCursada(this.profesor, this.superpuesta);
         }
         catch (ClaveYaExistenteException | DatoInvalidoException e)
         {
             Assert.fail("No deberia existir ningún error en el agregado.");
         }
-        Assert.assertFalse("El alumno no deberia estar disponible.",
-                           this.sistema.alumnoDisponible(this.alumno, this.cursada));
+        Assert.assertFalse("El profesor no deberia estar disponible.",
+                           this.sistema.profesorDisponible(this.profesor, this.cursada));
     }
 
     /**
-     * @see modelo.Sistema#alumnoDisponible(modelo.Alumno,modelo.Cursada)
+     * @see modelo.Sistema#profesorDisponible(modelo.Profesor,modelo.Cursada)
      */
     @Test
-    public void testAlumnoDisponibleErroneo2()
+    public void testProfesorDisponibleErroneo2()
     {
-        Assert.assertFalse("El alumno no deberia estar disponible.", this.sistema.alumnoDisponible(null, this.cursada));
+        Assert.assertFalse("El profesor no deberia estar disponible",
+                           this.sistema.profesorDisponible(null, this.cursada));
     }
 
     /**
-     * @see modelo.Sistema#alumnoDisponible(modelo.Alumno,modelo.Cursada)
+     * @see modelo.Sistema#profesorDisponible(modelo.Profesor,modelo.Cursada)
      */
     @Test
-    public void testAlumnoDisponibleErroneo4()
+    public void testProfesorDisponibleErroneo4()
     {
-        Assert.assertFalse("El alumno no deberia estar disponible.", this.sistema.alumnoDisponible(this.alumno, null));
+        Assert.assertFalse("El profesor no deberia estar disponible",
+                           this.sistema.profesorDisponible(this.profesor, null));
     }
 
     /**
-     * @see modelo.Sistema#alumnoDisponible(modelo.Alumno,modelo.Cursada)
+     * @see modelo.Sistema#profesorDisponible(modelo.Profesor,modelo.Cursada)
      */
     @Test
-    public void testAlumnoDisponibleErroneo6()
+    public void testProfesorDisponibleErroneo6()
     {
         this.sistema.setCalendario(new IndiceDoble<Cursada>());
-        Assert.assertFalse("El alumno no deberia estar disponible.",
-                           this.sistema.alumnoDisponible(this.alumno, this.cursada));
+        Assert.assertFalse("El profesor no deberia estar disponible",
+                           this.sistema.profesorDisponible(this.profesor, this.cursada));
     }
 }
