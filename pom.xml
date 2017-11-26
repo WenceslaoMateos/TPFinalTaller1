@@ -16,9 +16,7 @@
       </resource>
     </resources>
   </build>
-  <modules>
-    <module>TPFinal</module>
-  </modules>
+  <modules/>
   <dependencies>
     <dependency>
       <groupId>TPFinal</groupId>
