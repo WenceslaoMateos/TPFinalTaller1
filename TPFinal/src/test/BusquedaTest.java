@@ -639,4 +639,29 @@ public class BusquedaTest
         {
         }
     }
+    
+    /**
+     * @see modelo.Sistema#buscarCursada(String)
+     */
+    @Test
+    public void testBuscarCursadaCoberturaT3()
+    {
+        Iterator<Cursada> it;
+        String nombreAsignatura = "Álgebra A";
+        try
+        {
+            it = this.fixture1.sistema.buscarCursada(nombreAsignatura);
+            Assert.fail("Debería haber salido por NoEncontradoException.");
+        }
+        catch (NoEncontradoException e)
+        {
+            Assert.assertSame("El nombre pasado como parámetro no fue lo que disparó la excepción.",
+                              nombreAsignatura, e.getDato());
+        }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber salido por NoEncontradoException.");
+        }
+
+    }
 }

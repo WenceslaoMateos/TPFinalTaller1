@@ -37,9 +37,7 @@ public class QuitarCompetenciaAProfesorTest
             .sistema
             .quitarCompetenciaAProfesor(this.fixture1.profesor, this.fixture1.asignatura1);
         Assert.assertFalse("No se quitó correctamente la asignatura al profesor",
-                           this.fixture1
-                                                                                      .profesor
-                                                                                      .habilitadoParaAsignatura(this.fixture1.asignatura1));
+                           this.fixture1.profesor.habilitadoParaAsignatura(this.fixture1.asignatura1));
     }
 
     /**

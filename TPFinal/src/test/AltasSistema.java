@@ -723,7 +723,7 @@ public class AltasSistema
     @Test
     public void testAgregarAsignaturaErroneo6()
     {
-        Asignatura nuevo = new Asignatura(null);
+        Asignatura nuevo = new Asignatura("Física 1");
         this.sistema.setPlanDeEstudio(null);
         try
         {
@@ -740,6 +740,29 @@ public class AltasSistema
         }
         catch (Exception e)
         {
+        }
+    }
+    
+    /**
+     * @see Sistema#agregarAsignatura(Asignatura)
+     */
+    @Test
+    public void testAgregarAsignaturaCoberturaT1()
+    {
+        Asignatura nuevo = new Asignatura("");
+        try
+        {
+            this.sistema.agregarAsignatura(nuevo);
+            Assert.fail("Debería haber salido por DatoInvalidoException.");
+        }
+        catch (DatoInvalidoException e)
+        {
+            Assert.assertSame("La asignatura que se intentó agregar no fue lo que disparó la excepción.",
+                              nuevo, e.getDato());
+        }
+        catch (Exception e)
+        {
+            Assert.fail("Debería haber salido por DatoInvalidoException.");
         }
     }
 
