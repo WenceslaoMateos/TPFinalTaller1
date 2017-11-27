@@ -5,6 +5,9 @@
   <artifactId>TPFinal</artifactId>
   <version>1.0-SNAPSHOT</version>
   <description>Super POM for TPFinal</description>
+  <modules>
+    <module>TPFinal</module>
+  </modules>
   <packaging>pom</packaging>
   <build>
     <resources>
@@ -16,15 +19,4 @@
       </resource>
     </resources>
   </build>
-  <modules>
-    <module>TPFinal</module>
-  </modules>
-  <dependencies>
-    <dependency>
-      <groupId>TPFinal</groupId>
-      <artifactId>TPFinal</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>war</type>
-    </dependency>
-  </dependencies>
 </project>
