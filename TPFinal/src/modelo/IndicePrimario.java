@@ -90,9 +90,7 @@ public class IndicePrimario<V extends I_Indexable>
      */
     public Iterator<V> elementos()
     {
-        return this.elementos
-                   .values()
-                   .iterator();
+        return this.elementos.values().iterator();
     }
 
     /**
@@ -129,9 +127,7 @@ public class IndicePrimario<V extends I_Indexable>
      */
     public Iterator clavesPrimarias()
     {
-        return this.elementos
-                   .keySet()
-                   .iterator();
+        return this.elementos.keySet().iterator();
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

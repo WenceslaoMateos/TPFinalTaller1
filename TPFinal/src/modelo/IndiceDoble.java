@@ -40,9 +40,7 @@ public class IndiceDoble<V extends I_Indexable>
         if (!this.contieneClaveSecundaria(nuevo.getClaveSecundaria()))
             // Si la clave no existe aún, se crea una entrada para la misma.
             this.indice2.put(nuevo.getClaveSecundaria(), new ArrayList<V>());
-        this.indice2
-            .get(nuevo.getClaveSecundaria())
-            .add(nuevo); // Agrega al índice secundario.
+        this.indice2.get(nuevo.getClaveSecundaria()).add(nuevo); // Agrega al índice secundario.
     }
 
     /**
@@ -87,18 +85,9 @@ public class IndiceDoble<V extends I_Indexable>
     {
         if (!this.contieneClaveSecundaria(clave))
             throw new NoEncontradoException(clave, "Clave no encontrada en el índice.");
-        return this.indice2
-                   .get(clave)
-                   .iterator();
+        return this.indice2.get(clave).iterator();
     }
-
-    // No usado
-    public Iterator<ArrayList<V>> elementosPorClaveSecundaria()
-    {
-        return this.indice2
-                   .values()
-                   .iterator();
-    }
+    
 
     /**
      * Comprueba si la clave dada tiene una entrada en el índice primario.<br>
@@ -140,6 +129,11 @@ public class IndiceDoble<V extends I_Indexable>
     {
         return this.indice1.elementos();
     }
+    
+    public Iterator<ArrayList<V>> elementosPorClaveSecundaria()
+    {
+        return this.indice2.values().iterator();
+    }
 
     /**
      * Permite modificar un valor del índice dada su referencia. Las modificaciones se generan mediante el método
@@ -163,9 +157,7 @@ public class IndiceDoble<V extends I_Indexable>
                 this.indice2.remove(claveAux);
             if (!this.contieneClaveSecundaria(elem.getClaveSecundaria()))
                 this.indice2.put(elem.getClaveSecundaria(), new ArrayList<V>());
-            this.indice2
-                .get(elem.getClaveSecundaria())
-                .add(elem);
+            this.indice2.get(elem.getClaveSecundaria()).add(elem);
         }
     }
 
@@ -184,9 +176,7 @@ public class IndiceDoble<V extends I_Indexable>
      */
     public Iterator clavesSecundarias()
     {
-        return this.indice2
-                   .keySet()
-                   .iterator();
+        return this.indice2.keySet().iterator();
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

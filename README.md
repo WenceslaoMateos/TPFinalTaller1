@@ -13,6 +13,10 @@ Se tomaron las siguientes decisiones, tras consultar con la cátedra de la mater
 6- Los legajos e identificaciones son autogenerados por el sistema e inmodificables.
 
 -------------------------------------------------------------------------
+V3 changelog:
+-Se incorporaron casos de prueba de los propuestos por el grupo 3 para completar cobertura. Se alcanzó cobertura total en los métodos a probar propuestos por los diseñadores de los casos.
+-Se agregaron suites de pruebas para mejor organización de los tests.
+
 V2 changelog:
 -Se corrigieron los errores encontrados en el test de caja negra que fueron marcados en rojo en el archivo con los resultados anexo. Los demás errores están resueltos a nivel de integración o son problemas de los casos de prueba.
 
@@ -21,4 +25,4 @@ V1 changelog:
 -Se corrigió el error al eliminar a los profesores de la cursadas en las que participaban cuando se les elimina una competencia.
 -Se estandarizó la interacción de la clase Vista con Receptor en cuanto al manejo de colecciones internas, delegando la responsabilidad de los controles a este último.
 -Se modificó el comportamiento de los TableModel para no poder agregar el mismo elemento más de una vez.
--Se agregó la excepción DiaValidoException.
+-Se agregó la excepción DiaInvalidoException.
